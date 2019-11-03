@@ -14,6 +14,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookItemComponent } from './components/book-item/book-item.component';
 import { SearchBooksComponent } from './components/search-books/search-books.component';
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SearchBooksComponent } from './components/search-books/search-books.com
     FooterComponent,
     BookListComponent,
     BookItemComponent,
-    SearchBooksComponent
+    SearchBooksComponent,
+    HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
