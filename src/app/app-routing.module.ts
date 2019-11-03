@@ -4,12 +4,17 @@ import {BookListComponent} from './components/book-list/book-list.component';
 import {SearchBooksComponent} from './components/search-books/search-books.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home.component';
+import {LoginComponent} from './components/login/login.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'book-list',
