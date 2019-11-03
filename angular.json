@@ -5,7 +5,26 @@
   "projects": {
     "NetCrackerEducationFrontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+            "@schematics/angular:component": {
+                "spec": false
+            },
+            "@schematics/angular:directive": {
+                "spec": false
+            },
+            "@schematics/angular:modules": {
+                "spec": false
+            },
+            "@schematics/angular:pipe": {
+                "spec": false
+            },
+            "@schematics/angular:service": {
+                "spec": false
+            },
+            "@schematics/angular:class": {
+                "spec": false
+            }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,7 +43,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": []
           },
