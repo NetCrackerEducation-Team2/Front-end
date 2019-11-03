@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/NetCrackerEducation-Team2/Front-end.svg?branch=master)](https://travis-ci.com/NetCrackerEducation-Team2/Front-end)
+
+
 # NetCrackerEducationFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.16.
