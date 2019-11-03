@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.com/NetCrackerEducation-Team2/Front-end.svg?branch=master)](https://travis-ci.com/NetCrackerEducation-Team2/Front-end)
+| Service   |      Master      |  Develop |
+|:----------|:---------------- |:---------|
+| Travis CI |  [![Build Status](https://travis-ci.com/NetCrackerEducation-Team2/Front-end.svg?branch=master)](https://travis-ci.com/NetCrackerEducation-Team2/Front-end)   | [![Build Status](https://travis-ci.com/NetCrackerEducation-Team2/Front-end.svg?branch=dev)](https://travis-ci.com/NetCrackerEducation-Team2/Front-end) |
 
 
 # NetCrackerEducationFrontend
