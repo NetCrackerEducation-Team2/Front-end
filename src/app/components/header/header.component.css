@@ -1,0 +1,116 @@
+
+/* Mobile screen + version*/
+@media screen and (max-width: 767px) {
+
+
+  .buttons{
+    position: absolute;
+    right: 5vw;
+    bottom:3vw;
+  }
+  .content{
+    position: absolute;
+    left: 30%;
+    top: 2vw;
+    background-color: rgba(107, 81, 81, 0.5);
+    color: white;
+    font-size: 20px;
+
+
+  }
+
+
+  .header{
+    padding: 10vw;
+    background-image: url(../../../assets/images/header-image-2.jpg);
+    background-repeat:no-repeat;
+    background-position: top center;
+    background-size: 100%;
+    width: 100%;
+    height: auto;
+    color: var(--color1);
+    margin: auto;
+    position: relative;
+
+  }
+
+
+
+  button{
+
+
+  }
+
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
+
+}
+
+/* Tablet screen + version*/
+
+@media screen and (min-width: 768px) {
+
+
+  .header{
+    padding: 10vw;
+    background-image: url(../../../assets/images/header-image-2.jpg);
+    background-repeat:no-repeat;
+    background-position: top center;
+    background-size: 100%;
+    width: 100%;
+    height: auto;
+    color: var(--color1);
+    margin: auto;
+    position: relative;
+
+  }
+
+
+
+
+  .content{
+    position: absolute;
+    left: 5vw;
+    bottom: 3vw;
+    background-color: rgb(0, 0,0,0.5);
+    color: white;
+    font-size: 3vw;
+
+
+  }
+
+  .buttons{
+    position: absolute;
+    right: 5vw;
+    bottom:3vw;
+    display: flex;
+  }
+
+  button{
+    background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+    padding: 1vh 2vw;
+    margin-left: 2vw;
+    border: none;
+    outline: none;
+    font-size: 20px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+
+  }
+  button :hover{
+    padding: 1vw 2vw;
+    background: white;
+    color: black;
+
+
+
+
+  }
+
+
+}
