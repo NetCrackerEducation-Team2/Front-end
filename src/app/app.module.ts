@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {FormsModule} from '@angular/forms';
     HomeComponent,
     NotFoundComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
