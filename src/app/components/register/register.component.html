@@ -1,0 +1,52 @@
+
+
+
+<form *ngIf="!isRegister; else registeredTemplate" #regForm="ngForm" (ngSubmit)="register()"
+      style="text-align: center; margin-top: 100px" novalidate>
+  <label>Enter username
+    <input #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required type="text"
+           [(ngModel)]="user.username" name="username" class="form-control" placeholder="Enter username">
+  </label>
+  <br>
+  <small class="text-danger" [class.d-none]="name.valid || name.untouched">Username is required</small>
+  <br>
+  <label>Enter password
+    <input pattern="^.{6,}" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" type="password"
+           [(ngModel)]="user.password" name="password" class="form-control" placeholder="Enter password">
+  </label>
+  <div *ngIf="password.errors && password.touched">
+    <small class="text-danger" *ngIf="password.errors.required">Password is required</small>
+    <small class="text-danger" *ngIf="password.errors.pattern">Password must be at least 6 sybmols</small>
+  </div>
+  <br>
+  <br>
+  <label>Repeat password
+    <input  required type="password" name="repeatPassword" [(ngModel)]="repeatPassword" class="form-control"
+           placeholder="Repeat password">
+  </label>
+  <br>
+  <br>
+  <button [disabled]="regForm.form.invalid" class="btn btn-primary" type="submit">Sign up</button>
+</form>
+
+
+<div *ngIf="isError">
+  <div style="text-align: center; margin-top: 20px; color:red;">
+    <p *ngIf="!message">
+      User with username already exists
+      <br>
+      Try again.
+    </p>
+    <p *ngIf="message">
+      {{message}}
+    </p>
+  </div>
+</div>
+
+<ng-template #registeredTemplate>
+  <p style="text-align: center; margin-top: 20px; color:green;">
+    You're successfully signed up.
+    <br>
+    You will be automatically redirected to profile page.
+  </p>
+</ng-template>

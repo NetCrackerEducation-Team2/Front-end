@@ -1,21 +1,26 @@
-<form (ngSubmit)="submit()" style="margin-top: 100px; text-align: center">
-  <input type="text" [(ngModel)]="user.username" name="username" placeholder="enter 'test'" >
-  <input type="password" [(ngModel)]="user.password" name="password" placeholder="enter 'test'">
-  <input type="submit" value="Login">
-</form>
-
-<div *ngIf="isError">
-  <p style="text-align: center; margin-top: 20px; color:red;">
-    Invalid username or/and password.
+<div class="container">
+  <form (ngSubmit)="submit()" style="margin-top: 100px; text-align: center">
+    <label>Enter username <input type="text" [(ngModel)]="user.username" name="username"
+                                 placeholder="enter 'test'"></label>
     <br>
-    Try again.
-  </p>
-</div>
-
-<div *ngIf="isLogin">
-  <p style="text-align: center; margin-top: 20px; color:green;">
-    You're successfully signed in.
+    <label>Enter password <input type="password" [(ngModel)]="user.password" name="password" placeholder="enter 'test'"></label>
     <br>
-    You will be automatically redirected to profile page.
-  </p>
+    <input type="submit" value="Login">
+  </form>
+
+  <div *ngIf="isError">
+    <p style="text-align: center; margin-top: 20px; color:red;">
+      Invalid username or/and password.
+      <br>
+      Try again.
+    </p>
+  </div>
+
+  <div *ngIf="isLogin">
+    <p style="text-align: center; margin-top: 20px; color:green;">
+      You're successfully signed in.
+      <br>
+      You will be automatically redirected to profile page.
+    </p>
+  </div>
 </div>
