@@ -1,0 +1,68 @@
+.container, button {
+  font-size: 20px;
+}
+
+.achievements{
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+}
+
+.achievements > * {
+  width: 50%;
+}
+
+button {
+  height: 50px;
+}
+
+.details {
+  padding-top: 20px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding-bottom: 40px;
+}
+
+.info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .info {
+    align-items: center;
+  }
+  button {
+    height: 45px;
+  }
+  .achievements{
+    display: flex;
+    justify-content: center;
+  }
+  .achievements > * {
+    width: 80%;
+  }
+}
+
+@media (max-width: 380px) {
+  .container, button {
+    font-size: 16px;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+
+}
+
+.profile {
+  display: flex;
+  flex-flow: row wrap;
+}
