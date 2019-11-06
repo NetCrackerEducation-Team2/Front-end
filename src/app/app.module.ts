@@ -20,8 +20,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import {FormsModule} from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { EditComponent } from './components/account/edit/edit.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import {MatDividerModule} from '@angular/material/divider';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import {MatDividerModule} from '@angular/material/divider';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
