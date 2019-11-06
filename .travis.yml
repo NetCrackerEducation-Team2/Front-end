@@ -21,3 +21,6 @@ install:
 
 script:
   - echo "skipping tests"
+  
+ notifications:
+  slack: nc2019kpig2:ZGoyqsROEQgpRlXVLTFGZhKm
