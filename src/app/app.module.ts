@@ -23,7 +23,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { EditComponent } from './components/account/edit/edit.component';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
+
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     RegisterComponent,
     ProfileComponent,
     EditComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
