@@ -8,7 +8,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
-import {ChangePasswordComponent} from "./components/account/change-password/change-password.component";
+import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 
 
 const routes: Routes = [

@@ -2,17 +2,17 @@
 
   <div class="details">
 
-      <div class="avatar center">
-        <img width="128" height="128" style="border-radius: 100%;"
-             src="https://pickaface.net/gallery/avatar/unr_example_170227_1250_yq2lr.png" alt="Avatar">
-      </div>
+    <div class="avatar center">
+      <img width="128" height="128" style="border-radius: 100%;"
+           src="https://pickaface.net/gallery/avatar/unr_example_170227_1250_yq2lr.png" alt="Avatar">
+    </div>
 
-      <div class="info">
-        <span>Name: Alexander</span>
-        <span>Surname: Pushkin</span>
-        <span>Email: alexanderpushkin1799@mail.rus</span>
-        <span>Login: dantess</span>
-      </div>
+    <div class="info">
+      <span>Name: Alexander</span>
+      <span>Surname: Pushkin</span>
+      <span>Email: alexanderpushkin1799@mail.rus</span>
+      <span>Login: dantess</span>
+    </div>
     <div class="button center">
       <button mat-flat-button color="primary" routerLink="/profile/edit">Edit profile</button>
     </div>
@@ -20,10 +20,6 @@
   </div>
   <mat-divider></mat-divider>
 
-  <div class="achievements">
-    <mat-paginator [length]="52"
-                   [pageSize]="10">
-    </mat-paginator>
-  </div>
+  <app-achievements></app-achievements>
 
 </div>

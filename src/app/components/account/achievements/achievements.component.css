@@ -1,0 +1,42 @@
+/*@media (max-width: 768px) {*/
+/*  .achievements {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*  }*/
+
+/*  .achievements > * {*/
+/*    width: 80%;*/
+/*  }*/
+
+/*  .achievements {*/
+/*    display: flex;*/
+/*    justify-content: flex-start;*/
+/*    margin-top: 30px;*/
+/*  }*/
+/*}*/
+
+/*.achievements > * {*/
+/*  width: 70%;*/
+/*}*/
+
+h2 {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.container {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.achievements {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.achievement-row {
+  padding: 10px;
+}
+
