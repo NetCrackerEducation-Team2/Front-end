@@ -12,11 +12,11 @@ export class SearchBooksComponent implements OnInit {
 
   constructor() { }
   title: string;
-  onSubmit(){
+  onSubmit() {
     const todo = {
       title: this.title,
       completed: false
-    }
+    };
 
     this.addTodo.emit(todo);
   }

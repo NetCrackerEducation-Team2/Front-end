@@ -1,3 +1,4 @@
+
 <app-header></app-header>
 
 <!--<div class="search-wrapper">-->
@@ -8,6 +9,21 @@
 <!--<app-book-list>-->
 <!--</app-book-list>-->
 
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+  *ngFor="let link of navLinks"
+  [routerLink]="link.link"
+  routerLinkActive #rla="routerLinkActive"
+  [routerLinkActiveOptions]="{exact:true}"
+  [active]="rla.isActive">
+  {{link.label}}
+</a>
+</nav>
+<div class="wrapper">
 <router-outlet></router-outlet>
+<div class="push"></div>
+</div>
+
 
 <app-footer></app-footer>

@@ -30,10 +30,11 @@ const routes: Routes = [
     component: SearchBooksComponent
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
