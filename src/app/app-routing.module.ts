@@ -37,7 +37,7 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'edit',
+    path: 'profile/edit',
     component: EditComponent
   },
   {

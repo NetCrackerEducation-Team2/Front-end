@@ -25,6 +25,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import { EditComponent } from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { AchievementsComponent } from './components/account/achievements/achievements.component';
 
 
 
@@ -42,7 +44,8 @@ import { ChangePasswordComponent } from './components/account/change-password/ch
     RegisterComponent,
     ProfileComponent,
     EditComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AchievementsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { ChangePasswordComponent } from './components/account/change-password/ch
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
