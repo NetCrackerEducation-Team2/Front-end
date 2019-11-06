@@ -21,8 +21,7 @@ export class JwtResponse {
 })
 export class AuthenticationService {
   constructor(
-    private httpClient: HttpClient
-  ) {
+    private httpClient: HttpClient) {
   }
 
   // all constants below should be in /environments directory

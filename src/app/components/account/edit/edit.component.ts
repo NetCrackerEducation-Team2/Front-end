@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
 })
 export class EditComponent implements OnInit {
 
+  myName;
+
   constructor(private router: Router) { }
 
   ngOnInit() {

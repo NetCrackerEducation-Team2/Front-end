@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="submit-form">
+  <form #editForm="ngForm" class="submit-form">
 
     <div class="submit-row">
       <label for="name">Name</label>
@@ -12,7 +12,7 @@
     <div class="submit-row">
       <label for="surname">Surname</label>
       <mat-form-field class="example-full-width">
-        <input id="surname" matInput placeholder="Surname" [value]="'Pushkin'">
+        <input name="name" #name="ngModel" [(ngModel)]="myName" id="surname" matInput placeholder="Surname" [value]="'Pushkin'">
       </mat-form-field>
     </div>
 
@@ -30,7 +30,7 @@
       </mat-form-field>
     </div>
 
-  </div>
+  </form>
 
   <div class="checkboxes">
     <h2>Activity display options</h2>
@@ -48,7 +48,7 @@
   <div class="nav-footer">
     <button mat-flat-button color="primary" routerLink="/profile">Back</button>
     <button mat-flat-button color="primary" routerLink="/profile/change-password">Change password</button>
-    <button mat-flat-button color="primary" (click)="save()">Save changes</button>
+    <button  mat-flat-button color="primary" (click)="save()">Save changes</button>
   </div>
 
 </div>

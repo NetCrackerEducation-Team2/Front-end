@@ -1,11 +1,30 @@
+
 <div class="container">
-  <form (ngSubmit)="submit()" style="margin-top: 100px; text-align: center">
-    <label>Enter username <input type="text" [(ngModel)]="user.username" name="username"
-                                 placeholder="enter 'test'"></label>
-    <br>
-    <label>Enter password <input type="password" [(ngModel)]="user.password" name="password" placeholder="enter 'test'"></label>
-    <br>
-    <input type="submit" value="Login">
+
+  <form class="submit-form" (ngSubmit)="submit()">
+
+    <div class="submit-row">
+      <label for="username">Enter username</label>
+      <mat-form-field>
+        <input name="username" type="text" id="username" matInput placeholder="Username" [(ngModel)]="user.username">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label for="password">Enter password</label>
+      <mat-form-field>
+        <input name="password" type="password" id="password" matInput placeholder="Password" [(ngModel)]="user.password">
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="nav-footer">
+      <button type="submit" mat-flat-button color="primary">Login</button>
+      <button type="submit"  mat-stroked-button color="warn" routerLink="/profile/recover-password">Recover password
+      </button>
+    </div>
+
   </form>
 
   <div *ngIf="isError">
@@ -23,4 +42,7 @@
       You will be automatically redirected to profile page.
     </p>
   </div>
+
 </div>
+
+
