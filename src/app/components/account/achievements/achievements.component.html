@@ -1,0 +1,15 @@
+<div class="container">
+
+  <h2>Achievements</h2>
+
+  <div class="achievements">
+    <div *ngFor="let el of arr | slice: startIndex :endIndex">
+      <div class="achievement-row">{{el}}</div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+
+  <mat-paginator [length]="arr.length" [pageSize]="pageSize"
+                 (page)="getPaginatorData($event)">
+  </mat-paginator>
+</div>

@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
       this.message = '';
       this.isError = false;
     }
+    // to be fixed, using merge operator
     this.authService.register(this.user.username, this.user.password)
       .subscribe(
         resp => {

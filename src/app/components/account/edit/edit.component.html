@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="submit-form">
+
+    <div class="submit-row">
+      <label for="name">Name</label>
+      <mat-form-field class="example-full-width">
+        <input id="name" matInput placeholder="Name" [value]="'Alexander'">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label for="surname">Surname</label>
+      <mat-form-field class="example-full-width">
+        <input id="surname" matInput placeholder="Surname" [value]="'Pushkin'">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label for="login">Login</label>
+      <mat-form-field class="example-full-width">
+        <input id="login" matInput placeholder="Login" [value]="'dantess'">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label for="imgUrl">Image URL</label>
+      <mat-form-field class="example-full-width">
+        <input id="imgUrl" matInput placeholder="Email" [value]="'alexanderpushkin1799@mail.rus'">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="checkboxes">
+    <h2>Activity display options</h2>
+    <div class="checkboxList">
+      <mat-checkbox class="example-margin">Book adding</mat-checkbox>
+      <mat-checkbox class="example-margin">End of reading</mat-checkbox>
+      <mat-checkbox class="example-margin">My achievements</mat-checkbox>
+      <mat-checkbox class="example-margin">My reviews</mat-checkbox>
+      <mat-checkbox class="example-margin">Add to favourite</mat-checkbox>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="nav-footer">
+    <button mat-flat-button color="primary" routerLink="/profile">Back</button>
+    <button mat-flat-button color="primary" routerLink="/profile/change-password">Change password</button>
+    <button mat-flat-button color="primary" (click)="save()">Save changes</button>
+  </div>
+
+</div>
