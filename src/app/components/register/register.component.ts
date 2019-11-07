@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
-import {register} from 'ts-node';
 
 @Component({
   selector: 'app-register',
@@ -38,11 +37,11 @@ export class RegisterComponent implements OnInit {
       this.message = '';
       this.isError = false;
     }
-    register();
+    this.register();
   }
 
   register() {
-    this.authService.register(this.user.fullName, this.user.password);
+    this.authService.register(this.user.email, this.user.password);
   }
 
 

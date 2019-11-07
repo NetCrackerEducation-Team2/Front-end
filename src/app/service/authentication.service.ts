@@ -1,18 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 export class User {
-  constructor(
-    public status: string,
-  ) {
+  constructor(public status: string) {
   }
 }
 
 export class JwtResponse {
-  constructor(
-    public jwttoken: string,
-  ) {
+  constructor(public jwttoken: string) {
   }
 }
 
@@ -20,21 +17,17 @@ export class JwtResponse {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(
-    private httpClient: HttpClient) {
+
+  private readonly AUTH_LOGIN_URL;
+  private readonly AUTH_REG_URL;
+
+  constructor(private httpClient: HttpClient) {
+    this.AUTH_LOGIN_URL = environment.AUTH_LOGIN_URL;
+    this.AUTH_REG_URL = environment.AUTH_REGISTER_URL;
   }
 
-  // all constants below should be in /environments directory
-  private readonly ROOT = 'http://localhost:';
-  private readonly PORT = 8081;
-  private readonly LOGIN_ENDPOINT = '/auth/login';
-  private readonly REGISTER_ENDPOINT = '/auth/register';
-
-  private readonly AUTH_LOGIN_URL = this.ROOT + this.PORT + this.LOGIN_ENDPOINT;
-  private readonly AUTH_REG_URL = this.ROOT + this.PORT + this.REGISTER_ENDPOINT;
-
-  authenticate(username, password) {
-    return this.httpClient.post<any>(this.AUTH_LOGIN_URL, JSON.stringify({username, password})).pipe(
+  authenticate(email, password) {
+    return this.httpClient.post<any>(this.AUTH_LOGIN_URL, JSON.stringify({email, password})).pipe(
       map(
         data => {
           localStorage.setItem('token', data.token);
@@ -43,16 +36,7 @@ export class AuthenticationService {
     );
   }
 
-  register(fullName, password) {
-    return this.httpClient.post<any>(this.AUTH_REG_URL, {fullName, password});
-  }
-
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
-    return !(user === null)
-  }
-
-  logOut() {
-    sessionStorage.removeItem('username')
+  register(email, password) {
+    return this.httpClient.post<any>(this.AUTH_REG_URL, {email, password});
   }
 }
