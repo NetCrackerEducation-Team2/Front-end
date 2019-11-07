@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com//auth/login',
+  AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
 };

@@ -8,7 +8,7 @@ import {AuthenticationService} from '../../service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  user = {username: '', password: ''};
+  user = {email: '', password: ''};
   isError = false;
   isLogin = false;
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     console.log(JSON.stringify(this.user), ' submit');
-    this.authService.authenticate(this.user.username, this.user.password)
+    this.authService.authenticate(this.user.email, this.user.password)
       .subscribe(resp => {
           console.log(resp);
           this.isError = false;
