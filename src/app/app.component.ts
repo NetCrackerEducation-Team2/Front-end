@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
             index: 0
         }, {
             label: 'Announcements',
-            link: './404',
+            link: './announcements',
             index: 1
         }
     ];

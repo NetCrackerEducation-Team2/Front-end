@@ -29,8 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { AchievementsComponent } from './components/account/achievements/achievements.component';
-
-
+import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
+import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,9 @@ import { AchievementsComponent } from './components/account/achievements/achieve
     ProfileComponent,
     EditComponent,
     ChangePasswordComponent,
-    AchievementsComponent
+    AchievementsComponent,
+    AnnouncementItemComponent,
+    AnnouncementListComponent
   ],
   imports: [
     BrowserModule,
