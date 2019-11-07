@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,9 +8,25 @@ import {Router} from '@angular/router';
 })
 export class EditComponent implements OnInit {
 
-  myName;
+  isUpdated: boolean;
 
-  constructor(private router: Router) { }
+  user = {
+    fullName: 'Alexander Pushkin',
+    email: 'alexanderpushkin1799@mail.rus',
+    login: 'dantess',
+    optionArr: [
+      {title: 'Book adding', subscribed: false},
+      {title: 'End of reading', subscribed: false},
+      {title: 'My achievements', subscribed: true},
+      {title: 'My reviews', subscribed: false},
+      {title: 'Add to favourite', subscribed: true}
+    ],
+
+  };
+
+  constructor(private router: Router) {
+    this.isUpdated = false;
+  }
 
   ngOnInit() {
   }

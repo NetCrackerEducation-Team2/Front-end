@@ -19,3 +19,9 @@ h2 {
 .achievement-row {
   padding: 10px;
 }
+
+mat-paginator {
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 10px;
+}
