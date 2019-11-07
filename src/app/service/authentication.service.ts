@@ -43,8 +43,8 @@ export class AuthenticationService {
     );
   }
 
-  register(username, password) {
-    return this.httpClient.post<any>(this.AUTH_REG_URL, {username, password});
+  register(fullName, password) {
+    return this.httpClient.post<any>(this.AUTH_REG_URL, {fullName, password});
   }
 
   isUserLoggedIn() {

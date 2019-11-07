@@ -1,52 +1,69 @@
 
+<div class="container">
+
+  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate>
 
 
-<form *ngIf="!isRegister; else registeredTemplate" #regForm="ngForm" (ngSubmit)="register()"
-      style="text-align: center; margin-top: 100px" novalidate>
-  <label>Enter username
-    <input #name="ngModel" [class.is-invalid]="name.invalid && name.touched" required type="text"
-           [(ngModel)]="user.username" name="username" class="form-control" placeholder="Enter username">
-  </label>
-  <br>
-  <small class="text-danger" [class.d-none]="name.valid || name.untouched">Username is required</small>
-  <br>
-  <label>Enter password
-    <input pattern="^.{6,}" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" type="password"
-           [(ngModel)]="user.password" name="password" class="form-control" placeholder="Enter password">
-  </label>
-  <div *ngIf="password.errors && password.touched">
-    <small class="text-danger" *ngIf="password.errors.required">Password is required</small>
-    <small class="text-danger" *ngIf="password.errors.pattern">Password must be at least 6 sybmols</small>
-  </div>
-  <br>
-  <br>
-  <label>Repeat password
-    <input  required type="password" name="repeatPassword" [(ngModel)]="repeatPassword" class="form-control"
-           placeholder="Repeat password">
-  </label>
-  <br>
-  <br>
-  <button [disabled]="regForm.form.invalid" class="btn btn-primary" type="submit">Sign up</button>
-</form>
+    <div class="submit-row">
+      <label for="fullName">Enter full name</label>
+      <mat-form-field>
+        <input required name="fullName" #fullName="ngModel" type="text" id="fullName" matInput
+               placeholder="Full name" [(ngModel)]="user.fullName">
+      </mat-form-field>
+    </div>
 
+    <div class="submit-row">
+      <label for="email">Enter email</label>
+      <mat-form-field>
+        <input required name="email" #email="ngModel" type="email" id="email" matInput placeholder="Email"
+               [(ngModel)]="user.email" email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      </mat-form-field>
+    </div>
 
-<div *ngIf="isError">
-  <div style="text-align: center; margin-top: 20px; color:red;">
-    <p *ngIf="!message">
-      User with username already exists
+    <div class="submit-row">
+      <label for="password">Enter password</label>
+      <mat-form-field>
+        <input pattern="^.{6,}" required name="password" #password="ngModel" type="password" id="password" matInput
+               placeholder="Password" [(ngModel)]="user.password">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label for="confirmPassword">Confirm password</label>
+      <mat-form-field>
+        <input pattern="^.{6,}" required name="confirmPassword" #confirmPassword="ngModel" type="password"
+               id="confirmPassword" matInput
+               placeholder="Confirm password" [(ngModel)]="repeatPassword">
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="nav-footer">
+      <div class="errors">
+        <small class="text-danger" [class.d-none]="fullName.untouched || fullName.valid">Username is required</small>
+        <small class="text-danger" [class.d-none]="email.untouched || email.valid">Valid email is required</small>
+        <small class="text-danger" [class.d-none]="password.untouched || password.valid">Password must be at least 6 symbols</small>
+        <span class="text-danger" style="text-align: center;" *ngIf="!message && isError">
+          User with username already exists
+          <br>
+          Try again.
+        </span>
+        <span class="text-danger" style="text-align: center;" *ngIf="message && isError">
+          {{message}}
+        </span>
+      </div>
+      <button [disabled]="!regForm.valid" mat-flat-button color="primary">Sign up</button>
+    </div>
+
+  </form>
+
+  <ng-template #registeredTemplate>
+    <p style="text-align: center; margin-top: 20px; color:green;">
+      You're successfully signed up.
       <br>
-      Try again.
+      You will be automatically redirected to profile page.
     </p>
-    <p *ngIf="message">
-      {{message}}
-    </p>
-  </div>
-</div>
+  </ng-template>
 
-<ng-template #registeredTemplate>
-  <p style="text-align: center; margin-top: 20px; color:green;">
-    You're successfully signed up.
-    <br>
-    You will be automatically redirected to profile page.
-  </p>
-</ng-template>
+</div>
