@@ -4,9 +4,9 @@
 
 .checkboxList {
   display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
-}
+  align-items: flex-start;
+  flex-flow: column nowrap;
+  }
 
 button {
   height: 50px;
@@ -18,6 +18,9 @@ button {
 .checkboxes {
   margin-top: 20px;
   margin-bottom: 30px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
 
@@ -34,7 +37,8 @@ h2 {
 
 .submit-row {
   display: flex;
-  justify-content: space-around;
+  flex-flow: row wrap;
+  justify-content: center;
   align-items: center;
 }
 
@@ -54,18 +58,6 @@ label {
 }
 
 @media (max-width: 768px) {
-
-  .checkboxList {
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-  }
-
-  mat-checkbox {
-    text-align: left;
-  }
-
-
   .nav-footer {
     display: flex;
     flex-direction: column;
@@ -84,10 +76,11 @@ label {
   label {
     width: 80px;
   }
+}
 
-  mat-checkbox {
-    padding: 10px;
-  }
+mat-checkbox {
+  text-align: left;
+  padding: 5px;
 }
 
 

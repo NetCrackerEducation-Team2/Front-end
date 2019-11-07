@@ -54,7 +54,7 @@ const routes: Routes = [
      component: AnnouncementItemComponent
   },
   {
-    path: '404',
+    path: '**',
     component: NotFoundComponent
   }
 ];

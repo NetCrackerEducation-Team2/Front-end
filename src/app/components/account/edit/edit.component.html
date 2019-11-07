@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form #editForm="ngForm" class="submit-form">
+  <form class="submit-form">
 
     <div class="submit-row">
       <label for="name">Name</label>
@@ -12,7 +12,8 @@
     <div class="submit-row">
       <label for="surname">Surname</label>
       <mat-form-field class="example-full-width">
-        <input name="name" #name="ngModel" [(ngModel)]="myName" id="surname" matInput placeholder="Surname" [value]="'Pushkin'">
+        <input name="name" id="surname" matInput placeholder="Surname"
+               [value]="'Pushkin'">
       </mat-form-field>
     </div>
 
@@ -24,9 +25,9 @@
     </div>
 
     <div class="submit-row">
-      <label for="imgUrl">Image URL</label>
+      <label for="email">Email</label>
       <mat-form-field class="example-full-width">
-        <input id="imgUrl" matInput placeholder="Email" [value]="'alexanderpushkin1799@mail.rus'">
+        <input id="email" matInput placeholder="Email" [value]="'alexanderpushkin1799@mail.rus'">
       </mat-form-field>
     </div>
 
@@ -48,7 +49,8 @@
   <div class="nav-footer">
     <button mat-flat-button color="primary" routerLink="/profile">Back</button>
     <button mat-stroked-button color="warn" routerLink="/profile/change-password">Change password</button>
-    <button  mat-flat-button color="primary" (click)="save()">Save changes</button>
+    <button mat-flat-button color="primary" (click)="save()">Save changes</button>
   </div>
 
 </div>
+
