@@ -45,10 +45,11 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

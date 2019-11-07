@@ -33,8 +33,7 @@ export class RegisterComponent implements OnInit {
       this.message = '';
       this.isError = false;
     }
-    // to be fixed, using merge operator
-    this.authService.register(this.user.username, this.user.password)
+  /*  this.authService.register(this.user.username, this.user.password)
       .subscribe(
         resp => {
           console.log('register ', this.user);
@@ -52,6 +51,6 @@ export class RegisterComponent implements OnInit {
           this.isRegister = false;
           this.message = '';
         }
-      );
+      );*/
   }
 }
