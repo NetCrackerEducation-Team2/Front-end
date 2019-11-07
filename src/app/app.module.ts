@@ -6,6 +6,8 @@ import { MatToolbarModule, MatInputModule  } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,8 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { AchievementsComponent } from './components/account/achievements/achievements.component';
-
-
+import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
+import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { AchievementsComponent } from './components/account/achievements/achieve
     ProfileComponent,
     EditComponent,
     ChangePasswordComponent,
-    AchievementsComponent
+    AchievementsComponent,
+    AnnouncementItemComponent,
+    AnnouncementListComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,9 @@ import { AchievementsComponent } from './components/account/achievements/achieve
     MatInputModule,
     MatDividerModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

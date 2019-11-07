@@ -9,7 +9,8 @@ import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
-
+import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
+import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 
 const routes: Routes = [
   {
@@ -45,10 +46,19 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-    path: '**',
+     path: 'announcements',
+     component: AnnouncementListComponent
+  },
+  {
+     path: 'announcements/:id',
+     component: AnnouncementItemComponent
+  },
+  {
+    path: '404',
     component: NotFoundComponent
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

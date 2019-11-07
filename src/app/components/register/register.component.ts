@@ -12,10 +12,8 @@ export class RegisterComponent implements OnInit {
   user = {fullName: '', email: '', password: ''};
   repeatPassword: '';
 
-  isRegister = false;
   isError = false;
   message: string;
-  disabledSubmit = true;
 
   constructor(private authService: AuthenticationService,
               private router: Router) {
@@ -42,6 +40,25 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.authService.register(this.user.email, this.user.password);
+  /*  this.authService.register(this.user.username, this.user.password)
+      .subscribe(
+        resp => {
+          console.log('register ', this.user);
+          this.authService.authenticate(this.user.username, this.user.password)
+            .subscribe(
+              res => {
+                this.isError = false;
+                this.isRegister = true;
+              }
+            );
+          this.message = '';
+        },
+        err => {
+          this.isError = true;
+          this.isRegister = false;
+          this.message = '';
+        }
+      );*/
   }
 
 
