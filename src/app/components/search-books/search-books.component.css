@@ -1,27 +1,78 @@
-.container{
-  margin-top: 200px;
- }
+/*Mobile  screens*/
 
- .glyphicon-search{
-  font-size: 20px;
-  color: white;
- }
+@media screen and (max-width: 767px){
 
- .btn-default{
-  background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(111, 114, 247), rgb(120, 114, 239), rgb(130, 113, 231), rgb(139, 112, 223), rgb(149, 111, 215), rgb(158, 111, 208), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(196, 108, 176), rgb(206, 107, 168));;
-  width: 100px;
-  padding: 12.5px;
-  filter: brightness(70%);
- }
+  button {
+    width: 50px;
+    height: auto;
+    background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
+    padding: 1vh 1vw;
+    color: white;
+    outline-style: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+  }
 
- .form-control{
-  padding: 25px;
-  font-size: 20px;
- }
+  button:hover{
 
- form{
-  width: 50vw;
-  margin: auto;
-  margin-top: 50px;
+    background: rgb(0,0,255,0.5);
+    color: gray;
+    outline-style: none;
+  }
+
+
+  input{
+    height: auto;
+    width: 65vw;
+  }
+
+  form{
+    width: 65vw;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    max-height: 35px;
+
+  }
+
+}
+ /*Large screens +*/
+ @media screen and (min-width: 768px){
+
+    button {
+    width: 5vw;
+    height: auto;
+    background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
+    padding: 1vh 1vw;
+    color: white;
+    outline-style: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 2vw;
+  }
+
+
+  button:hover{
+
+    background: rgb(0,0,255,0.5);
+    color: gray;
+    outline-style: none;
+  }
+
+  input{
+    height: auto;
+    width: 65vw;
+  }
+
+  form{
+    width: 65vw;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    max-height: 40px;
+  }
 
  }
