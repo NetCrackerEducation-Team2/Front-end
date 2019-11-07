@@ -46,18 +46,19 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-    path: 'announcements',
-    component: AnnouncementListComponent
+     path: 'announcements',
+     component: AnnouncementListComponent
   },
   {
-    path: 'announcements/:id',
-    component: AnnouncementItemComponent
+     path: 'announcements/:id',
+     component: AnnouncementItemComponent
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
