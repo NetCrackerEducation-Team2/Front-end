@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -12,11 +13,13 @@ export class RegisterComponent implements OnInit {
   user = {fullName: '', email: '', password: ''};
   repeatPassword: '';
 
-  isError = false;
+  isError: boolean;
   message: string;
+  isRegistered: boolean;
 
-  constructor(private authService: AuthenticationService,
-              private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router) {
+    this.isRegistered = false;
+    this.isError = false;
   }
 
   ngOnInit() {
@@ -39,47 +42,20 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.authService.register(this.user.email, this.user.password);
-  /*  this.authService.register(this.user.username, this.user.password)
+    this.authService.register(this.user.fullName, this.user.email, this.user.password)
       .subscribe(
         resp => {
-          console.log('register ', this.user);
-          this.authService.authenticate(this.user.username, this.user.password)
-            .subscribe(
-              res => {
-                this.isError = false;
-                this.isRegister = true;
-              }
-            );
-          this.message = '';
+          this.isError = false;
+          this.isRegistered = true;
         },
-        err => {
+        (err: HttpErrorResponse) => {
           this.isError = true;
-          this.isRegister = false;
-          this.message = '';
+          if (typeof err.error === 'string') {
+            this.message = err.error;
+          } else {
+            this.message = 'Sorry, some unknown error occurred. Try again.';
+           }
         }
-      );*/
+      );
   }
-
-
-    // to be fixed, using merge operator
-    // this.authService.register((this.user as any).username, this.user.password)
-    //   .subscribe(
-    //     resp => {
-    //       console.log('register ', this.user);
-    //       this.authService.authenticate((this.user as any).username, this.user.password)
-    //         .subscribe(
-    //           res => {
-    //             this.isError = false;
-    //             this.isRegister = true;
-    //           }
-    //         );
-    //       this.message = '';
-    //     },
-    //     err => {
-    //       this.isError = true;
-    //       this.isRegister = false;
-    //       this.message = '';
-    //     }
-    //   );
 }

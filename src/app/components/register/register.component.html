@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate>
+  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate *ngIf="!isRegistered; else registeredTemplate">
 
 
     <div class="submit-row">
@@ -61,11 +61,7 @@
   </form>
 
   <ng-template #registeredTemplate>
-    <p style="text-align: center; margin-top: 20px; color:green;">
-      You're successfully signed up.
-      <br>
-      You will be automatically redirected to profile page.
-    </p>
+    <p style="margin-top: 40px;margin-bottom: 20px; font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Please go to your email and finish registration.</p>
   </ng-template>
 
 </div>

@@ -34,10 +34,11 @@ label {
 
   .submit-row {
     flex-flow: row wrap;
+    text-align: center;
   }
 
   .container, button {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   button {

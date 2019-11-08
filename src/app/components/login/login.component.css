@@ -18,7 +18,7 @@ button {
 
 .submit-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -37,7 +37,7 @@ label {
   }
 
   .container, button {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   mat-form-field {

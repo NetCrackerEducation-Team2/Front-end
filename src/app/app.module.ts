@@ -27,10 +27,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import { EditComponent } from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { AchievementsComponent } from './components/account/achievements/achievements.component';
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { AnnouncementListComponent } from './components/announcement-list/announ
     ChangePasswordComponent,
     AchievementsComponent,
     AnnouncementItemComponent,
-    AnnouncementListComponent
+    AnnouncementListComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,
