@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-activate-account',
@@ -27,12 +28,16 @@ export class ActivateAccountComponent implements OnInit {
       .subscribe(
         resp => {
           console.log('Activation code is admitted');
-          this.message = 'Please login into your account, by link below';
+          this.message = 'You successfully signed up. Click link below to login';
           this.isError = false;
         },
-        err => {
+        (err: HttpErrorResponse) => {
           console.error('Activation is rejected');
-          this.message = 'Some error occurred. Please try again.';
+          if (err.error != null && typeof err.error === 'string') {
+            this.message = err.error;
+          } else {
+            this.message = 'Some error occurred. Please try again.';
+          }
           this.isError = true;
         }
       );

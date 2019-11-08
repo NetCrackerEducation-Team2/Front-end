@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.user.email, this.user.password)
       .subscribe(
         (resp) => {
-          console.log('response from server', JSON.stringify(resp));
-          // localStorage.setItem('token', resp.token);
-          this.router.navigate(['/profile']);
+          const currentUser = {token: resp.token, userId: resp.userId};
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          this.router.navigate(['/profile', currentUser.userId]);
           console.log('Successfully signed in');
           this.isError = false;
           this.isLogin = true;
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           this.isError = true;
           this.isLogin = false;
         }
-      );
+      )
+    ;
   }
 }

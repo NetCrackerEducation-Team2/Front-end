@@ -39,7 +39,8 @@
     <mat-divider></mat-divider>
 
     <div class="nav-footer">
-      <div class="errors">
+      <div class="messages">
+        <span *ngIf="isDownloading">Please wait...</span>
         <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
         <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
         <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
@@ -61,7 +62,7 @@
   </form>
 
   <ng-template #registeredTemplate>
-    <p style="margin-top: 40px;margin-bottom: 20px; font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Please go to your email and finish registration.</p>
+    <p style="margin: 40px 30px 30px 30px;font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
 
 </div>

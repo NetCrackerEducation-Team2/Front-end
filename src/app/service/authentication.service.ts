@@ -21,24 +21,19 @@ export class AuthenticationService {
 
   private readonly AUTH_LOGIN_URL;
   private readonly AUTH_REG_URL;
-  private readonly AUTH_ACTIVATION_URL = 'http://localhost:8081/auth/activate/';
+  private readonly AUTH_ACTIVATION_URL;
 
   constructor(private httpClient: HttpClient) {
     this.AUTH_LOGIN_URL = environment.AUTH_LOGIN_URL;
     this.AUTH_REG_URL = environment.AUTH_REGISTER_URL;
+    this.AUTH_ACTIVATION_URL = environment.AUTH_ACTIVATION_URL;
   }
 
-  authenticate(email, password) {
-    return this.httpClient.post<any>(this.AUTH_LOGIN_URL, JSON.stringify({email, password})).pipe(
-      map(
-        data => {
-          localStorage.setItem('token', data.token);
-        }
-      )
-    );
+  authenticate(email, password): Observable<any> {
+    return this.httpClient.post<any>(this.AUTH_LOGIN_URL, JSON.stringify({email, password}));
   }
 
-  register(fullName, email, password) {
+  register(fullName, email, password): Observable<any> {
     return this.httpClient.post<any>(this.AUTH_REG_URL, {fullName, email, password});
   }
 

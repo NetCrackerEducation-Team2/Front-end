@@ -62,7 +62,7 @@ label {
   display: flex;
   flex-direction: column;
 }
-.errors{
+.messages{
   display: flex;
   flex-flow: column nowrap;
   align-items: center;

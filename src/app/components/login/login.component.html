@@ -1,12 +1,12 @@
 
 <div class="container">
 
-  <form class="submit-form" (ngSubmit)="submit()">
+  <form class="submit-form" (ngSubmit)="submit()" #loginFOm>
 
     <div class="submit-row">
-      <label for="username">Enter username</label>
+      <label for="email">Enter email</label>
       <mat-form-field>
-        <input name="username" type="text" id="username" matInput placeholder="Username" [(ngModel)]="user.email">
+        <input name="email" type="text" id="email" matInput placeholder="Username" [(ngModel)]="user.email">
       </mat-form-field>
     </div>
 

@@ -35,7 +35,7 @@ const routes: Routes = [
     component: SearchBooksComponent
   },
   {
-    path: 'profile',
+    path: 'profile/:userId',
     component: ProfileComponent
   },
   {

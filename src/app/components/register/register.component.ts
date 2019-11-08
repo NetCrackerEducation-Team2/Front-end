@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
 
   user = {fullName: '', email: '', password: ''};
   repeatPassword: '';
+  isDownloading: boolean;
 
   isError: boolean;
   message: string;
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.isDownloading = true;
     this.authService.register(this.user.fullName, this.user.email, this.user.password)
       .subscribe(
         resp => {
@@ -54,8 +56,10 @@ export class RegisterComponent implements OnInit {
             this.message = err.error;
           } else {
             this.message = 'Sorry, some unknown error occurred. Try again.';
-           }
-        }
+          }
+          this.isDownloading = false;
+        },
+        () => this.isDownloading = false
       );
   }
 }
