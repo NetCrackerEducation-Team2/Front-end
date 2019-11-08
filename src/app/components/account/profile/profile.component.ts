@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile = {};
+  profile = {fullName: '', email: '', createdAt: Date.now()};
 
   constructor(private activatedRoute: ActivatedRoute, private accountService: AccountService) {
   }
