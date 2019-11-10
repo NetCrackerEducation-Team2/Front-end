@@ -18,7 +18,12 @@ export class AccountService {
   }
 
   getToken() {
-    return JSON.parse(localStorage.getItem('currentUser')).token;
+    if(localStorage.getItem('currentUser')) {
+      return JSON.parse(localStorage.getItem('currentUser')).token;
+    } else {
+      return null;
+    }
+
   }
 
 }
