@@ -25,5 +25,4 @@ export class AnnouncementListComponent implements OnInit {
     this.announcementService.getAnnouncements()
         .subscribe(result => this.page = result);
   }
-
 }
