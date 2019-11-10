@@ -1,0 +1,10 @@
+<div class="container">
+  <ng-container *ngIf="isError;else successfulActivationTemplate">
+    <span style="text-align: center; color:red;">{{message}}</span>
+  </ng-container>
+  <ng-template #successfulActivationTemplate>
+    <span style="text-align: center; color:#522bff;margin: 10px 20px;">{{message}}</span>
+    <br>
+    <a mat-stroked-button routerLink="/login">Login into your account</a>
+  </ng-template>
+</div>

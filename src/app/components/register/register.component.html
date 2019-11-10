@@ -1,7 +1,6 @@
-
 <div class="container">
 
-  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate>
+  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate *ngIf="!isRegistered; else registeredTemplate">
 
 
     <div class="submit-row">
@@ -40,10 +39,14 @@
     <mat-divider></mat-divider>
 
     <div class="nav-footer">
-      <div class="errors">
-        <small class="text-danger" [class.d-none]="fullName.untouched || fullName.valid">Username is required</small>
-        <small class="text-danger" [class.d-none]="email.untouched || email.valid">Valid email is required</small>
-        <small class="text-danger" [class.d-none]="password.untouched || password.valid">Password must be at least 6 symbols</small>
+      <div class="messages">
+        <span *ngIf="isDownloading">Please wait...</span>
+        <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
+        <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
+        <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
+        <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
+        <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6
+          symbols</small>
         <span class="text-danger" style="text-align: center;" *ngIf="!message && isError">
           User with username already exists
           <br>
@@ -59,11 +62,7 @@
   </form>
 
   <ng-template #registeredTemplate>
-    <p style="text-align: center; margin-top: 20px; color:green;">
-      You're successfully signed up.
-      <br>
-      You will be automatically redirected to profile page.
-    </p>
+    <p style="margin: 40px 30px 30px 30px;font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
 
 </div>

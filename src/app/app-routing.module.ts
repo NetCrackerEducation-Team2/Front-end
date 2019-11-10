@@ -20,6 +20,7 @@ import {CreateAdminComponent } from './components/create-admin/create-admin.comp
 import {CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,7 @@ const routes: Routes = [
     component: SearchBooksComponent
   },
   {
-    path: 'profile',
+    path: 'profile/:userId',
     component: ProfileComponent
   },
   {
@@ -63,7 +64,11 @@ const routes: Routes = [
      component: AnnouncementItemComponent
   },
   {
-    path: '404',
+    path: 'activate/:code',
+    component: ActivateAccountComponent
+  },
+  {
+    path: '**',
     component: NotFoundComponent
   },
   {

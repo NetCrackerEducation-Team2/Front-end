@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AccountService} from '../../../service/account.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -6,11 +8,24 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  profile = {fullName: '', email: '', createdAt: Date.now()};
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute, private accountService: AccountService) {
   }
 
   ngOnInit() {
+    const userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    this.accountService.getUserById(userId)
+      .subscribe(
+        user => {
+          this.profile = user;
+        },
+        error => {
+          console.log('Error');
+          console.error(error.error);
+          // handle error
+        }
+      );
   }
 
   edit() {

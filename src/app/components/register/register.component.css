@@ -18,26 +18,27 @@ button {
 
 .submit-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
-mat-form-field, .input {
+mat-form-field {
   width: 600px;
 }
 
 label {
-  width: 150px;
+  width: 170px;
 }
 
 @media (max-width: 768px) {
 
   .submit-row {
     flex-flow: row wrap;
+    text-align: center;
   }
 
   .container, button {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   button {
@@ -61,8 +62,12 @@ label {
   display: flex;
   flex-direction: column;
 }
-.errors{
+.messages{
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+}
+
+.text-danger {
+  color: red;
 }
