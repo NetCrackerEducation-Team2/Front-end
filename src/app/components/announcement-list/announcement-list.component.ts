@@ -8,7 +8,11 @@ import { AnnouncementService } from '../../service/announcement.service';
   styleUrls: ['./announcement-list.component.css']
 })
 export class AnnouncementListComponent implements OnInit {
-  announcements:Announcement[];
+  page: {
+    currentPage:number,
+    countPages: number,
+    array: Announcement[]
+  }
 
 
   constructor(private announcementService: AnnouncementService) { }
@@ -19,7 +23,6 @@ export class AnnouncementListComponent implements OnInit {
 
   getAnnouncements(): void {
     this.announcementService.getAnnouncements()
-        .subscribe(announcements => this.announcements = announcements);
+        .subscribe(result => this.page = result);
   }
-
 }
