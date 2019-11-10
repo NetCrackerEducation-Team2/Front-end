@@ -18,6 +18,7 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) {
     this.announcementsUrl = 'http://localhost:8081/api/announcements';
+
   }
 
   getAnnouncements(): Observable<any> {
