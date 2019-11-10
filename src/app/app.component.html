@@ -10,19 +10,23 @@
 <!--</app-book-list>-->
 
 
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-  *ngFor="let link of navLinks"
+<nav mat-tab-nav-bar >
+
+  <div *ngFor="let link of navLinks" >
+  <a mat-tab-link *ngIf="link.access"
   [routerLink]="link.link"
   routerLinkActive #rla="routerLinkActive"
   [routerLinkActiveOptions]="{exact:true}"
   [active]="rla.isActive">
   {{link.label}}
-</a>
+  </a>
+  </div>
+
 </nav>
 <div class="wrapper">
 <router-outlet></router-outlet>
-<div class="push"></div>
+<div class="push" ></div>
+
 </div>
 
 

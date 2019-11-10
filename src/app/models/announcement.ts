@@ -1,9 +1,9 @@
 export class Announcement {
-  announcement_id: number;
+  announcementId: number;
   title: string;
   description: string;
-  user_id: number;
+  userId: number;
   published: boolean;
-  creation_time: string;
-  book_id: number;
+  creationTime: string;
+  bookId: number;
 }

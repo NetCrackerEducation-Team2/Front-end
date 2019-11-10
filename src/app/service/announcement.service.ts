@@ -16,6 +16,6 @@ export class AnnouncementService {
 
   getAnnouncement(id: number): Observable<Announcement> {
   // TODO: send the message _after_ fetching the hero
-    return of(ANNOUNCEMENTS.find(announcement => announcement.announcement_id === id));
+    return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
   }
 }

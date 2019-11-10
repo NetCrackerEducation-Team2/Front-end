@@ -14,6 +14,10 @@
     font-size: 12px;
   }
 
+  mat-icon{
+    margin-bottom: 50px;
+  }
+
   button:hover{
 
     background: rgb(0,0,255,0.5);
@@ -53,12 +57,17 @@
     font-size: 2vw;
   }
 
+  mat-icon{
+
+  }
 
   button:hover{
 
     background: rgb(0,0,255,0.5);
     color: gray;
     outline-style: none;
+
+
   }
 
   input{

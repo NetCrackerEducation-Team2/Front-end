@@ -27,10 +27,19 @@ import {MatDividerModule} from '@angular/material/divider';
 import { EditComponent } from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { AchievementsComponent } from './components/account/achievements/achievements.component';
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { SuperAdminComponent } from './components/super-admin/super-admin.component';
+import { ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
+import { BooksManagementComponent } from './components/books-management/books-management.component';
+import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
+import { CreateBookComponent } from './components/create-book/create-book.component';
+import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
+import { CreateAdminComponent } from './components/create-admin/create-admin.component';
+import { CreateAnnouncementComponent } from './components/create-announcement/create-announcement.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +58,16 @@ import { AnnouncementListComponent } from './components/announcement-list/announ
     ChangePasswordComponent,
     AchievementsComponent,
     AnnouncementItemComponent,
-    AnnouncementListComponent
+    AnnouncementListComponent,
+    AdminComponent,
+    SuperAdminComponent,
+    ReviewsManagementComponent,
+    BooksManagementComponent,
+    AnnouncementsManagementComponent,
+    CreateBookComponent,
+    CreateModeratorComponent,
+    CreateAdminComponent,
+    CreateAnnouncementComponent
   ],
   imports: [
     BrowserModule,
