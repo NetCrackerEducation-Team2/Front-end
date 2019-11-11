@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AccountService} from "../../../service/account.service";
 
 @Component({
   selector: 'app-change-password',
@@ -16,11 +17,20 @@ export class ChangePasswordComponent implements OnInit {
 
   errMessage = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private accountService: AccountService,
+              private activatedRoute: ActivatedRoute) {
   }
 
+  private userId: number;
 
   ngOnInit() {
+    const currentUser = this.accountService.getCurrentUser();
+    this.userId = +this.activatedRoute.snapshot.paramMap.get('userId');
+
+    if (!currentUser || currentUser && currentUser.userId !== this.userId) {
+      this.router.navigate(['']);
+    }
   }
 
   save() {

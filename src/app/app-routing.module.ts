@@ -39,11 +39,11 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'profile/edit',
+    path: 'profile/:userId/edit',
     component: EditComponent
   },
   {
-    path: 'profile/change-password',
+    path: 'profile/:userId/change-password',
     component: ChangePasswordComponent
   },
   {

@@ -13,7 +13,7 @@ export class TokenInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercepted http request');
+    console.log('intercepted http request. Trying to get ' + req.url);
     const token = this.service.getToken();
     if (token && !req.url.startsWith('auth/')) {
       const tokenizedReq = req.clone({
