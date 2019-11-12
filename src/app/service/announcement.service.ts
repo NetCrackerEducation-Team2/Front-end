@@ -4,6 +4,7 @@ import { ANNOUNCEMENTS } from '../mocks/mock-announcement';
 import { Observable, of  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,7 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) {
     //this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
-    this.announcemetnsUrl = 'https://netcracker2-back-end.herokuapp.com/api/announcements';
-
+    this.announcemetnsUrl = environment.API_ANNOUNCEMENTS;
   }
 
   getAnnouncements(): Observable<any> {
@@ -34,9 +34,12 @@ export class AnnouncementService {
 
   getAnnouncement(id: number): Observable<Announcement> {
     // Get from mock
-    return of(ANNOUNCEMENTS.find(announcement => announcement.announcement_id === id));
+    //return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
     //Return from backend
-  //  return this.http.get(this.urlAnnouncemetns);
+    return this.http.get(this.announcemetnsUrl + id)
+    .pipe(
+      catchError(this.handleError<any>('getAnnouncements', []))
+    );
   }
 
 
@@ -60,7 +63,4 @@ export class AnnouncementService {
     };
   }
 
-  /*getToken() {
-    return JSON.parse(localStorage.getItem('currentUser')).token;
-  }*/
 }

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(JSON.stringify(this.user), ' submit');
+    console.log(JSON.stringify(this.user.email), ' submitted');
     this.authService.authenticate(this.user.email, this.user.password)
       .subscribe(
         (resp) => {
