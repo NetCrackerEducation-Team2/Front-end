@@ -2,21 +2,21 @@ import { Announcement } from '../models/announcement';
 
 export const ANNOUNCEMENTS: Announcement[] = [
   {
-    announcement_id: 1,
+    announcementId: 1,
     title: "Title",
     description: "Description",
-    user_id: 1,
+    userId: 1,
     published: true,
-    creation_time: "07-11-2019",
-    book_id: 1
+    creationTime: "07-11-2019",
+    bookId: 1
   },
   {
-    announcement_id: 2,
+    announcementId: 2,
     title: "Title 2",
     description: "Description 2",
-    user_id: 2,
+    userId: 2,
     published: true,
-    creation_time: "07-11-2019",
-    book_id: 2
+    creationTime: "07-11-2019",
+    bookId: 2
   },
 ];

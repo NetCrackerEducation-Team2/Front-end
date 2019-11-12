@@ -11,16 +11,17 @@ import { AnnouncementService } from '../../service/announcement.service';
 })
 export class AnnouncementItemComponent implements OnInit {
   announcement: Announcement;
-
+  public theGoBackCallback: Function;
 
   constructor(
     private route: ActivatedRoute,
     private announcementService: AnnouncementService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getAnnouncement();
+    this.theGoBackCallback = this.goBack.bind(this);
   }
 
   getAnnouncement(): void {
@@ -28,8 +29,8 @@ export class AnnouncementItemComponent implements OnInit {
     this.announcementService.getAnnouncement(id)
       .subscribe(announcement => this.announcement = announcement);
   }
-  
-  goBack(): void {
+
+  public goBack(): void {
     this.location.back();
   }
 }

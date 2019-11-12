@@ -34,6 +34,7 @@ import {AnnouncementItemComponent} from './components/announcement-item/announce
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
     AchievementsComponent,
     AnnouncementItemComponent,
     AnnouncementListComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    ListItemComponent
   ],
   imports: [
     BrowserModule,
