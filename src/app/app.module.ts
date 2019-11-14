@@ -77,11 +77,11 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatTabsModule
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptorService,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
 
   bootstrap: [AppComponent]
