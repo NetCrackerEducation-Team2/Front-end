@@ -35,6 +35,7 @@ import {AnnouncementListComponent} from './components/announcement-list/announce
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ListItemComponent } from './components/presentational/list-item/list-it
     AnnouncementItemComponent,
     AnnouncementListComponent,
     ActivateAccountComponent,
-    ListItemComponent
+    ListItemComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

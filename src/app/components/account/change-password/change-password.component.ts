@@ -35,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
 
   save() {
     console.log('password saved...');
-    this.router.navigate(['/profile']);
+    this.router.navigate(['../']);
   }
 
   checkPasswords() {
