@@ -1,48 +1,40 @@
-
 <div class="container">
 
   <form class="submit-form" (ngSubmit)="submit()" #loginFOm>
 
     <div class="submit-row">
-      <label for="email">Enter email</label>
-      <mat-form-field>
+      <label class="label" for="email">Enter email</label>
+      <mat-form-field class="form-field">
         <input name="email" type="text" id="email" matInput placeholder="Username" [(ngModel)]="user.email">
       </mat-form-field>
     </div>
 
     <div class="submit-row">
-      <label for="password">Enter password</label>
-      <mat-form-field>
-        <input name="password" type="password" id="password" matInput placeholder="Password" [(ngModel)]="user.password">
+      <label class="label" for="password">Enter password</label>
+      <mat-form-field class="form-field">
+        <input name="password" type="password" id="password" matInput placeholder="Password"
+               [(ngModel)]="user.password">
       </mat-form-field>
     </div>
 
     <mat-divider></mat-divider>
 
     <div class="nav-footer">
-      <button type="submit" mat-flat-button color="primary">Login</button>
-      <button type="submit"  mat-stroked-button color="warn" routerLink="/profile/recover-password">Recover password
+      <button class="button" type="submit" mat-flat-button color="primary">Login</button>
+      <button class="button" type="submit" mat-stroked-button color="warn" routerLink="/profile/recover-password">
+        Recover password
       </button>
     </div>
 
   </form>
 
   <div *ngIf="isError">
-    <p style="text-align: center; margin-top: 20px; color:red;">
+    <p class="error">
       Invalid username or/and password.
       <br>
       Try again.
     </p>
   </div>
-
-  <div *ngIf="isLogin">
-    <p style="text-align: center; margin-top: 20px; color:green;">
-      You're successfully signed in.
-      <br>
-      You will be automatically redirected to profile page.
-    </p>
-  </div>
-
 </div>
 
 

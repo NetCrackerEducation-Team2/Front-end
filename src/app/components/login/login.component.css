@@ -2,11 +2,17 @@
   font-size: 20px;
 }
 
-button {
+.button {
   height: 50px;
   width: 180px;
   font-size: 18px;
   margin: 10px;
+}
+
+.error {
+  text-align: center;
+  margin-top: 20px;
+  color: red;
 }
 
 .submit-form {
@@ -22,11 +28,11 @@ button {
   align-items: center;
 }
 
-mat-form-field {
+.form-field {
   width: 600px;
 }
 
-label {
+.label {
   width: 150px;
 }
 
@@ -36,11 +42,11 @@ label {
     flex-flow: row wrap;
   }
 
-  .container, button {
+  .container, .button {
     font-size: 18px;
   }
 
-  mat-form-field {
+  .form-field {
     width: 300px;
   }
 }
@@ -52,7 +58,7 @@ label {
   justify-content: center;
 }
 
-.nav-footer:nth-child(1){
+.nav-footer:nth-child(1) {
   order: -1;
 }
 

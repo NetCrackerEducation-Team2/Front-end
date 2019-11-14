@@ -34,6 +34,7 @@ import {AnnouncementItemComponent} from './components/announcement-item/announce
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
     AchievementsComponent,
     AnnouncementItemComponent,
     AnnouncementListComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -75,11 +77,11 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
     MatTabsModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptorService,
+    //   multi: true
+    // }
   ],
 
   bootstrap: [AppComponent]
