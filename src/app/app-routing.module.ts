@@ -11,7 +11,8 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
-import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
+import {LogoutComponent} from './components/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'activate/:code',
     component: ActivateAccountComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   {
     path: '**',

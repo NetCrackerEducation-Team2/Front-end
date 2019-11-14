@@ -3,16 +3,16 @@
   <form class="submit-form" #editForm="ngForm" novalidate (change)="isUpdated=true">
 
     <div class="submit-row">
-      <label for="name">Full name</label>
-      <mat-form-field class="example-full-width">
+      <label class="row-label" for="name">Full name</label>
+      <mat-form-field class="form-field">
         <input required id="name" matInput placeholder="Full name" [(ngModel)]="user.fullName"
                name="name" #fullName="ngModel">
       </mat-form-field>
     </div>
 
     <div class="submit-row">
-      <label for="email">Email</label>
-      <mat-form-field class="example-full-width">
+      <label class="row-label" for="email">Email</label>
+      <mat-form-field class="form-field">
         <input required id="email" matInput placeholder="Email" [(ngModel)]="user.email" name="email"
                #email="ngModel" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
       </mat-form-field>
@@ -26,10 +26,10 @@
   </form>
 
   <div class="checkboxes">
-    <h2>Activity display options</h2>
+    <h2 class="header">Activity display options</h2>
     <div class="checkboxList">
       <ng-container *ngFor="let option of user.optionArr">
-        <mat-checkbox class="example-margin" [(ngModel)]="option.subscribed">{{option.title}}</mat-checkbox>
+        <mat-checkbox class="checkbox" [disabled]="true" [(ngModel)]="option.subscribed">{{option.title}}</mat-checkbox>
       </ng-container>
     </div>
   </div>
@@ -37,9 +37,9 @@
   <mat-divider></mat-divider>
 
   <div class="nav-footer">
-    <button mat-flat-button color="primary" [routerLink]="['../']">Back</button>
-    <button mat-stroked-button color="warn" [routerLink]="['../', 'change-password']">Change password</button>
-    <button [disabled]="editForm.invalid || !isUpdated" mat-flat-button color="primary" (click)="save()">Save changes
+    <button class="button" mat-flat-button color="primary" [routerLink]="['../']">Back</button>
+    <button class="button" mat-stroked-button color="warn" [routerLink]="['../', 'change-password']">Change password</button>
+    <button class="button" [disabled]="editForm.invalid || !isUpdated" mat-flat-button color="primary" (click)="save()">Save changes
     </button>
   </div>
 
