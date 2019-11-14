@@ -1,6 +1,34 @@
-<form>
-    <input type="text" placeholder="Search book..." name="search">
-    <button type="submit">
-        <mat-icon>search</mat-icon>
+<div class="filtered-book-list-container">
+  <div class="simple-books-filter">
+    <input type="text" placeholder=" Search book..." name="search" class="search-input" [(ngModel)]="title">
+    <button (click)="search()" class="search-button">
+      <mat-icon>search</mat-icon>
     </button>
-</form>
+  </div>
+  <div></div>
+  <!--<app-book-list></app-book-list>-->
+  <div class="advanced-books-filter">
+    <h2>Apply Filters</h2>
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <mat-select [(ngModel)]="author">
+          <mat-option *ngFor="let author of authors" [value]="author">
+            {{author.fullName}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Genre</mat-label>
+      <mat-select [(ngModel)]="genre">
+          <mat-option *ngFor="let genre of genres" [value]="genre">
+            {{genre.name}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>

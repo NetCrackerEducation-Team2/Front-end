@@ -7,13 +7,17 @@ export const environment = {
   // AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
   // AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
   // AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
-  // API_PROFILE : 'http://localhost:8081/profile'
+  // API_PROFILE : 'http://localhost:8081/profile',
+  API_BOOKS: 'http://localhost:8081/api/books',
+  API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book-download',
 
   AUTH_LOGIN_URL: 'http://netcracker2-back-end.herokuapp.com/auth/login',
   AUTH_REGISTER_URL: 'http://netcracker2-back-end.herokuapp.com/auth/register',
   AUTH_ACTIVATION_URL: 'http://netcracker2-back-end.herokuapp.com/auth/activate/',
   API_PROFILE: 'http://netcracker2-back-end.herokuapp.com/profile',
-  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/'
+  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
+  // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
+  // API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book-download',
 };
 
 /*

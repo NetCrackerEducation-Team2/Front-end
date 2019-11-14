@@ -27,6 +27,9 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
@@ -74,7 +77,10 @@ import { ListItemComponent } from './components/presentational/list-item/list-it
     MatCheckboxModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
