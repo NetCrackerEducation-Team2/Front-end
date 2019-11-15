@@ -2,7 +2,7 @@
   font-size: 20px;
 }
 
-button {
+.button {
   height: 50px;
   width: 220px;
   font-size: 18px;
@@ -22,11 +22,11 @@ button {
   align-items: center;
 }
 
-mat-form-field {
+.form-field {
   width: 600px;
 }
 
-label {
+.label {
   width: 170px;
 }
 
@@ -37,15 +37,15 @@ label {
     text-align: center;
   }
 
-  .container, button {
+  .container, .button {
     font-size: 18px;
   }
 
-  button {
+  .button {
     width: 180px;
   }
 
-  mat-form-field, .input {
+  .form-field, .input {
     width: 300px;
   }
 
@@ -62,7 +62,8 @@ label {
   display: flex;
   flex-direction: column;
 }
-.messages{
+
+.messages {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -70,4 +71,15 @@ label {
 
 .text-danger {
   color: red;
+}
+
+.center{
+  text-align: center;
+}
+
+.center-margin {
+  margin: 40px 30px 30px 30px;
+  font-size: 25px;
+  color: #522bff;
+  text-align: center
 }
