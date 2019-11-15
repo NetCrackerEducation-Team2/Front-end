@@ -1,7 +1,7 @@
 <div *ngIf="announcement">
   <app-list-item [title]= "announcement.title"
                  [description] = "announcement.description"
-                 [subtitle] = "announcement.creationTime"
+                 [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
                  [listItemCallback] = "theGoBackCallback"
   ></app-list-item>
 </div>
