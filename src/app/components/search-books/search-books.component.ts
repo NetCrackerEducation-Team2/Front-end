@@ -24,6 +24,7 @@ export class SearchBooksComponent implements OnInit {
   authors: Author[];
   genres: Genre[];
   selectedPage: Page<Book>;
+  window: any;
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
@@ -36,6 +37,7 @@ export class SearchBooksComponent implements OnInit {
     this.selectedPage.currentPage = 1;
     this.selectedPage.pageSize = 5;
     this.selectedPage.countPages = 10;
+    this.window = window;
     //let filteringParams = this.getBookFilteringParamsMap();
     //this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(selectedPage => this.selectedPage = selectedPage);
   }

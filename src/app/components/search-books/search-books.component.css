@@ -40,9 +40,19 @@
   margin: 0 10px;
 }
 
-.advanced-books-filter > h2{
-  margin: 10px;
-  text-align: center;
+.advanced-books-filter-exp-panel{
+  margin: 10px 10px;
+  margin-top: 0px;
+
+}
+/*.advanced-books-filter > h2{*/
+/*  margin: 10px;*/
+/*  text-align: center;*/
+/*}*/
+
+.books-filter-title{
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 767px) {
@@ -54,7 +64,7 @@
     order: 1;
   }
 
-  .advanced-books-filter{
+  .advanced-books-filter-exp-panel{
     order: 2;
   }
 

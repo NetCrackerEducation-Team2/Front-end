@@ -68,7 +68,6 @@ export class BookService {
   getBookAuthorsString(book: Book, count: number): string{
     return this.stringFormatterService.arrayPrettyFormat<Author>(book.authors, count);
   }
-
   private handleError<T>(operation = 'operation', result?: T){
     return (error: any): Observable<T> => {
       this.logger.error(`${operation} failed: ${error.message}`);

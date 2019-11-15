@@ -1,8 +1,8 @@
-.container, button {
+.container, .button  {
   font-size: 20px;
 }
 
-button {
+.button {
   height: 50px;
 }
 
@@ -24,13 +24,13 @@ button {
   .info {
     align-items: center;
   }
-  button {
+  .button  {
     height: 45px;
   }
 }
 
 @media (max-width: 380px) {
-  .container, button {
+  .container, .button  {
     font-size: 18px;
   }
 }
