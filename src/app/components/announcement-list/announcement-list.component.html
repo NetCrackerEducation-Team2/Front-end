@@ -1,4 +1,4 @@
-<ul>
+<ul *ngIf="page">
   <li *ngFor="let announcement of page.array">
     <app-list-item [title]= "announcement.title"
                    [description] = "announcement.description"

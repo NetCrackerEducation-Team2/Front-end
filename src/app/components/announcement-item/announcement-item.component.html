@@ -1,5 +1,7 @@
-<app-list-item [title]= "announcement.title"
-               [description] = "announcement.description"
-               [subtitle] = "announcement.creationTime"
-               [listItemCallback] = "theGoBackCallback"
-></app-list-item>
+<div *ngIf="announcement">
+  <app-list-item [title]= "announcement.title"
+                 [description] = "announcement.description"
+                 [subtitle] = "announcement.creationTime"
+                 [listItemCallback] = "theGoBackCallback"
+  ></app-list-item>
+</div>
