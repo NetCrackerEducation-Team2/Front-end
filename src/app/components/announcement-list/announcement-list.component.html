@@ -1,8 +1,8 @@
-<ul>
+<ul *ngIf="page">
   <li *ngFor="let announcement of page.array">
     <app-list-item [title]= "announcement.title"
                    [description] = "announcement.description"
-                   [subtitle] = "announcement.creationTime"
+                   [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
                    [url] = "announcement.announcementId"
                    [btnText] = "'View'"></app-list-item>
   </li>

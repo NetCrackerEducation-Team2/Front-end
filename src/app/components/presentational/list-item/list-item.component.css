@@ -19,10 +19,13 @@
 ::ng-deep .mat-card-subtitle {
   margin-top: -8px;
   margin-bottom: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 ::ng-deep .mat-card-content {
   margin-bottom: 16px;
+  margin-left: 16px;
 }
 
 ::ng-deep .mat-card-actions {
