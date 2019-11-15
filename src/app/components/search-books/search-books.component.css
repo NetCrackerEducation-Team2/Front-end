@@ -58,14 +58,14 @@
     order: 2;
   }
 
-  app-book-list{
+  .book-page{
     order: 3;
   }
 }
 
 @media screen and (min-width: 768px) {
   .filtered-book-list-container {
-    grid-template-columns: minmax(auto, 70%) minmax(275px, 30%);
+    grid-template-columns: auto minmax(275px, 30%);
   }
 
   .simple-books-filter {

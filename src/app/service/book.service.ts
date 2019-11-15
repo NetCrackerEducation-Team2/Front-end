@@ -30,7 +30,7 @@ export class BookService {
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
 
-  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number): Observable<Page<Book>>{
+  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>>{
     const params = new HttpParams();
     if(filteringParams.get(BookFilteringParam.Title) != null){
       let title = filteringParams.get(BookFilteringParam.Title) as unknown as string;
@@ -48,7 +48,8 @@ export class BookService {
       let announcementDate = filteringParams.get(BookFilteringParam.AnnouncementDate) as unknown as Date;
       params.set('date', announcementDate.toLocaleDateString());
     }
-    if(page != null) params.set('page', page.toString());
+    if(page != null) params.set('selectedPage', page.toString());
+    if(pageSize != null) params.set('pageSize', pageSize.toString());
     return this.http.get<Page<Book>>(this.booksUrl, {params})
       .pipe(
         catchError(this.handleError<any>('getBooks', []))

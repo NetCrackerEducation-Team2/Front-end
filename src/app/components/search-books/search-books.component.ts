@@ -1,4 +1,4 @@
-import {Output, EventEmitter, Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Author} from "../../models/author";
 import {Genre} from "../../models/genre";
 import {GenreService} from "../../service/genre.service";
@@ -7,6 +7,7 @@ import {BookFilteringParam} from "../../models/book-filtering-param";
 import {Book} from "../../models/book";
 import {Page} from "../../models/page";
 import {BookService} from "../../service/book.service";
+import {PageEvent} from "@angular/material";
 
 @Component({
   selector: 'app-search-books',
@@ -22,7 +23,7 @@ export class SearchBooksComponent implements OnInit {
 
   authors: Author[];
   genres: Genre[];
-  page: Page<Book>;
+  selectedPage: Page<Book>;
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
@@ -31,13 +32,25 @@ export class SearchBooksComponent implements OnInit {
   ngOnInit() {
     this.genreService.getGenres().subscribe(genres => this.genres = genres);
     this.authorService.getAuthors().subscribe(authors => this.authors = authors);
+    this.selectedPage = new Page<Book>();
+    this.selectedPage.currentPage = 1;
+    this.selectedPage.pageSize = 5;
+    this.selectedPage.countPages = 10;
     //let filteringParams = this.getBookFilteringParamsMap();
-    //this.bookService.getBooks(filteringParams, 1).subscribe(page => this.page = page);
+    //this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(selectedPage => this.selectedPage = selectedPage);
   }
 
   search(): void{
     //let filteringParams = this.getBookFilteringParamsMap();
-    //this.bookService.getBooks(filteringParams, this.page.currentPage).subscribe(page => this.page = page);
+    //this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(selectedPage => this.selectedPage = selectedPage);
+  }
+
+  handlePage(event?: PageEvent) {
+    this.selectedPage.currentPage = event.pageIndex;
+    console.log("Current selectedPage: " + this.selectedPage.currentPage);
+    this.selectedPage.pageSize = event.pageSize;
+    console.log("Page size: " + this.selectedPage.pageSize);
+    this.search();
   }
 
   getBookFilteringParamsMap(): Map<BookFilteringParam, object>{

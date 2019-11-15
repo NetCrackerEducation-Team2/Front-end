@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
 import {Page} from '../../models/page';
 import {BookService} from "../../service/book.service";
@@ -10,7 +10,7 @@ import {BookService} from "../../service/book.service";
 })
 export class BookListComponent implements OnInit {
 
-  page: Page<Book>;
+  @Input() page: Page<Book>;
 
   constructor(public bookService: BookService) { }
 

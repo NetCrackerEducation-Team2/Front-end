@@ -5,8 +5,12 @@
       <mat-icon>search</mat-icon>
     </button>
   </div>
-  <div></div>
-  <!--<app-book-list></app-book-list>-->
+  <div class="book-page">
+    <app-book-list [page]="selectedPage"></app-book-list>
+    <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                   [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+    </mat-paginator>
+  </div>
   <div class="advanced-books-filter">
     <h2>Apply Filters</h2>
     <mat-form-field>
