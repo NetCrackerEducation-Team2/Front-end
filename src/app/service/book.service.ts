@@ -16,13 +16,11 @@ import {StringFormatterService} from "./string-formatter.service";
 export class BookService {
 
   private readonly booksUrl: string;
-  private readonly bookUrl: string;
   private readonly bookDownloadUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
               private logger: LogService) {
-    this.bookUrl = environment.API_BOOK;
     this.booksUrl = environment.API_BOOKS;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
