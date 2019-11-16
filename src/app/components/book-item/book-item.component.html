@@ -1,1 +1,23 @@
-<p>book-item works!</p>
+<div class="mat-card">
+  <img [src]="photoSource" alt="bookPhoto" class="book-photo"/>
+  <div class="book-info">
+    <div class="mat-card-header">
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">{{title}}</div>
+        <div class="mat-card-subtitle">{{subtitle}}</div>
+      </div>
+    </div>
+    <div class="mat-card-content">
+      <p><span>Authors:</span> {{authors}}</p>
+      <p><span>Genres:</span> {{genres}}</p>
+    </div>
+    <div class="mat-card-actions">
+      <div *ngIf="url; else elseBlock">
+        <button mat-button routerLink="{{url}}">{{btnText}}</button>
+      </div>
+      <ng-template #elseBlock>
+        <button mat-button (click)="listItemCallback()">Go Back</button>
+      </ng-template>
+    </div>
+  </div>
+</div>
