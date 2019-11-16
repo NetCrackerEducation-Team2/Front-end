@@ -34,6 +34,7 @@ import {AnnouncementItemComponent} from './components/announcement-item/announce
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 
@@ -56,6 +57,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     AnnouncementItemComponent,
     AnnouncementListComponent,
     ActivateAccountComponent,
+    ListItemComponent,
     LogoutComponent
   ],
   imports: [

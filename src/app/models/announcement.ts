@@ -1,25 +1,25 @@
 export class Announcement {
-  announcement_id: number;
+  announcementId: number;
   title: string;
   description: string;
-  user_id: number;
+  userId: number;
   published: boolean;
-  creation_time: string;
-  book_id: number;
-  
-  public constructor(announcement_id: number,
+  creationTime: string;
+  bookId: number;
+
+  public constructor(announcementId: number,
               title: string,
               description: string,
-              user_id: number,
+              userId: number,
               published: boolean,
-              creation_time: string,
-              book_id: number) {
-        this.announcement_id = announcement_id;
+              creationTime: string,
+              bookId: number) {
+        this.announcementId = announcementId;
         this.title = title;
         this.description = description;
-        this.user_id = user_id;
+        this.userId = userId;
         this.published = published;
-        this.creation_time = creation_time;
-        this.book_id = book_id;
+        this.creationTime = creationTime;
+        this.bookId = bookId;
    }
 }

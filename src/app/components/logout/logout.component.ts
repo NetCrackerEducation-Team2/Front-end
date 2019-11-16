@@ -3,8 +3,7 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-logout',
-  template: '<p>Redirecting to home page...</p>',
-  styles: ['']
+  template: '<p>Redirecting to home page...</p>'
 })
 export class LogoutComponent implements OnInit {
 

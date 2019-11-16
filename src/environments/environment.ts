@@ -4,15 +4,16 @@
 
 export const environment = {
   production: false,
-  AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
-  AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
-  AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
-  API_PROFILE : 'http://localhost:8081/profile',
+  // AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
+  // AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
+  // AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
+  // API_PROFILE : 'http://localhost:8081/profile',
 
-  // AUTH_LOGIN_URL: 'http://netcracker2-back-end.herokuapp.com/auth/login',
-  // AUTH_REGISTER_URL: 'http://netcracker2-back-end.herokuapp.com/auth/register',
-  // AUTH_ACTIVATION_URL: 'http://netcracker2-back-end.herokuapp.com/auth/activate/',
-  // API_PROFILE: 'http://netcracker2-back-end.herokuapp.com/profile'
+  AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
+  AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
+  AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
+  API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/profile',
+  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/'
 };
 
 /*

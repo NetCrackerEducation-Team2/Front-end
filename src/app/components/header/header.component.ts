@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  isLogged(): boolean {
+  public isLogged(): boolean {
     return this.accService.getToken() !== null;
   }
 
