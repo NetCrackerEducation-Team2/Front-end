@@ -23,45 +23,63 @@ export class SearchBooksComponent implements OnInit {
 
   authors: Author[];
   genres: Genre[];
-  selectedPage: Page<Book>;
-  window: any;
+  selectedPage: Page<Book> = new Page<Book>();
+  window: Window = window;
+  book: Book;
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
               private bookService: BookService) { }
 
   ngOnInit() {
-    this.genreService.getGenres().subscribe(genres => this.genres = genres);
-    this.authorService.getAuthors().subscribe(authors => this.authors = authors);
-    this.selectedPage = new Page<Book>();
-    this.selectedPage.currentPage = 1;
-    this.selectedPage.pageSize = 5;
-    this.selectedPage.countPages = 10;
-    this.window = window;
-    //let filteringParams = this.getBookFilteringParamsMap();
-    //this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(selectedPage => this.selectedPage = selectedPage);
+    this.genreService.getGenres().subscribe(genres => {
+      this.genres = genres;
+      this.genres.sort((g1, g2) => g1.name.localeCompare(g2.name));
+    });
+    this.authorService.getAuthors().subscribe(authors => {
+      this.authors = authors;
+      this.authors.sort((a1, a2) => a1.fullName.localeCompare(a2.fullName));
+    });
+    let filteringParams = this.getBookFilteringParamsMap();
+    this.resetPaginator();
+    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
+      .subscribe(selectedPage => {
+        this.selectedPage = selectedPage;
+      });
   }
 
   search(): void{
-    //let filteringParams = this.getBookFilteringParamsMap();
-    //this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(selectedPage => this.selectedPage = selectedPage);
+    this.resetPaginator();
+    this.searchPage();
+  }
+
+  searchPage(): void{
+    let filteringParams = this.getBookFilteringParamsMap();
+    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
+      .subscribe(selectedPage => {
+        this.selectedPage = selectedPage;
+      });
   }
 
   handlePage(event?: PageEvent) {
     this.selectedPage.currentPage = event.pageIndex;
-    console.log("Current selectedPage: " + this.selectedPage.currentPage);
     this.selectedPage.pageSize = event.pageSize;
-    console.log("Page size: " + this.selectedPage.pageSize);
-    this.search();
+    this.searchPage();
   }
 
-  getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
     let filteringParams = new Map<BookFilteringParam, object>();
     filteringParams.set(BookFilteringParam.Title, this.title as any as object);
     filteringParams.set(BookFilteringParam.Author, this.author);
     filteringParams.set(BookFilteringParam.Genre, this.genre);
     filteringParams.set(BookFilteringParam.AnnouncementDate, this.announcementDate);
     return filteringParams;
+  }
+
+  private resetPaginator(){
+    this.selectedPage.currentPage = 0;
+    this.selectedPage.pageSize = 5;
+    this.selectedPage.countPages = 0;
   }
 
 }

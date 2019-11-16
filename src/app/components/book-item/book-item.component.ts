@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ListItemComponent} from "../presentational/list-item/list-item.component";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-book-item',
@@ -9,19 +9,18 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class BookItemComponent extends ListItemComponent {
 
-  @Input() photo: Blob;
+  @Input() photo: string;
   @Input() authors: string;
   @Input() genres: string;
 
-  thumbnail: any;
+  photoSource: SafeUrl;
 
   constructor(private sanitizer: DomSanitizer) {
     super();
   }
 
   ngOnInit() {
-    let objectURL = URL.createObjectURL(this.photo);
-    this.thumbnail = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+    this.photoSource = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.photo);
   }
 
 }

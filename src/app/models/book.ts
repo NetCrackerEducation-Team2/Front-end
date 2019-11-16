@@ -9,7 +9,7 @@ export class Book {
   pages: number;
   filePath: string;
   photoPath: string;
-  photo: Blob;
+  photo: string;
   publsihingHouse: string;
   rateSum: number;
   votersCount: number;

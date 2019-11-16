@@ -11,7 +11,6 @@
                    [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
     </mat-paginator>
   </div>
-<!--  <div class="advanced-books-filter">-->
     <mat-expansion-panel [expanded]="window.innerWidth > 768" class="advanced-books-filter-exp-panel">
       <mat-expansion-panel-header class="books-filter-title">
         <mat-panel-title>Apply Filters </mat-panel-title>
@@ -20,6 +19,7 @@
       <mat-form-field>
         <mat-label>Author</mat-label>
         <mat-select [(ngModel)]="author">
+          <mat-option [value]="null"></mat-option>
           <mat-option *ngFor="let author of authors" [value]="author">
             {{author.fullName}}
           </mat-option>
@@ -28,6 +28,7 @@
       <mat-form-field>
         <mat-label>Genre</mat-label>
         <mat-select [(ngModel)]="genre">
+          <mat-option [value]="null"></mat-option>
           <mat-option *ngFor="let genre of genres" [value]="genre">
             {{genre.name}}
           </mat-option>
@@ -40,6 +41,4 @@
       </mat-form-field>
       </div>
     </mat-expansion-panel>
-
-<!--  </div>-->
 </div>

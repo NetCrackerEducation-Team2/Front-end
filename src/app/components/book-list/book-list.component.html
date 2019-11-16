@@ -1,115 +1,113 @@
-<!--
-<ul>
-  <li *ngFor="let book of page.array">
+<div class="book-list-container">
+  <ng-container *ngFor="let book of page.array">
     <app-book-item [title]="book.title"
                    [subtitle]="bookService.getBookSubtitle(book)"
                    [photo]="book.photo"
-                   [authors]="bookService.getBookAuthorsString(book, 4)"
-                   [genres]="bookService.getBookGenresString(book, 4)"
+                   [authors]="bookService.getBookAuthorsString(book, 3)"
+                   [genres]="bookService.getBookGenresString(book, 3)"
                    [url]="book.slug"
                    [btnText]="'View'"></app-book-item>
-  </li>
-</ul>
--->
-
-
-
-<div class="book-list-container">
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-title>
-      Lorem ipsum
-    </mat-card-title>
-    <mat-card-subtitle>
-      Lorem ipsum dolor sit amet consectetur
-    </mat-card-subtitle>
-    <mat-card-content>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-    </mat-card-content>
-  </mat-card>
-
+  </ng-container>
 </div>
+
+
+
+<!--<div class="book-list-container">-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+  <!--<mat-card>-->
+    <!--<mat-card-title>-->
+      <!--Lorem ipsum-->
+    <!--</mat-card-title>-->
+    <!--<mat-card-subtitle>-->
+      <!--Lorem ipsum dolor sit amet consectetur-->
+    <!--</mat-card-subtitle>-->
+    <!--<mat-card-content>-->
+      <!--Lorem ipsum dolor sit, amet consectetur adipisicing elit.-->
+    <!--</mat-card-content>-->
+  <!--</mat-card>-->
+
+<!--</div>-->
