@@ -13,6 +13,7 @@ import { AnnouncementItemComponent } from './components/announcement-item/announ
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
+import {BookItemComponent} from "./components/book-item/book-item.component";
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent
+  },
+  {
+    path: 'book/:id',
+    component: BookItemComponent
   }
 ];
 

@@ -27,6 +27,9 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
@@ -36,6 +39,9 @@ import {ActivateAccountComponent} from './components/activate-account/activate-a
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import { BookOverviewComponent } from './components/book-overview/book-overview.component';
+
 
 
 @NgModule({
@@ -58,7 +64,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     AnnouncementListComponent,
     ActivateAccountComponent,
     ListItemComponent,
-    LogoutComponent
+    LogoutComponent,
+    BookOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,11 @@ import { LogoutComponent } from './components/logout/logout.component';
     MatCheckboxModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule
   ],
   providers: [
     {
