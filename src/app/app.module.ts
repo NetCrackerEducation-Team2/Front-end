@@ -51,6 +51,8 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
 import { RecoverComponent } from './components/recover-password/recover/recover.component';
 import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
+import { OverviewListComponent } from './components/overview-list/overview-list.component';
+import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 
 
 
@@ -86,7 +88,9 @@ import { reducers  } from './state/app.state';
     CreateModeratorComponent,
     CreateAdminComponent,
     CreateAnnouncementComponent,
-    ActivateAccountComponent
+    ActivateAccountComponent,
+    OverviewListComponent,
+    OverviewItemComponent,
   ],
   imports: [
     BrowserModule,

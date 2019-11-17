@@ -24,6 +24,7 @@ import {CreateModeratorComponent } from './components/create-moderator/create-mo
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
+import {OverviewListComponent} from "./components/overview-list/overview-list.component";
 
 const routes: Routes = [
   {
@@ -87,6 +88,7 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
+<<<<<<< HEAD
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },
@@ -127,6 +129,13 @@ const routes: Routes = [
      path: 'create-announcement',
      component: CreateAnnouncementComponent
   },  // routing to NotFoundComponent must be in the end
+  {
+=======
+>>>>>>> d0ddf10ab660695bd35d374da346f495bbd94098
+    path: 'book-overviews/:bookId',
+    component: OverviewListComponent
+  },
+  // routing to NotFoundComponent must be in the end
   {
     path: '**',
     component: NotFoundComponent
