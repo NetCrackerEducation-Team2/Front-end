@@ -1,2 +1,34 @@
+<div class="book-overview-container">
+  <div class="book-overview-title">
+    Book title{{book.title}}
+  </div>
+  <mat-divider class="book-overview-mat-divider"></mat-divider>
+  <div class="book-overview-picture">
+    Picture
+  </div>
+  <div class="book-overview-overview">
+    <div>Announcement date: {{book.release | date}}</div>
+    <div>Genres:</div>
+    <div>Authors: Author#1, Author#2,...</div>
+    <div>file for loading? dont really know what is that</div>
+    <div>Rating: 9.8</div>
+    <div>Publishing house: <span class="book-overview-publishing-house">Whale house</span></div>
 
+    <button class="book-overview-to-read-button">Add to "To read"(still thinking where to place it)</button>
+  </div>
+  <div class="book-description">
+    <h2>Short description:</h2>
+    <p>Lorem ipsum dolor sit amet, onsectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia
+      deserunt mollit anim id est laborum.{{slug}}</p>
+  </div>
+  <mat-divider class="book-overview-mat-divider"></mat-divider>
+  <div></div>
+</div>
+
+<app-book-review></app-book-review>
 

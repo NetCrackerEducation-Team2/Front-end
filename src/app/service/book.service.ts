@@ -17,12 +17,22 @@ export class BookService {
 
   private readonly booksUrl: string;
   private readonly bookDownloadUrl: string;
+  private readonly bookUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
               private logger: LogService) {
     this.booksUrl = environment.API_BOOKS;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
+    this.bookUrl = environment.API_BOOK;
+  }
+
+  getBook(slug: string): Observable<any>{
+    const url = `/${slug}`;   // URL FOR BOOK SEARCH NEEDED
+    return this.http.get<Book>(this.bookUrl + url)
+      .pipe(
+        catchError(this.handleError<any>('getBook', Book))
+      );
   }
 
   getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<any>{

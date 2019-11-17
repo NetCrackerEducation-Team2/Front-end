@@ -3,7 +3,7 @@ import { Announcement } from '../models/announcement';
 import { ANNOUNCEMENTS } from '../mocks/mock-announcement';
 import { Observable, of  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -22,22 +22,11 @@ export class AnnouncementService {
     this.announcemetnsUrl = environment.API_ANNOUNCEMENTS;
   }
 
-  getAnnouncements(page: number, pageSize: number): Observable<any> {
+  getAnnouncements(): Observable<any> {
     // Get from mock
   //  return of(ANNOUNCEMENTS);
     // Get from backend
-    let params = new HttpParams();
-    let paramsString: string = "";
-    if(page != null){
-      params = params.set('page', page.toString());
-    }
-    if(pageSize != null){
-      params = params.set('pageSize', pageSize.toString());
-    }
-    if(params.keys().length > 0){
-      paramsString = "?" + params.toString();
-    }
-    return this.http.get(this.announcemetnsUrl + paramsString)
+    return this.http.get(this.announcemetnsUrl)
     .pipe(
       catchError(this.handleError<any>('getAnnouncements', []))
     );

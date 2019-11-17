@@ -40,9 +40,9 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import {MatExpansionModule} from "@angular/material/expansion";
-import { BookOverviewComponent } from './components/book-overview/book-overview.component';
-import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
-import { RecoverComponent } from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
+import { BookReviewComponent } from './components/book-review/book-review.component';
+
 
 
 
@@ -68,8 +68,7 @@ import { RecoverComponent } from './components/recover-password/recover/recover.
     ListItemComponent,
     LogoutComponent,
     BookOverviewComponent,
-    RecoverPasswordComponent,
-    RecoverComponent,
+    BookReviewComponent,
   ],
   imports: [
     BrowserModule,

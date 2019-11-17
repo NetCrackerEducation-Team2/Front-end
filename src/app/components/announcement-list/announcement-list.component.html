@@ -1,5 +1,5 @@
-<ul *ngIf="selectedPage">
-  <li *ngFor="let announcement of selectedPage.array">
+<ul *ngIf="page">
+  <li *ngFor="let announcement of page.array">
     <app-list-item [title]= "announcement.title"
                    [description] = "announcement.description"
                    [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
@@ -7,6 +7,3 @@
                    [btnText] = "'View'"></app-list-item>
   </li>
 </ul>
-<mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
-               [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-</mat-paginator>

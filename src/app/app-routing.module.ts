@@ -14,8 +14,7 @@ import { AnnouncementListComponent } from './components/announcement-list/announ
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from "./components/book-item/book-item.component";
-import {RecoverPasswordComponent} from "./components/recover-password/recover-password.component";
-import {RecoverComponent} from "./components/recover-password/recover/recover.component";
+import {BookOverviewComponent} from "./components/book-overview/book-overview.component";
 
 const routes: Routes = [
   {
@@ -67,22 +66,18 @@ const routes: Routes = [
     component: LogoutComponent
   },
   {
-    path: 'book/:id',
+    path: 'book/:slug',
+    component: BookOverviewComponent
+  },
+  {
+    path: 'book-item',
     component: BookItemComponent
   },
   {
-    path: 'recover',
-    component: RecoverPasswordComponent
-  },
-  {
-    path: 'recover/:link',
-    component: RecoverComponent
-  },
-  // routing to NotFoundComponent must be in the end
-  {
     path: '**',
     component: NotFoundComponent
-  }
+  },
+
 ];
 
 
@@ -92,3 +87,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+

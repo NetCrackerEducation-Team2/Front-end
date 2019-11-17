@@ -18,3 +18,5 @@ export class Book {
   genres: Genre[];
   authors: Author[];
 }
+
+

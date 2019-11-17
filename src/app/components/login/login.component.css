@@ -2,20 +2,16 @@
   font-size: 20px;
 }
 
-.button, .link {
+.button {
   height: 50px;
   width: 180px;
   font-size: 18px;
   margin: 10px;
 }
 
-.link{
-  display: flex;
-  align-items: center;
-}
-
 .error {
   text-align: center;
+  margin-top: 20px;
   color: red;
 }
 
