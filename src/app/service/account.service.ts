@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,12 +17,14 @@ export class AccountService {
   }
 
   getToken() {
-    if(localStorage.getItem('currentUser')) {
+    if (localStorage.getItem('currentUser')) {
       return JSON.parse(localStorage.getItem('currentUser')).token;
     } else {
       return null;
     }
 
   }
+
+
 
 }

@@ -18,6 +18,7 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) {
     this.announcementsUrl = 'http://localhost:8081/api/announcements';
+    // this.announcemetnsUrl = 'https://netcracker2-back-end.herokuapp.com/api/announcements';
 
   }
 

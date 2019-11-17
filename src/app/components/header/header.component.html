@@ -4,9 +4,10 @@
   </div>
 
   <div class="buttons">
-    <button type="button" mat-stroked-button routerLink="/login">Sign in</button>
-    <button type="button" mat-stroked-button routerLink="/register">Sign up</button>
-
+    <ng-container >
+      <button type="button" mat-stroked-button routerLink="/login" *ngIf="!isLogged"> Sign in</button>
+      <button type="button" mat-stroked-button routerLink="/register" *ngIf="!isLogged">Sign up</button>
+    </ng-container>
   </div>
 
 </div>

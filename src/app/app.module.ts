@@ -8,8 +8,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
-
-
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -31,7 +29,6 @@ import { AchievementsComponent } from './components/account/achievements/achieve
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { SuperAdminComponent } from './components/super-admin/super-admin.component';
 import { ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
 import { BooksManagementComponent } from './components/books-management/books-management.component';
 import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
@@ -40,9 +37,12 @@ import { CreateModeratorComponent } from './components/create-moderator/create-m
 import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import { CreateAnnouncementComponent } from './components/create-announcement/create-announcement.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+import {StoreModule} from '@ngrx/store';
+import { reducers  } from './state/app.state';
+
 
 
 @NgModule({
@@ -64,7 +64,6 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
     AnnouncementItemComponent,
     AnnouncementListComponent,
     AdminComponent,
-    SuperAdminComponent,
     ReviewsManagementComponent,
     BooksManagementComponent,
     AnnouncementsManagementComponent,
@@ -75,6 +74,25 @@ import {TokenInterceptorService} from './service/token-interceptor.service';
     ActivateAccountComponent
   ],
   imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    HttpClientModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatTabsModule,
+    StoreModule.forRoot( reducers)
+  ],
+  exports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

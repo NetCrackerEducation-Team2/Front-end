@@ -4,7 +4,7 @@
 
 
     <div class="submit-row">
-      <label for="fullName">Enter full name</label>
+      <label for="fullName">Enter name</label>
       <mat-form-field>
         <input required name="fullName" #fullName="ngModel" type="text" id="fullName" matInput
                placeholder="Full name" [(ngModel)]="user.fullName">
@@ -38,6 +38,7 @@
 
     <mat-divider></mat-divider>
 
+
     <div class="nav-footer">
       <div class="messages">
         <span *ngIf="isDownloading">Please wait...</span>
@@ -59,10 +60,11 @@
       <button [disabled]="!regForm.valid" mat-flat-button color="primary">Sign up</button>
     </div>
 
-  </form>
 
   <ng-template #registeredTemplate>
     <p style="margin: 40px 30px 30px 30px;font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
+
+  </form>
 
 </div>

@@ -15,7 +15,6 @@ import {AnnouncementsManagementComponent } from './components/announcements-mana
 import {BooksManagementComponent } from './components/books-management/books-management.component';
 import {ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
 import {AdminComponent } from './components/admin/admin.component';
-import {SuperAdminComponent } from './components/super-admin/super-admin.component';
 import {CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
@@ -68,7 +67,7 @@ const routes: Routes = [
     component: ActivateAccountComponent
   },
   {
-    path: '**',
+    path: '404',
     component: NotFoundComponent
   },
   {
@@ -85,13 +84,14 @@ const routes: Routes = [
   },
   {
      path: 'admin',
-     component: AdminComponent
+     component: AdminComponent,
+     children: [
+        {path: 'create-moderator', component: CreateModeratorComponent},
+        // {path: 'edit-moderator', component: EditModeratorComponent},
+        {path: 'create-admin', component: CreateAdminComponent}
+
+     ]
   },
-  {
-     path: 'super-admin',
-     component: SuperAdminComponent
-  }
-  ,
   {
      path: 'create-moderator',
      component: CreateModeratorComponent
@@ -118,5 +118,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }

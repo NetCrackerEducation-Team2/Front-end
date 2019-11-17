@@ -1,4 +1,4 @@
-import { Output, EventEmitter, Component, OnInit } from '@angular/core';
+import { Output, EventEmitter, Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-search-books',
@@ -9,7 +9,7 @@ export class SearchBooksComponent implements OnInit {
 
 
  @Output() addTodo: EventEmitter<any> = new EventEmitter();
-
+ @Input() isAdmin: boolean;
   constructor() { }
   title: string;
   onSubmit() {
@@ -22,6 +22,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

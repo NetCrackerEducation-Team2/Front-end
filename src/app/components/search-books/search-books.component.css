@@ -3,20 +3,15 @@
 @media screen and (max-width: 767px){
 
   button {
-    width: 50px;
     height: auto;
     background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
-    padding: 1vh 1vw;
     color: white;
     outline-style: none;
     border: none;
     border-radius: 2px;
-    font-size: 12px;
+
   }
 
-  mat-icon{
-    margin-bottom: 50px;
-  }
 
   button:hover{
 
@@ -46,20 +41,14 @@
  @media screen and (min-width: 768px){
 
     button {
-    width: 5vw;
     height: auto;
     background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
-    padding: 1vh 1vw;
     color: white;
     outline-style: none;
     border: none;
     border-radius: 2px;
-    font-size: 2vw;
   }
 
-  mat-icon{
-
-  }
 
   button:hover{
 

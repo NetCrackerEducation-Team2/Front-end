@@ -9,10 +9,10 @@ import { AnnouncementService } from '../../service/announcement.service';
 })
 export class AnnouncementListComponent implements OnInit {
   page: {
-    currentPage:number,
+    currentPage: number,
     countPages: number,
     array: Announcement[]
-  }
+  };
 
 
   constructor(private announcementService: AnnouncementService) { }

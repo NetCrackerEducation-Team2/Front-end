@@ -28,7 +28,7 @@ export class AnnouncementItemComponent implements OnInit {
     this.announcementService.getAnnouncement(id)
       .subscribe(announcement => this.announcement = announcement);
   }
-  
+
   goBack(): void {
     this.location.back();
   }
