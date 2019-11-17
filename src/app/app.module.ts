@@ -37,13 +37,14 @@ import {AnnouncementItemComponent} from './components/announcement-item/announce
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-import { ListItemComponent } from './components/presentational/list-item/list-item.component';
+import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { BookOverviewComponent } from './components/book-overview/book-overview.component';
-import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
-import { RecoverComponent } from './components/recover-password/recover/recover.component';
+import {LogoutComponent} from './components/logout/logout.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
+import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
+import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {AddBookReviewComponent} from "./components/add-book-review/add-book-review.component";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { RecoverComponent } from './components/recover-password/recover/recover.
     BookOverviewComponent,
     RecoverPasswordComponent,
     RecoverComponent,
+    AddBookReviewComponent
   ],
   imports: [
     BrowserModule,

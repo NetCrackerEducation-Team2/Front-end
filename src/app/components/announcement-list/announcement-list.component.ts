@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement';
 import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
-import {PageEvent} from "@angular/material";
+import {PageEvent} from '@angular/material';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-announcement-list',
@@ -13,7 +14,7 @@ export class AnnouncementListComponent implements OnInit {
   selectedPage: Page<Announcement> = new Page<Announcement>();
 
 
-  constructor(private announcementService: AnnouncementService) { }
+  constructor(private announcementService: AnnouncementService, private accountService: AccountService) { }
 
   ngOnInit() {
     this.getAnnouncements();
@@ -28,5 +29,8 @@ export class AnnouncementListComponent implements OnInit {
     this.selectedPage.currentPage = event.pageIndex;
     this.selectedPage.pageSize = event.pageSize;
     this.getAnnouncements();
+  }
+  public isLogged(): boolean {
+    return this.accountService.getToken() !== null;
   }
 }

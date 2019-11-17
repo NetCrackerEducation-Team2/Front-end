@@ -15,6 +15,7 @@ export const environment = {
   AUTH_RECOVER_PASS_URL: 'http://localhost:8081/auth/recover/',
 
   API_BOOKS: 'http://localhost:8081/api/books',
+  API_BOOK_INFO: 'http://localhost:8081/api/book',
   API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
   API_GENRES: 'http://localhost:8081/api/genres',
   API_AUTHORS: 'http://localhost:8081/api/authors',

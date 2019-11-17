@@ -12,6 +12,9 @@
       <p><span>Genres:</span> {{genres}}</p>
     </div>
     <div class="mat-card-actions">
+      <div class="mat-card-content">
+        <button mat-button [routerLink]="['/review/add', this.bookId]">Write a review</button>
+      </div>
       <div *ngIf="url; else elseBlock">
         <button mat-button routerLink="{{url}}">{{btnText}}</button>
       </div>

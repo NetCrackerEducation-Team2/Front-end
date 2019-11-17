@@ -9,14 +9,15 @@ import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
-import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
-import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
+import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
+import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {AddBookReviewComponent} from "./components/add-book-review/add-book-review.component";
 
 const routes: Routes = [
   {
@@ -52,16 +53,16 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-     path: 'announcements',
-     component: AnnouncementListComponent
+    path: 'announcements',
+    component: AnnouncementListComponent
   },
   {
     path: 'announcements/add',
     component: AddAnnouncementComponent
   },
   {
-     path: 'announcements/:id',
-     component: AnnouncementItemComponent
+    path: 'announcements/:id',
+    component: AnnouncementItemComponent
   },
   {
     path: 'activate/:code',
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'recover/:link',
     component: RecoverComponent
+  },
+  {
+    path: 'review/add/:bookId',
+    component: AddBookReviewComponent
   },
   // routing to NotFoundComponent must be in the end
   {
