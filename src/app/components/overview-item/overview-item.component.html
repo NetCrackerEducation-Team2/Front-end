@@ -1,0 +1,21 @@
+<div class="mat-card" [ngStyle]="{'background-color': bookOverview.published ? 'palegreen' : 'white'}">
+  <div class="mat-card-header">
+    <div class="mat-card-header-text">
+      <div class="mat-card-title">{{title}}</div>
+      <div class="mat-card-subtitle">{{subtitle}}</div>
+    </div>
+  </div>
+  <div class="mat-card-content">
+    <p>
+      {{description}}
+    </p>
+  </div>
+  <div class="mat-card-actions">
+    <div *ngIf="url; else elseBlock">
+      <button mat-button [disabled]="bookOverview.published" routerLink="{{url}}">{{btnText}}</button>
+    </div>
+    <ng-template #elseBlock>
+      <button mat-button (click)="listItemCallback()">Go Back</button>
+    </ng-template>
+  </div>
+</div>

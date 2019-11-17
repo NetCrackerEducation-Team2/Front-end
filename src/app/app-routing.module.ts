@@ -16,6 +16,7 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from "./components/book-item/book-item.component";
 import {RecoverPasswordComponent} from "./components/recover-password/recover-password.component";
 import {RecoverComponent} from "./components/recover-password/recover/recover.component";
+import {OverviewListComponent} from "./components/overview-list/overview-list.component";
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path: 'recover/:link',
     component: RecoverComponent
+  },
+  {
+    path: 'book-overviews/:bookId',
+    component: OverviewListComponent
   },
   // routing to NotFoundComponent must be in the end
   {
