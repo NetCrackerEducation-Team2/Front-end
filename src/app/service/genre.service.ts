@@ -22,7 +22,7 @@ export class GenreService {
     //Get from mock
     //return of(GENRES);
 
-    return this.http.get<Genre[]>(this.genresUrl)
+    return this.http.get(this.genresUrl)
       .pipe(
         catchError(this.handleError<any>('getGenres', []))
       );
