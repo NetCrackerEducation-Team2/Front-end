@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {ListItemComponent} from "../presentational/list-item/list-item.component";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {ListItemComponent} from "../presentational/list-item/list-item.component";
 
 @Component({
   selector: 'app-book-item',
