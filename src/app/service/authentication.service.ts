@@ -12,11 +12,15 @@ export class AuthenticationService {
   private readonly AUTH_LOGIN_URL;
   private readonly AUTH_REG_URL;
   private readonly AUTH_ACTIVATION_URL;
+  private readonly AUTH_RECOVER_LINK_URL;
+  private readonly AUTH_RECOVER_PASS_URL;
 
   constructor(private httpClient: HttpClient) {
     this.AUTH_LOGIN_URL = environment.AUTH_LOGIN_URL;
     this.AUTH_REG_URL = environment.AUTH_REGISTER_URL;
     this.AUTH_ACTIVATION_URL = environment.AUTH_ACTIVATION_URL;
+    this.AUTH_RECOVER_LINK_URL = environment.AUTH_RECOVER_LINK_URL;
+    this.AUTH_RECOVER_PASS_URL = environment.AUTH_RECOVER_PASS_URL;
   }
 
   authenticate(email, password): Observable<any> {
@@ -29,5 +33,13 @@ export class AuthenticationService {
 
   sendActivationCode(code: string): Observable<any> {
     return this.httpClient.get(this.AUTH_ACTIVATION_URL + code);
+  }
+
+  getRecoveryCode(email: string): Observable<any> {
+    return this.httpClient.get(this.AUTH_RECOVER_LINK_URL + email);
+  }
+
+  getRecoveryPassword(link: string): Observable<any> {
+    return this.httpClient.get(this.AUTH_RECOVER_PASS_URL + link);
   }
 }

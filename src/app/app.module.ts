@@ -41,6 +41,8 @@ import { ListItemComponent } from './components/presentational/list-item/list-it
 import { LogoutComponent } from './components/logout/logout.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { BookOverviewComponent } from './components/book-overview/book-overview.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RecoverComponent } from './components/recover-password/recover/recover.component';
 
 
 
@@ -66,6 +68,8 @@ import { BookOverviewComponent } from './components/book-overview/book-overview.
     ListItemComponent,
     LogoutComponent,
     BookOverviewComponent,
+    RecoverPasswordComponent,
+    RecoverComponent,
   ],
   imports: [
     BrowserModule,
