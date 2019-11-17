@@ -34,8 +34,21 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   save() {
-    console.log('password saved...');
-    this.router.navigate(['../']);
+    console.log('password changing...');
+    this.accountService.updatePassword(this.changePassEntity.oldPassword, this.changePassEntity.newPassword)
+      .subscribe(
+        () => {
+        },
+        err => {
+          this.errMessage = 'Error occurred. Try again';
+          if (typeof err.error === 'string') {
+            this.errMessage = err.error;
+          }
+        },
+        () => {
+          this.router.navigate(['profile', this.accountService.getCurrentUser().userId]);
+        }
+      );
   }
 
   checkPasswords() {
@@ -43,11 +56,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   submit() {
-    if (this.checkPasswords()) {
+    if (!this.checkPasswords()) {
       this.errMessage = 'Passwords must match';
       return;
     }
-    // Also entered old password must be checked
     this.save();
   }
 }
