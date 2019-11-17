@@ -9,5 +9,6 @@ export const environment = {
   AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
   AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
   AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
+  AUTH_RECOVER_LINK_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recovery-link/',
   API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/profile'
 };
