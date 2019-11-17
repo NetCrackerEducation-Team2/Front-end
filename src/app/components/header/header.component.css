@@ -41,7 +41,6 @@
 
 
   button{
-    padding: 1vh 1vw;
     background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
     margin-left: 20px;
     border: none;
@@ -53,7 +52,6 @@
 
   button:hover{
 
-    padding: 1vh 1vw;
     background: rgb(0,0,255,0.5);
     color: gray;
     outline-style: none;
@@ -109,7 +107,6 @@
 
   button{
     background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
-    padding: 1vh 1vw;
     margin-left: 20px;
     border: none;
     outline: none;
@@ -130,7 +127,6 @@
 
   }
   button :hover{
-    padding: 1vh 1vw;
     background: white;
     color: black;
   }

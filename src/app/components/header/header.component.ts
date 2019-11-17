@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AccountService} from '../../service/account.service';
-
+import {AppState} from '../../state/app.state';
+import {Store} from '@ngrx/store';
+import { LOGOUT } from 'src/app/state/app.action';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +11,17 @@ import {AccountService} from '../../service/account.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private accService: AccountService) {
-  }
+
+  isLogged: boolean;
+  roles: any[];
+  constructor(private store: Store<AppState>, private accService: AccountService) { }
 
   ngOnInit() {
+    this.store.select('appReducer').subscribe(reducer => {this.isLogged = reducer.login; console.log(this.isLogged, 'header'); } );
+
   }
 
-  public isLogged(): boolean {
-    return this.accService.getToken() !== null;
+  onLogout() {
+    this.store.dispatch(new LOGOUT());
   }
-
 }
