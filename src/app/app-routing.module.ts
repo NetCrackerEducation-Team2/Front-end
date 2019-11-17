@@ -88,7 +88,6 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
-<<<<<<< HEAD
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },
@@ -130,8 +129,6 @@ const routes: Routes = [
      component: CreateAnnouncementComponent
   },  // routing to NotFoundComponent must be in the end
   {
-=======
->>>>>>> d0ddf10ab660695bd35d374da346f495bbd94098
     path: 'book-overviews/:bookId',
     component: OverviewListComponent
   },
