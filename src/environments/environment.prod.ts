@@ -2,10 +2,16 @@
 export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com'
 export const environment = {
   production: true,
+  API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
+  API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
+  API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
+  API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
+  API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/api/profile',
+  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
 
-  AUTH_LOGIN_URL: BASE_URL + '/auth/login',
-  AUTH_REGISTER_URL: BASE_URL + '/auth/register',
-  AUTH_ACTIVATION_URL: BASE_URL + '/auth/activate/',
-  API_PROFILE: BASE_URL + '/profile',
-  API_ANNOUNCEMENTS: BASE_URL + '/api/announcements/'
+  AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
+  AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
+  AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
+  AUTH_RECOVER_LINK_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recovery-link/',
+  AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/'
 };

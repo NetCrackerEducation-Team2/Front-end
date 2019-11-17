@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AccountService} from '../../service/account.service';
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accService: AccountService) {
+  }
 
   ngOnInit() {
+  }
+
+  public isLogged(): boolean {
+    return this.accService.getToken() !== null;
   }
 
 }

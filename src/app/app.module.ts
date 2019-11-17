@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbarModule, MatInputModule} from '@angular/material';
+import {MatToolbarModule, MatInputModule, MatExpansionModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -27,6 +27,9 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
@@ -35,8 +38,12 @@ import {AnnouncementListComponent} from './components/announcement-list/announce
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {AddAnnouncementComponent} from "./components/add-announcement/add-announcement.component";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { BookOverviewComponent } from './components/book-overview/book-overview.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RecoverComponent } from './components/recover-password/recover/recover.component';
 
 
 @NgModule({
@@ -59,7 +66,11 @@ import {AddAnnouncementComponent} from "./components/add-announcement/add-announ
     AnnouncementListComponent,
     ActivateAccountComponent,
     ListItemComponent,
-    AddAnnouncementComponent
+    AddAnnouncementComponent,
+    LogoutComponent,
+    BookOverviewComponent,
+    RecoverPasswordComponent,
+    RecoverComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +89,11 @@ import {AddAnnouncementComponent} from "./components/add-announcement/add-announ
     MatPaginatorModule,
     MatIconModule,
     MatTabsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule
   ],
   providers: [
     {

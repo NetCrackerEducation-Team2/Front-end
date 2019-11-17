@@ -1,18 +1,12 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav position="end" mode="side" opened style="width: 20%">
-    <div align="center">
-      <button type="submit" mat-flat-button color="primary" [routerLink]="['/announcements/add']">Add</button>
-    </div>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <ul>
-      <li *ngFor="let announcement of page.array">
-        <app-list-item [title]= "announcement.title"
-                       [description] = "announcement.description"
-                       [subtitle] = "announcement.creationTime"
-                       [url] = "announcement.announcementId"
-                       [btnText] = "'View'"></app-list-item>
-      </li>
-    </ul>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<ul *ngIf="selectedPage">
+  <li *ngFor="let announcement of selectedPage.array">
+    <app-list-item [title]= "announcement.title"
+                   [description] = "announcement.description"
+                   [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
+                   [url] = "announcement.announcementId"
+                   [btnText] = "'View'"></app-list-item>
+  </li>
+</ul>
+<mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+               [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+</mat-paginator>

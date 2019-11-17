@@ -2,6 +2,22 @@
   font-size: 20px;
 }
 
+.button, .link {
+  height: 50px;
+  width: 180px;
+  font-size: 18px;
+  margin: 10px;
+}
+
+.link{
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}
 .submit-form {
   display: flex;
   flex-flow: column nowrap;
@@ -15,8 +31,27 @@
   align-items: center;
 }
 
-mat-form-field {
-  width: 1000pt;
+.form-field {
+  width: 600px;
+}
+
+.label {
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+
+  .submit-row {
+    flex-flow: row wrap;
+  }
+
+  .container, .button {
+    font-size: 18px;
+  }
+
+  .form-field {
+    width: 300px;
+  }
 }
 
 .nav-footer {
@@ -24,6 +59,9 @@ mat-form-field {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+.nav-footer:nth-child(1) {
+  order: -1;
 }
 
 

@@ -11,8 +11,12 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
-import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
-import {AddAnnouncementComponent} from "./components/add-announcement/add-announcement.component";
+import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
+import {LogoutComponent} from './components/logout/logout.component';
+import {BookItemComponent} from './components/book-item/book-item.component';
+import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
+import {RecoverComponent} from './components/recover-password/recover/recover.component';
 
 const routes: Routes = [
   {
@@ -63,6 +67,23 @@ const routes: Routes = [
     path: 'activate/:code',
     component: ActivateAccountComponent
   },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  {
+    path: 'book/:id',
+    component: BookItemComponent
+  },
+  {
+    path: 'recover',
+    component: RecoverPasswordComponent
+  },
+  {
+    path: 'recover/:link',
+    component: RecoverComponent
+  },
+  // routing to NotFoundComponent must be in the end
   {
     path: '**',
     component: NotFoundComponent
