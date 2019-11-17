@@ -22,7 +22,7 @@ export class AuthorService {
     //Get from mock
     //return of(AUTHORS)
 
-    return this.http.get<Author[]>(this.authorsUrl)
+    return this.http.get(this.authorsUrl)
       .pipe(
         catchError(this.handleError<any>('getAuthors', []))
       );

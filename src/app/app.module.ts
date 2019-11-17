@@ -43,6 +43,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { BookOverviewComponent } from './components/book-overview/book-overview.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { RecoverComponent } from './components/recover-password/recover/recover.component';
+import { OverviewListComponent } from './components/overview-list/overview-list.component';
+import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 
 
 
@@ -70,6 +72,8 @@ import { RecoverComponent } from './components/recover-password/recover/recover.
     BookOverviewComponent,
     RecoverPasswordComponent,
     RecoverComponent,
+    OverviewListComponent,
+    OverviewItemComponent,
   ],
   imports: [
     BrowserModule,

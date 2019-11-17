@@ -44,13 +44,6 @@
   margin: 0 10px 10px;
 }
 
-.books-no-results, .books-loading{
-  font-weight: bolder;
-  font-size: 1.5em;
-  text-align: center;
-  color: gray;
-}
-
 .books-filter-title{
   font-size: 1.5em;
   font-weight: bold;
@@ -69,7 +62,7 @@
     order: 2;
   }
 
-  .books-no-results, .books-loading{
+  .no-result, .loading{
     order: 3;
   }
 
