@@ -26,10 +26,9 @@ export class BookService {
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
     this.bookUrl = environment.API_BOOK;
   }
-
-  getBook(slug: string): Observable<any>{
-    const url = `/${slug}`;   // URL FOR BOOK SEARCH NEEDED
-    return this.http.get<Book>(this.bookUrl + url)
+  getBook(slug: string): Observable<any> {
+    const url = `/${slug}`;
+    return this.http.get<Book>(this.booksUrl + url)
       .pipe(
         catchError(this.handleError<any>('getBook', Book))
       );

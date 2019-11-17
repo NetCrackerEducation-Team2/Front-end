@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BookService} from "../../service/book.service";
-import {GenreService} from "../../service/genre.service";
-import {AuthorService} from "../../service/author.service";
 import { ActivatedRoute } from '@angular/router';
 import {Book} from '../../models/book';
-import {Author} from "../../models/author";
-import {Genre} from "../../models/genre";
-import {Page} from "../../models/page";
+
 
 
 @Component({
@@ -22,10 +18,10 @@ export class BookOverviewComponent implements OnInit {
 
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
-              ) { }
+  ) { }
 
   ngOnInit() {
-    this.getBook()
+    this.getBook();
   }
 
   getBook(): void {

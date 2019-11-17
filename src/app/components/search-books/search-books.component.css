@@ -43,10 +43,13 @@
 .advanced-books-filter-exp-panel{
   margin: 0 10px 10px;
 }
-/*.advanced-books-filter > h2{*/
-/*  margin: 10px;*/
-/*  text-align: center;*/
-/*}*/
+
+.books-no-results, .books-loading{
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: gray;
+}
 
 .books-filter-title{
   font-size: 1.5em;
@@ -64,6 +67,10 @@
 
   .advanced-books-filter-exp-panel{
     order: 2;
+  }
+
+  .books-no-results, .books-loading{
+    order: 3;
   }
 
   .book-page{
