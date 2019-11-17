@@ -8,11 +8,21 @@
   flex-flow: column nowrap;
 }
 
-.button {
+.button, .link {
   height: 50px;
   width: 180px;
   font-size: 18px;
   margin: 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link > * {
+  text-align: center;
 }
 
 .checkboxes {
@@ -57,7 +67,7 @@
   justify-content: center;
 }
 
-.button:nth-child(2) {
+.link:nth-child(2) {
   margin-left: 95px;
   margin-right: 95px;
 }
@@ -81,7 +91,8 @@
   .row-label {
     width: 80px;
   }
-  .button:nth-child(2) {
+
+  .link:nth-child(2) {
     margin-left: 0;
     margin-right: 0;
   }

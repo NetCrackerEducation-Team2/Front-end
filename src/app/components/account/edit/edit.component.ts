@@ -63,6 +63,7 @@ export class EditComponent implements OnInit {
 
   save() {
     console.log('saving changes...');
+    this.accountService.updateUser(this.user).subscribe();
     this.router.navigate(['/profile', this.userId]);
   }
 }
