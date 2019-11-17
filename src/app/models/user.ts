@@ -4,4 +4,5 @@ export class User {
   email: string;
   createdAt: string;
   photoPath: string;
+  enabled: boolean;
 }

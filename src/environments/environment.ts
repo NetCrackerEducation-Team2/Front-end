@@ -5,31 +5,32 @@
 export const environment = {
   production: false,
 
-  // AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
-  // AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
-  // AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
-  // AUTH_RECOVER_LINK_URL: 'http://localhost:8081/auth/recovery-link/',
-  // AUTH_RECOVER_PASS_URL: 'http://localhost:8081/auth/recover/',
+  AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
+  AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
+  AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
+  AUTH_RECOVER_LINK_URL: 'http://localhost:8081/auth/recovery-link/',
+  AUTH_RECOVER_PASS_URL: 'http://localhost:8081/auth/recover/',
+
+  API_PROFILE : 'http://localhost:8081/api/profile',
+  API_BOOKS: 'http://localhost:8081/api/books',
+  API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
+  API_GENRES: 'http://localhost:8081/api/genres',
+  API_AUTHORS: 'http://localhost:8081/api/authors',
+  API_ANNOUNCEMENTS: 'http://localhost:8081/api/announcements/',
+
+
+  // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
+  // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
+  // API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
+  // API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
+  // API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
+  // API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/profile',
   //
-  // API_PROFILE : 'http://localhost:8081/profile',
-  // API_BOOKS: 'http://localhost:8081/api/books',
-  // API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
-  // API_GENRES: 'http://localhost:8081/api/genres',
-  // API_AUTHORS: 'http://localhost:8081/api/authors',
-  // API_ANNOUNCEMENTS: 'http://localhost:8081/api/announcements/'
-
-  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
-  API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
-  API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
-  API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
-  API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
-  API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/profile',
-
-  AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
-  AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
-  AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
-  AUTH_RECOVER_LINK_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recovery-link/',
-  AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/'
+  // AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
+  // AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
+  // AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
+  // AUTH_RECOVER_LINK_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recovery-link/',
+  // AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/'
 };
 
 /*
