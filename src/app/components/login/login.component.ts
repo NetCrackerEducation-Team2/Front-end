@@ -25,7 +25,13 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.user.email, this.user.password)
       .subscribe(
         (resp) => {
-          const currentUser = {token: resp.token, userId: resp.userId};
+          const currentUser = {
+            token: resp.token,
+            userId: resp.user.userId,
+            fullName: resp.user.fullName,
+            enabled: resp.user.enabled,
+            email: resp.user.email
+          };
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
           this.router.navigate(['/profile', currentUser.userId]);
           console.log('Successfully signed in');
