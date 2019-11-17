@@ -29,6 +29,13 @@ export class AccountService {
     return this.http.put(this.API_PROFILE + '/update', [currUser, newUser]);
   }
 
+  updatePassword(oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.put(this.API_PROFILE + `/change-password/${this.getCurrentUser().userId}`, {
+      oldPassword,
+      newPassword
+    });
+  }
+
   getToken() {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
