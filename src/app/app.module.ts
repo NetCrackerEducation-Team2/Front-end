@@ -35,6 +35,8 @@ import {AnnouncementListComponent} from './components/announcement-list/announce
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {AddAnnouncementComponent} from "./components/add-announcement/add-announcement.component";
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { ListItemComponent } from './components/presentational/list-item/list-it
     AnnouncementItemComponent,
     AnnouncementListComponent,
     ActivateAccountComponent,
-    ListItemComponent
+    ListItemComponent,
+    AddAnnouncementComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { ListItemComponent } from './components/presentational/list-item/list-it
     MatCheckboxModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSidenavModule
   ],
   providers: [
     {

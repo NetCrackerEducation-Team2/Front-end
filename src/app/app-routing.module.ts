@@ -12,6 +12,7 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
+import {AddAnnouncementComponent} from "./components/add-announcement/add-announcement.component";
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
      path: 'announcements',
      component: AnnouncementListComponent
+  },
+  {
+    path: 'announcements/add',
+    component: AddAnnouncementComponent
   },
   {
      path: 'announcements/:id',

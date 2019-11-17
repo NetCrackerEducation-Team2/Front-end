@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {BASE_URL} from './environment.prod';
+
 export const environment = {
   production: false,
   // AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
@@ -9,11 +11,11 @@ export const environment = {
   // AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
   // API_PROFILE : 'http://localhost:8081/profile'
 
-  AUTH_LOGIN_URL: 'http://netcracker2-back-end.herokuapp.com/auth/login',
-  AUTH_REGISTER_URL: 'http://netcracker2-back-end.herokuapp.com/auth/register',
-  AUTH_ACTIVATION_URL: 'http://netcracker2-back-end.herokuapp.com/auth/activate/',
-  API_PROFILE: 'http://netcracker2-back-end.herokuapp.com/profile',
-  API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/'
+  AUTH_LOGIN_URL: BASE_URL + '/auth/login',
+  AUTH_REGISTER_URL: BASE_URL + '/auth/register',
+  AUTH_ACTIVATION_URL: BASE_URL + '/auth/activate/',
+  API_PROFILE: BASE_URL + '/profile',
+  API_ANNOUNCEMENTS: BASE_URL + '/api/announcements/'
 };
 
 /*
