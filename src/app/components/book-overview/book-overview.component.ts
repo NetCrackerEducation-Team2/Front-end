@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {BookService} from "../../service/book.service";
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {BookService} from '../../service/book.service';
+import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
-
+import {BookOverview} from '../../models/book-overview';
+import {concat} from 'rxjs';
 
 
 @Component({
@@ -13,21 +14,39 @@ import {Book} from '../../models/book';
 export class BookOverviewComponent implements OnInit {
 
   book: Book;
-  slug: string;
-
+  bookOverview: BookOverview;
 
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.getBook();
+    // this.getBookOverview();
   }
 
-  getBook(): void {
+  /*getBookOverview(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
+    alert('Before!');
     this.bookService.getBook(slug)
-      .subscribe(book => this.book = book);
-  }
-
+      .flatMap((resBook: Book) => {
+        return resBook.bookId;
+      })
+      .flatMap((bookId: number) => {
+      })
+      .subscribe((res2) => {
+      });
+  } */
 }
+
+
+/*
+concat(
+    this.bookService.getBook(slug).pipe(
+      flatMap((respBook: Book) => {
+        this.book = respBook;
+        this.bookService.getBookOverview(respBook.bookId);
+      }).subscribe((respOverview: BookOverview) => {
+      this.bookOverview = respOverview;
+    })));
+ */

@@ -13,10 +13,10 @@ import { AnnouncementItemComponent } from './components/announcement-item/announ
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
-import {BookItemComponent} from "./components/book-item/book-item.component";
-import {RecoverPasswordComponent} from "./components/recover-password/recover-password.component";
-import {RecoverComponent} from "./components/recover-password/recover/recover.component";
-import {BookOverviewComponent} from "./components/book-overview/book-overview.component";
+import {BookItemComponent} from './components/book-item/book-item.component';
+import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
+import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 
 const routes: Routes = [
   {
@@ -80,7 +80,7 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
-    path: 'book-overview/:slag',
+    path: 'book-overview/:slug',
     component: BookOverviewComponent
   },
   // routing to NotFoundComponent must be in the end
