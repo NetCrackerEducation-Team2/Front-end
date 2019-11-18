@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable, of} from "rxjs";
-import {LogService} from "./logging/log.service";
+import {Observable} from "rxjs";
 import {Book} from "../models/book";
 import {catchError} from "rxjs/operators";
 import {BookFilteringParam} from "../models/book-filtering-param";
@@ -19,6 +18,7 @@ export class BookService {
 
   private readonly bookUrl: string;
   private readonly booksUrl: string;
+  private readonly bookTitleByIdUrl: string;
   private readonly bookDownloadUrl: string;
 
   constructor(private http: HttpClient,
@@ -26,6 +26,7 @@ export class BookService {
               private errorHandlerService: ErrorHandlerService) {
     this.bookUrl = environment.API_BOOK;
     this.booksUrl = environment.API_BOOKS;
+    this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
 
@@ -67,6 +68,13 @@ export class BookService {
     return this.http.get(this.bookUrl + id)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getBook', []))
+      );
+  }
+
+  getBookTitleById(bookId: number): Observable<string>{
+    return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBookTitleById', []))
       );
   }
 

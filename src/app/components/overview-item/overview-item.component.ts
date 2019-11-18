@@ -20,9 +20,9 @@ export class OverviewItemComponent extends ListItemComponent {
   }
 
   ngOnInit() {
-    this.bookService.getBook(this.bookOverview.bookId)
-      .subscribe(book => {
-        this.title = "Overview on " + book.title;
+    this.bookService.getBookTitleById(this.bookOverview.bookId)
+      .subscribe(bookTitle => {
+        this.title = "Overview on " + bookTitle;
       });
     this.accountService.getUserById(this.bookOverview.userId)
       .subscribe(user => {
