@@ -33,10 +33,6 @@ export class BookOverviewComponent implements OnInit {
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
-        //console.log("###############");
-        //console.log(JSON.stringify(this.book));
-        //console.log(JSON.stringify(this.bookOverview));
-        //console.log("$$$$$$$$$$$$$$$")
     });
   }
 }
