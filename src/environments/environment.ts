@@ -16,9 +16,11 @@ export const environment = {
 
   API_BOOKS: 'http://localhost:8081/api/books',
   API_BOOK_INFO: 'http://localhost:8081/api/book',
+  API_BOOK_CREATE: BASE_URL + '/api/book',
   API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
   API_GENRES: 'http://localhost:8081/api/genres',
   API_AUTHORS: 'http://localhost:8081/api/authors',
+  API_REVIEW: BASE_URL + '/api/book-review'
 
 
   // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',

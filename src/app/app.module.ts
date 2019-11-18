@@ -21,6 +21,7 @@ import {SearchBooksComponent} from './components/search-books/search-books.compo
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {LoginComponent} from './components/login/login.component';
+import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 import {FormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
@@ -44,9 +45,11 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
-import {AddBookReviewComponent} from "./components/add-book-review/add-book-review.component";
-
-
+import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
+import {RatingModule} from 'ng-starrating';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import {CommonModule} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,8 @@ import {AddBookReviewComponent} from "./components/add-book-review/add-book-revi
     BookOverviewComponent,
     RecoverPasswordComponent,
     RecoverComponent,
-    AddBookReviewComponent
+    AddBookReviewComponent,
+    SuggestBookComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +99,12 @@ import {AddBookReviewComponent} from "./components/add-book-review/add-book-revi
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    RatingModule,
+    MatInputModule,
+    NgSelectModule,
+    NgOptionHighlightModule,
+    CommonModule
   ],
   providers: [
     {

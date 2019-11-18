@@ -1,8 +1,5 @@
-.rating-span {
-  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
-  margin-right: 50px;
-}
-.add-book-review-container {
+@import "~@ng-select/ng-select/themes/material.theme.css";
+.suggest-book-container {
   font-size: 20px;
 }
 
@@ -30,11 +27,34 @@ mat-form-field {
   width: 600px;
 }
 
+label {
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+
+  .submit-row {
+    flex-flow: row wrap;
+  }
+
+  .container, button {
+    font-size: 18px;
+  }
+
+  mat-form-field {
+    width: 300px;
+  }
+}
+
 .nav-footer {
   margin-top: 20px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+
+.nav-footer:nth-child(1){
+  order: -1;
 }
 
 

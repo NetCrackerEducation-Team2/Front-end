@@ -1,31 +1,30 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Author} from '../models/author';
 import {HttpClient} from '@angular/common/http';
 import {LogService} from './logging/log.service';
-import {catchError} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorService {
+export class ReviewService {
 
-  private authorsUrl: string;
+  readonly reviewUrl: string;
 
   constructor(private http: HttpClient,
               private logger: LogService) {
-    this.authorsUrl = environment.API_AUTHORS;
+    this.reviewUrl = environment.API_REVIEW;
   }
 
-  getAuthors(): Observable<Author[]> {
-    // Get from mock
-    // return of(AUTHORS)
-
-    return this.http.get<Author[]>(this.authorsUrl)
-      .pipe(
-        catchError(this.handleError<any>('getAuthors', []))
-      );
+  createReview(rating: number, description: string, bookId: number) {
+    const userId = JSON.parse(localStorage.getItem('currentUser')).userId;
+    return this.http.post(this.reviewUrl, {
+      userId,
+      bookId,
+      rating,
+      description
+    }).pipe(catchError(this.handleError<any>('createReview', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

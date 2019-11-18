@@ -1,0 +1,21 @@
+<div class="add-book-review-container">
+  <form class="submit-form" (ngSubmit)="sendReview()">
+    <div class="submit-row">
+      <span class="rating-span">Rating</span>
+      <div style="text-align:center">
+        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false"></star-rating>
+      </div>
+    </div>
+    <div class="submit-row">
+      <mat-form-field class="form-field">
+        <textarea type="text" name="announcement_body" id="announcement_body" matInput
+                  placeholder="Enter review content" rows="6"
+                  [(ngModel)]="review.description"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="nav-footer">
+      <button class="button" type="submit" mat-flat-button color="primary">Send</button>
+    </div>
+  </form>
+</div>

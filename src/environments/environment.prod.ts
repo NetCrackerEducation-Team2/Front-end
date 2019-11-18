@@ -1,5 +1,5 @@
-// export const BASE_URL = 'http://localhost:8081'
-export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com'
+export const BASE_URL = 'http://localhost:8081'
+// export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com'
 export const environment = {
   production: true,
   API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',

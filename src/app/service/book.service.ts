@@ -9,6 +9,7 @@ import {BookFilteringParam} from '../models/book-filtering-param';
 import {Author} from '../models/author';
 import {Genre} from '../models/genre';
 import {StringFormatterService} from './string-formatter.service';
+import {placeholdersToParams} from "@angular/compiler/src/render3/view/i18n/util";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,14 @@ export class BookService {
   private readonly booksUrl: string;
   private readonly bookDownloadUrl: string;
   private readonly bookInfoUrl: string;
+  private readonly bookCreateUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
               private logger: LogService) {
     this.booksUrl = environment.API_BOOKS;
     this.bookInfoUrl = environment.API_BOOK_INFO;
+    this.bookCreateUrl = environment.API_BOOK_CREATE;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
 
@@ -76,6 +79,14 @@ export class BookService {
 
   getBookBySlug(slug: string): Observable<any> {
     return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.handleError<any>('getBookBySlug', [])));
+  }
+
+  getBookById(id: number): Observable<any> {
+    return this.http.get(this.bookInfoUrl + '/id/' + id).pipe(catchError(this.handleError<any>('getBookById', [])));
+  }
+
+  suggestBook(book) {
+    return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.handleError<any>('suggestBook', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

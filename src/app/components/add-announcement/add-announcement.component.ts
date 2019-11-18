@@ -13,7 +13,6 @@ export class AddAnnouncementComponent implements OnInit {
 
   announcement = {title: '', description: ''};
   isError = false;
-
   constructor(private announcementsService: AnnouncementService, private router: Router) {
   }
 

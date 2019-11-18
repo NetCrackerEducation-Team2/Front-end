@@ -17,7 +17,9 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
-import {AddBookReviewComponent} from "./components/add-book-review/add-book-review.component";
+import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 
 const routes: Routes = [
   {
@@ -73,7 +75,15 @@ const routes: Routes = [
     component: LogoutComponent
   },
   {
-    path: 'book/:id',
+    path: 'book/suggest',
+    component: SuggestBookComponent
+  },
+  {
+    path: 'book/slug/:slug',
+    component: BookItemComponent
+  },
+  {
+    path: 'book/id/:id',
     component: BookItemComponent
   },
   {
@@ -97,7 +107,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), BarRatingModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

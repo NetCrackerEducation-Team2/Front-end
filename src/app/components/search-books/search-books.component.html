@@ -23,11 +23,11 @@
       <p class="books-no-results">No results found</p>
     </ng-template>
   </ng-template>
-    <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
-      <mat-expansion-panel-header class="books-filter-title">
-        <mat-panel-title>Apply Filters </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="advanced-books-filter">
+  <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
+    <mat-expansion-panel-header class="books-filter-title">
+      <mat-panel-title>Apply Filters</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="advanced-books-filter">
       <mat-form-field>
         <mat-label>Author</mat-label>
         <mat-select [(ngModel)]="author">
@@ -51,6 +51,9 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      </div>
-    </mat-expansion-panel>
+    </div>
+    <div align="center" *ngIf="isLogged()">
+      <button mat-flat-button color="primary" [routerLink]="['/book/suggest']">Suggest book</button>
+    </div>
+  </mat-expansion-panel>
 </div>
