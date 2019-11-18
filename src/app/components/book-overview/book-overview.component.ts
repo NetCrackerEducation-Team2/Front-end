@@ -3,8 +3,7 @@ import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
-import {concat} from 'rxjs';
-
+import {mergeMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-book-overview',
@@ -22,31 +21,22 @@ export class BookOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getBookOverview();
+    this.getBookOverview();
   }
 
-  /*getBookOverview(): void {
+  getBookOverview(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
-    alert('Before!');
-    this.bookService.getBook(slug)
-      .flatMap((resBook: Book) => {
-        return resBook.bookId;
-      })
-      .flatMap((bookId: number) => {
-      })
-      .subscribe((res2) => {
-      });
-  } */
-}
-
-
-/*
-concat(
     this.bookService.getBook(slug).pipe(
-      flatMap((respBook: Book) => {
-        this.book = respBook;
-        this.bookService.getBookOverview(respBook.bookId);
-      }).subscribe((respOverview: BookOverview) => {
-      this.bookOverview = respOverview;
-    })));
- */
+      mergeMap((resBook: Book) => {
+        this.book = resBook;
+        return this.bookService.getBookOverview(this.book.bookId);
+      }),
+      ).subscribe((resOverview: BookOverview) => {
+        this.bookOverview = resOverview;
+        //console.log("###############");
+        //console.log(JSON.stringify(this.book));
+        //console.log(JSON.stringify(this.bookOverview));
+        //console.log("$$$$$$$$$$$$$$$")
+    });
+  }
+}
