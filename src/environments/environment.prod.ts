@@ -6,6 +6,7 @@ export const environment = {
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
   API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
+  API_BOOK_TITLE_BY_ID: 'https://netcracker2-back-end.herokuapp.com/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'https://netcracker2-back-end.herokuapp.com/api/published-by-book/',
   API_BOOK_OVERVIEWS_BY_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-overviews/by-book/',
   API_PROFILE: 'https://netcracker2-back-end.herokuapp.com/api/profile',

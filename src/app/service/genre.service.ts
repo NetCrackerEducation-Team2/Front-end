@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {Genre} from "../models/genre";
 import {catchError} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
-import {LogService} from "./logging/log.service";
 import {environment} from "../../environments/environment";
+import {ErrorHandlerService} from "./logging/error-handler.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class GenreService {
   private genresUrl: string;
 
   constructor(private http: HttpClient,
-              private logger: LogService) {
+              private errorHandlerService: ErrorHandlerService) {
     this.genresUrl = environment.API_GENRES;
   }
 
@@ -24,14 +24,7 @@ export class GenreService {
 
     return this.http.get(this.genresUrl)
       .pipe(
-        catchError(this.handleError<any>('getGenres', []))
+        catchError(this.errorHandlerService.handleError<any>('getGenres', []))
       );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T){
-    return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
   }
 }
