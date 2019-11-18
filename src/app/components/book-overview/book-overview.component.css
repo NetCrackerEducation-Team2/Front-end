@@ -11,77 +11,62 @@
 }
 
 
-.book-overview-container{
+.book-overview-container{                           /*Container*/
   display: grid;
   margin: 0 5px;
-  font-size: 20px;
 }
-.book-overview-picture{
-  font-size: 1.5em;
-  font-weight: bold;
-  min-height: 300px;
-  min-width: 300px;
-}
-.book-overview-overview{
-  margin:  10px 0;
-  display: flex;
-  flex-direction: column;
-}
-.book-overview-publishing-house{
-  font-style: italic;
-}
-.book-overview-title{
+.book-overview-title{                               /*Title*/
   margin-top: 20px;
   font-size: 2em;
   align-content: start;
 }
-.book-description{
-
+.book-overview-picture{                             /*Picture*/
+  min-height: 300px;
+  min-width: 300px;
 }
-.book-overview-reviews{
-  align-content: center;
+.book-overview-overview{                            /*Overview*/
+  display: flex;
+  flex-direction: column;
+}
+.book-description{                                  /*Description*/
+  font-size: 20px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {              /*Mobile version*/
   .book-overview-container{
     grid-template-columns: 100% ;
   }
   .book-overview-mat-divider{
-    margin-bottom: 50px   ;
-
+    margin-bottom: 10px;
   }
-
-
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {              /*PC version*/
   .book-overview-container{
     grid-template-columns: fit-content(300px) 1fr;
     grid-template-rows: fit-content(100px) 2px fit-content(300px) auto 1fr;
+    margin: 0 100px;
   }
-  .book-overview-title{
+  .book-overview-title{                              /*title*/
     grid-column: span 2;
     grid-row: 1;
   }
-  .book-overview-mat-divider{
+  .book-overview-mat-divider{                        /*divider*/
     grid-column: span 2;
     grid-row: 2;
-
   }
-  .book-overview-picture{
+  .book-overview-picture{                            /*picture*/
     grid-column: 1;
     grid-row: 3;
   }
-  .book-overview-overview{
+  .book-overview-overview{                           /*overview*/
+    margin-left: 20px;
+    margin-top: 60px;
+    font-size: 25px;
     grid-column: 2;
     grid-row: 3;
   }
-  .book-description{
-    grid-column: span 2;
-    grid-row: 4;
-  }
-
-  .book-overview-reviews{
+  .book-description{                                /*description*/
     grid-column: span 2;
     grid-row: 4;
   }

@@ -4,17 +4,15 @@
   </div>
   <mat-divider class="book-overview-mat-divider"></mat-divider>
   <div class="book-overview-picture">
-    <img src="{{book.photoPath}}" width="300" height="300">
+    <img [src]="scourcePhoto" width="300" height="300">
   </div>
   <div class="book-overview-overview">
-    <div>Announcement date: {{book.release}}</div>
-    <div>Genres: </div>
-    <div>Authors: </div>
-    <div>file for loading? dont really know what is that</div>
-    <div>Rating: {{book.rateSum}}</div>
-    <div>Publishing house: <span class="book-overview-publishing-house">Whale house</span></div>
-
-    <button class="book-overview-to-read-button">Add to "To read"(still thinking where to place it)</button>
+      <div>Announcement date: {{book.release}}</div>
+      <div>Genres: {{genres}}</div>
+      <div>Authors: {{authors}}</div>
+      <div>Rating: {{book.rateSum}}</div>
+      <div>Publishing house: {{book.publsihingHouse}}</div>
+    <button class="book-overview-to-read-button">Add to "To read"</button>
   </div>
   <div class="book-description">
     <h2>Description:</h2>
