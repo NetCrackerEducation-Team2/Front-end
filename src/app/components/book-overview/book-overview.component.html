@@ -7,7 +7,7 @@
     <img src="{{book.photoPath}}" width="300" height="300">
   </div>
   <div class="book-overview-overview">
-    <div>Announcement date: {{book.release}}</div>
+    <div>Announcement date: {{book.release}}</div>npm
     <div>Genres: </div>
     <div>Authors: </div>
     <div>file for loading? dont really know what is that</div>
@@ -24,5 +24,7 @@
 
 </div>
 
-<app-book-review></app-book-review>
+<app-book-review
+  [bookId]=book.bookId>
+</app-book-review>
 
