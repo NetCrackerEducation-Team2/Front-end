@@ -8,11 +8,21 @@
   flex-flow: column nowrap;
 }
 
-button {
+.button, .link {
   height: 50px;
   width: 180px;
   font-size: 18px;
   margin: 10px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link > * {
+  text-align: center;
 }
 
 .checkboxes {
@@ -24,7 +34,7 @@ button {
 }
 
 
-h2 {
+.header {
   text-align: center;
   padding-bottom: 10px;
 }
@@ -42,11 +52,11 @@ h2 {
   align-items: center;
 }
 
-mat-form-field {
+.form-field {
   width: 600px;
 }
 
-label {
+.row-label {
   width: 120px;
 }
 
@@ -57,7 +67,7 @@ label {
   justify-content: center;
 }
 
-button:nth-child(2) {
+.link:nth-child(2) {
   margin-left: 95px;
   margin-right: 95px;
 }
@@ -69,21 +79,26 @@ button:nth-child(2) {
     align-items: center;
   }
 
-  .container, button {
+  .container, .button {
     font-size: 18px;
   }
 
 
-  mat-form-field {
+  .form-field {
     width: 300px;
   }
 
-  label {
+  .row-label {
     width: 80px;
+  }
+
+  .link:nth-child(2) {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
-mat-checkbox {
+.checkbox {
   text-align: left;
   padding: 5px;
 }

@@ -1,0 +1,19 @@
+<div class="container">
+
+  <div *ngIf="message">
+    <p class="error" *ngIf="isError; else ok">
+      {{message}}
+    </p>
+    <ng-template #ok>
+      <div class="inner">
+        <p class="message">{{message}}</p>
+        <a class="link" type="submit" mat-stroked-button color="primary" routerLink="/login">Login</a>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="message" *ngIf="isDownloading">Loading...</div>
+
+</div>
+
+

@@ -1,76 +1,83 @@
-/*Mobile  screens*/
-
-@media screen and (max-width: 767px){
-
-  button {
-    height: auto;
-    background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
-    color: white;
-    outline-style: none;
-    border: none;
-    border-radius: 2px;
-
-  }
-
-
-  button:hover{
-
-    background: rgb(0,0,255,0.5);
-    color: gray;
-    outline-style: none;
-  }
-
-
-  input{
-    height: auto;
-    width: 65vw;
-  }
-
-  form{
-    width: 65vw;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    max-height: 35px;
-
-  }
-
+.search-button {
+  width: 50px;
+  height: auto;
+  background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
+  padding: 6px;
+  color: white;
+  outline-style: none;
+  border: none;
+  border-radius: 2px;
+  font-size: 12px;
 }
- /*Large screens +*/
- @media screen and (min-width: 768px){
 
-    button {
-    height: auto;
-    background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
-    color: white;
-    outline-style: none;
-    border: none;
-    border-radius: 2px;
+.search-button:hover{
+  background: rgba(0,0,255,0.5);
+  color: gray;
+  outline-style: none;
+}
+
+.search-input{
+  height: auto;
+  width: 65vw;
+}
+
+.filtered-book-list-container {
+  display: grid;
+}
+
+.simple-books-filter{
+  margin: 50px auto;
+  display: flex;
+  max-height: 35px;
+}
+
+.advanced-books-filter{
+  display: flex;
+  flex-direction: column;
+}
+
+.advanced-books-filter > mat-form-field{
+  margin: 0 10px;
+}
+
+.advanced-books-filter-exp-panel{
+  margin: 0 10px 10px;
+}
+
+.books-filter-title{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 767px) {
+  .filtered-book-list-container {
+    grid-template-columns: 100%;
   }
 
-
-  button:hover{
-
-    background: rgb(0,0,255,0.5);
-    color: gray;
-    outline-style: none;
-
-
+  .simple-books-filter{
+    order: 1;
   }
 
-  input{
-    height: auto;
-    width: 65vw;
+  .advanced-books-filter-exp-panel{
+    order: 2;
   }
 
-  form{
-    width: 65vw;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    max-height: 40px;
+  .no-result, .loading{
+    order: 3;
   }
 
- }
+  .book-page{
+    order: 3;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .filtered-book-list-container {
+    grid-template-columns: auto minmax(275px, 30%);
+  }
+
+  .simple-books-filter {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}

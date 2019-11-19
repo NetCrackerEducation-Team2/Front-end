@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement';
+import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-announcement-list',
@@ -8,11 +10,7 @@ import { AnnouncementService } from '../../service/announcement.service';
   styleUrls: ['./announcement-list.component.css']
 })
 export class AnnouncementListComponent implements OnInit {
-  page: {
-    currentPage: number,
-    countPages: number,
-    array: Announcement[]
-  };
+  selectedPage: Page<Announcement> = new Page<Announcement>();
 
 
   constructor(private announcementService: AnnouncementService) { }
@@ -22,7 +20,13 @@ export class AnnouncementListComponent implements OnInit {
   }
 
   getAnnouncements(): void {
-    this.announcementService.getAnnouncements()
-        .subscribe(result => this.page = result);
+    this.announcementService.getAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
+        .subscribe(result => this.selectedPage = result);
+  }
+
+  handlePage(event?: PageEvent) {
+    this.selectedPage.currentPage = event.pageIndex;
+    this.selectedPage.pageSize = event.pageSize;
+    this.getAnnouncements();
   }
 }

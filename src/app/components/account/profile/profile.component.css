@@ -1,5 +1,10 @@
+.container, .button  {
+  font-size: 20px;
+}
 
-@media (min-width: 767px) {
+.button {
+  height: 50px;
+}
 
   .container, button {
     font-size: 20px;
@@ -23,19 +28,19 @@
     justify-content: center;
   }
 
-  }
+
 
 @media (max-width: 768px) {
   .info {
     align-items: center;
   }
-  button {
+  .button  {
     height: 45px;
   }
 }
 
 @media (max-width: 380px) {
-  .container, button {
+  .container, .button  {
     font-size: 18px;
   }
 }

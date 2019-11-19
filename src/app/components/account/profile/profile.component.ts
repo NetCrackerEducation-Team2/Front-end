@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
-import {ActivatedRoute} from '@angular/router';
-import {Store} from '@ngrx/store';
-import { LOGOUT } from 'src/app/state/app.action';
-import { take } from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
+
 
 
 @Component({
@@ -12,26 +10,37 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile = {fullName: '', email: '', createdAt: Date.now()};
-  isLogged: boolean;
+  profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: null};
 
   constructor(private activatedRoute: ActivatedRoute,
-              private accService: AccountService,
-              private store: Store<any>
-              ) {
+              private accountService: AccountService,
+              private router: Router) {
+  }
+
+  private setDefaultAvatar() {
+    this.profile.photoPath = '../../../assets/images/default_avatar.jpg';
   }
 
   ngOnInit() {
+    this.setDefaultAvatar();
     const userId = this.activatedRoute.snapshot.paramMap.get('userId');
-    this.accService.getUserById(userId)
+    this.accountService.getUserById(userId)
       .subscribe(
         user => {
           this.profile = user;
+          if (!this.profile.photoPath) {
+            this.setDefaultAvatar();
+          }
         },
         error => {
           console.log('Error');
+          console.log(error);
+          console.log('Error message');
+          console.log(error.message);
+          console.log('Error object');
           console.error(error.error);
           // handle error
+          this.router.navigate(['']);
         }
       );
 
@@ -41,8 +50,9 @@ export class ProfileComponent implements OnInit {
     console.log('edit button clicked');
   }
 
-  onLogout() {
-    this.store.dispatch(new LOGOUT());
+  canEdit() {
+    const currentUser = this.accountService.getCurrentUser();
+    return currentUser && this.profile.userId === currentUser.userId;
   }
 
 }

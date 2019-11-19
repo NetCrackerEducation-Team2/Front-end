@@ -1,10 +1,56 @@
-
-<form>
-    <input type="text" style="padding-left: 1vw;" placeholder="Search book..." name="search">
-
-    <button type="button" style="" mat-stroked-button >
-        <mat-icon>search</mat-icon>
-
+<div class="filtered-book-list-container">
+  <div class="simple-books-filter">
+    <input type="text" placeholder=" Search book..." name="search" class="search-input" [(ngModel)]="title">
+    <button (click)="search()" class="search-button">
+      <mat-icon>search</mat-icon>
     </button>
-
-</form>
+  </div>
+  <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
+  <ng-template #loading>
+    <p class="loading">Loading...</p>
+  </ng-template>
+  <ng-template #loaded>
+    <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
+    <ng-template #hasresults>
+      <div class="book-page">
+        <app-book-list [page]="selectedPage"></app-book-list>
+        <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                       [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+        </mat-paginator>
+      </div>
+    </ng-template>
+    <ng-template #noresults>
+      <p class="no-result">No results found</p>
+    </ng-template>
+  </ng-template>
+    <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
+      <mat-expansion-panel-header class="books-filter-title">
+        <mat-panel-title>Apply Filters </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="advanced-books-filter">
+      <mat-form-field>
+        <mat-label>Author</mat-label>
+        <mat-select [(ngModel)]="author">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let author of authors" [value]="author">
+            {{author.fullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Genre</mat-label>
+        <mat-select [(ngModel)]="genre">
+          <mat-option [value]="null"></mat-option>
+          <mat-option *ngFor="let genre of genres" [value]="genre">
+            {{genre.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+</div>

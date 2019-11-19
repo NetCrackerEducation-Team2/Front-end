@@ -19,14 +19,12 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  showCreateAdmin() {
-    this.router.navigate(['create-admin'], { relativeTo: this.route });
+  showCreateAdminModerator() {
+    this.router.navigate(['create-admin-moderator'], { relativeTo: this.route });
 
   }
 
-  showCreateModerator() {
-    this.router.navigate(['create-moderator'], { relativeTo: this.route });
-  }
+
 
   showEditModerator() {
     this.router.navigate(['edit-moderator'], { relativeTo: this.route });

@@ -4,32 +4,32 @@
 
 
     <div class="submit-row">
-      <label for="fullName">Enter name</label>
-      <mat-form-field>
+      <label class="label" for="fullName">Enter full name</label>
+      <mat-form-field class="form-field">
         <input required name="fullName" #fullName="ngModel" type="text" id="fullName" matInput
                placeholder="Full name" [(ngModel)]="user.fullName">
       </mat-form-field>
     </div>
 
     <div class="submit-row">
-      <label for="email">Enter email</label>
-      <mat-form-field>
+      <label class="label" for="email">Enter email</label>
+      <mat-form-field class="form-field">
         <input required name="email" #email="ngModel" type="email" id="email" matInput placeholder="Email"
                [(ngModel)]="user.email" email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
       </mat-form-field>
     </div>
 
     <div class="submit-row">
-      <label for="password">Enter password</label>
-      <mat-form-field>
+      <label class="label" for="password">Enter password</label>
+      <mat-form-field class="form-field">
         <input pattern="^.{6,}" required name="password" #password="ngModel" type="password" id="password" matInput
                placeholder="Password" [(ngModel)]="user.password">
       </mat-form-field>
     </div>
 
     <div class="submit-row">
-      <label for="confirmPassword">Confirm password</label>
-      <mat-form-field>
+      <label class="label" for="confirmPassword">Confirm password</label>
+      <mat-form-field class="form-field">
         <input pattern="^.{6,}" required name="confirmPassword" #confirmPassword="ngModel" type="password"
                id="confirmPassword" matInput
                placeholder="Confirm password" [(ngModel)]="repeatPassword">
@@ -48,23 +48,23 @@
         <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
         <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6
           symbols</small>
-        <span class="text-danger" style="text-align: center;" *ngIf="!message && isError">
+        <span class="text-danger center" *ngIf="!message && isError">
           User with username already exists
           <br>
           Try again.
         </span>
-        <span class="text-danger" style="text-align: center;" *ngIf="message && isError">
+        <span class="text-danger center" *ngIf="message && isError">
           {{message}}
         </span>
       </div>
-      <button [disabled]="!regForm.valid" mat-flat-button color="primary">Sign up</button>
+      <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
     </div>
 
+  </form>
 
   <ng-template #registeredTemplate>
-    <p style="margin: 40px 30px 30px 30px;font-size: 25px; color: #522bff; text-align: center">We have sent activation link to your email. Go to your email to finish registration.</p>
+    <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
 
-  </form>
 
 </div>
