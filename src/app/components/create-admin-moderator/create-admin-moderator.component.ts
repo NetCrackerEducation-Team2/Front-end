@@ -12,6 +12,7 @@ export class CreateAdminModeratorComponent implements OnInit {
   isError: boolean;
   message: string;
   isCreated: boolean;
+  isDownloading:boolean = true;
 
   constructor(private admModerService: AdminModeratorService) {
     this.isError = false;
