@@ -1,31 +1,36 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable, of} from "rxjs";
-import {LogService} from "./logging/log.service";
+import {Observable} from "rxjs";
 import {Book} from "../models/book";
 import {catchError} from "rxjs/operators";
 import {BookFilteringParam} from "../models/book-filtering-param";
 import {Author} from "../models/author";
 import {Genre} from "../models/genre";
 import {StringFormatterService} from "./string-formatter.service";
+import {ErrorHandlerService} from "./logging/error-handler.service";
+import {Page} from "../models/page";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
+  private readonly bookUrl: string;
   private readonly booksUrl: string;
+  private readonly bookTitleByIdUrl: string;
   private readonly bookDownloadUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
-              private logger: LogService) {
+              private errorHandlerService: ErrorHandlerService) {
+    this.bookUrl = environment.API_BOOK;
     this.booksUrl = environment.API_BOOKS;
+    this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
 
-  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<any>{
+  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>>{
     let params = new HttpParams();
     let paramsString: string = "";
     if(filteringParams.get(BookFilteringParam.Title) != null){
@@ -55,7 +60,21 @@ export class BookService {
     }
     return this.http.get(this.booksUrl + paramsString)
       .pipe(
-        catchError(this.handleError<any>('getBooks', []))
+        catchError(this.errorHandlerService.handleError<any>('getBooks', []))
+      );
+  }
+
+  getBook(id: number): Observable<Book>{
+    return this.http.get(this.bookUrl + id)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBook', []))
+      );
+  }
+
+  getBookTitleById(bookId: number): Observable<string>{
+    return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBookTitleById', []))
       );
   }
 
@@ -70,12 +89,5 @@ export class BookService {
 
   getBookAuthorsString(book: Book, count: number): string{
     return this.stringFormatterService.arrayPrettyFormat(book.authors.map(author => author.fullName), count);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T){
-    return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
   }
 }

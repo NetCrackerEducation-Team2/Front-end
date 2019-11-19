@@ -7,7 +7,7 @@
   </div>
   <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
   <ng-template #loading>
-    <p class="books-loading">Loading...</p>
+    <p class="loading">Loading...</p>
   </ng-template>
   <ng-template #loaded>
     <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
@@ -20,7 +20,7 @@
       </div>
     </ng-template>
     <ng-template #noresults>
-      <p class="books-no-results">No results found</p>
+      <p class="no-result">No results found</p>
     </ng-template>
   </ng-template>
     <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">

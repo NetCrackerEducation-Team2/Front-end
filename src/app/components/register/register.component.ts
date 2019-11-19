@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
       this.message = '';
       this.isError = false;
     }
-    this.register();
+    // this.register();
   }
 
   register() {
