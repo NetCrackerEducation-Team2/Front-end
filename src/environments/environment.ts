@@ -20,8 +20,10 @@ export const environment = {
   API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',
   API_BOOK_OVERVIEWS_BY_BOOK: 'http://localhost:8081/api/book-overviews/by-book/',
   API_ANNOUNCEMENTS: 'http://localhost:8081/api/announcements/',
-
-
+  API_CREATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/create',
+  API_DELETE_ADMIN_MODERATOR: 'http://localhost:8081/admins/delete',
+  API_GET_ADMIN_MODERATOR: 'http://localhost:8081/admins',
+  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'
   // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
   // API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
   // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',

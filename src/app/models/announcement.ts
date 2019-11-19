@@ -8,12 +8,12 @@ export class Announcement {
   bookId: number;
 
   public constructor(announcementId: number,
-              title: string,
-              description: string,
-              userId: number,
-              published: boolean,
-              creationTime: string,
-              bookId: number) {
+                     title: string,
+                     description: string,
+                     userId: number,
+                     published: boolean,
+                     creationTime: string,
+                     bookId: number) {
         this.announcementId = announcementId;
         this.title = title;
         this.description = description;
