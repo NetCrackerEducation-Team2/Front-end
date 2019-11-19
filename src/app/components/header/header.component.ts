@@ -10,8 +10,6 @@ import { LOGOUT } from 'src/app/state/app.action';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-
   isLogged: boolean;
   roles: any[];
   constructor(private store: Store<AppState>, private accService: AccountService) { }

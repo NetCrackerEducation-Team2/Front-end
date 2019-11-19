@@ -43,14 +43,14 @@ import {ActivateAccountComponent} from './components/activate-account/activate-a
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import {MatExpansionModule} from '@angular/material/expansion';
+import {MatExpansionModule} from "@angular/material/expansion";
 import { BookOverviewComponent } from './components/book-overview/book-overview.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { RecoverComponent } from './components/recover-password/recover/recover.component';
-import {StoreModule} from '@ngrx/store';
-import { reducers  } from './state/app.state';
 import { OverviewListComponent } from './components/overview-list/overview-list.component';
 import { OverviewItemComponent } from './components/overview-item/overview-item.component';
+import {StoreModule} from '@ngrx/store';
+import { reducers  } from './state/app.state';
 import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 

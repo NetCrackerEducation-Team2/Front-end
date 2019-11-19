@@ -4,13 +4,12 @@
 
 export const environment = {
   production: false,
-
+  
   AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
   AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
   AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
   AUTH_RECOVER_LINK_URL: 'http://localhost:8081/auth/recovery-link/',
   AUTH_RECOVER_PASS_URL: 'http://localhost:8081/auth/recover/',
-
   API_PROFILE : 'http://localhost:8081/api/profile',
   API_BOOK: 'http://localhost:8081/api/book-by-id/',
   API_BOOKS: 'http://localhost:8081/api/books',
