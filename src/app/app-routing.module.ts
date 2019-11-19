@@ -55,10 +55,6 @@ const routes: Routes = [
      component: AnnouncementListComponent
   },
   {
-     path: 'announcements/:id',
-     component: AnnouncementItemComponent
-  },
-  {
     path: 'activate/:code',
     component: ActivateAccountComponent
   },

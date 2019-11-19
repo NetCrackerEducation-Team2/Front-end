@@ -13,7 +13,7 @@
     </div>
     <div class="mat-card-actions">
       <div *ngIf="url; else elseBlock">
-        <button mat-button routerLink="{{url}}">{{btnText}}</button>
+        <button mat-button routerLink="{{url}}">View</button>
       </div>
       <ng-template #elseBlock>
         <button mat-button (click)="listItemCallback()">Go Back</button>

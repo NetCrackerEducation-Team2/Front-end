@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject  } from '@angular/core';
 import { Announcement } from '../../models/announcement';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { AnnouncementService } from '../../service/announcement.service';
+import { AnnouncementService} from '../../service/announcement.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-announcement-item',
@@ -10,27 +11,35 @@ import { AnnouncementService } from '../../service/announcement.service';
   styleUrls: ['./announcement-item.component.css']
 })
 export class AnnouncementItemComponent implements OnInit {
-  announcement: Announcement;
+  @Input() announcement: Announcement;
   public theGoBackCallback: Function;
+  theViewItemCallback: Function;
 
   constructor(
     private route: ActivatedRoute,
     private announcementService: AnnouncementService,
-    private location: Location
+    private location: Location,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
-    this.getAnnouncement();
+    //this.getAnnouncement();
     this.theGoBackCallback = this.goBack.bind(this);
+    this.theViewItemCallback = this.viewItem.bind(this);
   }
 
-  getAnnouncement(): void {
+  /*getAnnouncement(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.announcementService.getAnnouncement(id)
       .subscribe(announcement => this.announcement = announcement);
-  }
+  }*/
 
   public goBack(): void {
     this.location.back();
+  }
+
+  viewItem(url:string) {
+    this.document.location.href = this.location.path();
   }
 }
