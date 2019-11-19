@@ -1,0 +1,74 @@
+
+
+
+@media screen and (min-width:768px){
+  .buttons{
+
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: auto;
+    margin-left: 5vw;
+  }
+
+  button{
+    background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+    border: none;
+    outline: none;
+    color: white;
+    outline-style: none;
+    font-size: 15px;
+    margin-right: 10vw;
+  }
+
+  button:hover{
+
+    background: rgb(0,0,255,0.5);
+    color: gray;
+    outline-style: none;
+    margin-right: 10vw;
+
+
+  }
+
+
+}
+
+
+
+@media screen and (max-width:767px){
+  .buttons{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+    width: auto;
+    margin-left: 10vw;
+
+
+  }
+  button{
+    background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+    border: none;
+    outline: none;
+    color: white;
+    outline-style: none;
+    font-size: 15px;
+    margin-right: 10vw;
+    margin-bottom: 4vh;
+
+  }
+
+  button:hover{
+
+    background: rgb(0,0,255,0.5);
+    color: gray;
+    outline-style: none;
+
+
+  }
+
+}

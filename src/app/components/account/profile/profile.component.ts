@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -16,7 +18,6 @@ export class ProfileComponent implements OnInit {
   }
 
   private setDefaultAvatar() {
-    // tslint:disable-next-line:max-line-length
     this.profile.photoPath = '../../../assets/images/default_avatar.jpg';
   }
 
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit {
           this.router.navigate(['']);
         }
       );
+
   }
 
   edit() {
