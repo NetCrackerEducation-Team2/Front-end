@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {Author} from "../models/author";
 import {HttpClient} from "@angular/common/http";
-import {LogService} from "./logging/log.service";
 import {catchError} from "rxjs/operators";
 import {environment} from "../../environments/environment";
+import {ErrorHandlerService} from "./logging/error-handler.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthorService {
   private authorsUrl: string;
 
   constructor(private http: HttpClient,
-              private logger: LogService) {
+              private errorHandlerService: ErrorHandlerService) {
     this.authorsUrl = environment.API_AUTHORS;
   }
 
@@ -22,16 +22,9 @@ export class AuthorService {
     //Get from mock
     //return of(AUTHORS)
 
-    return this.http.get<Author[]>(this.authorsUrl)
+    return this.http.get(this.authorsUrl)
       .pipe(
-        catchError(this.handleError<any>('getAuthors', []))
+        catchError(this.errorHandlerService.handleError<any>('getAuthors', []))
       );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T){
-    return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
   }
 }

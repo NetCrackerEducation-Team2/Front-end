@@ -38,6 +38,7 @@
 
     <mat-divider></mat-divider>
 
+
     <div class="nav-footer">
       <div class="messages">
         <span *ngIf="isDownloading">Please wait...</span>
@@ -56,7 +57,7 @@
           {{message}}
         </span>
       </div>
-      <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary">Sign up</button>
+      <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
     </div>
 
   </form>
@@ -64,5 +65,6 @@
   <ng-template #registeredTemplate>
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
+
 
 </div>

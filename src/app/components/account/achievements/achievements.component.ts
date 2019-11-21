@@ -61,8 +61,7 @@ export class AchievementsComponent implements OnInit {
     if (event.pageIndex === this.pageIndex + 1) {
       this.startIndex = this.startIndex + this.pageSize;
       this.endIndex = this.endIndex + this.pageSize;
-    } // previous page wanted
-    else {
+    }  else {
       this.startIndex = this.startIndex - this.pageSize;
       this.endIndex = this.endIndex - this.pageSize;
     }

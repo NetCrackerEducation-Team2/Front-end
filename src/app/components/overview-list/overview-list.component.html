@@ -1,0 +1,19 @@
+<ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
+<ng-template #loaded>
+  <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
+  <ng-template #hasresults>
+    <ng-container *ngFor="let bookOverview of selectedPage.array">
+        <app-overview-item [bookOverview]="bookOverview"
+                       [btnText]="'Publish'"></app-overview-item>
+    </ng-container>
+    <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                   [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+    </mat-paginator>
+  </ng-template>
+  <ng-template #noresults>
+    <p class="no-result">No overviews to this book yet</p>
+  </ng-template>
+</ng-template>
+<ng-template #loading>
+  <p class="loading">Loading...</p>
+</ng-template>

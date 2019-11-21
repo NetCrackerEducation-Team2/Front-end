@@ -6,6 +6,8 @@
                    [authors]="bookService.getBookAuthorsString(book, 3)"
                    [genres]="bookService.getBookGenresString(book, 3)"
                    [url]="book.slug"
-                   [btnText]="'View'"></app-book-item>
+                   [overviewsUrl]="'book-overviews/' + book.bookId"
+                   [btnText]="'View'"
+                   [overviewsBtnText]="'View Overviews'"></app-book-item>
   </ng-container>
 </div>

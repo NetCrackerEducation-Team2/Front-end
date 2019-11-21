@@ -9,14 +9,22 @@ import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
-import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
-import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
-import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
+import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
+import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
+import {AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
+import {BooksManagementComponent } from './components/books-management/books-management.component';
+import {ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
+import {AdminComponent } from './components/admin/admin.component';
+import {CreateBookComponent} from './components/create-book/create-book.component';
+import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
+import {OverviewListComponent} from './components/overview-list/overview-list.component';
+import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 
 const routes: Routes = [
   {
@@ -83,6 +91,40 @@ const routes: Routes = [
     path: 'book-overview/:slug',
     component: BookOverviewComponent
   },
+  {
+    path: 'announcements-management',
+    component: AnnouncementsManagementComponent
+  },
+  {
+    path: 'books-management',
+    component: BooksManagementComponent
+  },
+  {
+    path: 'reviews-management',
+    component: ReviewsManagementComponent
+  },
+  {
+     path: 'admin',
+     component: AdminComponent,
+     children: [
+        {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
+        // {path: 'edit-moderator', component: EditModeratorComponent},
+
+     ]
+  },
+  {
+     path: 'create-book',
+     component: CreateBookComponent
+  }
+  ,
+  {
+     path: 'create-announcement',
+     component: CreateAnnouncementComponent
+  },  // routing to NotFoundComponent must be in the end
+  {
+    path: 'book-overviews/:bookId',
+    component: OverviewListComponent
+  },
   // routing to NotFoundComponent must be in the end
   {
     path: '**',
@@ -95,5 +137,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }

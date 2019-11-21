@@ -19,6 +19,7 @@ export class EditComponent implements OnInit {
   isUpdated: boolean;
 
   user: Account = {
+    enabled: true,
     userId: null,
     fullName: null,
     email: null,
@@ -63,6 +64,9 @@ export class EditComponent implements OnInit {
 
   save() {
     console.log('saving changes...');
-    this.router.navigate(['/profile', this.userId]);
+    this.accountService.updateUser(this.user).subscribe(
+      () => this.router.navigate(['/profile', this.userId]),
+      () => this.router.navigate(['/profile', this.userId])
+    );
   }
 }

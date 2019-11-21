@@ -6,4 +6,3 @@ export class BookOverview {
   published: boolean;
   creationTime: Date;
 }
-
