@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement';
 import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
-import {PageEvent} from "@angular/material";
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-announcement-list',

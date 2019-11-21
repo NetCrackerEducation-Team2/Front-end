@@ -12,12 +12,20 @@
       <p><span>Genres:</span> {{genres}}</p>
     </div>
     <div class="mat-card-actions">
-      <div *ngIf="url; else elseBlock">
-        <button mat-button routerLink="{{url}}">{{btnText}}</button>
-      </div>
+      <ng-container *ngIf="url; else elseBlock">
+        <button mat-button class="book-details-btn" routerLink="{{url}}">{{btnText}}</button>
+      </ng-container>
       <ng-template #elseBlock>
-        <button mat-button (click)="listItemCallback()">Go Back</button>
+        <button mat-button class="book-details-btn" (click)="listItemCallback()">Go Back</button>
       </ng-template>
+      <ng-container *ngIf="isModerator()">
+        <ng-container *ngIf="overviewsUrl; else overviewsElseBlock">
+          <button mat-button class="book-overviews-btn" routerLink="{{overviewsUrl}}">{{overviewsBtnText}}</button>
+        </ng-container>
+        <ng-template #overviewsElseBlock>
+          <button mat-button class="book-overviews-btn" (click)="overviewsItemCallback()">Go Back</button>
+        </ng-template>
+      </ng-container>
     </div>
   </div>
 </div>

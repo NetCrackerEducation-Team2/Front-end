@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 })
 export class AnnouncementService {
 
-  private readonly announcemetnsUrl;
+  private readonly announcementsUrl:string;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +19,7 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) {
     //this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
-    this.announcemetnsUrl = environment.API_ANNOUNCEMENTS;
+    this.announcementsUrl = environment.API_ANNOUNCEMENTS;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {
@@ -37,7 +37,7 @@ export class AnnouncementService {
     if(params.keys().length > 0){
       paramsString = "?" + params.toString();
     }
-    return this.http.get(this.announcemetnsUrl + paramsString)
+    return this.http.get(this.announcementsUrl + paramsString)
     .pipe(
       catchError(this.handleError<any>('getAnnouncements', []))
     );
@@ -47,27 +47,27 @@ export class AnnouncementService {
     // Get from mock
     //return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
     //Return from backend
-    return this.http.get(this.announcemetnsUrl + id)
+    return this.http.get(this.announcementsUrl + id)
     .pipe(
       catchError(this.handleError<any>('getAnnouncements', []))
     );
   }
 
 
-  /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
+  /*
+  Handle Http operation that failed.
+  Let the app continue.
+  @param operation - name of the operation that failed
+  @param result - optional value to return as the observable result
  */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      //this.log(`${operation} failed: ${error.message}`);
+      // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
