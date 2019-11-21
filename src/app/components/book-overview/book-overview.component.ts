@@ -3,7 +3,7 @@ import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
-import {mergeMap} from 'rxjs/operators';
+import {flatMap, map, mergeMap} from 'rxjs/operators';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
@@ -18,9 +18,6 @@ export class BookOverviewComponent implements OnInit {
   genres: string;
   authors: string;
   scourcePhoto: SafeUrl;
-
- // genres = this.bookService.getBookGenresString(this.book, this.book.genres.length);
- // authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -34,7 +31,7 @@ export class BookOverviewComponent implements OnInit {
   getBookOverview(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
     this.bookService.getBook(slug).pipe(
-      mergeMap((resBook: Book) => {
+      flatMap((resBook: Book) => {
         this.book = resBook;
         this.authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
         this.genres = this.bookService.getBookAuthorsString(this.book, this.book.genres.length);
@@ -46,3 +43,4 @@ export class BookOverviewComponent implements OnInit {
     });
   }
 }
+
