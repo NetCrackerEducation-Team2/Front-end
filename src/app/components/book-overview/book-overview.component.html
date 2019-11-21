@@ -1,3 +1,4 @@
+<!--<div *ngIf="loadfinished; else elseBlock">-->
 <div class="book-overview-container">
   <div class="book-overview-title">
     {{book.title}}
@@ -11,7 +12,7 @@
       <div>Genres: {{genres}}</div>
       <div>Authors: {{authors}}</div>
       <div>Rating: {{book.rateSum}}</div>
-      <div>Publishing house: {{book.publsihingHouse}} </div>
+      <div>Publishing house: {{publishingHouse}} </div>
     <button class="book-overview-to-read-button">Add to "To read"</button>
   </div>
   <div class="book-description">
@@ -23,3 +24,5 @@
 
 <app-book-review></app-book-review>
 
+<!--</div>-->
+<!--<ng-template #elseBlock><mat-spinner></mat-spinner></ng-template>-->

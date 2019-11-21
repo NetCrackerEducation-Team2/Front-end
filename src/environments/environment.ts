@@ -6,8 +6,9 @@ export const environment = {
   production: false,
 
 
+/*
 
-  /*AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
+  AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
   AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
   AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
   AUTH_RECOVER_LINK_URL: 'http://localhost:8081/auth/recovery-link/',
@@ -15,6 +16,8 @@ export const environment = {
   API_PROFILE : 'http://localhost:8081/api/profile',
   API_BOOK: 'http://localhost:8081/api/book-by-id/',
   API_BOOKS: 'http://localhost:8081/api/books',
+  API_BOOK_OVERVIEW: 'https://localhost:8081/api/book/',
+  API_BOOK_OVERVIEWS: 'http://localhost:8081/api/book-overview',
   API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
   API_GENRES: 'http://localhost:8081/api/genres',
   API_AUTHORS: 'http://localhost:8081/api/authors',
@@ -25,7 +28,8 @@ export const environment = {
   API_CREATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/create',
   API_DELETE_ADMIN_MODERATOR: 'http://localhost:8081/admins/delete',
   API_GET_ADMIN_MODERATOR: 'http://localhost:8081/admins',
-  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'*/
+  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'
+*/
 
   AUTH_LOGIN_URL: 'https://netcracker2-back-end.herokuapp.com/auth/login',
   AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
@@ -34,6 +38,8 @@ export const environment = {
   AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/',
   API_PROFILE : 'https://netcracker2-back-end.herokuapp.com/api/profile',
   API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
+  API_BOOK_OVERVIEW: 'https://netcracker2-back-end.herokuapp.com/api/book/',
+  API_BOOK_OVERVIEWS: 'http://netcracker2-back-end.herokuapp.com/api/book-overviews/',
   API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   API_GENRES: 'https://netcracker2-back-end.herokuapp.com/api/genres',

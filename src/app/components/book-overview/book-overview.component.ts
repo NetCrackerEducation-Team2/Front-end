@@ -18,6 +18,8 @@ export class BookOverviewComponent implements OnInit {
   genres: string;
   authors: string;
   scourcePhoto: SafeUrl;
+  loadfinished = 0;
+  publishingHouse: string;
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -35,11 +37,15 @@ export class BookOverviewComponent implements OnInit {
         this.book = resBook;
         this.authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
         this.genres = this.bookService.getBookAuthorsString(this.book, this.book.genres.length);
+
         this.scourcePhoto = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.book.photo);
+        this.publishingHouse = resBook.publsihingHouse;
         return this.bookService.getBookOverview(this.book.bookId);
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
+        alert('function started');
+        this.loadfinished = 1;
     });
   }
 }
