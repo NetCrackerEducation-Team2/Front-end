@@ -38,7 +38,6 @@ export class BookService {
 
   getBook(slug: string): Observable<Book> {
     const url = `${slug}`;
-    alert(this.bookOverviewUrl + url);
     return this.http.get<Book>(this.bookOverviewUrl + url)
       .pipe(
         catchError(this.handleError<any>('getBook', Book))
@@ -47,7 +46,6 @@ export class BookService {
 
   getBookOverview(id: number): Observable<BookOverview> {
     const url = `published-by-book/${id}`;
-    alert(this.bookOverviewsUrl + url);
     return this.http.get<BookOverview>(this.bookOverviewsUrl + url)
       .pipe(
         catchError(this.handleError<any>('getBookOverview', BookOverview))

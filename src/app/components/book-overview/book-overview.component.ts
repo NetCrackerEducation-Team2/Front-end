@@ -44,7 +44,6 @@ export class BookOverviewComponent implements OnInit {
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
-        alert('function started');
         this.loadfinished = 1;
     });
   }
