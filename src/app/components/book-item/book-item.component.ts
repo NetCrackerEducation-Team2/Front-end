@@ -12,6 +12,9 @@ export class BookItemComponent extends ListItemComponent {
   @Input() photo: string;
   @Input() authors: string;
   @Input() genres: string;
+  @Input() overviewsUrl: string;
+  @Input() overviewsBtnText: string;
+  @Input() overviewsItemCallback: Function;
 
   photoSource: SafeUrl;
 
@@ -21,6 +24,11 @@ export class BookItemComponent extends ListItemComponent {
 
   ngOnInit() {
     this.photoSource = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.photo);
+  }
+
+  //Will refer to role service in future
+  isModerator(): boolean{
+    return true;
   }
 
 }

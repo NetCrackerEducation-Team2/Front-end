@@ -1,4 +1,4 @@
-export class BookOverview {
+export class BookOverview{
   bookOverviewId: number;
   description: string;
   bookId: number;
@@ -6,4 +6,3 @@ export class BookOverview {
   published: boolean;
   creationTime: Date;
 }
-

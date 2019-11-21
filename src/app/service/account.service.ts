@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from "../models/user";
-import {environment} from "../../environments/environment";
+import {User} from '../models/user';
+import {environment} from '../../environments/environment';
 
 
 @Injectable({
@@ -20,6 +20,22 @@ export class AccountService {
     return this.http.get(this.API_PROFILE + '/' + userId);
   }
 
+  updateUser(newUser: User) {
+    const currUser = this.getCurrentUser();
+    newUser.userId = currUser.userId;
+    newUser.enabled = currUser.enabled;
+    console.log('newUser', JSON.stringify(newUser));
+    console.log('currUser', JSON.stringify(currUser));
+    return this.http.put(this.API_PROFILE + '/update', [currUser, newUser]);
+  }
+
+  updatePassword(oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.put(this.API_PROFILE + `/change-password/${this.getCurrentUser().userId}`, {
+      oldPassword,
+      newPassword
+    });
+  }
+
   getToken() {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
@@ -32,5 +48,7 @@ export class AccountService {
   getCurrentUser(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
+
+
 
 }

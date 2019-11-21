@@ -13,7 +13,7 @@
     <div class="submit-row">
       <label class="row-label" for="email">Email</label>
       <mat-form-field class="form-field">
-        <input required id="email" matInput placeholder="Email" [(ngModel)]="user.email" name="email"
+        <input [disabled]="true" required id="email" matInput placeholder="Email" [(ngModel)]="user.email" name="email"
                #email="ngModel" type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
       </mat-form-field>
     </div>
@@ -37,8 +37,8 @@
   <mat-divider></mat-divider>
 
   <div class="nav-footer">
-    <button class="button" mat-flat-button color="primary" [routerLink]="['../']">Back</button>
-    <button class="button" mat-stroked-button color="warn" [routerLink]="['../', 'change-password']">Change password</button>
+    <a class="link" mat-flat-button color="primary" [routerLink]="['../']">Back</a>
+    <a class="link" mat-stroked-button color="warn" [routerLink]="['../', 'change-password']">Change password</a>
     <button class="button" [disabled]="editForm.invalid || !isUpdated" mat-flat-button color="primary" (click)="save()">Save changes
     </button>
   </div>
