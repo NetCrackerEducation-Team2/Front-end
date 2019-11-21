@@ -1,4 +1,4 @@
-export class BookOverview{
+export class BookOverview {
   bookOverviewId: number;
   description: string;
   bookId: number;

@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from "rxjs";
-import {Book} from "../models/book";
-import {catchError} from "rxjs/operators";
-import {BookFilteringParam} from "../models/book-filtering-param";
-import {Author} from "../models/author";
-import {Genre} from "../models/genre";
-import {StringFormatterService} from "./string-formatter.service";
-import {ErrorHandlerService} from "./logging/error-handler.service";
-import {Page} from "../models/page";
+import {Observable, of} from 'rxjs';
+import {Book} from '../models/book';
+import {catchError} from 'rxjs/operators';
+import {BookFilteringParam} from '../models/book-filtering-param';
+import {Author} from '../models/author';
+import {Genre} from '../models/genre';
+import {StringFormatterService} from './string-formatter.service';
+import {BookOverview} from '../models/book-overview';
+import {ErrorHandlerService} from './logging/error-handler.service';
+import {Page} from '../models/page';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,8 @@ export class BookService {
   private readonly booksUrl: string;
   private readonly bookTitleByIdUrl: string;
   private readonly bookDownloadUrl: string;
-  private readonly bookUrl: string;
   private readonly bookOverviewUrl: string;
+  private readonly bookOverviewsUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
@@ -30,13 +32,31 @@ export class BookService {
     this.booksUrl = environment.API_BOOKS;
     this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
-    this.bookUrl = environment.API_BOOK;
-    this.bookOverviewUrl = environment.API_BOOK_OVERVIEWS;
+    this.bookOverviewUrl = environment.API_BOOK_OVERVIEW;
+    this.bookOverviewsUrl = environment.API_BOOK_OVERVIEWS;
   }
 
-  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>>{
+  getBook(slug: string): Observable<Book> {
+    const url = `${slug}`;
+    alert(this.bookOverviewUrl + url);
+    return this.http.get<Book>(this.bookOverviewUrl + url)
+      .pipe(
+        catchError(this.handleError<any>('getBook', Book))
+      );
+  }
+
+  getBookOverview(id: number): Observable<BookOverview> {
+    const url = `published-by-book/${id}`;
+    alert(this.bookOverviewsUrl + url);
+    return this.http.get<BookOverview>(this.bookOverviewsUrl + url)
+      .pipe(
+        catchError(this.handleError<any>('getBookOverview', BookOverview))
+      );
+  }
+
+  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {
     let params = new HttpParams();
-    let paramsString: string = "";
+    let paramsString: string = '';
     if (filteringParams.get(BookFilteringParam.Title) != null) {
       let title = filteringParams.get(BookFilteringParam.Title) as unknown as string;
       params = params.set('title', title);
@@ -60,7 +80,7 @@ export class BookService {
       params = params.set('pageSize', pageSize.toString());
     }
     if (params.keys().length > 0) {
-      paramsString = "?" + params.toString();
+      paramsString = '?' + params.toString();
     }
     return this.http.get(this.booksUrl + paramsString)
       .pipe(
@@ -68,12 +88,12 @@ export class BookService {
       );
   }
 
-  getBook(id: number): Observable<Book>{
+  /*getBook(id: number): Observable<Book> {
     return this.http.get(this.bookUrl + id)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getBook', []))
       );
-  }
+  }*/
 
   getBookTitleById(bookId: number): Observable<string>{
     return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
@@ -84,7 +104,7 @@ export class BookService {
 
   getBookSubtitle(book: Book): string {
     let authors = this.getBookAuthorsString(book, 1);
-    return "by " + (authors == "" ? "unknown" : authors);
+    return 'by ' + (authors === '' ? 'unknown' : authors);
   }
 
   getBookGenresString(book: Book, count: number): string {
@@ -94,4 +114,12 @@ export class BookService {
   getBookAuthorsString(book: Book, count: number): string {
     return this.stringFormatterService.arrayPrettyFormat(book.authors.map(author => author.fullName), count);
   }
+
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      return of(result as T);
+    };
+  }
+
 }

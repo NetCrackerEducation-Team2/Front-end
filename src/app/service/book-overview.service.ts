@@ -41,7 +41,7 @@ export class BookOverviewService {
       );
   }
 
-  getPublishedBookOverview(bookId: number): Observable<BookOverview>{
+  getPublishedBookOverview(bookId: number): Observable<BookOverview> {
     return this.http.get(this.publishedBookOverviewUrl + bookId)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getPublishedBookOverview', []))

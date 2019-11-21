@@ -13,6 +13,7 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
@@ -85,6 +86,10 @@ const routes: Routes = [
   {
     path: 'recover/:link',
     component: RecoverComponent
+  },
+  {
+    path: 'book-overview/:slug',
+    component: BookOverviewComponent
   },
   {
     path: 'announcements-management',
