@@ -1,14 +1,17 @@
 <div>
-  <div class="review-block" *ngFor="let review of reviews">
+  <mat-card class="review-block" *ngFor="let review of reviews">
     <div class="review-profile-block">
       <img class="review-avatar" src="{{ avatartPath }}" alt="Avatar">
     </div>
 
     <div class="review-content">
-      <p class="review-name"> {{ fullName }} </p>
-      <p> Date: {{ review.creationTime }} </p>
-      <p> Rate: {{ review.rating }} </p>
+
+      <mat-card-title> {{ fullName }} </mat-card-title>
+      <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
+      <mat-card-title> Rate:  </mat-card-title>
+
+
       <p> {{ review.description }} </p>
     </div>
-  </div>
+  </mat-card>
 </div>
