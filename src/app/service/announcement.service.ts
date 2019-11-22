@@ -60,6 +60,8 @@ export class AnnouncementService {
       );
   }
 
+  А
+
 
   /**
    * Handle Http operation that failed.

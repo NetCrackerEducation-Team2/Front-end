@@ -13,6 +13,7 @@ export class AddAnnouncementComponent implements OnInit {
 
   announcement = {title: '', description: ''};
   isError = false;
+
   constructor(private announcementsService: AnnouncementService, private router: Router) {
   }
 
@@ -25,13 +26,12 @@ export class AddAnnouncementComponent implements OnInit {
     this.announcementsService.createAnnouncement(this.announcement.title, this.announcement.description, user.userId)
       .subscribe(
         (response) => {
-          console.log('Response from announcement creation: ', response);
           this.isError = false;
           this.router.navigate(['/announcements']);
         },
         (error: HttpErrorResponse) => {
-          console.log('Error from announcement creation: ', error);
           this.isError = true;
+          // TODO add error handling here
         }
       );
   }
