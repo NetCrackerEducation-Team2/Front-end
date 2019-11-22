@@ -22,13 +22,4 @@ export class BookReviewService {
     return this.http.get<BookReview[]>(this.bookReviewUrl + url);
   }
 
-  // getBookReviewComment(BookReviewId: number, page: number, pageSize: number): Observable<BookReviewComment[]> {
-  //   const url = '?page=' + page + '&pageSize=' + pageSize;
-  //   alert(url);
-  //   return this.http.get<BookReviewComment[]>(this.bookReviewUrl + url)
-  //     .pipe(
-  //       catchError(this.handleError<any>('getBookReview', BookReviewComment))
-  //     );
-  // }
-
 }

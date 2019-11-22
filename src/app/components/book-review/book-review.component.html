@@ -1,17 +1,32 @@
 <div>
-  <mat-card class="review-block" *ngFor="let review of reviews">
-    <div class="review-profile-block">
-      <img class="review-avatar" src="{{ avatartPath }}" alt="Avatar">
+  <div  *ngFor="let review of reviews; index as reviewInd">
+    <mat-card class="review-block">
+
+      <div class="review-block-body">
+
+        <div class="review-profile-block">
+          <img class="review-avatar" src="{{ avatartPath }}" alt="Avatar">
+        </div>
+
+        <div class="review-content">
+          <mat-card-title> {{ fullName }} </mat-card-title>
+          <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
+          <mat-card-title> Rate:  </mat-card-title>
+          <p> {{ review.description }} </p>
+        </div>
+
+      </div>
+
+      <div class="review-block-footer">
+        <button mat-button *ngIf="!showCommentsFlag[reviewInd]" (click)="showComments(reviewInd)">Show comments</button>
+        <button mat-button *ngIf="showCommentsFlag[reviewInd]" (click)="hideComments(reviewInd)">Hide comments</button>
+      </div>
+
+    </mat-card>
+
+    <div class="review-comment-block" *ngIf="showCommentsFlag[reviewInd]">
+      Hey!
     </div>
 
-    <div class="review-content">
-
-      <mat-card-title> {{ fullName }} </mat-card-title>
-      <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
-      <mat-card-title> Rate:  </mat-card-title>
-
-
-      <p> {{ review.description }} </p>
-    </div>
-  </mat-card>
+  </div>
 </div>
