@@ -13,6 +13,7 @@ export class AnnouncementListComponent implements OnInit {
   selectedPage: Page<Announcement> = new Page<Announcement>();
 
 
+
   constructor(private announcementService: AnnouncementService) { }
 
   ngOnInit() {
