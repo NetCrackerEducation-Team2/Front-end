@@ -3,8 +3,7 @@
   <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
   <ng-template #hasresults>
     <ng-container *ngFor="let bookOverview of selectedPage.array">
-        <app-overview-item [bookOverview]="bookOverview"
-                       [btnText]="'Publish'"></app-overview-item>
+        <app-overview-item [bookOverview]="bookOverview"></app-overview-item>
     </ng-container>
     <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
                    [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">

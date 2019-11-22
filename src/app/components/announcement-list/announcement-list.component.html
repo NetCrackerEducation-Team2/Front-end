@@ -1,17 +1,10 @@
 <div class="app-announcement-list">
-  <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
-  <ng-template #loading>
-    <p class="books-loading">Loading...</p>
-  </ng-template>
-  <ng-template #loaded>
-    <ng-container *ngFor="let announcement of selectedPage.array">
-      <app-list-item [title]= "announcement.title"
-                     [description] = "announcement.description"
-                     [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
-                     [url] = "announcement.announcementId"
-                     [btnText] = "'View'"></app-list-item>
-    </ng-container>
-  </ng-template>
+  <div *ngIf="selectedPage.array">
+    <div *ngFor="let announcement of selectedPage.array">
+      <app-announcement-item [announcement] = "announcement">
+      </app-announcement-item>
+    </div>
+  </div>
   <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
                  [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
   </mat-paginator>
