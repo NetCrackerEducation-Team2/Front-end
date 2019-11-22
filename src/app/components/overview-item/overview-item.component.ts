@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {ListItemComponent} from "../presentational/list-item/list-item.component";
-import {BookService} from "../../service/book.service";
-import {BookOverview} from "../../models/book-overview";
-import {AccountService} from "../../service/account.service";
+import {ListItemComponent} from '../presentational/list-item/list-item.component';
+import {BookService} from '../../service/book.service';
+import {BookOverview} from '../../models/book-overview';
+import {AccountService} from '../../service/account.service';
 import {User} from "../../models/user";
 
 @Component({

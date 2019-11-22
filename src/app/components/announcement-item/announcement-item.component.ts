@@ -12,8 +12,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AnnouncementItemComponent implements OnInit {
   @Input() announcement: Announcement;
-  public theGoBackCallback: Function;
-  theViewItemCallback: Function;
+  theGoBackCallback: () => void;
+  theViewItemCallback: () => void;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class AnnouncementItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //this.getAnnouncement();
+    // this.getAnnouncement();
     this.theGoBackCallback = this.goBack.bind(this);
     this.theViewItemCallback = this.viewItem.bind(this);
   }
@@ -39,7 +39,7 @@ export class AnnouncementItemComponent implements OnInit {
     this.location.back();
   }
 
-  viewItem(url:string) {
+  viewItem(url: string) {
     this.document.location.href = this.location.path();
   }
 }
