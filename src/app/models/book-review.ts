@@ -1,3 +1,5 @@
+import {User} from './user';
+
 export class BookReview {
   bookReviewId: number;
   rating: number;
@@ -6,4 +8,5 @@ export class BookReview {
   bookId: number;
   published: boolean;
   creationTime: Date;
+  author: User;
 }
