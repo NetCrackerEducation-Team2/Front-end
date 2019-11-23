@@ -13,7 +13,16 @@ import {Router} from '@angular/router';
 export class SuggestBookComponent implements OnInit {
   authors = [];
   genres = [];
-  book = {title: '', authors: [], genres: [], description: '', publishYear: null, release: null, isbn: null, publishingHouse: null};
+  book = {
+    title: '',
+    authors: [],
+    genres: [],
+    description: '',
+    publishYear: null,
+    release: null,
+    isbn: null,
+    publishingHouse: null
+  };
 
   constructor(private authorService: AuthorService,
               private genreService: GenreService,
@@ -22,27 +31,21 @@ export class SuggestBookComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAuthors();
-    this.loadGenres();
   }
 
   submit() {
-    console.log('Suggesting book: ', this.book);
     this.bookService.suggestBook(this.book).subscribe((response) => {
       this.router.navigate(['/']);
     });
   }
 
-  private loadGenres(): void {
-    this.genreService.getGenres().subscribe(genres => {
-      console.log('Loaded genres: ', genres);
+  searchGenres(event) {
+    this.genreService.searchGenres(event.term).subscribe(genres => {
       this.genres = genres;
     });
   }
-
-  private loadAuthors(): void {
-    this.authorService.getAuthors().subscribe(authors => {
-      console.log('Loaded authors: ', authors);
+  searchAuthors(event) {
+    this.authorService.findAuthors(event.term).subscribe(authors => {
       this.authors = authors;
     });
   }

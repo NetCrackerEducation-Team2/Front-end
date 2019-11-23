@@ -12,10 +12,12 @@ import {environment} from '../../environments/environment';
 export class AuthorService {
 
   private authorsUrl: string;
+  private findAuthorByFullNameContains: string;
 
   constructor(private http: HttpClient,
               private logger: LogService) {
     this.authorsUrl = environment.API_AUTHORS;
+    this.findAuthorByFullNameContains = environment.API_AUTHORS_URL.FIND_URL;
   }
 
   getAuthors(): Observable<Author[]> {
@@ -25,6 +27,13 @@ export class AuthorService {
     return this.http.get<Author[]>(this.authorsUrl)
       .pipe(
         catchError(this.handleError<any>('getAuthors', []))
+      );
+  }
+
+  findAuthors(contains: string): Observable<Author[]> {
+    return this.http.get<Author[]>(this.findAuthorByFullNameContains, {params: {contains}})
+      .pipe(
+        catchError(this.handleError<any>('findAuthors', []))
       );
   }
 

@@ -82,7 +82,7 @@ export class BookService {
   }
 
   getBookById(id: number): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/id/' + id).pipe(catchError(this.handleError<any>('getBookById', [])));
+    return this.http.get(this.bookInfoUrl + '/book-by-id/' + id).pipe(catchError(this.handleError<any>('getBookById', [])));
   }
 
   suggestBook(book) {

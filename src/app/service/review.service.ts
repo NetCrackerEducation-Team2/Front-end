@@ -18,7 +18,13 @@ export class ReviewService {
   }
 
   createReview(rating: number, description: string, bookId: number) {
-    const userId = JSON.parse(localStorage.getItem('currentUser')).userId;
+    let userId = null;
+    try {
+      userId = JSON.parse(localStorage.getItem('currentUser')).userId;
+    } catch (e) {
+      // TODO error handling here
+      return;
+    }
     return this.http.post(this.reviewUrl, {
       userId,
       bookId,

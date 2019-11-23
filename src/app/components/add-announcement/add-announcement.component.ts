@@ -21,7 +21,13 @@ export class AddAnnouncementComponent implements OnInit {
   }
 
   sendAnnouncement() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
+    let user = null;
+    try {
+      user = JSON.parse(localStorage.getItem('currentUser'));
+    } catch (e) {
+      this.isError = true;
+      return;
+    }
     console.log('UserId from local storage: ', user.userId);
     this.announcementsService.createAnnouncement(this.announcement.title, this.announcement.description, user.userId)
       .subscribe(

@@ -18,8 +18,14 @@ export const environment = {
   API_BOOK_INFO: 'http://localhost:8081/api/book',
   API_BOOK_CREATE: BASE_URL + '/api/book',
   API_BOOK_DOWNLOAD: 'http://localhost:8081/api/book/download',
-  API_GENRES: 'http://localhost:8081/api/genres',
+  API_GENRES: 'http://localhost:8081/api/genres/',
+  API_GENRES_URL: {
+    SEARCH_BY_NAME_SUBSTRING: BASE_URL + '/api/genres/searchByNameContains'
+  },
   API_AUTHORS: 'http://localhost:8081/api/authors',
+  API_AUTHORS_URL: {
+    FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
+  },
   API_REVIEW: BASE_URL + '/api/book-review'
 
 
