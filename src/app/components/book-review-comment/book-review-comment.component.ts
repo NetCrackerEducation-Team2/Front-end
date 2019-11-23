@@ -13,7 +13,7 @@ import {BookReviewComment} from '../../models/book-review-comment';
 })
 export class BookReviewCommentComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  expandCount = 2;
+  expandCount = 10;
   @Input() reviewId: number;
   reviewComments: BookReviewComment[];
   ableToExpand: boolean;
@@ -40,7 +40,7 @@ export class BookReviewCommentComponent implements OnInit {
         return reviewCommentList;
       }),
     ).subscribe((reviewComment: BookReviewComment) => {
-      this.accountService.getUserById(reviewComment).pipe(
+      this.accountService.getUserById(reviewComment.authorId).pipe(
         map((author: User) => {
           reviewComment.author = author;
           return reviewComment;

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  // SERVER_DOMAIN: 'https://localhost:8081',
+  // SERVER_DOMAIN: 'http://localhost:8081',
   SERVER_DOMAIN: 'https://netcracker2-back-end.herokuapp.com',
 
   /// Чекните, нигде ли я не пропустил кусок URI

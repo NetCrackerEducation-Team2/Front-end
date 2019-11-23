@@ -13,7 +13,7 @@ import {map, flatMap} from 'rxjs/operators';
 })
 export class BookReviewComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  expandCount = 2;
+  expandCount = 10;
 
   @Input() bookId: number;
   reviews: BookReview[];
