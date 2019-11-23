@@ -19,7 +19,7 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) {
     //this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
-    this.announcementsUrl = environment.API_ANNOUNCEMENTS;
+    this.announcementsUrl = environment.SERVER_DOMAIN + environment.API_ANNOUNCEMENTS;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {

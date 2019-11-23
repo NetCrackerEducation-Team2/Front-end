@@ -14,10 +14,10 @@ export class AdminModeratorService {
   private readonly API_GET_ADMIN_MODERATOR;
 
   constructor(private httpClient: HttpClient) {
-    this.API_CREATE_ADMIN_MODERATOR = environment.API_CREATE_ADMIN_MODERATOR;
-    this.API_DELETE_ADMIN_MODERATOR = environment.API_DELETE_ADMIN_MODERATOR;
-    this.API_UPDATE_ADMIN_MODERATOR = environment.API_UPDATE_ADMIN_MODERATOR;
-    this.API_GET_ADMIN_MODERATOR = environment.API_GET_ADMIN_MODERATOR;
+    this.API_CREATE_ADMIN_MODERATOR = environment.SERVER_DOMAIN + environment.API_CREATE_ADMIN_MODERATOR;
+    this.API_DELETE_ADMIN_MODERATOR = environment.SERVER_DOMAIN + environment.API_DELETE_ADMIN_MODERATOR;
+    this.API_UPDATE_ADMIN_MODERATOR = environment.SERVER_DOMAIN + environment.API_UPDATE_ADMIN_MODERATOR;
+    this.API_GET_ADMIN_MODERATOR = environment.SERVER_DOMAIN + environment.API_GET_ADMIN_MODERATOR;
    }
 
 

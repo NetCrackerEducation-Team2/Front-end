@@ -13,7 +13,7 @@ export class AccountService {
   private readonly API_PROFILE;
 
   constructor(private http: HttpClient) {
-    this.API_PROFILE = environment.API_PROFILE;
+    this.API_PROFILE = environment.SERVER_DOMAIN + environment.API_PROFILE;
   }
 
   getUserById(userId): Observable<User> {

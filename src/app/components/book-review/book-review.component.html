@@ -1,11 +1,13 @@
-<div>
+<mat-card class="main-panel">
+  <h1> Reviews </h1>
   <div  *ngFor="let review of reviews; index as reviewInd">
     <mat-card class="review-block">
 
       <div class="review-block-body">
 
         <div class="review-profile-block">
-          <img class="review-avatar" src="{{ avatartPath }}" alt="Avatar">
+          <img *ngIf="review.author.photoPath" class="review-avatar" src="{{ review.author.photoPath }}" alt="Avatar">
+          <img *ngIf="!review.author.photoPath" class="review-avatar" src="{{ defaultPhotoPath }}" alt="Avatar">
         </div>
 
         <div class="review-content">
@@ -17,10 +19,10 @@
 
       </div>
 
-      <div class="review-block-footer">
-        <button mat-button *ngIf="!showCommentsFlag[reviewInd]" (click)="showComments(reviewInd)">Show comments</button>
-        <button mat-button *ngIf="showCommentsFlag[reviewInd]" (click)="hideComments(reviewInd)">Hide comments</button>
-      </div>
+      <mat-card-actions class="review-block-footer">
+        <button mat-button color="primary" *ngIf="!showCommentsFlag[reviewInd]" (click)="showComments(reviewInd)">Show comments</button>
+        <button mat-button color="primary" *ngIf="showCommentsFlag[reviewInd]" (click)="hideComments(reviewInd)">Hide comments</button>
+      </mat-card-actions>
 
     </mat-card>
 
@@ -29,4 +31,9 @@
     </div>
 
   </div>
-</div>
+
+  <mat-card-actions class="main-panel-buttons">
+    <button mat-button color="primary" *ngIf="ableToExpand" (click)="expandReviews()">Show more</button>
+  </mat-card-actions>
+
+</mat-card>

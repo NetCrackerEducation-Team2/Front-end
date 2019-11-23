@@ -16,11 +16,11 @@ export class AuthenticationService {
   private readonly AUTH_RECOVER_PASS_URL;
 
   constructor(private httpClient: HttpClient) {
-    this.AUTH_LOGIN_URL = environment.AUTH_LOGIN_URL;
-    this.AUTH_REG_URL = environment.AUTH_REGISTER_URL;
-    this.AUTH_ACTIVATION_URL = environment.AUTH_ACTIVATION_URL;
-    this.AUTH_RECOVER_LINK_URL = environment.AUTH_RECOVER_LINK_URL;
-    this.AUTH_RECOVER_PASS_URL = environment.AUTH_RECOVER_PASS_URL;
+    this.AUTH_LOGIN_URL = environment.SERVER_DOMAIN + environment.AUTH_LOGIN_URL;
+    this.AUTH_REG_URL = environment.SERVER_DOMAIN + environment.AUTH_REGISTER_URL;
+    this.AUTH_ACTIVATION_URL = environment.SERVER_DOMAIN + environment.AUTH_ACTIVATION_URL;
+    this.AUTH_RECOVER_LINK_URL = environment.SERVER_DOMAIN + environment.AUTH_RECOVER_LINK_URL;
+    this.AUTH_RECOVER_PASS_URL = environment.SERVER_DOMAIN + environment.AUTH_RECOVER_PASS_URL;
   }
 
   authenticate(email, password): Observable<any> {

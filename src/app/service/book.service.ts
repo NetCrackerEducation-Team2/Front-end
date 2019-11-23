@@ -28,12 +28,12 @@ export class BookService {
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
               private errorHandlerService: ErrorHandlerService) {
-    this.bookUrl = environment.API_BOOK;
-    this.booksUrl = environment.API_BOOKS;
-    this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
-    this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
-    this.bookOverviewUrl = environment.API_BOOK_OVERVIEW;
-    this.bookOverviewsUrl = environment.API_BOOK_OVERVIEWS;
+    this.bookUrl = environment.SERVER_DOMAIN + environment.API_BOOK;
+    this.booksUrl = environment.SERVER_DOMAIN + environment.API_BOOKS;
+    this.bookTitleByIdUrl = environment.SERVER_DOMAIN + environment.API_BOOK_TITLE_BY_ID;
+    this.bookDownloadUrl = environment.SERVER_DOMAIN + environment.API_BOOK_DOWNLOAD;
+    this.bookOverviewUrl = environment.SERVER_DOMAIN + environment.API_BOOK_OVERVIEW;
+    this.bookOverviewsUrl = environment.SERVER_DOMAIN + environment.API_BOOK_OVERVIEWS;
   }
 
   getBook(slug: string): Observable<Book> {

@@ -1,13 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Page} from '../../models/page';
+import {User} from '../../models/user';
 import {BookReview} from '../../models/book-review';
 import {BookReviewComment} from '../../models/book-review-comment';
 import {BookReviewService} from '../../service/book-review.service';
-import {AuthorService} from '../../service/author.service';
-import {map, flatMap} from 'rxjs/operators';
-import {of, Observable} from 'rxjs';
-import {Page} from '../../models/page';
-import {User} from '../../models/user';
 import {AccountService} from '../../service/account.service';
+import {map, flatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-review',
@@ -15,28 +13,27 @@ import {AccountService} from '../../service/account.service';
   styleUrls: ['./book-review.component.css']
 })
 export class BookReviewComponent implements OnInit {
+  defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
+  expandCount = 2;
+
   @Input() bookId: number;
   size: number;
   reviews: BookReview[];
   showCommentsFlag: boolean[];
-
-  avatartPath: string;
-  fullName: string;
+  ableToExpand: boolean;
 
   constructor( private bookReviewService: BookReviewService,
                private accountService: AccountService
   ) { }
 
   ngOnInit() {
-    this.avatartPath = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
-    this.fullName = 'Ivanov Ivan';
-
-    this.size = 5;
+    this.size = this.expandCount;
     this.reviews = [];
-    this.showReviews(1, this.size);
+    this.ableToExpand = true;
+    this.getReviews(1, this.size);
   }
 
-  showReviews(from: number, count: number): void {
+  getReviews(from: number, count: number): void {
     this.prepareFlags(this.size);
 
     this.bookReviewService.getBookReview(this.bookId, from, count).pipe(
@@ -44,6 +41,10 @@ export class BookReviewComponent implements OnInit {
         return respPage.array;
       }),
       flatMap((reviewList: BookReview[]) => {
+        if (reviewList.length === 0) {
+          this.ableToExpand = false;
+        }
+        console.log(reviewList.length);
         return reviewList;
       }),
     ).subscribe((review: BookReview) => {
@@ -58,9 +59,7 @@ export class BookReviewComponent implements OnInit {
     });
   }
   expandReviews(): void {
-    const oldSize = this.size;
-    this.size += 5;
-    this.showReviews(oldSize, this.size);
+    this.getReviews(this.reviews.length + 1, this.expandCount);
   }
 
   prepareFlags(count: number): void {

@@ -19,8 +19,8 @@ export class BookOverviewService {
   constructor(private http: HttpClient,
               private bookService: BookService,
               private errorHandlerService: ErrorHandlerService) {
-    this.bookOverviewsByBookUrl = environment.API_BOOK_OVERVIEWS_BY_BOOK;
-    this.publishedBookOverviewUrl = environment.API_PUBLISHED_BOOK_OVERVIEW;
+    this.bookOverviewsByBookUrl = environment.SERVER_DOMAIN + environment.API_BOOK_OVERVIEWS_BY_BOOK;
+    this.publishedBookOverviewUrl = environment.SERVER_DOMAIN + environment.API_PUBLISHED_BOOK_OVERVIEW;
   }
 
   getBookOverviewsByBook(bookId: number, page: number, pageSize: number): Observable<Page<BookOverview>>{

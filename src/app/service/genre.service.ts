@@ -15,7 +15,7 @@ export class GenreService {
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.genresUrl = environment.API_GENRES;
+    this.genresUrl = environment.SERVER_DOMAIN + environment.API_GENRES;
   }
 
   getGenres(): Observable<Genre[]>{

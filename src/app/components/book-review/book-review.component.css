@@ -1,3 +1,14 @@
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (min-width: 768px) {
+  mat-card.main-panel {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
 mat-card.review-block {
   padding: 10px;
   margin: 10px;
@@ -17,16 +28,15 @@ img.review-avatar {
   min-width: 60px;
   max-height: 60px;
   max-width: 60px;
-  border: solid 2px black;
-
 }
 
 div.review-content {
 
 }
 
-div.review-block-footer {
+mat-card-actions.review-block-footer {
   margin-top: 20px;
+  padding: 10px;
 }
 
 
