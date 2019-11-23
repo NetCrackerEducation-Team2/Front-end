@@ -55,6 +55,7 @@ import { CreateAdminModeratorComponent } from './components/create-admin-moderat
 import { TabsComponent } from './components/tabs/tabs.component';
 import { BookReviewComponent } from './components/book-review/book-review.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BookReviewCommentComponent } from './components/book-review-comment/book-review-comment.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    BookReviewCommentComponent,
   ],
   imports: [
     BrowserModule,

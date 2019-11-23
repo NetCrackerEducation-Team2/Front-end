@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Page} from '../../models/page';
 import {User} from '../../models/user';
 import {BookReview} from '../../models/book-review';
-import {BookReviewComment} from '../../models/book-review-comment';
 import {BookReviewService} from '../../service/book-review.service';
 import {AccountService} from '../../service/account.service';
 import {map, flatMap} from 'rxjs/operators';
@@ -17,7 +16,6 @@ export class BookReviewComponent implements OnInit {
   expandCount = 2;
 
   @Input() bookId: number;
-  size: number;
   reviews: BookReview[];
   showCommentsFlag: boolean[];
   ableToExpand: boolean;
@@ -27,14 +25,13 @@ export class BookReviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.size = this.expandCount;
     this.reviews = [];
     this.ableToExpand = true;
-    this.getReviews(1, this.size);
+    this.getReviews(1, this.expandCount);
   }
 
   getReviews(from: number, count: number): void {
-    this.prepareFlags(this.size);
+    this.prepareComments(this.reviews.length + this.expandCount);
 
     this.bookReviewService.getBookReview(this.bookId, from, count).pipe(
       map((respPage: Page<BookReview>) => {
@@ -62,7 +59,7 @@ export class BookReviewComponent implements OnInit {
     this.getReviews(this.reviews.length + 1, this.expandCount);
   }
 
-  prepareFlags(count: number): void {
+  prepareComments(count: number): void {
     this.showCommentsFlag = [];
     for (let i = 0; i < count; i++) {
       this.showCommentsFlag.push(false);

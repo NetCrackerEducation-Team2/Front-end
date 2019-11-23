@@ -1,6 +1,6 @@
 <mat-card class="main-panel">
   <h1> Reviews </h1>
-  <div  *ngFor="let review of reviews; index as reviewInd">
+  <div *ngFor="let review of reviews; index as reviewInd">
     <mat-card class="review-block">
 
       <div class="review-block-body">
@@ -26,8 +26,10 @@
 
     </mat-card>
 
-    <div class="review-comment-block" *ngIf="showCommentsFlag[reviewInd]">
-      Hey!
+    <div>
+      <app-book-review-comment *ngIf="showCommentsFlag[reviewInd]"
+                               [reviewId]=review.bookReviewId>
+      </app-book-review-comment>
     </div>
 
   </div>

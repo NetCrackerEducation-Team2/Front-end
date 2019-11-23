@@ -1,0 +1,10 @@
+<mat-card class="main-panel">
+  <h1> Review comments {{ reviewId }} </h1>
+  <div *ngFor="let comment of reviewComments; index as commentInd">
+
+    <mat-card>
+      <h1> Comment: {{comment}}</h1>
+    </mat-card>
+
+  </div>
+</mat-card>
