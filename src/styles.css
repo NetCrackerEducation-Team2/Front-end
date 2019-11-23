@@ -16,3 +16,10 @@ html,
 body {
   height: 100%;
 }
+
+.no-result, .loading{
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: gray;
+}

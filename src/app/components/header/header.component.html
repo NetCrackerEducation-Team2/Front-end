@@ -1,15 +1,15 @@
-<div class="header">
+  <div class="header">
   <div class="content" routerLink="/">
-    NetCrackerLibrary
+    NetcrackerLibrary
   </div>
 
   <div class="buttons">
-    <ng-container *ngIf="!isLogged(); else alreadyLogged">
-      <button class="btn btn-secondary" routerLink="/login">Sign in</button>
-      <button type="button" class="btn btn-secondary" routerLink="/register">Sign up</button>
+    <ng-container *ngIf='!isLogged;else alreadyLogged'>
+      <button type="button"  mat-stroked-button routerLink= "/login">Sign in</button>
+      <button type="button"  mat-stroked-button  routerLink="/register">Sign up</button>
     </ng-container>
     <ng-template #alreadyLogged>
-      <button class="btn btn-secondary" routerLink="/logout">Sign out</button>
+      <button  type="button"  mat-stroked-button routerLink="/logout" (click)="onLogout()">Sign out</button>
     </ng-template>
   </div>
 

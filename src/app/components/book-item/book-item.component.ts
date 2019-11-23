@@ -14,6 +14,9 @@ export class BookItemComponent extends ListItemComponent implements OnInit {
   @Input() photo: string;
   @Input() authors: string;
   @Input() genres: string;
+  @Input() overviewsUrl: string;
+  @Input() overviewsBtnText: string;
+  @Input() overviewsItemCallback: Function;
 
   photoSource: SafeUrl;
   bookSlug: string;
@@ -42,5 +45,10 @@ export class BookItemComponent extends ListItemComponent implements OnInit {
 
   getBookInfo(slug) {
     return this.bookService.getBookBySlug(slug);
+  }
+
+  // Will refer to role service in future
+  isModerator(): boolean {
+    return true;
   }
 }

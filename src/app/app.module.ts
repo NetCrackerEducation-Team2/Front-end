@@ -8,8 +8,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
-
-
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -31,11 +29,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
-import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
 import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
+import {AdminComponent} from './components/admin/admin.component';
+import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
+import {BooksManagementComponent} from './components/books-management/books-management.component';
+import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
+import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
+import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
@@ -47,9 +49,16 @@ import {RecoverPasswordComponent} from './components/recover-password/recover-pa
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
 import {RatingModule} from 'ng-starrating';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
-import {CommonModule} from "@angular/common";
+import {NgSelectModule} from '@ng-select/ng-select';
+import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
+import {CommonModule} from '@angular/common';
+import {OverviewListComponent} from './components/overview-list/overview-list.component';
+import {OverviewItemComponent} from './components/overview-item/overview-item.component';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './state/app.state';
+import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
+import {TabsComponent} from './components/tabs/tabs.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +85,16 @@ import {CommonModule} from "@angular/common";
     RecoverPasswordComponent,
     RecoverComponent,
     AddBookReviewComponent,
-    SuggestBookComponent
+    SuggestBookComponent,
+    AdminComponent,
+    ReviewsManagementComponent,
+    BooksManagementComponent,
+    AnnouncementsManagementComponent,
+    ActivateAccountComponent,
+    OverviewListComponent,
+    OverviewItemComponent,
+    CreateAdminModeratorComponent,
+    TabsComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +122,26 @@ import {CommonModule} from "@angular/common";
     MatInputModule,
     NgSelectModule,
     NgOptionHighlightModule,
-    CommonModule
+    CommonModule,
+    StoreModule.forRoot(reducers)
+  ],
+  exports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    HttpClientModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [
     {

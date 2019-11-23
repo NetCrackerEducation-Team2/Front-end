@@ -11,7 +11,6 @@ export class ListItemComponent implements OnInit {
   @Input() subtitle: string;
   @Input() url: string;
   @Input() btnText: string;
-  // tslint:disable-next-line:ban-types
   @Input() listItemCallback: Function;
   constructor() { }
 

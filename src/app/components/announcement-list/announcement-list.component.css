@@ -1,1 +1,10 @@
+.app-announcement-list{
+  width: auto;
+}
 
+.app-announcement-loading{
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: gray;
+}

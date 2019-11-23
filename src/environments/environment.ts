@@ -13,7 +13,7 @@ export const environment = {
   API_ANNOUNCEMENTS: BASE_URL + '/api/announcements/',
   AUTH_RECOVER_LINK_URL: 'http://localhost:8081/auth/recovery-link/',
   AUTH_RECOVER_PASS_URL: 'http://localhost:8081/auth/recover/',
-
+  API_BOOK: 'http://localhost:8081/api/book-by-id/',
   API_BOOKS: 'http://localhost:8081/api/books',
   API_BOOK_INFO: 'http://localhost:8081/api/book',
   API_BOOK_CREATE: BASE_URL + '/api/book',
@@ -26,11 +26,20 @@ export const environment = {
   API_AUTHORS_URL: {
     FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
   },
-  API_REVIEW: BASE_URL + '/api/book-review'
-
-
+  API_REVIEW: BASE_URL + '/api/book-review',
+  API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',
+  API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',
+  API_BOOK_OVERVIEWS_BY_BOOK: 'http://localhost:8081/api/book-overviews/by-book/',
+  API_CREATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/create',
+  API_DELETE_ADMIN_MODERATOR: 'http://localhost:8081/admins/delete',
+  API_GET_ADMIN_MODERATOR: 'http://localhost:8081/admins',
+  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'
   // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
+  // API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
   // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
+  // API_BOOK_TITLE_BY_ID: 'https://netcracker2-back-end.herokuapp.com/api/book-title/',
+  // API_PUBLISHED_BOOK_OVERVIEW: 'https://netcracker2-back-end.herokuapp.com/api/published-by-book/',
+  // API_BOOK_OVERVIEWS_BY_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-overviews/by-book/',
   // API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   // API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
   // API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',

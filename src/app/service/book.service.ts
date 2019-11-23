@@ -2,35 +2,40 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, of} from 'rxjs';
-import {LogService} from './logging/log.service';
 import {Book} from '../models/book';
 import {catchError} from 'rxjs/operators';
 import {BookFilteringParam} from '../models/book-filtering-param';
 import {Author} from '../models/author';
 import {Genre} from '../models/genre';
 import {StringFormatterService} from './string-formatter.service';
-import {placeholdersToParams} from "@angular/compiler/src/render3/view/i18n/util";
+import {ErrorHandlerService} from './logging/error-handler.service';
+import {Page} from '../models/page';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
+  private readonly bookUrl: string;
   private readonly booksUrl: string;
+  private readonly bookTitleByIdUrl: string;
   private readonly bookDownloadUrl: string;
   private readonly bookInfoUrl: string;
   private readonly bookCreateUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
-              private logger: LogService) {
+              private errorHandlerService: ErrorHandlerService) {
+    this.bookUrl = environment.API_BOOK;
     this.booksUrl = environment.API_BOOKS;
     this.bookInfoUrl = environment.API_BOOK_INFO;
     this.bookCreateUrl = environment.API_BOOK_CREATE;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
+    this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
+    this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
   }
 
-  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<any> {
+  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {
     let params = new HttpParams();
     let paramsString = '';
     if (filteringParams.get(BookFilteringParam.Title) != null) {
@@ -60,7 +65,21 @@ export class BookService {
     }
     return this.http.get(this.booksUrl + paramsString)
       .pipe(
-        catchError(this.handleError<any>('getBooks', []))
+        catchError(this.errorHandlerService.handleError<any>('getBooks', []))
+      );
+  }
+
+  getBook(id: number): Observable<Book> {
+    return this.http.get(this.bookUrl + id)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBook', []))
+      );
+  }
+
+  getBookTitleById(bookId: number): Observable<string> {
+    return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBookTitleById', []))
       );
   }
 
@@ -78,21 +97,15 @@ export class BookService {
   }
 
   getBookBySlug(slug: string): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.handleError<any>('getBookBySlug', [])));
+    return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.errorHandlerService.handleError<any>('getBookBySlug', [])));
   }
 
   getBookById(id: number): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/book-by-id/' + id).pipe(catchError(this.handleError<any>('getBookById', [])));
+    return this.http.get(this.bookInfoUrl + '/book-by-id/' + id)
+      .pipe(catchError(this.errorHandlerService.handleError<any>('getBookById', [])));
   }
 
   suggestBook(book) {
-    return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.handleError<any>('suggestBook', [])));
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
+    return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.errorHandlerService.handleError<any>('suggestBook', [])));
   }
 }
