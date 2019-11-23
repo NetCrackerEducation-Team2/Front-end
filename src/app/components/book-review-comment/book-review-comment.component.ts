@@ -36,6 +36,7 @@ export class BookReviewCommentComponent implements OnInit {
         if (reviewCommentList.length === 0) {
           this.ableToExpand = false;
         }
+        console.log('Size: ' + reviewCommentList.length);
         return reviewCommentList;
       }),
     ).subscribe((reviewComment: BookReviewComment) => {

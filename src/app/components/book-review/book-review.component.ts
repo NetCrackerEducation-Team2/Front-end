@@ -41,7 +41,6 @@ export class BookReviewComponent implements OnInit {
         if (reviewList.length === 0) {
           this.ableToExpand = false;
         }
-        console.log(reviewList.length);
         return reviewList;
       }),
     ).subscribe((review: BookReview) => {
