@@ -26,6 +26,9 @@ export const environment = {
   API_AUTHORS_URL: {
     FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
   },
+  API_BOOK_URL: {
+    FIND_BY_ID: BASE_URL + '/api/book-by-id/'
+  },
   API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',

@@ -1,0 +1,34 @@
+<div class="book-profile-container">
+  <h1 class="roboto-font">Book profile</h1>
+  <!--  FIXME Go back function does not work-->
+  <app-book-item [title]="book.title"
+                 [subtitle]="bookService.getBookSubtitle(book)"
+                 [photo]="book.photo"
+                 [authors]="bookService.getBookAuthorsString(book, 3)"
+                 [genres]="bookService.getBookGenresString(book, 3)"
+                 [overviewsUrl]="'/book-overviews/' + book.bookId"
+                 [listItemCallback]="goBackFunction"
+                 [overviewsBtnText]="'View Overviews'">
+  </app-book-item>
+  <h2 class="roboto-font">Send a review</h2>
+  <form *ngIf="isUser" class="submit-form" (ngSubmit)="sendReview()">
+    <div class="submit-row">
+      <span class="rating-span">Rating</span>
+      <div style="text-align:center">
+        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px"
+                     readonly="false"></star-rating>
+      </div>
+    </div>
+    <div class="submit-row">
+      <mat-form-field class="form-field">
+        <textarea type="text" name="announcement_body" id="announcement_body" matInput
+                  placeholder="Enter review content" rows="6"
+                  [(ngModel)]="review.description"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="nav-footer">
+      <button class="button" type="submit" mat-flat-button color="primary">Send</button>
+    </div>
+  </form>
+</div>

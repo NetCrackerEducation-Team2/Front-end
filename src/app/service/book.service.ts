@@ -22,6 +22,7 @@ export class BookService {
   private readonly bookDownloadUrl: string;
   private readonly bookInfoUrl: string;
   private readonly bookCreateUrl: string;
+  private readonly findBookByIdUrl: string;
 
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
@@ -33,6 +34,7 @@ export class BookService {
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
     this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
     this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
+    this.findBookByIdUrl = environment.API_BOOK_URL.FIND_BY_ID;
   }
 
   getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {
@@ -69,13 +71,6 @@ export class BookService {
       );
   }
 
-  getBook(id: number): Observable<Book> {
-    return this.http.get(this.bookUrl + id)
-      .pipe(
-        catchError(this.errorHandlerService.handleError<any>('getBook', []))
-      );
-  }
-
   getBookTitleById(bookId: number): Observable<string> {
     return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
       .pipe(
@@ -101,7 +96,7 @@ export class BookService {
   }
 
   getBookById(id: number): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/book-by-id/' + id)
+    return this.http.get(this.findBookByIdUrl + id)
       .pipe(catchError(this.errorHandlerService.handleError<any>('getBookById', [])));
   }
 

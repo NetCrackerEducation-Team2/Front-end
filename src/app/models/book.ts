@@ -10,7 +10,7 @@ export class Book {
   filePath: string;
   photoPath: string;
   photo: string;
-  publsihingHouse: string;
+  publishingHouse: string;
   rateSum: number;
   votersCount: number;
   creationTime: Date;

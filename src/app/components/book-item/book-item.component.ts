@@ -16,7 +16,7 @@ export class BookItemComponent extends ListItemComponent implements OnInit {
   @Input() genres: string;
   @Input() overviewsUrl: string;
   @Input() overviewsBtnText: string;
-  @Input() overviewsItemCallback: Function;
+  @Input() overviewsItemCallback: () => void;
 
   photoSource: SafeUrl;
   bookSlug: string;
