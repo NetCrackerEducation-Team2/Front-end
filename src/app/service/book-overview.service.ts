@@ -25,15 +25,15 @@ export class BookOverviewService {
 
   getBookOverviewsByBook(bookId: number, page: number, pageSize: number): Observable<Page<BookOverview>>{
     let params = new HttpParams();
-    let paramsString: string = "";
-    if(page != null){
+    let paramsString = '';
+    if (page != null) {
       params = params.set('page', page.toString());
     }
-    if(pageSize != null){
+    if (pageSize != null) {
       params = params.set('pageSize', pageSize.toString());
     }
-    if(params.keys().length > 0){
-      paramsString = "?" + params.toString();
+    if (params.keys().length > 0) {
+      paramsString = '?' + params.toString();
     }
     return this.http.get(this.bookOverviewsByBookUrl + bookId + paramsString)
       .pipe(
@@ -41,7 +41,7 @@ export class BookOverviewService {
       );
   }
 
-  getPublishedBookOverview(bookId: number): Observable<BookOverview>{
+  getPublishedBookOverview(bookId: number): Observable<BookOverview> {
     return this.http.get(this.publishedBookOverviewUrl + bookId)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getPublishedBookOverview', []))

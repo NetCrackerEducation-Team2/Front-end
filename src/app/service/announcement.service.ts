@@ -4,22 +4,24 @@ import { ANNOUNCEMENTS } from '../mocks/mock-announcement';
 import { Observable, of  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
 
-  private readonly announcementsUrl:string;
+  private readonly announcementsUrl: string;
+  private readonly publishedAnnouncementsUrl: string;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) {
-    //this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
+    // this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
     this.announcementsUrl = environment.API_ANNOUNCEMENTS;
+    this.publishedAnnouncementsUrl = environment.API_PUBLISHED_ANNOUNCEMENTS;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {
@@ -27,15 +29,15 @@ export class AnnouncementService {
   //  return of(ANNOUNCEMENTS);
     // Get from backend
     let params = new HttpParams();
-    let paramsString: string = "";
-    if(page != null){
+    let paramsString = '';
+    if (page != null) {
       params = params.set('page', page.toString());
     }
-    if(pageSize != null){
+    if (pageSize != null) {
       params = params.set('pageSize', pageSize.toString());
     }
-    if(params.keys().length > 0){
-      paramsString = "?" + params.toString();
+    if (params.keys().length > 0) {
+      paramsString = '?' + params.toString();
     }
     return this.http.get(this.announcementsUrl + paramsString)
     .pipe(
@@ -45,14 +47,13 @@ export class AnnouncementService {
 
   getAnnouncement(id: number): Observable<Announcement> {
     // Get from mock
-    //return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
-    //Return from backend
+    // return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
+    // Return from backend
     return this.http.get(this.announcementsUrl + id)
     .pipe(
       catchError(this.handleError<any>('getAnnouncements', []))
     );
   }
-
 
   /*
   Handle Http operation that failed.
@@ -74,4 +75,22 @@ export class AnnouncementService {
     };
   }
 
+  getPublishedAnnouncements(page: number, pageSize: number): Observable<any> {
+    let params = new HttpParams();
+    let paramsString = '';
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (pageSize != null) {
+      params = params.set('pageSize', pageSize.toString());
+    }
+    if (params.keys().length > 0) {
+      paramsString = '?' + params.toString();
+    }
+    console.log(this.publishedAnnouncementsUrl + paramsString);
+    return this.http.get(this.publishedAnnouncementsUrl + paramsString)
+      .pipe(
+        catchError(this.handleError<any>('getPublishAnnouncements', []))
+      );
+  }
 }
