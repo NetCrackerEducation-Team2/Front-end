@@ -1,10 +1,22 @@
-
-<app-search-books></app-search-books>
-<div style="display:flex;justify-content:center;">
-<app-book-list></app-book-list>
+<div class="app-announcement-list">
+  <div *ngIf="selectedPage.array">
+    <div *ngFor="let announcement of selectedPage.array">
+      <div *ngIf="announcement.published" >
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(announcement.bookId)'>publish</button>
+      </div>
+      <div *ngIf="!announcement.published">
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button color="primary"  (click)='publish(announcement.bookId)'>publish</button>
+      </div>
+      <app-announcement-item [announcement] = "announcement"></app-announcement-item>
+    </div>
+  </div>
+  <mat-paginator [pageSize]="selectedPage.pageSize"
+                 [length]="selectedPage.countPages * selectedPage.pageSize"
+                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+  </mat-paginator>
 </div>
-<div class="buttons">
-  <button type="button" style="width: auto;" mat-raised-button	routerLink="/create-announcement">Add announcement</button>
 
-</div>
+
 
