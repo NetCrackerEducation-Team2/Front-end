@@ -8,9 +8,7 @@ export const APP_ACTION = {
 export class LOGIN implements Action {
 
   readonly type: any = APP_ACTION.APP_LOGIN;
-  readonly payload: string[];
-  constructor(public strArr: string[]) {
-    this.payload = strArr;
+  constructor(public payload: any[]) {
   }
 }
 
@@ -19,7 +17,6 @@ export class LOGOUT implements Action {
 
   readonly type: any = APP_ACTION.APP_LOGOUT;
   constructor() {
-
   }
 
 }

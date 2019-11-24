@@ -24,6 +24,9 @@ import {CreateAnnouncementComponent} from './components/create-announcement/crea
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
+import {EditAdminModeratorComponent} from './components/edit-admin-moderator/edit-admin-moderator.component';
+import {DeleteAdminModeratorComponent} from './components/delete-admin-moderator/delete-admin-moderator.component';
+
 
 const routes: Routes = [
   {
@@ -103,8 +106,8 @@ const routes: Routes = [
      component: AdminComponent,
      children: [
         {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
-        // {path: 'edit-moderator', component: EditModeratorComponent},
-
+        {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
+        {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
      ]
   },
   {

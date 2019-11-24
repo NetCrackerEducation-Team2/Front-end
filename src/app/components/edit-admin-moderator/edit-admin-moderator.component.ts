@@ -1,48 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminModeratorService} from '../../service/admin-moderator.service';
-import { take } from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../state/app.state';
 import * as constants from '../../state/constants';
 
+
 @Component({
-  selector: 'app-create-admin-moderator',
-  templateUrl: './create-admin-moderator.component.html',
-  styleUrls: ['./create-admin-moderator.component.css']
+  selector: 'app-edit-admin-moderator',
+  templateUrl: './edit-admin-moderator.component.html',
+  styleUrls: ['./edit-admin-moderator.component.css']
 })
-export class CreateAdminModeratorComponent implements OnInit {
-  adminRoles = constants.adminRoles;
-  superAdminRoles = constants.superAdminRoles;
+export class EditAdminModeratorComponent implements OnInit {
   user = {fullName: '', email: '', password: '', photo_path: 'asdasd', roles: []};
-  roles: any[];
+  roles = [constants.user, ...constants.adminRoles];
   repeatPassword: '';
   isError = false;
   message: string;
-  isCreated: boolean;
-  isDownloading = true;
+
 
   constructor(private admModerService: AdminModeratorService, private store: Store<AppState>) {
   }
 
+
   ngOnInit() {
-    this.store.select('appReducer').
-    pipe(take(1)).
-    subscribe(state => { if (state.roles.includes(constants.superAdmin)) { this.roles = this.superAdminRoles; }
-                         else if (state.roles.includes(constants.admin)) { this.roles = this.adminRoles; }  } );
+    console.log('edit-admin', ...this.roles);
   }
 
   checkPasswords(): boolean {
     return this.repeatPassword === this.user.password;
   }
 
-  createModerAdmin(): void {
+  editUser(): void {
     this.admModerService.
-    createAdminModer(this.user).pipe(take(1)).
+    updateAdminModer(this.user).pipe(take(1)).
     subscribe();
   }
 
 
-  change(event) {
+  change(event): void {
        console.log(event.source.selected, event.source.value);
        if (event.source.selected) {
         this.user.roles.push({name: event.source.value});
@@ -53,3 +49,5 @@ export class CreateAdminModeratorComponent implements OnInit {
   }
 
 }
+
+

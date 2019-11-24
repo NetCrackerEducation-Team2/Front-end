@@ -1,59 +1,81 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {AppState} from '../../state/app.state';
-
+import * as constants from '../../state/constants';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.css']
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent implements OnInit, OnDestroy {
   navLinks: any[];
   activeLinkIndex: number;
-
+  storeSubscription: any;
+  routerEventsSubscription: any;
   constructor(private router: Router, private store: Store<AppState>) {
   }
+
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
+    this.initSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.storeSubscription.unsubscribe();
+
+  }
+
+  initSubscriptions(): void {
+
+    this.routerEventsSubscription = this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
     });
+    this.storeSubscription = this.store.select('appReducer').subscribe(state => {
+       this.updateRolesState(state);
+       this.checkNavLinks(state);
+    });
 
-    this.store.select('appReducer').subscribe(state => {
-       console.log('asd');
-       console.log(state.roles);
-       for (const role of state.roles) {
-        switch (role) {
-          case 'admin':
-            state.accessMap.set('admin', true);
-            console.log(state.accessMap.get(role));
-            break;
-          case 'superadmin':
-            state.accessMap.set('superadmin', true);
-            break;
-          case 'moderatorForBooks':
-            state.accessMap.set('moderatorForBooks', true);
-            break;
-          case 'moderatorForReviews':
-            state.accessMap.set('moderatorForReviews', true);
-            break;
-          case 'moderatorForAnnouncements':
-            state.accessMap.set('moderatorForAnnouncements', true);
-            break;
-        }
-       }
-       if (state.roles.length < 1) {
-        state.accessMap.set('admin', false);
-        state.accessMap.set('superadmin', false);
-        state.accessMap.set('moderatorForBooks', false);
-        state.accessMap.set('moderatorForReviews', false);
-        state.accessMap.set('moderatorForAnnouncements', false);
-       }
-       state.accessMap.set('user', state.login);
-       console.log(state.accessMap.get('user'), 'user app');
-       console.log(state.accessMap.get('admin'), 'admin app');
+  }
 
-       this.navLinks = [
+
+  updateRolesState(state) {
+
+    for (const role of state.roles) {
+      this.accessMapChange(state, role);
+    }
+    if (state.roles.length < 1) {
+     state.accessMap.set(constants.admin, false);
+     state.accessMap.set(constants.superAdmin, false);
+     state.accessMap.set(constants.overviewModerator, false);
+     state.accessMap.set(constants.reviewModerator, false);
+     state.accessMap.set(constants.announcementModerator, false);
+    }
+    state.accessMap.set(constants.user, state.login);
+
+  }
+
+  accessMapChange(state, role) {
+    switch (role) {
+      case constants.admin:
+        state.accessMap.set(constants.admin, true);
+        break;
+      case constants.superAdmin:
+        state.accessMap.set(constants.superAdmin, true);
+        break;
+      case constants.overviewModerator:
+        state.accessMap.set(constants.overviewModerator, true);
+        break;
+      case constants.reviewModerator:
+        state.accessMap.set(constants.reviewModerator, true);
+        break;
+      case constants.announcementModerator:
+        state.accessMap.set(constants.announcementModerator, true);
+        break;
+    }
+
+}
+  checkNavLinks(state) {
+    this.navLinks = [
       {
           label: 'Library',
           link: './',
@@ -68,38 +90,38 @@ export class TabsComponent implements OnInit {
           label: 'Profile',
           link: 'profile/:userId',
           index: 2,
-          access: state.accessMap.get('user')
+          access: state.accessMap.get(constants.user)
       }, {
           label: 'Manage Announcements ',
           link: './announcements-management',
           index: 3,
-          access: state.accessMap.get('moderatorForAnnouncements') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get(constants.announcementModerator) ||
+                  state.accessMap.get(constants.admin) ||
+                  state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Manage Reviews',
           link: './reviews-management',
           index: 4,
-          access: state.accessMap.get('moderatorForReviews') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get(constants.reviewModerator) ||
+                  state.accessMap.get(constants.admin) ||
+                  state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Manage Books',
           link: './books-management',
           index: 5,
-          access: state.accessMap.get('moderatorForBooks') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get(constants.overviewModerator) ||
+                  state.accessMap.get(constants.admin) ||
+                  state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Admin',
           link: './admin',
           index: 6,
-          access: state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get(constants.admin) ||
+                  state.accessMap.get(constants.superAdmin)
       }
   ];
 
-
-    });
-
-
-
-
-
-      }
+  }
 
 
 

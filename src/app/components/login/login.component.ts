@@ -49,10 +49,7 @@ export class LoginComponent implements OnInit {
           this.isError = false;
           const a = JSON.parse(JSON.stringify((jwt_decode(resp.token))));
         //  this.store.dispatch({type: APP_ACTION.APP_LOGIN }); add supp func
-          for (const s of a.rol) {
-            this.store.dispatch(new LOGIN(s));
-          }
-         // this.store.select('appReducer').subscribe(reducer => {console.log("login",reducer.login);});
+          this.store.dispatch(new LOGIN(a.rol));
         },
         (error: HttpErrorResponse) => {
           this.isError = true;

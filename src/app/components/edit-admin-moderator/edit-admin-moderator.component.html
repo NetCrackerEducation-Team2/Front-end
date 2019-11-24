@@ -3,6 +3,14 @@
     <form class="submit-form" #regForm="ngForm" novalidate >
 
 
+
+    <div class="submit-row">
+      <label class="label" for="fullName">Enter id</label>
+      <mat-form-field class="form-field">
+        <input required name="UserId" #fullName="ngModel" type="text" id="" matInput
+                placeholder="id" [(ngModel)]="user.userId">
+      </mat-form-field>
+    </div>
     <div class="submit-row">
         <label class="label" for="fullName">Choose role</label>
         <mat-form-field class="form-field">
@@ -47,11 +55,14 @@
         </mat-form-field>
       </div>
 
+    </form>
+
       <mat-divider></mat-divider>
 
 
       <div class="nav-footer">
         <div class="messages">
+          <span *ngIf="isDownloading">Please wait...</span>
           <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
           <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
           <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
@@ -67,10 +78,9 @@
             {{message}}
           </span>
         </div>
-        <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='createModerAdmin()'>Create role</button>
+        <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='editUser()'>Edit user</button>
       </div>
 
-    </form>
 
 
 

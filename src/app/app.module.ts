@@ -53,6 +53,8 @@ import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
 import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { EditAdminModeratorComponent } from './components/edit-admin-moderator/edit-admin-moderator.component';
+import { DeleteAdminModeratorComponent } from './components/delete-admin-moderator/delete-admin-moderator.component';
 
 
 @NgModule({
@@ -90,6 +92,8 @@ import { TabsComponent } from './components/tabs/tabs.component';
     OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    EditAdminModeratorComponent,
+    DeleteAdminModeratorComponent,
   ],
   imports: [
     BrowserModule,

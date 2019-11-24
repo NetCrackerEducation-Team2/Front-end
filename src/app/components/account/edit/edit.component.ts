@@ -25,6 +25,7 @@ export class EditComponent implements OnInit {
     email: null,
     createdAt: null,
     photoPath: null,
+    roles:{name: ''},
     optionArr: [
       {title: 'Book adding', subscribed: false},
       {title: 'End of reading', subscribed: false},
