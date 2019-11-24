@@ -24,34 +24,34 @@ export class TabsComponent implements OnInit {
        console.log(state.roles);
        for (const role of state.roles) {
         switch (role) {
-          case 'admin':
-            state.accessMap.set('admin', true);
+          case 'ADMIN':
+            state.accessMap.set('ADMIN', true);
             console.log(state.accessMap.get(role));
             break;
-          case 'superadmin':
-            state.accessMap.set('superadmin', true);
+          case 'SUPER_ADMIN':
+            state.accessMap.set('SUPER_ADMIN', true);
             break;
-          case 'moderatorForBooks':
-            state.accessMap.set('moderatorForBooks', true);
+          case 'OVERVIEW_MODERATOR':
+            state.accessMap.set('OVERVIEW_MODERATOR', true);
             break;
-          case 'moderatorForReviews':
-            state.accessMap.set('moderatorForReviews', true);
+          case 'REVIEW_MODERATOR':
+            state.accessMap.set('REVIEW_MODERATOR', true);
             break;
-          case 'moderatorForAnnouncements':
-            state.accessMap.set('moderatorForAnnouncements', true);
+          case 'ANNOUNCEMENT_MODERATOR':
+            state.accessMap.set('ANNOUNCEMENT_MODERATOR', true);
             break;
         }
        }
        if (state.roles.length < 1) {
-        state.accessMap.set('admin', false);
-        state.accessMap.set('superadmin', false);
-        state.accessMap.set('moderatorForBooks', false);
-        state.accessMap.set('moderatorForReviews', false);
-        state.accessMap.set('moderatorForAnnouncements', false);
+        state.accessMap.set('ADMIN', false);
+        state.accessMap.set('SUPER_ADMIN', false);
+        state.accessMap.set('OVERVIEW_MODERATOR', false);
+        state.accessMap.set('REVIEW_MODERATOR', false);
+        state.accessMap.set('ANNOUNCEMENT_MODERATOR', false);
        }
        state.accessMap.set('user', state.login);
        console.log(state.accessMap.get('user'), 'user app');
-       console.log(state.accessMap.get('admin'), 'admin app');
+       console.log(state.accessMap.get('ADMIN'), 'admin app');
 
        this.navLinks = [
       {
@@ -73,22 +73,22 @@ export class TabsComponent implements OnInit {
           label: 'Manage Announcements ',
           link: './announcements-management',
           index: 3,
-          access: state.accessMap.get('moderatorForAnnouncements') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get('ANNOUNCEMENT_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
       }, {
           label: 'Manage Reviews',
           link: './reviews-management',
           index: 4,
-          access: state.accessMap.get('moderatorForReviews') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get('REVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
       }, {
-          label: 'Manage Books',
-          link: './books-management',
+          label: 'Manage Overviews',
+          link: './overviews-management',
           index: 5,
-          access: state.accessMap.get('moderatorForBooks') || state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get('OVERVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
       }, {
           label: 'Admin',
           link: './admin',
           index: 6,
-          access: state.accessMap.get('admin') || state.accessMap.get('superadmin')
+          access: state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
       }
   ];
 

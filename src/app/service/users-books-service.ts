@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LogService} from './logging/log.service';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Page} from '../models/page';
@@ -13,8 +12,7 @@ export class UsersBooksService {
 
   usersBookUrl: string;
 
-  constructor(private http: HttpClient,
-              private logger: LogService) {
+  constructor(private http: HttpClient) {
     this.usersBookUrl = environment.API_USERS_BOOKS;
   }
 

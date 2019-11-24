@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {LogService} from './logging/log.service';
 import {environment} from '../../environments/environment';
 import {catchError} from 'rxjs/operators';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class ReviewService {
   readonly reviewUrl: string;
 
   constructor(private http: HttpClient,
-              private logger: LogService) {
+              private errorHandlerService: ErrorHandlerService) {
     this.reviewUrl = environment.API_REVIEW;
   }
 
@@ -30,13 +29,8 @@ export class ReviewService {
       bookId,
       rating,
       description
-    }).pipe(catchError(this.handleError<any>('createReview', [])));
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
+    }).pipe(
+      catchError(this.errorHandlerService.handleError<any>('searchGenres', []))
+    );
   }
 }
