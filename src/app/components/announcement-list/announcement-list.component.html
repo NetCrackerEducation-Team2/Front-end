@@ -1,11 +1,20 @@
-<div class="app-announcement-list">
-  <div *ngIf="selectedPage.array">
-    <div *ngFor="let announcement of selectedPage.array">
-      <app-announcement-item [announcement] = "announcement">
-      </app-announcement-item>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav position="end" mode="side" opened style="width: 20%">
+    <div align="center" *ngIf="isLogged()">
+      <button type="submit" mat-flat-button color="primary" [routerLink]="['/announcements/add']">Add</button>
     </div>
-  </div>
-  <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
-                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-  </mat-paginator>
-</div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="app-announcement-list">
+      <div *ngIf="selectedPage.array">
+        <div *ngFor="let announcement of selectedPage.array">
+          <app-announcement-item [announcement] = "announcement">
+          </app-announcement-item>
+        </div>
+      </div>
+      <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                     [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

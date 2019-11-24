@@ -1,10 +1,11 @@
+export const BASE_URL = 'http://localhost:8081'
+// export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com'
 export const environment = {
   production: true,
-  
   API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
   API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
-  API_GENRES:  'https://netcracker2-back-end.herokuapp.com/api/genres',
+  API_GENRES: 'https://netcracker2-back-end.herokuapp.com/api/genres',
   API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
   API_BOOK_TITLE_BY_ID: 'https://netcracker2-back-end.herokuapp.com/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'https://netcracker2-back-end.herokuapp.com/api/published-by-book/',
