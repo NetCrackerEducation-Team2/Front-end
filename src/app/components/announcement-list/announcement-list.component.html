@@ -1,11 +1,11 @@
 <div class="app-announcement-list">
-  <div *ngIf="selectedPage.array">
-    <div *ngFor="let announcement of selectedPage.array">
-      <app-announcement-item [announcement] = "announcement">
-      </app-announcement-item>
+  <div *ngIf="selectedPagePublish.array">
+    <div *ngFor="let announcement of selectedPagePublish.array">
+        <app-announcement-item [announcement] = "announcement">
+        </app-announcement-item>
     </div>
   </div>
-  <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
-                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-  </mat-paginator>
+    <mat-paginator [pageSize]="selectedPagePublish.pageSize" [length]="selectedPagePublish.countPages * selectedPagePublish.pageSize"
+                   [pageIndex]="selectedPagePublish.currentPage" (page)="handlePage($event)">
+    </mat-paginator>
 </div>

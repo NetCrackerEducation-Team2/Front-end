@@ -16,7 +16,7 @@ import {RecoverComponent} from './components/recover-password/recover/recover.co
 import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
-import {BooksManagementComponent } from './components/books-management/books-management.component';
+import {OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
 import {ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
 import {AdminComponent } from './components/admin/admin.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
@@ -87,8 +87,8 @@ const routes: Routes = [
     component: AnnouncementsManagementComponent
   },
   {
-    path: 'books-management',
-    component: BooksManagementComponent
+    path: 'overviews-management',
+    component: OverviewsManagementComponent
   },
   {
     path: 'reviews-management',

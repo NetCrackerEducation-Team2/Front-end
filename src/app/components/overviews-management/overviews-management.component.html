@@ -1,12 +1,23 @@
-
-
-<app-search-books></app-search-books>
-<div style="display:flex;justify-content:center;">
-<app-book-list></app-book-list>
+<div class="app-overviews-list">
+  <div *ngIf="selectedPage.array">
+    <div *ngFor="let overview of selectedPage.array">
+      <div *ngIf="overview.published" >
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(overview.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(overview.bookId)'>publish</button>
+      </div>
+      <div *ngIf="!overview.published">
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(overview.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button color="primary"  (click)='publish(overview.bookId)'>publish</button>
+      </div>
+      <app-overview-admins-item [bookOverview]="overview"></app-overview-admins-item>
+    </div>
+  </div>
+  <mat-paginator [pageSize]="selectedPage.pageSize"
+                 [length]="selectedPage.countPages * selectedPage.pageSize"
+                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+  </mat-paginator>
 </div>
-<div class="buttons">
-  <button type="button" style="width: auto;" mat-raised-button	routerLink="/create-book">Add book</button>
 
-</div>
+
 
 
