@@ -39,7 +39,11 @@ export class AccountService {
   getToken() {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
-      return JSON.parse(localStorage.getItem('currentUser')).token;
+      try {
+        return JSON.parse(localStorage.getItem('currentUser')).token;
+      } catch (e) {
+        return null;
+      }
     } else {
       return null;
     }

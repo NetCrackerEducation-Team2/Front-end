@@ -1,16 +1,27 @@
-<ng-container *ngIf="!selectedPage.array; else loaded">
-  <div class="loading">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-container>
-<ng-template #loaded>
-  <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
-    <app-list-item *ngFor="let bookOverview of selectedPage.array" [listItemInfo]="bookOverview"></app-list-item>
-    <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
-                   [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-    </mat-paginator>
-  </ng-container>
-  <ng-template #noresults>
-    <p class="no-result">No announcements yet</p>
-  </ng-template>
-</ng-template>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav position="end" mode="side" opened style="width: 20%">
+    <div align="center" *ngIf="isLogged()">
+      <button type="submit" mat-flat-button color="primary" [routerLink]="['/announcements/add']">Add</button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-container *ngIf="!selectedPage.array; else loaded">
+      <div class="loading">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+        <div class="app-announcement-list">
+          <app-list-item *ngFor="let bookOverview of selectedPage.array" [listItemInfo]="bookOverview"></app-list-item>
+          <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                         [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+          </mat-paginator>
+        </div>
+      </ng-container>
+      <ng-template #noresults>
+        <p class="no-results">No announcements yet</p>
+      </ng-template>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

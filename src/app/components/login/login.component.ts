@@ -10,7 +10,7 @@ import { LOGIN} from '../../state/app.action';
 
 
 @Component({
-  selector: 'app-login',
+  selector: ' app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
