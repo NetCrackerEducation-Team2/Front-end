@@ -13,7 +13,9 @@ import {BookReviewComment} from '../../models/book-review-comment';
 })
 export class BookReviewCommentComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  expandCount = 10;
+  pageSize = 1;
+  page: number;
+
   @Input() reviewId: number;
   reviewComments: BookReviewComment[];
   ableToExpand: boolean;
@@ -22,13 +24,14 @@ export class BookReviewCommentComponent implements OnInit {
                private accountService: AccountService ) { }
 
   ngOnInit() {
+    this.page = 1;
     this.reviewComments = [];
     this.ableToExpand = true;
-    this.getReviewComment(1, this.expandCount);
+    this.getReviewComment();
   }
 
-  getReviewComment(from: number, count: number): void {
-    this.bookReviewCommentService.getBookReviewComments(this.reviewId, from, count).pipe(
+  getReviewComment(): void {
+    this.bookReviewCommentService.getBookReviewComments(this.reviewId, this.page, this.pageSize).pipe(
       map((respPage: Page<BookReviewComment>) => {
         return respPage.array;
       }),
@@ -51,6 +54,7 @@ export class BookReviewCommentComponent implements OnInit {
     });
   }
   expandReviewsComments(): void {
-    this.getReviewComment(this.reviewComments.length + 1, this.expandCount);
+    this.page += 1;
+    this.getReviewComment();
   }
 }

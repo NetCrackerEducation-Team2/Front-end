@@ -13,7 +13,8 @@ import {map, flatMap} from 'rxjs/operators';
 })
 export class BookReviewComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  expandCount = 10;
+  pageSize = 5;
+  page: number;
 
   @Input() bookId: number;
   reviews: BookReview[];
@@ -25,20 +26,21 @@ export class BookReviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.page = 1;
     this.reviews = [];
     this.ableToExpand = true;
-    this.getReviews(1, this.expandCount);
+    this.getReviews();
   }
 
-  getReviews(from: number, count: number): void {
-    this.prepareComments(this.reviews.length + this.expandCount);
+  getReviews(): void {
+    this.prepareComments(this.reviews.length + this.pageSize);
 
-    this.bookReviewService.getBookReview(this.bookId, from, count).pipe(
+    this.bookReviewService.getBookReview(this.bookId, this.page, this.pageSize).pipe(
       map((respPage: Page<BookReview>) => {
         return respPage.array;
       }),
       flatMap((reviewList: BookReview[]) => {
-        if (reviewList.length === 0) {
+        if (reviewList.length < this.pageSize) {
           this.ableToExpand = false;
         }
         return reviewList;
@@ -55,7 +57,8 @@ export class BookReviewComponent implements OnInit {
     });
   }
   expandReviews(): void {
-    this.getReviews(this.reviews.length + 1, this.expandCount);
+    this.page += 1;
+    this.getReviews();
   }
 
   prepareComments(count: number): void {
