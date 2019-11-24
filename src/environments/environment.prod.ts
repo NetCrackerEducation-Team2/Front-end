@@ -14,6 +14,7 @@ export const environment = {
   API_AUTHORS_URL: {
     FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
   },
+  API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   API_GENRES: 'https://netcracker2-back-end.herokuapp.com/api/genres',
   API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',
