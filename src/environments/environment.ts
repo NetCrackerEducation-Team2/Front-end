@@ -6,6 +6,9 @@ import {BASE_URL} from './environment.prod';
 
 export const environment = {
   production: false,
+  // AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
+  // AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
+  // AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
   AUTH_LOGIN_URL: BASE_URL + '/auth/login',
   AUTH_REGISTER_URL: BASE_URL + '/auth/register',
   AUTH_ACTIVATION_URL: BASE_URL + '/auth/activate/',

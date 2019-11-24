@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {LogService} from './logging/log.service';
 import {environment} from '../../environments/environment';
 import {Observable, of} from 'rxjs';
 import {Author} from '../models/author';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {ErrorHandlerService} from './logging/error-handler.service';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'

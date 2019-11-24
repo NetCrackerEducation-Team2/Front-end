@@ -1,23 +1,13 @@
-export class BookOverview {
+import {Book} from './book';
+import {User} from './user';
+
+export class BookOverview{
   bookOverviewId: number;
   description: string;
   bookId: number;
+  book: Book;
   userId: number;
+  user: User;
   published: boolean;
   creationTime: Date;
-  creatTime: string;
-
-  public constructor(bookOverviewId: number,
-                     description: string,
-                     bookId: number,
-                     published: boolean,
-                     creationTime: Date,
-                     creatTime: string) {
-    this.bookOverviewId = bookOverviewId;
-    this.description = description;
-    this.bookId = bookId;
-    this.published = published;
-    this.creationTime = creationTime;
-    this.creatTime = creatTime;
-  }
 }

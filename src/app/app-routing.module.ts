@@ -12,7 +12,6 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
-import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';

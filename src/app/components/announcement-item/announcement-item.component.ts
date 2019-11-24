@@ -29,11 +29,11 @@ export class AnnouncementItemComponent implements OnInit {
     this.theViewItemCallback = this.viewItem.bind(this);
   }
 
-  /*getAnnouncement(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.announcementService.getAnnouncement(id)
-      .subscribe(announcement => this.announcement = announcement);
-  }*/
+  //  getAnnouncement(): void {
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   this.announcementService.getAnnouncement(id)
+  //     .subscribe(announcement => this.announcement = announcement);
+  // }
 
   public goBack(): void {
     this.location.back();

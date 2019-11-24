@@ -14,13 +14,12 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BookListComponent} from './components/book-list/book-list.component';
-import {BookItemComponent} from './components/book-item/book-item.component';
 import {SearchBooksComponent} from './components/search-books/search-books.component';
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {LoginComponent} from './components/login/login.component';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -29,6 +28,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
 import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
 import { CreateBookComponent } from './components/create-book/create-book.component';
@@ -38,7 +39,6 @@ import {AnnouncementItemComponent} from './components/announcement-item/announce
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
-import {BooksManagementComponent} from './components/books-management/books-management.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
@@ -58,12 +58,11 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
-import {OverviewItemComponent} from './components/overview-item/overview-item.component';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
-import {BookProfileComponent} from "./components/book-profile/book-profile.component";
+import {BookProfileComponent} from './components/book-profile/book-profile.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +70,6 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     HeaderComponent,
     FooterComponent,
     BookListComponent,
-    BookItemComponent,
     SearchBooksComponent,
     HomeComponent,
     NotFoundComponent,
@@ -98,7 +96,6 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     AnnouncementsManagementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
     ReviewItemComponent,
@@ -129,6 +126,9 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     RatingModule,
     MatInputModule,
     NgSelectModule,
@@ -153,6 +153,7 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     MatPaginatorModule,
     MatIconModule,
     MatTabsModule,
+    ReactiveFormsModule,
     AnnouncementListComponent
   ],
   providers: [

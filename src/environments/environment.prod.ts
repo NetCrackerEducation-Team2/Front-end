@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com'
+export const BASE_URL = 'https://netcracker2-back-end.herokuapp.com';
 export const environment = {
   production: true,
   API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
