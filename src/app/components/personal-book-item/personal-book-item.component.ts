@@ -7,16 +7,12 @@ import {AccountService} from '../../service/account.service';
   styleUrls: ['./personal-book-item.component.css']
 })
 export class PersonalBookItemComponent implements OnInit {
-  userId = 1007;
 
-  constructor( private accountService: AccountService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
 
   }
 
-  loadList(): void {
 
-  }
 }

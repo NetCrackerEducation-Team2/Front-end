@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-personal-booklist',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-booklist.component.css']
 })
 export class PersonalBooklistComponent implements OnInit {
+  userId = 1007;
+  page = 1;
+  pageSize = 5;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit() {
   }
 
+  loadList(): void {
+
+  }
 }

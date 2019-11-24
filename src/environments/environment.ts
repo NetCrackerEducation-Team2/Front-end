@@ -36,7 +36,10 @@ export const environment = {
   API_CREATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/create',
   API_DELETE_ADMIN_MODERATOR: 'http://localhost:8081/admins/delete',
   API_GET_ADMIN_MODERATOR: 'http://localhost:8081/admins',
-  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'
+  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update',
+
+  API_USERS_BOOKS: 'http://localhost:8081/' + '/api/users-book',
+
   // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
   // API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
   // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
