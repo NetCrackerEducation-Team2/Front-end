@@ -13,7 +13,7 @@ import {BookReviewComment} from '../../models/book-review-comment';
 })
 export class BookReviewCommentComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  pageSize = 1;
+  pageSize = 5;
   page: number;
 
   @Input() reviewId: number;

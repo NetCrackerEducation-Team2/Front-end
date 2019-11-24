@@ -15,7 +15,7 @@ export class AuthorService {
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.authorsUrl = environment.SERVER_DOMAIN + environment.SERVER_DOMAIN + environment.API_AUTHORS;
+    this.authorsUrl = environment.SERVER_DOMAIN + environment.API_AUTHORS;
   }
 
   getAuthors(): Observable<Author[]> {
