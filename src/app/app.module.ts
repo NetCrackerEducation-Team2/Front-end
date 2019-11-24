@@ -14,12 +14,11 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BookListComponent} from './components/book-list/book-list.component';
-import {BookItemComponent} from './components/book-item/book-item.component';
 import {SearchBooksComponent} from './components/search-books/search-books.component';
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {LoginComponent} from './components/login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -28,6 +27,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { AchievementsComponent } from './components/account/achievements/achievements.component';
 import { AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import { AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
@@ -48,7 +49,6 @@ import { BookOverviewComponent } from './components/book-overview/book-overview.
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { RecoverComponent } from './components/recover-password/recover/recover.component';
 import { OverviewListComponent } from './components/overview-list/overview-list.component';
-import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
 import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
@@ -61,7 +61,6 @@ import { TabsComponent } from './components/tabs/tabs.component';
     HeaderComponent,
     FooterComponent,
     BookListComponent,
-    BookItemComponent,
     SearchBooksComponent,
     HomeComponent,
     NotFoundComponent,
@@ -87,7 +86,6 @@ import { TabsComponent } from './components/tabs/tabs.component';
     CreateAnnouncementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
   ],
@@ -112,6 +110,9 @@ import { TabsComponent } from './components/tabs/tabs.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     StoreModule.forRoot( reducers)
   ],
   exports: [
@@ -130,7 +131,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
     MatCheckboxModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [
     {

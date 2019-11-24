@@ -4,7 +4,7 @@ import {Genre} from "../models/genre";
 import {catchError} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {ErrorHandlerService} from "./logging/error-handler.service";
+import {ErrorHandlerService} from "./error-handler.service";
 
 @Injectable({
   providedIn: 'root'

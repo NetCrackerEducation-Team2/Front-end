@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BookService} from "./book.service";
 import {BookOverview} from "../models/book-overview";
 import {Observable} from "rxjs";
-import {ErrorHandlerService} from "./logging/error-handler.service";
+import {ErrorHandlerService} from "./error-handler.service";
 import {catchError} from "rxjs/operators";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Page} from "../models/page";

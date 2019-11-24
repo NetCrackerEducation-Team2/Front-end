@@ -8,7 +8,7 @@ import {BookFilteringParam} from "../models/book-filtering-param";
 import {Author} from "../models/author";
 import {Genre} from "../models/genre";
 import {StringFormatterService} from "./string-formatter.service";
-import {ErrorHandlerService} from "./logging/error-handler.service";
+import {ErrorHandlerService} from "./error-handler.service";
 import {Page} from "../models/page";
 
 @Injectable({
@@ -76,18 +76,5 @@ export class BookService {
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getBookTitleById', []))
       );
-  }
-
-  getBookSubtitle(book: Book): string{
-    let authors = this.getBookAuthorsString(book, 1);
-    return "by " + (authors == "" ? "unknown" : authors);
-  }
-
-  getBookGenresString(book: Book, count: number): string{
-    return this.stringFormatterService.arrayPrettyFormat(book.genres.map(genre => genre.name), count);
-  }
-
-  getBookAuthorsString(book: Book, count: number): string{
-    return this.stringFormatterService.arrayPrettyFormat(book.authors.map(author => author.fullName), count);
   }
 }

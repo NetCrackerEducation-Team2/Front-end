@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Announcement } from '../models/announcement';
 import { ANNOUNCEMENTS } from '../mocks/mock-announcement';
 import { Observable, of  } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from "../../environments/environment";
+import {Page} from '../models/page';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AnnouncementService {
     this.announcementsUrl = environment.API_ANNOUNCEMENTS;
   }
 
-  getAnnouncements(page: number, pageSize: number): Observable<any> {
+  getAnnouncements(page: number, pageSize: number): Observable<Page<Announcement>> {
     // Get from mock
   //  return of(ANNOUNCEMENTS);
     // Get from backend
@@ -37,7 +38,7 @@ export class AnnouncementService {
     if(params.keys().length > 0){
       paramsString = "?" + params.toString();
     }
-    return this.http.get(this.announcementsUrl + paramsString)
+    return this.http.get<Page<Announcement>>(this.announcementsUrl + paramsString)
     .pipe(
       catchError(this.handleError<any>('getAnnouncements', []))
     );

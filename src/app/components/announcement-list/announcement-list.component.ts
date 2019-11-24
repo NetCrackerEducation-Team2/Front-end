@@ -1,33 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { Announcement } from '../../models/announcement';
+import { DatePipe } from '@angular/common'
 import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
+import {ListItemInfo} from '../../models/presentation-models/list-item-info';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-announcement-list',
   templateUrl: './announcement-list.component.html',
-  styleUrls: ['./announcement-list.component.css']
+  styleUrls: ['./announcement-list.component.css'],
+  providers: [DatePipe]
 })
 export class AnnouncementListComponent implements OnInit {
-  selectedPage: Page<Announcement> = new Page<Announcement>();
 
+  pageLoading: boolean;
+  emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
+  selectedPage: Page<ListItemInfo>;
 
-
-  constructor(private announcementService: AnnouncementService) { }
+  constructor(public datePipe: DatePipe,
+    private announcementService: AnnouncementService) { }
 
   ngOnInit() {
-    this.getAnnouncements();
+    this.resetPaginator();
+    this.searchPage();
   }
 
-  getAnnouncements(): void {
+  searchPage(): void {
+    this.pageLoading = true;
     this.announcementService.getAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
-        .subscribe(result => this.selectedPage = result);
+      .pipe(map(page => {
+        return {
+          currentPage: page.currentPage,
+          countPages: page.countPages,
+          pageSize: page.pageSize,
+          array: page.array.map(announcement => {
+            return {
+              title: announcement.title,
+              subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
+              photo: null,
+              contentElements: [
+                {contentInfoId: 1, title: null, content: announcement.description},
+              ],
+              actionElements: [
+                {buttonInfoId: 1, name: "View", url: "/", disabled: false}
+              ],
+              listItemCallback: null,
+              additionalParams: null
+            };
+          })
+        }
+      }))
+      .subscribe(selectedPage => {
+        this.selectedPage = selectedPage;
+        this.pageLoading = false;
+      })
   }
 
   handlePage(event?: PageEvent) {
     this.selectedPage.currentPage = event.pageIndex;
     this.selectedPage.pageSize = event.pageSize;
-    this.getAnnouncements();
+    this.searchPage();
+  }
+
+  private resetPaginator(){
+    this.selectedPage = this.emptyPage;
   }
 }
