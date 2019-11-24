@@ -1,1 +1,15 @@
-<p>personal-booklist works!</p>
+<div>
+
+  <ng-container *ngFor="let book of books">
+    <app-book-item [title]="book.title"
+                   [subtitle]="bookService.getBookSubtitle(book)"
+                   [photo]="book.photo"
+                   [authors]="bookService.getBookAuthorsString(book, 3)"
+                   [genres]="bookService.getBookGenresString(book, 3)"
+                   [url]="'/book/slug/' + book.slug"
+                   [overviewsUrl]="'book-overviews/' + book.bookId"
+                   [overviewsBtnText]="'View Overviews'">
+    </app-book-item>
+  </ng-container>
+
+</div>

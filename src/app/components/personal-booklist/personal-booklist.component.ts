@@ -13,7 +13,7 @@ import {BookService} from '../../service/book.service';
   styleUrls: ['./personal-booklist.component.css']
 })
 export class PersonalBooklistComponent implements OnInit {
-  userId = 1007;
+  userId = 832;
   pageSize = 5;
   page: number;
   books: Book[];
@@ -25,23 +25,27 @@ export class PersonalBooklistComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
+    this.books = [];
     this.loadList();
   }
 
   loadList(): void {
     this.usersBooksService.getUsersBookPage(this.userId, this.page, this.pageSize).pipe(
       map((response: Page<UsersBook> ) => {
-          return response.array;
+        return response.array;
       }),
       flatMap((userBooksList: UsersBook[]) => {
         return userBooksList;
       }),
       switchMap((userBook: UsersBook) => {
+        console.log('ID = : ' + userBook.bookId);
         return this.bookService.getBookById(userBook.bookId);
       }),
-    ).subscribe( (book: Book) => {
-      this.books.push(book);
-    });
+      map((book: Book) => {
+        console.log('Four: ' + JSON.stringify(Book));
+        this.books.push(book);
+      })
+    ).subscribe();
   }
   expandReviews(): void {
     this.page += 1;
