@@ -1,23 +1,22 @@
-export class BookOverview {
-  bookOverviewId: number;
+export class BookReview {
+  bookReviewId: number;
   description: string;
   bookId: number;
   userId: number;
+  creationTime: string;
   published: boolean;
-  creationTime: Date;
-  creatTime: string;
 
-  public constructor(bookOverviewId: number,
+  public constructor(bookReviewId: number,
                      description: string,
                      bookId: number,
+                     userId: number,
                      published: boolean,
-                     creationTime: Date,
-                     creatTime: string) {
-    this.bookOverviewId = bookOverviewId;
+                     creationTime: string) {
+    this.bookReviewId = bookReviewId;
     this.description = description;
     this.bookId = bookId;
     this.published = published;
     this.creationTime = creationTime;
-    this.creatTime = creatTime;
+    this.userId = userId;
   }
 }

@@ -33,10 +33,19 @@ export const environment = {
   API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',
   API_BOOK_OVERVIEWS_BY_BOOK: 'http://localhost:8081/api/book-overviews/by-book/',
+  API_PUBLISHED_ANNOUNCEMENTS: 'http://localhost:8081/api/announcements/published/',
+  API_OVERVIEWS: 'http://localhost:8081/api/overviews/',
+  API_REVIEWS: 'http://localhost:8081/api/reviews/',
   API_CREATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/create',
   API_DELETE_ADMIN_MODERATOR: 'http://localhost:8081/admins/delete',
   API_GET_ADMIN_MODERATOR: 'http://localhost:8081/admins',
-  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update'
+  API_UPDATE_ADMIN_MODERATOR: 'http://localhost:8081/admins/update',
+  ADMIN_MODERATOR_PUBLISH_OVERVIEW: 'http://localhost:8081/admins/publish-overview/',
+  ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS: 'http://localhost:8081/admins/publish-announcement/',
+  ADMIN_MODERATOR_PUBLISH_REVIEW: 'http://localhost:8081/admins/publish-review/',
+  ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS: 'http://localhost:8081/admins/upublish-announcement/',
+  ADMIN_MODERATOR_UNPUBLISHED_REVIEW: 'http://localhost:8081/admins/unpublish-review/',
+  ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: 'http://localhost:8081/admins/unpublish-overview/',
   // API_ANNOUNCEMENTS: 'https://netcracker2-back-end.herokuapp.com/api/announcements/',
   // API_BOOK: 'https://netcracker2-back-end.herokuapp.com/api/book-by-id/',
   // API_BOOKS: 'https://netcracker2-back-end.herokuapp.com/api/books',
@@ -52,7 +61,8 @@ export const environment = {
   // AUTH_REGISTER_URL: 'https://netcracker2-back-end.herokuapp.com/auth/register',
   // AUTH_ACTIVATION_URL: 'https://netcracker2-back-end.herokuapp.com/auth/activate/',
   // AUTH_RECOVER_LINK_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recovery-link/',
-  // AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/'
+  // AUTH_RECOVER_PASS_URL: 'https://netcracker2-back-end.herokuapp.com/auth/recover/'API_PUBLISH_ANNOUNCEMENTS:
+
 };
 
 /*

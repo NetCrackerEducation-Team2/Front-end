@@ -22,7 +22,7 @@ export class OverviewListComponent implements OnInit {
     this.searchPage();
   }
 
-  searchPage(){
+  searchPage() {
     const bookId = +this.route.snapshot.paramMap.get('bookId');
     this.bookOverviewService.getBookOverviewsByBook(bookId, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .subscribe(selectedPage => {

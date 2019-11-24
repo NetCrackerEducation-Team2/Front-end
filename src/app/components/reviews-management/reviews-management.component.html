@@ -1,8 +1,22 @@
+<div class="app-reviews-list">
+  <div *ngIf="selectedPage.array">
+    <div *ngFor="let review of selectedPage.array">
+      <div *ngIf="review.published" >
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(review.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(review.bookId)'>publish</button>
+      </div>
+      <div *ngIf="!review.published">
+        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(review.bookId)'>unpublish</button>
+        <button class="buttons" type="button" mat-raised-button color="primary"  (click)='publish(review.bookId)'>publish</button>
+      </div>
+      <app-review-item [bookReview]="review"></app-review-item>
+    </div>
+  </div>
+  <mat-paginator [pageSize]="selectedPage.pageSize"
+                 [length]="selectedPage.countPages * selectedPage.pageSize"
+                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+  </mat-paginator>
+</div>
 
 
-<div style="display:flex;justify-content:center;">
-</div>
-<div class="buttons">
-  <button type="button" style="width: auto;" mat-raised-button	routerLink="/create-review">Add review</button>
-</div>
 

@@ -29,17 +29,22 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import { OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
+import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
+import { CreateBookComponent } from './components/create-book/create-book.component';
+import { CreateAnnouncementComponent } from './components/create-announcement/create-announcement.component';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
 import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
 import {BooksManagementComponent} from './components/books-management/books-management.component';
-import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+import { ReviewItemComponent } from './components/review-item/review-item.component';
+import { OverviewAdminsItemComponent } from './components/overview-admins-item/overview-admins-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
@@ -58,8 +63,6 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
-import {CreateBookComponent} from './components/create-book/create-book.component';
-import {CreateAnnouncementComponent} from "./components/create-announcement/create-announcement.component";
 import {BookProfileComponent} from "./components/book-profile/book-profile.component";
 
 @NgModule({
@@ -91,13 +94,15 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     SuggestBookComponent,
     AdminComponent,
     ReviewsManagementComponent,
-    BooksManagementComponent,
+    OverviewsManagementComponent,
     AnnouncementsManagementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
     OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    ReviewItemComponent,
+    OverviewAdminsItemComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent
@@ -147,7 +152,8 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     MatCheckboxModule,
     MatPaginatorModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    AnnouncementListComponent
   ],
   providers: [
     {

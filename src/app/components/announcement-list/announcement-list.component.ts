@@ -12,18 +12,23 @@ import {AccountService} from '../../service/account.service';
 })
 export class AnnouncementListComponent implements OnInit {
   selectedPage: Page<Announcement> = new Page<Announcement>();
-
+  selectedPagePublish: Page<Announcement> = new Page<Announcement>();
 
   constructor(private announcementService: AnnouncementService, private accountService: AccountService) {
   }
 
   ngOnInit() {
     this.getAnnouncements();
+    this.getPublishedAnnouncements();
   }
 
   getAnnouncements(): void {
     this.announcementService.getAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
       .subscribe(result => this.selectedPage = result);
+  }
+  getPublishedAnnouncements(): void {
+    this.announcementService.getPublishedAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
+      .subscribe(result => this.selectedPagePublish = result);
   }
 
   handlePage(event?: PageEvent) {
