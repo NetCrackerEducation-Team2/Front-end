@@ -1,23 +1,22 @@
-.container {
+.rating-span {
+  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
+  margin-right: 50px;
+}
+.book_-profile-container {
   font-size: 20px;
 }
+.roboto-font {
+  text-align: center;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 
-.button, .link {
+button {
   height: 50px;
   width: 180px;
   font-size: 18px;
   margin: 10px;
 }
 
-.link{
-  display: flex;
-  align-items: center;
-}
-
-.error {
-  text-align: center;
-  color: red;
-}
 .submit-form {
   display: flex;
   flex-flow: column nowrap;
@@ -31,27 +30,8 @@
   align-items: center;
 }
 
-.form-field {
+mat-form-field {
   width: 600px;
-}
-
-.label {
-  width: 150px;
-}
-
-@media (max-width: 768px) {
-
-  .submit-row {
-    flex-flow: row wrap;
-  }
-
-  .container, .button {
-    font-size: 18px;
-  }
-
-  .form-field {
-    width: 300px;
-  }
 }
 
 .nav-footer {
@@ -60,8 +40,3 @@
   flex-flow: row wrap;
   justify-content: center;
 }
-.nav-footer:nth-child(1) {
-  order: -1;
-}
-
-

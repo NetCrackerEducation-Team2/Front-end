@@ -5,8 +5,9 @@
                    [photo]="book.photo"
                    [authors]="bookService.getBookAuthorsString(book, 3)"
                    [genres]="bookService.getBookGenresString(book, 3)"
-                   [url]="book.slug"
+                   [url]="'/book/slug/' + book.slug"
                    [overviewsUrl]="'book-overviews/' + book.bookId"
-                   [overviewsBtnText]="'View Overviews'"></app-book-item>
+                   [overviewsBtnText]="'View Overviews'">
+    </app-book-item>
   </ng-container>
 </div>

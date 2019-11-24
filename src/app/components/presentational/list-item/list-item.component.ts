@@ -10,7 +10,8 @@ export class ListItemComponent implements OnInit {
   @Input() description: string;
   @Input() subtitle: string;
   @Input() url: string;
-  @Input() listItemCallback: Function;
+  @Input() btnText: string;
+  @Input() listItemCallback: () => void;
   constructor() { }
 
   ngOnInit() {
