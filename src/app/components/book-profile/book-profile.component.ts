@@ -11,12 +11,12 @@ import {AccountService} from "../../service/account.service";
   styleUrls: ['./book-profile.component.css']
 })
 export class BookProfileComponent implements OnInit {
-  private book: Book;
-  private isUser: boolean;
+  book: Book;
+  isUser: boolean;
   review = {rating: 5, description: ''};
 
   constructor(private route: ActivatedRoute,
-              private bookService: BookService,
+              public bookService: BookService,
               private reviewService: ReviewService,
               private accountService: AccountService,
               private router: Router) {
