@@ -1,18 +1,20 @@
-<div class="app-announcement-list">
-  <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
-  <ng-template #loading>
-    <p class="books-loading">Loading...</p>
-  </ng-template>
-  <ng-template #loaded>
-    <ng-container *ngFor="let announcement of selectedPage.array">
-      <app-list-item [title]= "announcement.title"
-                     [description] = "announcement.description"
-                     [subtitle] = "announcement.creationTime | date:'d LLLL yyyy, h:mm'"
-                     [url] = "announcement.announcementId"
-                     [btnText] = "'View'"></app-list-item>
-    </ng-container>
-  </ng-template>
-  <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
-                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-  </mat-paginator>
-</div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav position="end" mode="side" opened style="width: 20%">
+    <div align="center" *ngIf="isLogged()">
+      <button type="submit" mat-flat-button color="primary" [routerLink]="['/announcements/add']">Add</button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="app-announcement-list">
+      <div *ngIf="selectedPagePublish.array">
+        <div *ngFor="let announcement of selectedPagePublish.array">
+          <app-announcement-item [announcement] = "announcement">
+          </app-announcement-item>
+        </div>
+      </div>
+      <mat-paginator [pageSize]="selectedPagePublish.pageSize" [length]="selectedPagePublish.countPages * selectedPagePublish.pageSize"
+                     [pageIndex]="selectedPagePublish.currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

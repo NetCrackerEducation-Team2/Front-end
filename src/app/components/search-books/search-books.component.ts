@@ -1,13 +1,14 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Author} from "../../models/author";
-import {Genre} from "../../models/genre";
-import {GenreService} from "../../service/genre.service";
-import {AuthorService} from "../../service/author.service";
-import {BookFilteringParam} from "../../models/book-filtering-param";
-import {Book} from "../../models/book";
-import {Page} from "../../models/page";
-import {BookService} from "../../service/book.service";
-import {PageEvent} from "@angular/material";
+import {Author} from '../../models/author';
+import {Genre} from '../../models/genre';
+import {GenreService} from '../../service/genre.service';
+import {AuthorService} from '../../service/author.service';
+import {BookFilteringParam} from '../../models/book-filtering-param';
+import {Book} from '../../models/book';
+import {Page} from '../../models/page';
+import {BookService} from '../../service/book.service';
+import {PageEvent} from '@angular/material';
+import {AccountService} from "../../service/account.service";
 
 @Component({
   selector: 'app-search-books',
@@ -29,7 +30,8 @@ export class SearchBooksComponent implements OnInit {
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
-              private bookService: BookService) { }
+              private bookService: BookService,
+              private accService: AccountService) { }
 
   ngOnInit() {
     this.genreService.getGenres().subscribe(genres => {
@@ -40,7 +42,7 @@ export class SearchBooksComponent implements OnInit {
       this.authors = authors;
       this.authors.sort((a1, a2) => a1.fullName.localeCompare(a2.fullName));
     });
-    let filteringParams = this.getBookFilteringParamsMap();
+    const filteringParams = this.getBookFilteringParamsMap();
     this.resetPaginator();
     this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .subscribe(selectedPage => {
@@ -48,17 +50,21 @@ export class SearchBooksComponent implements OnInit {
       });
   }
 
-  search(): void{
+  search(): void {
     this.resetPaginator();
     this.searchPage();
   }
 
-  searchPage(): void{
-    let filteringParams = this.getBookFilteringParamsMap();
+  searchPage(): void {
+    const filteringParams = this.getBookFilteringParamsMap();
     this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
       });
+  }
+
+  isLogged(): boolean {
+    return this.accService.getToken() !== null;
   }
 
   handlePage(event?: PageEvent) {
@@ -67,8 +73,8 @@ export class SearchBooksComponent implements OnInit {
     this.searchPage();
   }
 
-  private getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
-    let filteringParams = new Map<BookFilteringParam, object>();
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, object> {
+    const filteringParams = new Map<BookFilteringParam, object>();
     filteringParams.set(BookFilteringParam.Title, this.title as any as object);
     filteringParams.set(BookFilteringParam.Author, this.author);
     filteringParams.set(BookFilteringParam.Genre, this.genre);
@@ -76,7 +82,7 @@ export class SearchBooksComponent implements OnInit {
     return filteringParams;
   }
 
-  private resetPaginator(){
+  private resetPaginator() {
     this.selectedPage.currentPage = 0;
     this.selectedPage.pageSize = 5;
     this.selectedPage.countPages = 0;

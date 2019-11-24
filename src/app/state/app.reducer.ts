@@ -9,11 +9,11 @@ export interface AppReducerState {
 const initialState: AppReducerState = {
   login: false,
   roles: [ ],
-  accessMap: new Map([['moderatorForAnnouncements', false],
-                       ['moderatorForReviews', false],
-                       ['moderatorForBookOverview', false],
-                       ['admin', false],
-                       ['superadmin', false],
+  accessMap: new Map([['ANNOUNCEMENT_MODERATOR', false],
+                       ['REVIEW_MODERATOR', false],
+                       ['OVERVIEW_MODERATOR', false],
+                       ['ADMIN', false],
+                       ['SUPER_ADMIN', false],
                        ['user', false]])
 
 };

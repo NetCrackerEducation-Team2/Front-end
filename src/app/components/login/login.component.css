@@ -18,7 +18,6 @@
   text-align: center;
   color: red;
 }
-
 .submit-form {
   display: flex;
   flex-flow: column nowrap;
@@ -61,10 +60,8 @@
   flex-flow: row wrap;
   justify-content: center;
 }
-
 .nav-footer:nth-child(1) {
   order: -1;
 }
-
 
 

@@ -9,21 +9,26 @@ import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
+import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
 import {AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
-import {BooksManagementComponent } from './components/books-management/books-management.component';
+import {OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
 import {ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
 import {AdminComponent } from './components/admin/admin.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
-import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
+import {BookProfileComponent} from "./components/book-profile/book-profile.component";
 
 const routes: Routes = [
   {
@@ -59,12 +64,16 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-     path: 'announcements',
-     component: AnnouncementListComponent
+    path: 'announcements',
+    component: AnnouncementListComponent
   },
   {
-     path: 'announcements/:id',
-     component: AnnouncementItemComponent
+    path: 'announcements/add',
+    component: AddAnnouncementComponent
+  },
+  {
+    path: 'announcements/:id',
+    component: AnnouncementItemComponent
   },
   {
     path: 'activate/:code',
@@ -75,8 +84,16 @@ const routes: Routes = [
     component: LogoutComponent
   },
   {
-    path: 'book/:id',
-    component: BookItemComponent
+    path: 'book/suggest',
+    component: SuggestBookComponent
+  },
+  {
+    path: 'book/slug/:slug',
+    component: BookProfileComponent
+  },
+  {
+    path: 'book/id/:id',
+    component: BookProfileComponent
   },
   {
     path: 'recover',
@@ -87,12 +104,16 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
+    path: 'review/add/:bookId',
+    component: AddBookReviewComponent
+  },
+{
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },
   {
-    path: 'books-management',
-    component: BooksManagementComponent
+    path: 'overviews-management',
+    component: OverviewsManagementComponent
   },
   {
     path: 'reviews-management',
@@ -129,7 +150,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), BarRatingModule],
   exports: [RouterModule]
 })
 

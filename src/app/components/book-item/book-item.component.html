@@ -12,9 +12,9 @@
       <p><span>Genres:</span> {{genres}}</p>
     </div>
     <div class="mat-card-actions">
-      <ng-container *ngIf="url; else elseBlock">
-        <button mat-button class="book-details-btn" routerLink="{{url}}">{{btnText}}</button>
-      </ng-container>
+      <div *ngIf="url; else elseBlock">
+        <button mat-button class="book-details-btn" routerLink="{{url}}">View</button>
+      </div>
       <ng-template #elseBlock>
         <button mat-button class="book-details-btn" (click)="listItemCallback()">Go Back</button>
       </ng-template>
