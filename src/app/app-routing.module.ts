@@ -28,7 +28,8 @@ import {CreateBookComponent} from './components/create-book/create-book.componen
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
-import {BookProfileComponent} from "./components/book-profile/book-profile.component";
+import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 
 const routes: Routes = [
   {
@@ -136,10 +137,14 @@ const routes: Routes = [
   {
      path: 'create-announcement',
      component: CreateAnnouncementComponent
-  },  // routing to NotFoundComponent must be in the end
+  },
   {
     path: 'book-overviews/:bookId',
     component: OverviewListComponent
+  },
+  {
+    path: 'personal-list',
+    component: PersonalBooklistComponent
   },
   // routing to NotFoundComponent must be in the end
   {
