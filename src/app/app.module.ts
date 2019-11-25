@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbarModule, MatInputModule, MatExpansionModule} from '@angular/material';
+import {MatToolbarModule, MatInputModule, MatExpansionModule, MatButtonToggleModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -43,8 +43,6 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-import { ReviewItemComponent } from './components/review-item/review-item.component';
-import { OverviewAdminsItemComponent } from './components/overview-admins-item/overview-admins-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
@@ -98,8 +96,6 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     OverviewListComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
-    ReviewItemComponent,
-    OverviewAdminsItemComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent
@@ -134,7 +130,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     NgSelectModule,
     NgOptionHighlightModule,
     CommonModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    MatButtonToggleModule,
   ],
   exports: [
     BrowserModule,

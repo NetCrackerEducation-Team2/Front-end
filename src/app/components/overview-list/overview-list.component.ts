@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Page} from "../../models/page";
-import {BookOverviewService} from "../../service/book-overview.service";
-import {ActivatedRoute} from "@angular/router";
-import {PageEvent} from "@angular/material";
+import {Page} from '../../models/page';
+import {BookOverviewService} from '../../service/book-overview.service';
+import {ActivatedRoute} from '@angular/router';
+import {PageEvent} from '@angular/material';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
 import {BookOverviewPresentationService} from '../../service/presentation-services/book-overview-presentation.service';
@@ -41,19 +41,22 @@ export class OverviewListComponent implements OnInit {
               title: this.bookOverviewPresentationService.getBookOverviewTitle(bookOverview),
               subtitle: this.bookOverviewPresentationService.getBookOverviewSubtitle(bookOverview),
               photo: null,
+              itemId: null,
+              publish: null,
               contentElements: [
                 {contentInfoId: 1, title: null, content: bookOverview.description},
               ],
               actionElements: [
-                {buttonInfoId: 1, name: "Publish", url: null, disabled: bookOverview.published}
+                {buttonInfoId: 1, name: 'Publish', url: null, disabled: bookOverview.published,
+                  clickFunction: () => {}}
               ],
               listItemCallback: null,
               additionalParams: new Map([
-                ["published", bookOverview.published]
+                ['published', bookOverview.published]
               ])
             };
           })
-        }
+        };
       }))
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
@@ -67,7 +70,7 @@ export class OverviewListComponent implements OnInit {
     this.searchPage();
   }
 
-  private resetPaginator(){
+  private resetPaginator() {
     this.selectedPage = this.emptyPage;
   }
 }
