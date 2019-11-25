@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {AccountService} from '../../service/account.service';
 import {Book} from '../../models/book';
 import {UsersBooksService} from '../../service/users-books-service';
-import {flatMap, map, switchMap} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 import {UsersBook} from '../../models/users-book';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
-import {of} from 'rxjs';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {PageEvent} from '@angular/material';
 
@@ -18,8 +17,9 @@ import {PageEvent} from '@angular/material';
 })
 export class PersonalBooklistComponent implements OnInit {
   userId = 832; //Number(localStorage.getItem('currentuser'));
-  emptyPage: Page<ListItemInfo>;
   selectedPage: Page<ListItemInfo>;
+  usersBooks: UsersBook[];
+  books: Book[];
   loading = false;
 
   constructor(private accountService: AccountService,
@@ -29,14 +29,16 @@ export class PersonalBooklistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.emptyPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
+    this.usersBooks = [];
+    this.books = [];
     this.loadPage();
   }
 
   loadPage(): void  {
     this.loading = true;
     this.selectedPage.array = [];
+
     this.usersBooksService.getUsersBookPage(this.userId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
     map((response: Page<UsersBook> ) => {
       this.selectedPage.countPages = response.countPages;
@@ -48,10 +50,12 @@ export class PersonalBooklistComponent implements OnInit {
       return userBook;
     }),
     flatMap((usersBook: UsersBook) => {
+      this.usersBooks.push(usersBook);
       return this.bookService.getBookById(usersBook.bookId);
     }),
     ).subscribe((book: Book) => {
-      this.selectedPage.array.push({
+      this.books.push(book);
+      const res: ListItemInfo = {
         title: book.title,
         subtitle: this.bookPresentationService.getBookSubtitle(book),
         photo: this.bookPresentationService.getBookPhoto(book),
@@ -61,11 +65,30 @@ export class PersonalBooklistComponent implements OnInit {
         ],
         actionElements: [
           {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false},
-          {buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId, disabled: false}
         ],
         listItemCallback: null,
         additionalParams: null
-      });
+      };
+      const usersBook = this.usersBooks.filter(value => value.bookId === book.bookId)[0];
+      if (usersBook.favoriteMark) {
+        res.actionElements.push(
+          {buttonInfoId: 2, name: 'Remove from Favorite', url: book.slug, disabled: false}
+        );
+      } else {
+        res.actionElements.push(
+          {buttonInfoId: 2, name: 'Add to Favorite', url: book.slug, disabled: false}
+        );
+      }
+      if (usersBook.readMark) {
+        res.actionElements.push(
+          {buttonInfoId: 3, name: 'Remove read mark', url: book.slug, disabled: false}
+        );
+      } else {
+        res.actionElements.push(
+          {buttonInfoId: 3, name: 'Set read mark', url: book.slug, disabled: false}
+        );
+      }
+      this.selectedPage.array.push(res);
       this.loading = false;
     });
   }
@@ -73,7 +96,6 @@ export class PersonalBooklistComponent implements OnInit {
     if (this.loading) {
       return;
     }
-    this.loading = true;
     this.selectedPage.currentPage = event.pageIndex + 1;
     this.selectedPage.pageSize = event.pageSize;
     this.loadPage();
