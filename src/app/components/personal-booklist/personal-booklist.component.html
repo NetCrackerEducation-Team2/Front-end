@@ -1,7 +1,8 @@
 <div>
-
-  <ng-container *ngFor="let book of books">
-
+  <ng-container *ngFor="let itemInfo of selectedPage.array">
+    <app-list-item [listItemInfo]="itemInfo"></app-list-item>
   </ng-container>
-
+  <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+  </mat-paginator>
 </div>
