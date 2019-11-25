@@ -9,7 +9,7 @@ import {take} from 'rxjs/operators';
 })
 export class DeleteAdminModeratorComponent implements OnInit {
 
-  userId: number;
+  email: string;
   isDownloading = true;
   constructor(private admModerService: AdminModeratorService) {
   }
@@ -18,10 +18,10 @@ export class DeleteAdminModeratorComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteUser(userId) {
-    console.log(this.userId);
+  deleteUser() {
+    console.log(this.email);
     this.admModerService.
-    deleteAdminModer(this.userId).pipe(take(1)).
+    deleteAdminModer(this.email).pipe(take(1)).
     subscribe();
   }
 }

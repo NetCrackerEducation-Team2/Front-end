@@ -26,8 +26,8 @@ createAdminModer(user): Observable<any> {
   return this.httpClient.post<any>(this.API_CREATE_ADMIN_MODERATOR, JSON.stringify(user), {headers: headers});
 }
 
-deleteAdminModer(id): Observable<any> {
- return this.httpClient.delete<any>(this.API_DELETE_ADMIN_MODERATOR + '/' + id.toString());
+deleteAdminModer(email): Observable<any> {
+ return this.httpClient.delete<any>(this.API_DELETE_ADMIN_MODERATOR + '/' + email);
 }
 
 updateAdminModer(user): Observable<any> {

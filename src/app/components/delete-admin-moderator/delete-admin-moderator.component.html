@@ -2,10 +2,10 @@
 
   <form class="submit-form" #regForm="ngForm" novalidate >
     <div class="submit-row">
-      <label class="label" for="userId">Enter id</label>
+      <label class="label" for="Email">Enter email</label>
       <mat-form-field class="form-field">
-        <input required name="UserId" #UserId="ngModel" type="text" id="UserId" matInput
-                placeholder="id" [(ngModel)]="userId">
+        <input required name="email" #Email="ngModel" type="text" id="email" matInput
+                placeholder="Email" [(ngModel)]="email">
       </mat-form-field>
     </div>
   </form>
