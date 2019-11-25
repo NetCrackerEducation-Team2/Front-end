@@ -13,7 +13,7 @@ import {BookReviewComment} from '../../models/book-review-comment';
 })
 export class BookReviewCommentComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  pageSize = 5;
+  pageSize = 2;
   page: number;
   loading: boolean;
 
@@ -42,6 +42,7 @@ export class BookReviewCommentComponent implements OnInit {
       flatMap((reviewCommentList: BookReviewComment[]) => {
         if (reviewCommentList.length < this.pageSize) {
           this.ableToExpand = false;
+          this.loading = false;
         }
         return reviewCommentList;
       }),
