@@ -15,6 +15,7 @@ export class BookReviewCommentComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
   pageSize = 5;
   page: number;
+  loading: boolean;
 
   @Input() reviewId: number;
   reviewComments: BookReviewComment[];
@@ -27,31 +28,34 @@ export class BookReviewCommentComponent implements OnInit {
     this.page = 1;
     this.reviewComments = [];
     this.ableToExpand = true;
+    this.loading = true;
     this.getReviewComment();
   }
 
   getReviewComment(): void {
+    this.loading = true;
+    const tmpComments: BookReviewComment[] = [];
     this.bookReviewCommentService.getBookReviewComments(this.reviewId, this.page, this.pageSize).pipe(
       map((respPage: Page<BookReviewComment>) => {
         return respPage.array;
       }),
       flatMap((reviewCommentList: BookReviewComment[]) => {
-        if (reviewCommentList.length === 0) {
+        if (reviewCommentList.length < this.pageSize) {
           this.ableToExpand = false;
         }
-        console.log('Size: ' + reviewCommentList.length);
         return reviewCommentList;
       }),
-    ).subscribe((reviewComment: BookReviewComment) => {
-      this.accountService.getUserById(reviewComment.authorId).pipe(
-        map((author: User) => {
-          reviewComment.author = author;
-          return reviewComment;
-        }))
-        .subscribe((finishReviewComment: BookReviewComment) => {
-          this.reviewComments.push(finishReviewComment);
-        });
-    });
+      flatMap((reviewComment: BookReviewComment) => {
+        tmpComments.push(reviewComment);
+        return this.accountService.getUserById(reviewComment.authorId);
+      }),
+      map((author: User) => {
+        const comment = tmpComments.filter(value => value.authorId === author.userId)[0];
+        comment.author = author;
+        this.reviewComments.push(comment);
+        this.loading = false;
+      }),
+    ).subscribe();
   }
   expandReviewsComments(): void {
     this.page += 1;
