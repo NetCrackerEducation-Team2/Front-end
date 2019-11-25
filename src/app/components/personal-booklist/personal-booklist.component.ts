@@ -20,6 +20,7 @@ export class PersonalBooklistComponent implements OnInit {
   userId = 832; //Number(localStorage.getItem('currentuser'));
   emptyPage: Page<ListItemInfo>;
   selectedPage: Page<ListItemInfo>;
+  loading = false;
 
   constructor(private accountService: AccountService,
               private usersBooksService: UsersBooksService,
@@ -34,6 +35,8 @@ export class PersonalBooklistComponent implements OnInit {
   }
 
   loadPage(): void  {
+    this.loading = true;
+    this.selectedPage.array = [];
     this.usersBooksService.getUsersBookPage(this.userId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
     map((response: Page<UsersBook> ) => {
       this.selectedPage.countPages = response.countPages;
@@ -44,7 +47,7 @@ export class PersonalBooklistComponent implements OnInit {
     flatMap((userBook: UsersBook[]) => {
       return userBook;
     }),
-    switchMap((usersBook: UsersBook) => {
+    flatMap((usersBook: UsersBook) => {
       return this.bookService.getBookById(usersBook.bookId);
     }),
     ).subscribe((book: Book) => {
@@ -63,15 +66,16 @@ export class PersonalBooklistComponent implements OnInit {
         listItemCallback: null,
         additionalParams: null
       });
-      console.log(JSON.stringify(this.selectedPage));
+      this.loading = false;
     });
   }
   handlePage(event?: PageEvent): void {
-    this.selectedPage.currentPage = event.pageIndex;
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
+    this.selectedPage.currentPage = event.pageIndex + 1;
     this.selectedPage.pageSize = event.pageSize;
     this.loadPage();
-  }
-  private resetPaginator(): void {
-    this.selectedPage = this.emptyPage;
   }
 }

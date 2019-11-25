@@ -108,7 +108,7 @@ export class SearchBooksComponent implements OnInit {
                 additionalParams: null
               };
           })
-        }
+      };
       }))
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
