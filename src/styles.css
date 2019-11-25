@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 
 *{
@@ -16,9 +17,14 @@ body {
   height: 100%;
 }
 
-.no-result, .loading{
+.no-results, .loading{
   font-weight: bolder;
   font-size: 1.5em;
   text-align: center;
   color: gray;
+}
+
+.mat-spinner {
+  position: relative;
+  margin: 50% auto;
 }

@@ -2,9 +2,11 @@
   width: auto;
 }
 
-
-.heroes{
-display: flex;
-justify-content: center;
-
+.app-announcement-loading{
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: gray;
 }
+
+

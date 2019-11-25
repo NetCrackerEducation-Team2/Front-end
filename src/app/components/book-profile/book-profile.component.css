@@ -1,0 +1,42 @@
+.rating-span {
+  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
+  margin-right: 50px;
+}
+.book_-profile-container {
+  font-size: 20px;
+}
+.roboto-font {
+  text-align: center;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+button {
+  height: 50px;
+  width: 180px;
+  font-size: 18px;
+  margin: 10px;
+}
+
+.submit-form {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.submit-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 600px;
+}
+
+.nav-footer {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
