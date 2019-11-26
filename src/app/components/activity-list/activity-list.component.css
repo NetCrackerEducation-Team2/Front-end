@@ -1,0 +1,10 @@
+.app-activity-list {
+  width: auto;
+}
+
+.app-activity-loading{
+  font-weight: bolder;
+  font-size: 1.5em;
+  text-align: center;
+  color: gray;
+}

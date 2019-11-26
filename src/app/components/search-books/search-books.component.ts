@@ -8,7 +8,7 @@ import {Book} from '../../models/book';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
 import {PageEvent} from '@angular/material';
-import {AccountService} from "../../service/account.service";
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-search-books',

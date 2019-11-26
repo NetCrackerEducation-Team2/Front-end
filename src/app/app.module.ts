@@ -59,8 +59,13 @@ import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
-import {CreateAnnouncementComponent} from "./components/create-announcement/create-announcement.component";
-import {BookProfileComponent} from "./components/book-profile/book-profile.component";
+import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
+import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import {ActivityItemComponent} from './components/activity-item/activity-item.component';
+import {ActivityListComponent} from './components/activity-list/activity-list.component';
+import {SearchUsersComponent} from './components/search-users/search-users.component';
+import {UsersListComponent} from "./components/users-list/users-list.component";
+import {UserItemComponent} from "./components/user-item/user-item.component";
 
 @NgModule({
   declarations: [
@@ -100,7 +105,12 @@ import {BookProfileComponent} from "./components/book-profile/book-profile.compo
     TabsComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
-    BookProfileComponent
+    BookProfileComponent,
+    ActivityItemComponent,
+    ActivityListComponent,
+    SearchUsersComponent,
+    UsersListComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,

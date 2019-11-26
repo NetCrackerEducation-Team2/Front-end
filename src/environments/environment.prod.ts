@@ -14,6 +14,12 @@ export const environment = {
   API_AUTHORS_URL: {
     FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
   },
+  API_ACTIVITIES: {
+    GET_LAST_ACTIVITIES: BASE_URL + '/api/activity/lastFriendActivities'
+  },
+  API_USERS: {
+    SEARCH_USERS_URL: BASE_URL + '/api/profile/search'
+  },
   API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   API_GENRES: 'https://netcracker2-back-end.herokuapp.com/api/genres',

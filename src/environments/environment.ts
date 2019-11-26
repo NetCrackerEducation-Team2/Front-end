@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {BASE_URL} from './environment.prod';
+export const BASE_URL = 'http://localhost:8081';
 
 export const environment = {
   production: false,
@@ -28,6 +28,12 @@ export const environment = {
   },
   API_BOOK_URL: {
     FIND_BY_ID: BASE_URL + '/api/book-by-id/'
+  },
+  API_ACTIVITIES: {
+    GET_LAST_ACTIVITIES: BASE_URL + '/api/activity/lastFriendActivities'
+  },
+  API_USERS: {
+    SEARCH_USERS_URL: BASE_URL + '/api/profile/search'
   },
   API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',

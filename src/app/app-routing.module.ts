@@ -16,19 +16,21 @@ import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
-import { BarRatingModule } from 'ngx-bar-rating';
+import {BarRatingModule} from 'ngx-bar-rating';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
-import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
-import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
-import {AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
-import {BooksManagementComponent } from './components/books-management/books-management.component';
-import {ReviewsManagementComponent } from './components/reviews-management/reviews-management.component';
-import {AdminComponent } from './components/admin/admin.component';
+import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
+import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
+import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
+import {BooksManagementComponent} from './components/books-management/books-management.component';
+import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
+import {AdminComponent} from './components/admin/admin.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
-import {BookProfileComponent} from "./components/book-profile/book-profile.component";
+import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import {ActivityListComponent} from './components/activity-list/activity-list.component';
+import {SearchUsersComponent} from "./components/search-users/search-users.component";
 
 const routes: Routes = [
   {
@@ -107,7 +109,7 @@ const routes: Routes = [
     path: 'review/add/:bookId',
     component: AddBookReviewComponent
   },
-{
+  {
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },
@@ -120,26 +122,34 @@ const routes: Routes = [
     component: ReviewsManagementComponent
   },
   {
-     path: 'admin',
-     component: AdminComponent,
-     children: [
-        {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
-        // {path: 'edit-moderator', component: EditModeratorComponent},
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
+      // {path: 'edit-moderator', component: EditModeratorComponent},
 
-     ]
+    ]
   },
   {
-     path: 'create-book',
-     component: CreateBookComponent
+    path: 'create-book',
+    component: CreateBookComponent
   }
   ,
   {
-     path: 'create-announcement',
-     component: CreateAnnouncementComponent
+    path: 'create-announcement',
+    component: CreateAnnouncementComponent
   },  // routing to NotFoundComponent must be in the end
   {
     path: 'book-overviews/:bookId',
     component: OverviewListComponent
+  },
+  {
+    path: 'activities',
+    component: ActivityListComponent
+  },
+  {
+    path: 'search-users',
+    component: SearchUsersComponent
   },
   // routing to NotFoundComponent must be in the end
   {

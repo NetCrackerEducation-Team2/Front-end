@@ -1,0 +1,26 @@
+<div class="filtered-book-list-container">
+  <div class="simple-books-filter">
+    <input matInput type="text" placeholder=" Search user..." name="search" class="search-input" [(ngModel)]="searchExpression">
+    <button (click)="search()" class="search-button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
+  <ng-template #loading>
+    <p class="loading">Loading...</p>
+  </ng-template>
+  <ng-template #loaded>
+    <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
+    <ng-template #hasresults>
+      <div class="users-page">
+        <app-users-list [page]="selectedPage"></app-users-list>
+        <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                       [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+        </mat-paginator>
+      </div>
+    </ng-template>
+    <ng-template #noresults>
+      <p class="no-result" *ngIf="wasSearch">No results found</p>
+    </ng-template>
+  </ng-template>
+</div>

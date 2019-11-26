@@ -1,0 +1,16 @@
+<div class="container">
+
+  <div class="details">
+
+    <div class="avatar center">
+      <img width="128" height="128" style="border-radius: 100%;"
+           [src]="profile.photoPath" alt="Avatar">
+    </div>
+
+    <div class="info">
+      <span>Full name: {{profile.fullName}}</span>
+      <span>Email: {{profile.email}}</span>
+      <span>Registered at: {{profile.createdAt | date: ('MMM d, y')}}</span>
+    </div>
+  </div>
+</div>
