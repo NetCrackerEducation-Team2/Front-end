@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {apiUrls} from '../../api-urls';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -14,10 +14,10 @@ export class AdminModeratorService {
   private readonly API_GET_ADMIN_MODERATOR;
 
   constructor(private httpClient: HttpClient) {
-    this.API_CREATE_ADMIN_MODERATOR = environment.API_CREATE_ADMIN_MODERATOR;
-    this.API_DELETE_ADMIN_MODERATOR = environment.API_DELETE_ADMIN_MODERATOR;
-    this.API_UPDATE_ADMIN_MODERATOR = environment.API_UPDATE_ADMIN_MODERATOR;
-    this.API_GET_ADMIN_MODERATOR = environment.API_GET_ADMIN_MODERATOR;
+    this.API_CREATE_ADMIN_MODERATOR = apiUrls.API_CREATE_ADMIN_MODERATOR;
+    this.API_DELETE_ADMIN_MODERATOR = apiUrls.API_DELETE_ADMIN_MODERATOR;
+    this.API_UPDATE_ADMIN_MODERATOR = apiUrls.API_UPDATE_ADMIN_MODERATOR;
+    this.API_GET_ADMIN_MODERATOR = apiUrls.API_GET_ADMIN_MODERATOR;
    }
 
 

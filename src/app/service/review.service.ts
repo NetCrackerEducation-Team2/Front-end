@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {catchError} from 'rxjs/operators';
+import {apiUrls} from '../../api-urls';
 import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.reviewUrl = environment.API_REVIEW;
+    this.reviewUrl = apiUrls.API_REVIEW;
   }
 
   createReview(rating: number, description: string, bookId: number) {
