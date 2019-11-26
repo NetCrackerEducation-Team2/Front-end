@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {Author} from '../models/author';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {ErrorHandlerService} from './logging/error-handler.service';
+import {ErrorHandlerService} from './error-handler.service';
 import {apiUrls} from '../../api-urls';
 
 @Injectable({

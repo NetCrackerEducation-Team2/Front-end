@@ -1,6 +1,3 @@
-export enum BookFilteringParam{
-  Title,
-  Genre,
-  Author,
-  AnnouncementDate
+export const enum BookFilteringParam{
+  Title, Genre, Author, AnnouncementDate
 }

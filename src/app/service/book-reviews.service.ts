@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CheckPaginationService} from './check-pagination.service';
-import {ErrorHandlerService} from './logging/error-handler.service';
 import {Observable} from 'rxjs';
 import {Page} from '../models/page';
-import {BookOverview} from '../models/book-overview';
 import {catchError} from 'rxjs/operators';
 import {BookReview} from '../models/book-review';
 import {apiUrls} from '../../api-urls';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,18 +1,23 @@
 <div class="mat-card">
-  <div class="mat-card-header">
-    <div class="mat-card-header-text">
-      <div class="mat-card-title">{{title}}</div>
-      <div class="mat-card-subtitle">{{subtitle}}</div>
+  <ng-container *ngIf="listItemInfo.photo">
+    <img [src]="listItemInfo.photo" alt="item-photo" class="item-photo"/>
+  </ng-container>
+  <div class="item-info">
+    <div class="mat-card-header">
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">{{listItemInfo.title}}</div>
+        <div class="mat-card-subtitle">{{listItemInfo.subtitle}}</div>
+      </div>
     </div>
-  </div>
-  <div class="mat-card-content">
-    <p>
-      {{description}}
-    </p>
-  </div>
-  <div class="mat-card-actions">
-    <div *ngIf="url">
-      <button mat-button routerLink="{{url}}">View</button>
+    <div class="mat-card-content">
+      <p *ngFor="let element of listItemInfo.contentElements" [attr.id]="element.contentInfoId">
+        <span class="bolder-text">{{element.title}}</span> {{element.content}}
+      </p>
+    </div>
+    <div class="mat-card-actions">
+      <button *ngFor="let element of listItemInfo.actionElements" mat-button
+              [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled" (click)="element.clickFunction() ">
+        {{element.name}}</button>
     </div>
   </div>
 </div>

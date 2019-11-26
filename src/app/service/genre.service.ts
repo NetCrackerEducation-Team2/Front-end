@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {Genre} from '../models/genre';
 import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {ErrorHandlerService} from './logging/error-handler.service';
 import {apiUrls} from '../../api-urls';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
