@@ -8,9 +8,9 @@ import {BookFilteringParam} from '../models/book-filtering-param';
 import {Author} from '../models/author';
 import {Genre} from '../models/genre';
 import {StringFormatterService} from './string-formatter.service';
-import {ErrorHandlerService} from './logging/error-handler.service';
 import {Page} from '../models/page';
 import {apiUrls} from '../../api-urls';
+import {ErrorHandlerService} from './logging/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -69,13 +69,6 @@ export class BookService {
     return this.http.get(this.booksUrl + paramsString)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getBooks', []))
-      );
-  }
-
-  getBookTitleById(bookId: number): Observable<string> {
-    return this.http.get(this.bookTitleByIdUrl + bookId, {responseType: 'text'})
-      .pipe(
-        catchError(this.errorHandlerService.handleError<any>('getBookTitleById', []))
       );
   }
 

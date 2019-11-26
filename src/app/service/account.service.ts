@@ -16,8 +16,8 @@ export class AccountService {
     this.API_PROFILE = apiUrls.API_PROFILE;
   }
 
-  getUserById(userId): Observable<any> {
-    return this.http.get(this.API_PROFILE + '/' + userId);
+  getUserById(userId): Observable<User> {
+    return this.http.get<User>(this.API_PROFILE + '/' + userId);
   }
 
   updateUser(newUser: User) {

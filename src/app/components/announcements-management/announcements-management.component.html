@@ -1,22 +1,24 @@
-<div class="app-announcement-list">
-  <div *ngIf="selectedPage.array">
-    <div *ngFor="let announcement of selectedPage.array">
-      <div *ngIf="announcement.published" >
-        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.bookId)'>unpublish</button>
-        <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(announcement.bookId)'>publish</button>
+<mat-sidenav-container class="example-container">
+<!--            <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.itemId)'>unpublish</button>-->
+<!--            <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(announcement.itemId)'>publish</button>-->
+  <mat-sidenav-content>
+    <ng-container *ngIf="!selectedPage.array; else loaded">
+      <div class="loading">
+        <mat-spinner></mat-spinner>
       </div>
-      <div *ngIf="!announcement.published">
-        <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.bookId)'>unpublish</button>
-        <button class="buttons" type="button" mat-raised-button color="primary"  (click)='publish(announcement.bookId)'>publish</button>
-      </div>
-      <app-announcement-item [announcement] = "announcement"></app-announcement-item>
-    </div>
-  </div>
-  <mat-paginator [pageSize]="selectedPage.pageSize"
-                 [length]="selectedPage.countPages * selectedPage.pageSize"
-                 [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
-  </mat-paginator>
-</div>
-
-
-
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+        <div class="app-announcement-list">
+          <app-list-item *ngFor="let announcement of selectedPage.array" [listItemInfo]="announcement"></app-list-item>
+          <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                         [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+          </mat-paginator>
+        </div>
+      </ng-container>
+      <ng-template #noresults>
+        <p class="no-results">No announcements yet</p>
+      </ng-template>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

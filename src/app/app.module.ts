@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbarModule, MatInputModule, MatExpansionModule} from '@angular/material';
+import {MatToolbarModule, MatInputModule, MatExpansionModule, MatButtonToggleModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,13 +14,12 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BookListComponent} from './components/book-list/book-list.component';
-import {BookItemComponent} from './components/book-item/book-item.component';
 import {SearchBooksComponent} from './components/search-books/search-books.component';
 import {HomeComponent} from './components/home/home.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {LoginComponent} from './components/login/login.component';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -29,6 +28,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
 import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
 import { CreateBookComponent } from './components/create-book/create-book.component';
@@ -42,8 +43,6 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-import { ReviewItemComponent } from './components/review-item/review-item.component';
-import { OverviewAdminsItemComponent } from './components/overview-admins-item/overview-admins-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
@@ -57,7 +56,6 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
-import {OverviewItemComponent} from './components/overview-item/overview-item.component';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
@@ -70,7 +68,6 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     HeaderComponent,
     FooterComponent,
     BookListComponent,
-    BookItemComponent,
     SearchBooksComponent,
     HomeComponent,
     NotFoundComponent,
@@ -97,11 +94,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     AnnouncementsManagementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
-    ReviewItemComponent,
-    OverviewAdminsItemComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent
@@ -128,12 +122,16 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
     RatingModule,
     MatInputModule,
     NgSelectModule,
     NgOptionHighlightModule,
     CommonModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    MatButtonToggleModule,
   ],
   exports: [
     BrowserModule,
@@ -152,6 +150,7 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     MatPaginatorModule,
     MatIconModule,
     MatTabsModule,
+    ReactiveFormsModule,
     AnnouncementListComponent
   ],
   providers: [

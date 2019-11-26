@@ -5,16 +5,23 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="app-announcement-list">
-      <div *ngIf="selectedPagePublish.array">
-        <div *ngFor="let announcement of selectedPagePublish.array">
-          <app-announcement-item [announcement] = "announcement">
-          </app-announcement-item>
-        </div>
+    <ng-container *ngIf="!selectedPagePublish.array; else loaded">
+      <div class="loading">
+        <mat-spinner></mat-spinner>
       </div>
-      <mat-paginator [pageSize]="selectedPagePublish.pageSize" [length]="selectedPagePublish.countPages * selectedPagePublish.pageSize"
-                     [pageIndex]="selectedPagePublish.currentPage" (page)="handlePage($event)">
-      </mat-paginator>
-    </div>
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="selectedPagePublish.array.length > 0; else noresults">
+        <div class="app-announcement-list">
+          <app-list-item *ngFor="let bookOverview of selectedPagePublish.array" [listItemInfo]="bookOverview"></app-list-item>
+          <mat-paginator [pageSize]="selectedPagePublish.pageSize" [length]="selectedPagePublish.countPages * selectedPagePublish.pageSize"
+                         [pageIndex]="selectedPagePublish.currentPage" (page)="handlePage($event)">
+          </mat-paginator>
+        </div>
+      </ng-container>
+      <ng-template #noresults>
+        <p class="no-results">No announcements yet</p>
+      </ng-template>
+    </ng-template>
   </mat-sidenav-content>
 </mat-sidenav-container>
