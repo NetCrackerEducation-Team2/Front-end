@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Page} from '../models/page';
 import {UsersBook} from '../models/users-book';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UsersBooksService {
   usersBookUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usersBookUrl = environment.API_USERS_BOOKS;
+    this.usersBookUrl = apiUrls.API_USERS_BOOKS;
   }
 
   getUsersBookPage(userId: number, page: number, pageSize: number): Observable<Page<UsersBook>> {

@@ -16,7 +16,7 @@ import {PageEvent} from '@angular/material';
   styleUrls: ['./personal-booklist.component.css']
 })
 export class PersonalBooklistComponent implements OnInit {
-  userId = 832; //Number(localStorage.getItem('currentuser'));
+  userId = 832;
   selectedPage: Page<ListItemInfo>;
   usersBooks: UsersBook[];
   books: Book[];
@@ -59,12 +59,14 @@ export class PersonalBooklistComponent implements OnInit {
         title: book.title,
         subtitle: this.bookPresentationService.getBookSubtitle(book),
         photo: this.bookPresentationService.getBookPhoto(book),
+        itemId: null,
+        publish: null,
         contentElements: [
           {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
           {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
         ],
         actionElements: [
-          {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false},
+          {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
         ],
         listItemCallback: null,
         additionalParams: null
@@ -72,20 +74,20 @@ export class PersonalBooklistComponent implements OnInit {
       const usersBook = this.usersBooks.filter(value => value.bookId === book.bookId)[0];
       if (usersBook.favoriteMark) {
         res.actionElements.push(
-          {buttonInfoId: 2, name: 'Remove from Favorite', url: book.slug, disabled: false}
+          {buttonInfoId: 2, name: 'Remove from Favorite', url: book.slug, disabled: false, clickFunction: () => {}}
         );
       } else {
         res.actionElements.push(
-          {buttonInfoId: 2, name: 'Add to Favorite', url: book.slug, disabled: false}
+          {buttonInfoId: 2, name: 'Add to Favorite', url: book.slug, disabled: false, clickFunction: () => {}}
         );
       }
       if (usersBook.readMark) {
         res.actionElements.push(
-          {buttonInfoId: 3, name: 'Remove read mark', url: book.slug, disabled: false}
+          {buttonInfoId: 3, name: 'Remove read mark', url: book.slug, disabled: false, clickFunction: () => {}}
         );
       } else {
         res.actionElements.push(
-          {buttonInfoId: 3, name: 'Set read mark', url: book.slug, disabled: false}
+          {buttonInfoId: 3, name: 'Set read mark', url: book.slug, disabled: false, clickFunction: () => {}}
         );
       }
       this.selectedPage.array.push(res);
