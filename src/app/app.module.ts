@@ -61,6 +61,8 @@ import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
+import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     TabsComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
-    BookProfileComponent
+    BookProfileComponent,
+    PersonalBooklistComponent,
+    PersonalBookItemComponent
   ],
   imports: [
     BrowserModule,
