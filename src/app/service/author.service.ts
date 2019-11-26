@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {LogService} from './logging/log.service';
-import {environment} from '../../environments/environment';
 import {Observable, of} from 'rxjs';
 import {Author} from '../models/author';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {ErrorHandlerService} from './logging/error-handler.service';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +16,8 @@ export class AuthorService {
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.authorsUrl = environment.API_AUTHORS;
-    this.findAuthorByFullNameContains = environment.API_AUTHORS_URL.FIND_URL;
+    this.authorsUrl = apiUrls.API_AUTHORS;
+    this.findAuthorByFullNameContains = apiUrls.API_AUTHORS_URL.FIND_URL;
   }
 
   getAuthors(): Observable<Author[]> {

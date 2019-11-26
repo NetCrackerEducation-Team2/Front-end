@@ -10,6 +10,7 @@ import {Genre} from '../models/genre';
 import {StringFormatterService} from './string-formatter.service';
 import {ErrorHandlerService} from './logging/error-handler.service';
 import {Page} from '../models/page';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -27,14 +28,14 @@ export class BookService {
   constructor(private http: HttpClient,
               private stringFormatterService: StringFormatterService,
               private errorHandlerService: ErrorHandlerService) {
-    this.bookUrl = environment.API_BOOK;
-    this.booksUrl = environment.API_BOOKS;
-    this.bookInfoUrl = environment.API_BOOK_INFO;
-    this.bookCreateUrl = environment.API_BOOK_CREATE;
-    this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
-    this.bookTitleByIdUrl = environment.API_BOOK_TITLE_BY_ID;
-    this.bookDownloadUrl = environment.API_BOOK_DOWNLOAD;
-    this.findBookByIdUrl = environment.API_BOOK_URL.FIND_BY_ID;
+    this.bookUrl = apiUrls.API_BOOK;
+    this.booksUrl = apiUrls.API_BOOKS;
+    this.bookInfoUrl = apiUrls.API_BOOK_INFO;
+    this.bookCreateUrl = apiUrls.API_BOOK_CREATE;
+    this.bookDownloadUrl = apiUrls.API_BOOK_DOWNLOAD;
+    this.bookTitleByIdUrl = apiUrls.API_BOOK_TITLE_BY_ID;
+    this.bookDownloadUrl = apiUrls.API_BOOK_DOWNLOAD;
+    this.findBookByIdUrl = apiUrls.API_BOOK_URL.FIND_BY_ID;
   }
 
   getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {

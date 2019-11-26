@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {LogService} from './logging/log.service';
-import {environment} from '../../environments/environment';
 import {catchError} from 'rxjs/operators';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ReviewService {
 
   constructor(private http: HttpClient,
               private logger: LogService) {
-    this.reviewUrl = environment.API_REVIEW;
+    this.reviewUrl = apiUrls.API_REVIEW;
   }
 
   createReview(rating: number, description: string, bookId: number) {
