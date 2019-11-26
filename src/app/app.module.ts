@@ -43,7 +43,7 @@ import {ActivateAccountComponent} from './components/activate-account/activate-a
 import {TokenInterceptorService} from './service/token-interceptor.service';
 import { ListItemComponent } from './components/presentational/list-item/list-item.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import {MatExpansionModule} from "@angular/material/expansion";
+import {MatExpansionModule} from '@angular/material/expansion';
 import { BookOverviewComponent } from './components/book-overview/book-overview.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { RecoverComponent } from './components/recover-password/recover/recover.component';
@@ -53,7 +53,13 @@ import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
 import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import {MatMenuModule} from '@angular/material/menu';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { HttpErrorComponent } from './components/presentational/http-error/http-error.component';
+import {MatSnackBarModule} from '@angular/material';
+import { MatSnackBarComponent } from './components/presentational/mat-snack-bar/mat-snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +96,9 @@ import { TabsComponent } from './components/tabs/tabs.component';
     OverviewItemComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    NotificationListComponent,
+    HttpErrorComponent,
+    MatSnackBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,8 +120,11 @@ import { TabsComponent } from './components/tabs/tabs.component';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
     MatExpansionModule,
-    StoreModule.forRoot( reducers)
+    MatSnackBarModule,
+    StoreModule.forRoot( reducers), 
+    AngularSvgIconModule 
   ],
   exports: [
     BrowserModule,
@@ -136,6 +148,11 @@ import { TabsComponent } from './components/tabs/tabs.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],

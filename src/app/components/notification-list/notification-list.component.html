@@ -1,0 +1,11 @@
+<button mat-button [matMenuTriggerFor]="animals">
+    <svg-icon class="bell" src="assets/images/notifications.svg"></svg-icon>
+</button>
+
+<mat-menu #animals="matMenu">
+    <div *ngIf="notifications">
+        <div *ngFor="let notification of notifications">
+            <button mat-menu-item>{{notification.description}}</button>
+        </div>
+    </div>
+</mat-menu>
