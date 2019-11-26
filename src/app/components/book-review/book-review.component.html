@@ -12,12 +12,12 @@
           <div class="review-block-body">
 
             <div class="review-profile-block">
-              <img *ngIf="review.author.photoPath" class="review-avatar" src="{{ review.author.photoPath }}" alt="Avatar">
-              <img *ngIf="!review.author.photoPath" class="review-avatar" src="{{ defaultPhotoPath }}" alt="Avatar">
+              <img *ngIf="authors[review.userId].photoPath" class="review-avatar" src="{{ authors[review.userId].photoPath }}" alt="Avatar">
+              <img *ngIf="!authors[review.userId].photoPath" class="review-avatar" src="{{ defaultPhotoPath }}" alt="Avatar">
             </div>
 
             <div class="review-content">
-              <mat-card-title> {{ review.author.fullName }} </mat-card-title>
+              <mat-card-title> {{ authors[review.userId].fullName }} </mat-card-title>
               <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
               <mat-card-title> Rate:  </mat-card-title>
               <p> {{ review.description }} </p>

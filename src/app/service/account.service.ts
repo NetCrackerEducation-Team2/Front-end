@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
-import {environment} from '../../environments/environment';
+import {apiUrls} from '../../api-urls';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AccountService {
   private readonly API_PROFILE;
 
   constructor(private http: HttpClient) {
-    this.API_PROFILE = environment.SERVER_DOMAIN + environment.API_PROFILE;
+    this.API_PROFILE = apiUrls.API_PROFILE;
   }
 
   getUserById(userId): Observable<User> {
@@ -39,7 +39,11 @@ export class AccountService {
   getToken() {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
-      return JSON.parse(localStorage.getItem('currentUser')).token;
+      try {
+        return JSON.parse(localStorage.getItem('currentUser')).token;
+      } catch (e) {
+        return null;
+      }
     } else {
       return null;
     }
@@ -48,7 +52,4 @@ export class AccountService {
   getCurrentUser(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
-
-
-
 }

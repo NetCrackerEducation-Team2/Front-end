@@ -5,7 +5,6 @@ import {BookReview} from '../../models/book-review';
 import {BookReviewService} from '../../service/book-review.service';
 import {AccountService} from '../../service/account.service';
 import {map, flatMap} from 'rxjs/operators';
-import {Book} from '../../models/book';
 
 @Component({
   selector: 'app-book-review',
@@ -20,6 +19,7 @@ export class BookReviewComponent implements OnInit {
 
   @Input() bookId: number;
   reviews: BookReview[];
+  authors: { [reviewId: number]: User; } = { };
   showCommentsFlag: boolean[];
   ableToExpand: boolean;
 
@@ -30,6 +30,7 @@ export class BookReviewComponent implements OnInit {
   ngOnInit() {
     this.page = 1;
     this.reviews = [];
+    this.authors = [];
     this.ableToExpand = true;
     this.loading = true;
     this.getReviews();
@@ -55,7 +56,7 @@ export class BookReviewComponent implements OnInit {
       }),
       map((author: User) => {
         const review = tmpReviews.filter(value => value.userId === author.userId)[0];
-        review.author = author;
+        this.authors[author.userId] = author;
         this.reviews.push(review);
         this.loading = false;
       }),

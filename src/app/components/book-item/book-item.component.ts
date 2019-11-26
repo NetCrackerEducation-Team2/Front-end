@@ -30,5 +30,4 @@ export class BookItemComponent extends ListItemComponent {
   isModerator(): boolean{
     return true;
   }
-
 }

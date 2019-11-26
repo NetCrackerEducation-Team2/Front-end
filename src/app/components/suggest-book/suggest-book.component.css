@@ -1,0 +1,75 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+.suggest-book-container {
+  font-size: 20px;
+}
+
+button {
+  height: 50px;
+  width: 180px;
+  font-size: 18px;
+  margin: 10px;
+}
+
+.submit-form {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.submit-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 600px;
+}
+
+label {
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+
+  .submit-row {
+    flex-flow: row wrap;
+  }
+
+  .container, button {
+    font-size: 18px;
+  }
+
+  mat-form-field {
+    width: 300px;
+  }
+}
+
+.nav-footer {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.nav-footer:nth-child(1){
+  order: -1;
+}
+.ng-select.custom > .ng-placeholder {
+  text-align: center;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.alert-danger {
+  background-color: #f44336; /* Red */
+}
+.alert-success {
+  background-color: #36f456;
+}
+.alert{
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+}

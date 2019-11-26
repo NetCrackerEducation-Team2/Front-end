@@ -1,19 +1,19 @@
-import {Genre} from "../models/genre";
+import {Genre} from '../models/genre';
 
 export const GENRES: Genre[] = [
   {
     genreId: 1,
-    name: "Horror",
+    name: 'Horror',
     description: null
   },
   {
     genreId: 2,
-    name: "Fiction",
+    name: 'Fiction',
     description: null
   },
   {
     genreId: 3,
-    name: "Poetry",
+    name: 'Poetry',
     description: null
   }
 ];

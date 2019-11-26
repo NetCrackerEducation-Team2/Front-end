@@ -7,6 +7,7 @@ import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {BookReviewComment} from '../models/book-review-comment';
 import {Page} from '../models/page';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BookReviewService {
   bookReviewUrl: string;
 
   constructor(private http: HttpClient) {
-    this.bookReviewUrl = environment.SERVER_DOMAIN + environment.API_BOOK_REVIEW;
+    this.bookReviewUrl = apiUrls.API_BOOK_REVIEW;
   }
 
   getBookReview(bookId: number, page: number, pageSize: number): Observable<Page<BookReview>> {
