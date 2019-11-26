@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
@@ -7,6 +7,7 @@ import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
 import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
+import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 
 @Component({
   selector: 'app-announcement-list',
@@ -21,7 +22,8 @@ export class AnnouncementListComponent implements OnInit {
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
   selectedPagePublish: Page<ListItemInfo> = new Page<ListItemInfo>();
 
-  constructor(public datePipe: DatePipe,
+  constructor(private publishAnnouncementService: PublishAnnouncementService,
+              public datePipe: DatePipe,
               private announcementService: AnnouncementService,
               private accountService: AccountService) { }
 
@@ -29,6 +31,17 @@ export class AnnouncementListComponent implements OnInit {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
+  }
+
+
+  publish(bookId: number) {
+    console.log(bookId);
+    this.publishAnnouncementService.publishAnnouncement(bookId);
+  }
+
+  unpublished(bookId: number) {
+    console.log(bookId);
+    this.publishAnnouncementService.unpublishedAnnouncement(bookId);
   }
 
   getAnnouncements(): void {
@@ -40,7 +53,7 @@ export class AnnouncementListComponent implements OnInit {
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
         this.pageLoading = false;
-      })
+      });
   }
 
   getPublishedAnnouncements(): void {
@@ -52,10 +65,10 @@ export class AnnouncementListComponent implements OnInit {
       .subscribe(selectedPage => {
         this.selectedPagePublish = selectedPage;
         this.pageLoading = false;
-      })
+      });
   }
 
-  private mapPage(page: Page<Announcement>): Page<ListItemInfo>{
+  private mapPage(page: Page<Announcement>): Page<ListItemInfo> {
     return {
       currentPage: page.currentPage,
       countPages: page.countPages,
@@ -65,17 +78,19 @@ export class AnnouncementListComponent implements OnInit {
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
+          itemId: announcement.bookId,
+          publish: null,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: "View", url: "/", disabled: false}
+            {buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {}}
           ],
           listItemCallback: null,
           additionalParams: null
         };
       })
-    }
+    };
   }
 
   handlePage(event?: PageEvent) {
@@ -84,7 +99,7 @@ export class AnnouncementListComponent implements OnInit {
     this.getAnnouncements();
   }
 
-  private resetPaginator(){
+  private resetPaginator() {
     this.selectedPage = this.emptyPage;
   }
 

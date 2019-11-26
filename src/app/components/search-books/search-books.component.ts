@@ -1,11 +1,11 @@
 import {Component, OnInit, Input, EventEmitter} from '@angular/core';
-import {Author} from "../../models/author";
-import {Genre} from "../../models/genre";
-import {GenreService} from "../../service/genre.service";
-import {AuthorService} from "../../service/author.service";
-import {BookFilteringParam} from "../../models/book-filtering-param";
-import {Page} from "../../models/page";
-import {BookService} from "../../service/book.service";
+import {Author} from '../../models/author';
+import {Genre} from '../../models/genre';
+import {GenreService} from '../../service/genre.service';
+import {AuthorService} from '../../service/author.service';
+import {BookFilteringParam} from '../../models/book-filtering-param';
+import {Page} from '../../models/page';
+import {BookService} from '../../service/book.service';
 import {MatAutocompleteSelectedEvent, MatOptionSelectionChange, PageEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
@@ -96,19 +96,22 @@ export class SearchBooksComponent implements OnInit {
                 title: book.title,
                 subtitle: this.bookPresentationService.getBookSubtitle(book),
                 photo: this.bookPresentationService.getBookPhoto(book),
+                itemId: null,
+                publish: null,
                 contentElements: [
                   {contentInfoId: 1, title: "Genres:", content: this.bookPresentationService.getBookGenresString(book, 3)},
                   {contentInfoId: 2, title: "Authors:", content: this.bookPresentationService.getBookAuthorsString(book, 3)}
                 ],
                 actionElements: [
-                  {buttonInfoId: 1, name: "View", url: book.slug, disabled: false},
-                  {buttonInfoId: 2, name: "View Overviews", url: "book-overviews/" + book.bookId, disabled: false}
+                  {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
+                  {buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
+                    disabled: false, clickFunction: () => {}}
                 ],
                 listItemCallback: null,
                 additionalParams: null
               };
           })
-      };
+        };
       }))
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
@@ -123,7 +126,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   private getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
-    let filteringParams = new Map<BookFilteringParam, object>();
+    const filteringParams = new Map<BookFilteringParam, object>();
     filteringParams.set(BookFilteringParam.Title, this.title as any as object);
     filteringParams.set(BookFilteringParam.Author, this.author);
     filteringParams.set(BookFilteringParam.Genre, this.genre);
