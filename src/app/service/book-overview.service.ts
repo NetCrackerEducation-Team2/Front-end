@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import {BookService} from './book.service';
 import {BookOverview} from '../models/book-overview';
 import {Observable} from 'rxjs';
-import {ErrorHandlerService} from './logging/error-handler.service';
 import {catchError} from 'rxjs/operators';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Page} from '../models/page';
-import {environment} from '../../environments/environment';
 import {CheckPaginationService} from './check-pagination.service';
+import {apiUrls} from '../../api-urls';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +22,9 @@ export class BookOverviewService {
               private checkPaginationService: CheckPaginationService,
               private bookService: BookService,
               private errorHandlerService: ErrorHandlerService) {
-    this.bookOverviewsByBookUrl = environment.API_BOOK_OVERVIEWS_BY_BOOK;
-    this.publishedBookOverviewUrl = environment.API_PUBLISHED_BOOK_OVERVIEW;
-    this.overviewsUrl = environment.API_OVERVIEWS;
+    this.bookOverviewsByBookUrl = apiUrls.API_BOOK_OVERVIEWS_BY_BOOK;
+    this.publishedBookOverviewUrl = apiUrls.API_PUBLISHED_BOOK_OVERVIEW;
+    this.overviewsUrl = apiUrls.API_OVERVIEWS;
   }
 
   getBookOverviewsByBook(bookId: number, page: number, pageSize: number): Observable<Page<BookOverview>> {

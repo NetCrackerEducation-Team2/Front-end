@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {LogService} from "./log.service";
 import {Observable, of} from "rxjs";
 
 @Injectable({
@@ -7,11 +6,11 @@ import {Observable, of} from "rxjs";
 })
 export class ErrorHandlerService {
 
-  constructor(private logger: LogService) { }
+  constructor() { }
 
   handleError<T>(operation = 'operation', result?: T){
     return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
+      console.log(error);
       return of(result as T);
     };
   }
