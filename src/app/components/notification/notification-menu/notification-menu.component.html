@@ -4,8 +4,10 @@
 
 <mat-menu #animals="matMenu">
     <div *ngIf="notifications">
-        <div *ngFor="let notification of notifications">
-            <button mat-menu-item>{{notification.description}}</button>
+        <div *ngFor="let notification of notifications.array">
+            <button mat-menu-item>{{notification.notificationMessage}}</button>
         </div>
     </div>
+    <button mat-button routerLink="/notifications">View all</button>
 </mat-menu>
+

@@ -1,4 +1,5 @@
 export class Notification {
     notificationId: number;
-    description: string;
+    notificationMessage: string;
+    creationTime: string;
 }

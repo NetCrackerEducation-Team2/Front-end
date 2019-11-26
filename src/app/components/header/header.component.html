@@ -5,7 +5,7 @@
 
   <div class="buttons">
     <ng-container *ngIf='!isLogged;else alreadyLogged'>
-      <app-notification-list></app-notification-list>
+      <app-notification-menu></app-notification-menu>
       <button type="button"  mat-stroked-button routerLink= "/login">Sign in</button>
       <button type="button"  mat-stroked-button  routerLink="/register">Sign up</button>
     </ng-container>

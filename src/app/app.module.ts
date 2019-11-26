@@ -53,7 +53,7 @@ import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
 import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { NotificationListComponent } from './components/notification/notification-list/notification-list.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
@@ -68,6 +68,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     MatSnackBarComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
-    BookProfileComponent
+    BookProfileComponent,
+    NotificationMenuComponent
   ],
   imports: [
     BrowserModule,

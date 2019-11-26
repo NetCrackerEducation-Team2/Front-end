@@ -28,6 +28,7 @@ import {CreateAnnouncementComponent} from './components/create-announcement/crea
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { NotificationListComponent } from './components/notification/notification-list/notification-list.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: 'announcements',
     component: AnnouncementListComponent
+  },
+  {
+    path: 'notifications',
+    component: NotificationListComponent
   },
   {
     path: 'announcements/add',
