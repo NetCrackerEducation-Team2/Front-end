@@ -61,6 +61,7 @@ import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     TabsComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
-    BookProfileComponent
+    BookProfileComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

@@ -33,17 +33,6 @@ export class AnnouncementListComponent implements OnInit {
     this.getPublishedAnnouncements();
   }
 
-
-  publish(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.publishAnnouncement(bookId);
-  }
-
-  unpublished(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.unpublishedAnnouncement(bookId);
-  }
-
   getAnnouncements(): void {
     this.pageLoading = true;
     this.announcementService.getAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
@@ -78,7 +67,6 @@ export class AnnouncementListComponent implements OnInit {
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
-          itemId: announcement.bookId,
           publish: null,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},
