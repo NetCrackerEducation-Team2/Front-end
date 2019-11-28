@@ -20,6 +20,11 @@
   height: 35px;
   width: 65vw;
 }
+.simple-users-filter{
+  margin: 50px auto;
+  display: flex;
+  max-height: 35px;
+}
 
 .filtered-user-list-container {
   display: grid;
@@ -31,10 +36,6 @@
   }
 
   .no-result, .loading{
-    order: 3;
-  }
-
-  .book-page{
     order: 3;
   }
 }
