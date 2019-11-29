@@ -35,6 +35,10 @@ export const environment = {
   API_USERS: {
     SEARCH_USERS_URL: BASE_URL + '/api/profile/search'
   },
+  API_FRIENDS: {
+    API_FRIENDS_STATUS: BASE_URL + '/api/friends/getFriendInfo',
+    API_FRIEND_REQUEST: BASE_URL + '/api/friends/friendRequest'
+  },
   API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',

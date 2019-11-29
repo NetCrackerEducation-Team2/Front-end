@@ -19,6 +19,7 @@
 .search-input{
   height: 35px;
   width: 65vw;
+  border: solid black 1px;
 }
 .simple-users-filter{
   margin: 50px auto;

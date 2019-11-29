@@ -1,7 +1,7 @@
 <div class="filtered-user-list-container">
   <div class="simple-users-filter">
     <input matInput type="text" placeholder=" Search user..." name="search" class="search-input"
-           [(ngModel)]="searchExpression">
+           [(ngModel)]="searchExpression" minlength="2">
     <button (click)="search()" class="search-button">
       <mat-icon>search</mat-icon>
     </button>

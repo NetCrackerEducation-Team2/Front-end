@@ -28,7 +28,6 @@ export class SearchUsersComponent implements OnInit {
   }
 
   search(): void {
-    // FIXMe add search limit
     this.wasSearch = true;
     this.resetPaginator();
     this.searchPage();

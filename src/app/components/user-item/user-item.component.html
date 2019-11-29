@@ -12,5 +12,28 @@
       <span>Email: {{profile.email}}</span>
       <span>Registered at: {{profile.createdAt | date: ('MMM d, y')}}</span>
     </div>
+    <div id="user_operations">
+      <button class="custom-button round-button"
+              *ngIf="(this.friendStatus) && (this.friendStatus.friend === false) && (this.friendStatus.awaitFriendRequestConfirmation === false)"
+              (click)="sendFriendRequest()"
+              mat-stroked-button
+              matTooltip="Send friend request"
+      >
+        <mat-icon>person_add</mat-icon>
+      </button>
+      <button class="round-button custom-button"
+              *ngIf="(this.friendStatus) && (this.friendStatus.friend === true)" mat-stroked-button
+              (click)="deleteFromFriends()"
+              matTooltip="Delete from friends">
+        <i class="material-icons">person_add_disabled</i>
+      </button>
+      <button class="round-button custom-button"
+              *ngIf="this.friendStatus && (this.friendStatus.friend === false) && (this.friendStatus.awaitFriendRequestConfirmation === true)"
+              mat-stroked-button
+              matTooltip="Friend request has been sent"
+      >
+        <mat-icon class="yellow-color">person_add</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

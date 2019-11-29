@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-users-list',
@@ -10,9 +11,9 @@ import {BookService} from '../../service/book.service';
 })
 export class UsersListComponent implements OnInit {
 
-  @Input() page: Page<Book>;
+  @Input() page: Page<User>;
 
-  constructor(public bookService: BookService) { }
+  constructor() { }
 
   ngOnInit() {
 

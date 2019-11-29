@@ -64,8 +64,9 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
 import {ActivityItemComponent} from './components/activity-item/activity-item.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
-import {UsersListComponent} from "./components/users-list/users-list.component";
-import {UserItemComponent} from "./components/user-item/user-item.component";
+import {UsersListComponent} from './components/users-list/users-list.component';
+import {UserItemComponent} from './components/user-item/user-item.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,9 @@ import {UserItemComponent} from "./components/user-item/user-item.component";
     NgSelectModule,
     NgOptionHighlightModule,
     CommonModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    BrowserAnimationsModule,
+    MatTooltipModule
   ],
   exports: [
     BrowserModule,
