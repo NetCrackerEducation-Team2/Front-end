@@ -62,7 +62,7 @@
     order: 2;
   }
 
-  .no-result, .loading{
+  .no-results, .loading{
     order: 3;
   }
 

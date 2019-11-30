@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {ListItemInfo} from '../../../models/presentation-models/list-item-info';
 
 @Component({
   selector: 'app-list-item',
@@ -6,15 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./list-item.component.css']
 })
 export class ListItemComponent implements OnInit {
-  @Input() title: string;
-  @Input() description: string;
-  @Input() subtitle: string;
-  @Input() url: string;
-  @Input() btnText: string;
-  @Input() listItemCallback: () => void;
+
+  @Input() listItemInfo: ListItemInfo;
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

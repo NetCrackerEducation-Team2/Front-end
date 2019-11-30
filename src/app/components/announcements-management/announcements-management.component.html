@@ -1,10 +1,24 @@
-
-<app-search-books></app-search-books>
-<div style="display:flex;justify-content:center;">
-<app-book-list></app-book-list>
-</div>
-<div class="buttons">
-  <button type="button" style="width: auto;" mat-raised-button	routerLink="/create-announcement">Add announcement</button>
-
-</div>
-
+<mat-sidenav-container class="example-container">
+<!--            <button class="buttons" type="button" mat-raised-button color="warn"  (click)='unpublished(announcement.itemId)'>unpublish</button>-->
+<!--            <button class="buttons" type="button" mat-raised-button disabled  (click)='publish(announcement.itemId)'>publish</button>-->
+  <mat-sidenav-content>
+    <ng-container *ngIf="!selectedPage.array; else loaded">
+      <div class="loading">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-container>
+    <ng-template #loaded>
+      <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+        <div class="app-announcement-list">
+          <app-list-item *ngFor="let announcement of selectedPage.array" [listItemInfo]="announcement"></app-list-item>
+          <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                         [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+          </mat-paginator>
+        </div>
+      </ng-container>
+      <ng-template #noresults>
+        <p class="no-results">No announcements yet</p>
+      </ng-template>
+    </ng-template>
+  </mat-sidenav-content>
+</mat-sidenav-container>

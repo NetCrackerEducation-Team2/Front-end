@@ -1,15 +1,15 @@
 <div class="book-profile-container">
   <h1 class="roboto-font">Book profile</h1>
   <!--  FIXME Go back function does not work-->
-  <app-book-item [title]="book.title"
-                 [subtitle]="bookService.getBookSubtitle(book)"
-                 [photo]="book.photo"
-                 [authors]="bookService.getBookAuthorsString(book, 3)"
-                 [genres]="bookService.getBookGenresString(book, 3)"
-                 [overviewsUrl]="'/book-overviews/' + book.bookId"
-                 [listItemCallback]="goBackFunction"
-                 [overviewsBtnText]="'View Overviews'">
-  </app-book-item>
+  <!--<app-book-item [title]="book.title"-->
+                 <!--[subtitle]="bookService.getBookSubtitle(book)"-->
+                 <!--[photo]="book.photo"-->
+                 <!--[authors]="bookService.getBookAuthorsString(book, 3)"-->
+                 <!--[genres]="bookService.getBookGenresString(book, 3)"-->
+                 <!--[overviewsUrl]="'/book-overviews/' + book.bookId"-->
+                 <!--[listItemCallback]="goBackFunction"-->
+                 <!--[overviewsBtnText]="'View Overviews'">-->
+  <!--</app-book-item>-->
   <h2 class="roboto-font">Send a review</h2>
   <form *ngIf="isUser" class="submit-form" (ngSubmit)="sendReview()">
     <div class="submit-row">

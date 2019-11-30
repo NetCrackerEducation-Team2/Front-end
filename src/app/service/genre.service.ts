@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Genre} from '../models/genre';
 import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {ErrorHandlerService} from './logging/error-handler.service';
+import {apiUrls} from '../../api-urls';
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class GenreService {
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.genresUrl = environment.API_GENRES;
-    this.searchGenreUrl = environment.API_GENRES_URL.SEARCH_BY_NAME_SUBSTRING;
+    this.genresUrl = apiUrls.API_GENRES;
+    this.searchGenreUrl = apiUrls.API_GENRES_URL.SEARCH_BY_NAME_SUBSTRING;
   }
 
   getGenres(): Observable<Genre[]> {

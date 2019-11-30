@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {BookListComponent} from './components/book-list/book-list.component';
 import {SearchBooksComponent} from './components/search-books/search-books.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
@@ -12,25 +12,27 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
-import {BookItemComponent} from './components/book-item/book-item.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
 import {BarRatingModule} from 'ngx-bar-rating';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
-import {BooksManagementComponent} from './components/books-management/books-management.component';
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
 import {AdminComponent} from './components/admin/admin.component';
+import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
-import {SearchUsersComponent} from "./components/search-users/search-users.component";
+import {SearchUsersComponent} from './components/search-users/search-users.component';
+import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
+import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 
 const routes: Routes = [
   {
@@ -70,6 +72,10 @@ const routes: Routes = [
     component: AnnouncementListComponent
   },
   {
+    path: 'notifications',
+    component: NotificationListComponent
+  },
+  {
     path: 'announcements/add',
     component: AddAnnouncementComponent
   },
@@ -106,6 +112,10 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
+    path: 'book-overview/:slug',
+    component: BookOverviewComponent
+  },
+  {
     path: 'review/add/:bookId',
     component: AddBookReviewComponent
   },
@@ -114,8 +124,8 @@ const routes: Routes = [
     component: AnnouncementsManagementComponent
   },
   {
-    path: 'books-management',
-    component: BooksManagementComponent
+    path: 'overviews-management',
+    component: OverviewsManagementComponent
   },
   {
     path: 'reviews-management',
@@ -150,6 +160,10 @@ const routes: Routes = [
   {
     path: 'search-users',
     component: SearchUsersComponent
+  },
+  {
+    path: 'personal-list',
+    component: PersonalBooklistComponent
   },
   // routing to NotFoundComponent must be in the end
   {
