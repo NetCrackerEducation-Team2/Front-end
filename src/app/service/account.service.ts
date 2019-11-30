@@ -71,7 +71,11 @@ export class AccountService {
   }
 
   getCurrentUser(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    try {
+      return JSON.parse(localStorage.getItem('currentUser'));
+    } catch (e) {
+      return null;
+    }
   }
 
   getCurrentUserRoles(): string[] {

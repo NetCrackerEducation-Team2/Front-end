@@ -90,18 +90,6 @@ export class TabsComponent implements OnInit {
           link: './admin',
           index: 6,
           access: state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
-        },
-        {
-          label: 'Activities',
-          link: '/activities',
-          index: 7,
-          access: state.accessMap.get('user')
-        },
-        {
-          label: 'Search users',
-          link: '/search-users',
-          index: 8,
-          access: state.accessMap.get('user')
         }
       ];
     });
