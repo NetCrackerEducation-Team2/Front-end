@@ -43,4 +43,5 @@ export const apiUrls = {
   ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS: environment.BASE_URL + '/admins/upublish-announcement/',
   ADMIN_MODERATOR_UNPUBLISHED_REVIEW: environment.BASE_URL + '/admins/unpublish-review/',
   ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/admins/unpublish-overview/',
+  API_NOTIFICATION: environment.BASE_URL + '/api/notifications/',
 };
