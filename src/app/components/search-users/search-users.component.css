@@ -26,6 +26,9 @@
   margin: 50px auto;
   display: flex;
   max-height: 35px;
+  flex-flow: row wrap;
+  align-content: space-between;
+  justify-content: space-between;
 }
 
 .filtered-user-list-container {
@@ -45,4 +48,10 @@
 .mat-spinner {
   position: relative;
   margin: 50% auto;
+}
+.full-width {
+  width: 100%;
+}
+.break {
+  width: 100%;
 }

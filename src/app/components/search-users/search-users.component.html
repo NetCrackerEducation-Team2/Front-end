@@ -1,7 +1,12 @@
 <div class="filtered-user-list-container">
   <div class="simple-users-filter">
-    <input matInput type="text" placeholder=" Search user..." name="search" class="search-input"
-           [(ngModel)]="searchExpression" minlength="2">
+    <div>
+      <input matInput type="text" placeholder=" Search user..." name="search" class="search-input"
+             [(ngModel)]="searchExpression" minlength="2">
+      <div class="break" *ngIf="searchExpression.length < 2">
+        <mat-error >Search expression should contain at least 2 chars</mat-error>
+      </div>
+    </div>
     <button (click)="search()" class="search-button">
       <mat-icon>search</mat-icon>
     </button>
@@ -14,7 +19,7 @@
     <div class="filtered-user-list-container">
       <ng-container *ngIf="searchProcessing; then loading; else loaded"></ng-container>
       <ng-template #loading>
-       <mat-spinner></mat-spinner>
+        <mat-spinner></mat-spinner>
       </ng-template>
       <ng-template #loaded>
         <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>

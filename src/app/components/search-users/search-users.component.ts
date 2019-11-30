@@ -30,8 +30,10 @@ export class SearchUsersComponent implements OnInit {
   }
 
   search(): void {
-    this.resetPaginator();
-    this.searchPage();
+    if (this.searchExpression.length >= 2) {
+      this.resetPaginator();
+      this.searchPage();
+    }
   }
 
   searchPage(): void {
