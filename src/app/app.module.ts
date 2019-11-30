@@ -43,24 +43,32 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-import {ListItemComponent} from './components/presentational/list-item/list-item.component';
+import { ListItemComponent } from './components/presentational/list-item/list-item.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { BookOverviewComponent } from './components/book-overview/book-overview.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RecoverComponent } from './components/recover-password/recover/recover.component';
+import { OverviewListComponent } from './components/overview-list/overview-list.component';
+import {StoreModule} from '@ngrx/store';
+import { reducers  } from './state/app.state';
+import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { NotificationListComponent } from './components/notification/notification-list/notification-list.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import {MatMenuModule} from '@angular/material/menu';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { HttpErrorComponent } from './components/presentational/http-error/http-error.component';
+import {MatSnackBarModule} from '@angular/material';
+import { MatSnackBarComponent } from './components/presentational/mat-snack-bar/mat-snack-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
-import {LogoutComponent} from './components/logout/logout.component';
-import {BookOverviewComponent} from './components/book-overview/book-overview.component';
-import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
-import {RecoverComponent} from './components/recover-password/recover/recover.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
 import {RatingModule} from 'ng-starrating';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
-import {OverviewListComponent} from './components/overview-list/overview-list.component';
-import {StoreModule} from '@ngrx/store';
-import {reducers} from './state/app.state';
-import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
-import {TabsComponent} from './components/tabs/tabs.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
 import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
 import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
 
@@ -98,9 +106,13 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     OverviewListComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    NotificationListComponent,
+    HttpErrorComponent,
+    MatSnackBarComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent,
+    NotificationMenuComponent,
     PersonalBooklistComponent,
     PersonalBookItemComponent
   ],
@@ -125,7 +137,10 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
     MatExpansionModule,
+    MatSnackBarModule,
+    AngularSvgIconModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
@@ -161,6 +176,11 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],
