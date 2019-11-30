@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Book} from '../../models/book';
 import {Page} from '../../models/page';
-import {BookService} from '../../service/book.service';
 import {User} from "../../models/user";
 
 @Component({

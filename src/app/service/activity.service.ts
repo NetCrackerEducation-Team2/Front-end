@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Activity} from '../models/activity';
 import {Page} from '../models/page';
+import {apiUrls} from "../../api-urls";
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class ActivityService {
   private readonly API_GET_LAST_ACTIVITIES;
 
   constructor(private http: HttpClient) {
-    this.API_GET_LAST_ACTIVITIES = environment.API_ACTIVITIES.GET_LAST_ACTIVITIES;
+    this.API_GET_LAST_ACTIVITIES = apiUrls.API_ACTIVITIES.GET_LAST_ACTIVITIES;
   }
 
   getLastFriendActivities(pageIndex: number, pageSize: number): Observable<Page<Activity>> {

@@ -3,7 +3,6 @@ import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

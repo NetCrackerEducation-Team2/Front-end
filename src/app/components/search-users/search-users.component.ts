@@ -1,9 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Book} from '../../models/book';
 import {Page} from '../../models/page';
 import {PageEvent} from '@angular/material';
-import {AccountService} from "../../service/account.service";
-import {User} from "../../models/user";
+import {AccountService} from '../../service/account.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-search-users',
@@ -14,6 +14,7 @@ export class SearchUsersComponent implements OnInit {
 
   public searchExpression: string;
   public wasSearch: boolean;
+  public searchProcessing: boolean;
 
   selectedPage: Page<User> = new Page<User>();
   window: Window = window;
@@ -22,22 +23,23 @@ export class SearchUsersComponent implements OnInit {
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
+    this.searchProcessing = false;
     this.selectedPage.array = [];
     this.wasSearch = false;
     this.resetPaginator();
   }
 
   search(): void {
-    this.wasSearch = true;
     this.resetPaginator();
     this.searchPage();
   }
 
   searchPage(): void {
-    console.log('Start searching users')
+    this.wasSearch = true;
+    this.searchProcessing = true;
     this.accountService.searchUsers(this.searchExpression, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .subscribe(selectedPage => {
-        console.log('Users founded')
+        this.searchProcessing = false;
         // FIXME use async pipe
         this.selectedPage = selectedPage;
       });

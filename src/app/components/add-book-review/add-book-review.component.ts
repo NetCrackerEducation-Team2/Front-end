@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Announcement} from '../../models/announcement';
-import {AnnouncementService} from '../../service/announcement.service';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
-import {StarRatingComponent} from 'ng-starrating';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ReviewService} from '../../service/review.service';
 
 @Component({

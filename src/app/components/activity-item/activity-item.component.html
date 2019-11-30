@@ -1,7 +1,4 @@
 <div *ngIf="activity">
-  <app-list-item [title]= ""
-                 [description] = "activity.description"
-                 [subtitle] = "activity.creationTime | date:'d LLLL yyyy, h:mm'"
-                 [url] = "'/'"
+  <app-list-item [listItemInfo]="listItemInfo"
   ></app-list-item>
 </div>

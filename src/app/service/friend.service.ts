@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {ErrorHandlerService} from './logging/error-handler.service';
 import {FriendStatus} from '../models/friend-status';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +12,9 @@ export class FriendService {
   private readonly friendStatusUrl: string;
   private readonly friendRequestUrl: string;
 
-  constructor(private http: HttpClient,
-              private errorHandlerService: ErrorHandlerService) {
-    this.friendStatusUrl = environment.API_FRIENDS.API_FRIENDS_STATUS;
-    this.friendRequestUrl = environment.API_FRIENDS.API_FRIEND_REQUEST;
+  constructor(private http: HttpClient) {
+    this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
+    this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
   }
 
   getFriendStatus(targetUserId: number): Observable<FriendStatus> {

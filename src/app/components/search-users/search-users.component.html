@@ -12,9 +12,9 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="filtered-user-list-container">
-      <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
+      <ng-container *ngIf="searchProcessing; then loading; else loaded"></ng-container>
       <ng-template #loading>
-        <p class="loading">Loading...</p>
+       <mat-spinner></mat-spinner>
       </ng-template>
       <ng-template #loaded>
         <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>

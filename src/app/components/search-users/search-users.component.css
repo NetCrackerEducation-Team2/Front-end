@@ -10,18 +10,19 @@
   font-size: 12px;
 }
 
-.search-button:hover{
-  background: rgba(0,0,255,0.5);
+.search-button:hover {
+  background: rgba(0, 0, 255, 0.5);
   color: gray;
   outline-style: none;
 }
 
-.search-input{
+.search-input {
   height: 35px;
   width: 65vw;
   border: solid black 1px;
 }
-.simple-users-filter{
+
+.simple-users-filter {
   margin: 50px auto;
   display: flex;
   max-height: 35px;
@@ -36,7 +37,12 @@
     grid-template-columns: 100%;
   }
 
-  .no-result, .loading{
+  .no-result, .loading {
     order: 3;
   }
+}
+
+.mat-spinner {
+  position: relative;
+  margin: 50% auto;
 }

@@ -1,10 +1,6 @@
-import {Component, OnInit, Input, Inject} from '@angular/core';
-import {Announcement} from '../../models/announcement';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
-import {AnnouncementService} from '../../service/announcement.service';
-import {DOCUMENT} from '@angular/common';
-import {Activity} from "../../models/activity";
+import {Component, Input, OnInit} from '@angular/core';
+import {Activity} from '../../models/activity';
+import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 
 @Component({
   selector: 'app-activity-item',
@@ -13,9 +9,22 @@ import {Activity} from "../../models/activity";
 })
 export class ActivityItemComponent implements OnInit {
   @Input() activity: Activity;
+  listItemInfo: ListItemInfo;
   theGoBackCallback: () => void;
 
   constructor() {
+    // TODO asem format date here
+    this.listItemInfo = {
+      title: this.activity.description,
+      subtitle: this.activity.creationTime,
+      actionElements: null,
+      additionalParams: null,
+      contentElements: null,
+      itemId: this.activity.activityId,
+      listItemCallback: null,
+      photo: null,
+      publish: null
+    };
   }
 
   ngOnInit(): void {

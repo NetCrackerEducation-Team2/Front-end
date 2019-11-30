@@ -16,7 +16,7 @@ export class AccountService {
   private readonly API_SEARCH_USERS;
 
   constructor(private http: HttpClient) {
-    this.API_SEARCH_USERS = environment.API_USERS.SEARCH_USERS_URL;
+    this.API_SEARCH_USERS = apiUrls.API_USERS.SEARCH_USERS_URL;
     this.API_PROFILE = apiUrls.API_PROFILE;
 
   }

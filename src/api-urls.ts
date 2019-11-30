@@ -29,6 +29,13 @@ export const apiUrls = {
   API_BOOK_URL: {
     FIND_BY_ID: environment.BASE_URL + '/api/book-by-id/'
   },
+  API_ACTIVITIES: {
+    GET_LAST_ACTIVITIES: environment.BASE_URL + '/api/activity/lastFriendActivities'
+  },
+  API_FRIENDS: {
+    API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
+  },
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: environment.BASE_URL + '/api/book-overviews/published-by-book/',
