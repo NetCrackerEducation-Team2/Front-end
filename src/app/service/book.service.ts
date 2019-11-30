@@ -88,8 +88,8 @@ export class BookService {
     return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.errorHandlerService.handleError<any>('getBookBySlug', [])));
   }
 
-  getBookById(id: number): Observable<any> {
-    return this.http.get(this.findBookByIdUrl + id)
+  getBookById(id: number): Observable<Book> {
+    return this.http.get<Book>(this.findBookByIdUrl + id)
       .pipe(catchError(this.errorHandlerService.handleError<any>('getBookById', [])));
   }
 

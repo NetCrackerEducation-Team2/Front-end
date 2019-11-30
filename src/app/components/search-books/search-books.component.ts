@@ -55,13 +55,13 @@ export class SearchBooksComponent implements OnInit {
     this.filteredGenres = this.genresControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ""),
+        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
         map(name => name ? this.filterGenres(name) : this.genres.slice())
       );
     this.filteredAuthors = this.authorsControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ""),
+        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
         map(fullName => fullName ? this.filterAuthors(fullName) : this.authors.slice())
       );
     this.search();
@@ -84,7 +84,7 @@ export class SearchBooksComponent implements OnInit {
 
   searchPage(): void{
     this.pageLoading = true;
-    let filteringParams = this.getBookFilteringParamsMap();
+    const filteringParams = this.getBookFilteringParamsMap();
     this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .pipe(map(page => {
         return {
@@ -99,8 +99,8 @@ export class SearchBooksComponent implements OnInit {
                 itemId: null,
                 publish: null,
                 contentElements: [
-                  {contentInfoId: 1, title: "Genres:", content: this.bookPresentationService.getBookGenresString(book, 3)},
-                  {contentInfoId: 2, title: "Authors:", content: this.bookPresentationService.getBookAuthorsString(book, 3)}
+                  {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
+                  {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
                 ],
                 actionElements: [
                   {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},

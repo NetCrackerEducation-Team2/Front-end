@@ -69,6 +69,8 @@ import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
 import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
+import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
+import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +112,9 @@ import { NotificationMenuComponent } from './components/notification/notificatio
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent,
-    NotificationMenuComponent
+    NotificationMenuComponent,
+    PersonalBooklistComponent,
+    PersonalBookItemComponent
   ],
   imports: [
     BrowserModule,
