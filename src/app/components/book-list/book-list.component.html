@@ -1,13 +1,5 @@
 <div class="book-list-container">
-  <ng-container *ngFor="let book of page.array">
-    <app-book-item [title]="book.title"
-                   [subtitle]="bookService.getBookSubtitle(book)"
-                   [photo]="book.photo"
-                   [authors]="bookService.getBookAuthorsString(book, 3)"
-                   [genres]="bookService.getBookGenresString(book, 3)"
-                   [url]="book.slug"
-                   [overviewsUrl]="'book-overviews/' + book.bookId"
-                   [btnText]="'View'"
-                   [overviewsBtnText]="'View Overviews'"></app-book-item>
+  <ng-container *ngFor="let itemInfo of listItemInfos">
+    <app-list-item [listItemInfo]="itemInfo"></app-list-item>
   </ng-container>
 </div>

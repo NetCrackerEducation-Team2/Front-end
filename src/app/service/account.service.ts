@@ -16,8 +16,8 @@ export class AccountService {
     this.API_PROFILE = environment.API_PROFILE;
   }
 
-  getUserById(userId): Observable<any> {
-    return this.http.get(this.API_PROFILE + '/' + userId);
+  getUserById(userId): Observable<User> {
+    return this.http.get<User>(this.API_PROFILE + '/' + userId);
   }
 
   updateUser(newUser: User) {
@@ -39,7 +39,11 @@ export class AccountService {
   getToken() {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
-      return JSON.parse(localStorage.getItem('currentUser')).token;
+      try {
+        return JSON.parse(localStorage.getItem('currentUser')).token;
+      } catch (e) {
+        return null;
+      }
     } else {
       return null;
     }
