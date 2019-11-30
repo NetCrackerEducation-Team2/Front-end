@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../service/account.service';
 import {AppState} from '../../state/app.state';
 import {Store} from '@ngrx/store';
-import { LOGOUT } from 'src/app/state/app.action';
+import {LOGOUT} from 'src/app/state/app.action';
 
 @Component({
   selector: 'app-header',

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Author} from '../../models/author';
 import {Genre} from '../../models/genre';
 import {GenreService} from '../../service/genre.service';
@@ -6,7 +6,7 @@ import {AuthorService} from '../../service/author.service';
 import {BookFilteringParam} from '../../models/book-filtering-param';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
-import {MatAutocompleteSelectedEvent, MatOptionSelectionChange, PageEvent} from '@angular/material';
+import {MatAutocompleteSelectedEvent, PageEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
@@ -67,22 +67,22 @@ export class SearchBooksComponent implements OnInit {
     this.search();
   }
 
-  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void{
+  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void {
     this.author = event.option.value;
     this.search();
   }
 
-  searchWithGenre(event?: MatAutocompleteSelectedEvent): void{
+  searchWithGenre(event?: MatAutocompleteSelectedEvent): void {
     this.genre = event.option.value;
     this.search();
   }
 
-  search(): void{
+  search(): void {
     this.resetPaginator();
     this.searchPage();
   }
 
-  searchPage(): void{
+  searchPage(): void {
     this.pageLoading = true;
     const filteringParams = this.getBookFilteringParamsMap();
     this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
@@ -125,7 +125,7 @@ export class SearchBooksComponent implements OnInit {
     this.searchPage();
   }
 
-  private getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, object> {
     const filteringParams = new Map<BookFilteringParam, object>();
     filteringParams.set(BookFilteringParam.Title, this.title as any as object);
     filteringParams.set(BookFilteringParam.Author, this.author);
@@ -134,7 +134,7 @@ export class SearchBooksComponent implements OnInit {
     return filteringParams;
   }
 
-  private resetPaginator(): void{
+  private resetPaginator(): void {
     this.selectedPage = this.emptyPage;
   }
 

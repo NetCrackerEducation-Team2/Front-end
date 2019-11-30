@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Page} from '../../models/page';
 import {BookOverviewService} from '../../service/book-overview.service';
 import {ActivatedRoute} from '@angular/router';

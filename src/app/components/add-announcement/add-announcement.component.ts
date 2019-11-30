@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AnnouncementService} from '../../service/announcement.service';
 import {Router} from '@angular/router';
-import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {User} from '../../models/user';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-announcement',

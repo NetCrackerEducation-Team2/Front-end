@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {Page} from '../../models/page';
-import { AnnouncementService } from '../../service/announcement.service';
+import {AnnouncementService} from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';

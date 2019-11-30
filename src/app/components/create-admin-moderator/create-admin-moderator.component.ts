@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminModeratorService} from '../../service/admin-moderator.service';
+
 @Component({
   selector: 'app-create-admin-moderator',
   templateUrl: './create-admin-moderator.component.html',
