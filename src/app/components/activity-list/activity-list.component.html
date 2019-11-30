@@ -1,0 +1,16 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav position="end" mode="side" opened style="width: 20%">
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="app-activity-list">
+      <div *ngIf="selectedPage.array">
+        <div *ngFor="let activity of selectedPage.array">
+          <app-activity-item [activity]="activity"></app-activity-item>
+        </div>
+      </div>
+      <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                     [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+      </mat-paginator>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

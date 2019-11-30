@@ -4,7 +4,7 @@ import {User} from '../../models/user';
 import {BookReview} from '../../models/book-review';
 import {BookReviewService} from '../../service/book-review.service';
 import {AccountService} from '../../service/account.service';
-import {map, flatMap} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-review',

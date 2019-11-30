@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { NotificationService } from '../../../service/notification.service';
-import { Notification } from '../../../models/notification';
+import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {NotificationService} from '../../../service/notification.service';
+import {Notification} from '../../../models/notification';
 import {ListItemInfo} from '../../../models/presentation-models/list-item-info';
 import {Page} from '../../../models/page';
 import {map} from 'rxjs/operators';

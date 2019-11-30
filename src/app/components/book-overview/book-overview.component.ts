@@ -3,7 +3,7 @@ import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
-import {flatMap, map, mergeMap} from 'rxjs/operators';
+import {flatMap} from 'rxjs/operators';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {BookOverviewService} from '../../service/book-overview.service';
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
 import {AppState} from '../../state/app.state';
 
 @Component({
@@ -14,15 +14,16 @@ export class TabsComponent implements OnInit {
 
   constructor(private router: Router, private store: Store<AppState>) {
   }
+
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
     });
 
     this.store.select('appReducer').subscribe(state => {
-       console.log('asd');
-       console.log(state.roles);
-       for (const role of state.roles) {
+      console.log('asd');
+      console.log(state.roles);
+      for (const role of state.roles) {
         switch (role) {
           case 'ADMIN':
             state.accessMap.set('ADMIN', true);
@@ -41,66 +42,68 @@ export class TabsComponent implements OnInit {
             state.accessMap.set('ANNOUNCEMENT_MODERATOR', true);
             break;
         }
-       }
-       if (state.roles.length < 1) {
+      }
+      if (state.roles.length < 1) {
         state.accessMap.set('ADMIN', false);
         state.accessMap.set('SUPER_ADMIN', false);
         state.accessMap.set('OVERVIEW_MODERATOR', false);
         state.accessMap.set('REVIEW_MODERATOR', false);
         state.accessMap.set('ANNOUNCEMENT_MODERATOR', false);
-       }
-       state.accessMap.set('user', state.login);
-       console.log(state.accessMap.get('user'), 'user app');
-       console.log(state.accessMap.get('ADMIN'), 'admin app');
+      }
+      state.accessMap.set('user', state.login);
+      console.log(state.accessMap.get('user'), 'user app');
+      console.log(state.accessMap.get('ADMIN'), 'admin app');
 
-       this.navLinks = [
-      {
+      this.navLinks = [
+        {
           label: 'Library',
           link: './',
           index: 0,
           access: true
-      }, {
+        }, {
           label: 'Announcements',
           link: './announcements',
           index: 1,
           access: true
-      }, {
+        }, {
           label: 'Profile',
           link: 'profile/:userId',
           index: 2,
           access: state.accessMap.get('user')
-      }, {
+        }, {
           label: 'Manage Announcements ',
           link: './announcements-management',
           index: 3,
           access: state.accessMap.get('ANNOUNCEMENT_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
-      }, {
+        }, {
           label: 'Manage Reviews',
           link: './reviews-management',
           index: 4,
           access: state.accessMap.get('REVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
-      }, {
+        }, {
           label: 'Manage Overviews',
           link: './overviews-management',
           index: 5,
           access: state.accessMap.get('OVERVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
-      }, {
+        }, {
           label: 'Admin',
           link: './admin',
           index: 6,
           access: state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
-      }
-  ];
-
-
+        },
+        {
+          label: 'Activities',
+          link: '/activities',
+          index: 7,
+          access: state.accessMap.get('user')
+        },
+        {
+          label: 'Search users',
+          link: '/search-users',
+          index: 8,
+          access: state.accessMap.get('user')
+        }
+      ];
     });
-
-
-
-
-
-      }
-
-
-
+  }
 }
