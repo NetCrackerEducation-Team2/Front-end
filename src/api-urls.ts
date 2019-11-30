@@ -14,6 +14,7 @@ export const apiUrls = {
   API_BOOK_CREATE: environment.BASE_URL + '/api/book',
   API_BOOK_DOWNLOAD: environment.BASE_URL + '/api/book/download',
   API_BOOK_REVIEW: environment.BASE_URL + '/api/book-review',
+  API_USERS_BOOKS: environment.BASE_URL + '/api/users-book',
   API_GENRES: environment.BASE_URL + '/api/genres/',
   API_GENRES_URL: {
     SEARCH_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchByNameContains'
