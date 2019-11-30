@@ -32,6 +32,9 @@ export const environment = {
   API_BOOK_URL: {
     FIND_BY_ID: BASE_URL + '/api/book-by-id/'
   },
+  API_PREPARE_RECOMMENDATIONS_URL: 'http://localhost:8081/api/books-recommendations/prepare/',
+  API_GET_RECOMMENDATIONS_URL: 'http://localhost:8081/api/books-recommendations/get/',
+  API_ADD_SEARCHING_HISTORIES_URL: 'http://localhost:8081/api/searching-history/add',
   API_REVIEW: BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: 'http://localhost:8081/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: 'http://localhost:8081/api/published-by-book/',

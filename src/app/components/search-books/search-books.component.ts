@@ -12,6 +12,7 @@ import {BookPresentationService} from '../../service/presentation-services/book-
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {SearchingHistoryService} from '../../service/searching-history.service';
 
 @Component({
   selector: 'app-search-books',
@@ -35,13 +36,17 @@ export class SearchBooksComponent implements OnInit {
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
+  userId: number;
 
-  constructor(private genreService: GenreService,
+  constructor(private searchingHistoryService: SearchingHistoryService,
+              private genreService: GenreService,
               private authorService: AuthorService,
               private bookPresentationService: BookPresentationService,
               public bookService: BookService) { }
 
   ngOnInit() {
+    //this.userId = this.accountService.getCurrentUser().userId;
+    this.userId = 819;
     this.genreService.getGenres().subscribe(genres => {
       this.genres = genres;
       this.genres.sort((g1, g2) => g1.name.localeCompare(g2.name));

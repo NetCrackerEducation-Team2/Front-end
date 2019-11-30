@@ -15,6 +15,9 @@ export const environment = {
     FIND_URL: BASE_URL + '/api/authors/searchByNameContains'
   },
   API_REVIEW: BASE_URL + '/api/book-review',
+  API_PREPARE_RECOMMENDATIONS_URL: 'https://netcracker2-back-end.herokuapp.com/api/books-recommendations/prepare/',
+  API_GET_RECOMMENDATIONS_URL: 'https://netcracker2-back-end.herokuapp.com/api/books-recommendations/get/',
+  API_ADD_SEARCHING_HISTORIES_URL: 'https://netcracker2-back-end.herokuapp.com/api/searching-history/add',
   API_BOOK_DOWNLOAD: 'https://netcracker2-back-end.herokuapp.com/api/book/download',
   API_GENRES: 'https://netcracker2-back-end.herokuapp.com/api/genres',
   API_AUTHORS: 'https://netcracker2-back-end.herokuapp.com/api/authors',

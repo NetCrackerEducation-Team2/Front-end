@@ -39,61 +39,40 @@ export class BookService {
 
   getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {
     let params = new HttpParams();
-    let paramsString = '';
-    if (filteringParams.get(BookFilteringParam.Title) != null) {
-      const title = filteringParams.get(BookFilteringParam.Title) as unknown as string;
-      params = params.set('title', title);
-    }
-    if (filteringParams.get(BookFilteringParam.Author) != null) {
-      const author = filteringParams.get(BookFilteringParam.Author) as unknown as Author;
-      params = params.set('authorId', author.authorId.toString());
-    }
-    if (filteringParams.get(BookFilteringParam.Genre) != null) {
-      const genre = filteringParams.get(BookFilteringParam.Genre) as unknown as Genre;
-      params = params.set('genreId', genre.genreId.toString());
-    }
-    if (filteringParams.get(BookFilteringParam.AnnouncementDate) != null) {
-      const announcementDate = filteringParams.get(BookFilteringParam.AnnouncementDate) as unknown as Date;
-      params = params.set('date', this.stringFormatterService.formatDate(announcementDate));
-    }
-    if (page != null) {
-      params = params.set('page', page.toString());
-    }
-    if (pageSize != null) {
-      params = params.set('pageSize', pageSize.toString());
-    }
-    if (params.keys().length > 0) {
-      paramsString = '?' + params.toString();
-    }
+    const title = filteringParams.get(BookFilteringParam.Title) as unknown as string;
+    const author = filteringParams.get(BookFilteringParam.Author) as unknown as Author;
+    const genre = filteringParams.get(BookFilteringParam.Genre) as unknown as Genre;
+    const announcementDate = filteringParams.get(BookFilteringParam.AnnouncementDate) as unknown as Date;
+    if (filteringParams.get(BookFilteringParam.Title)) params = params.set('title', title);
+    if (filteringParams.get(BookFilteringParam.Author)) params = params.set('authorId', author.authorId.toString());
+    if (filteringParams.get(BookFilteringParam.Genre)) params = params.set('genreId', genre.genreId.toString());
+    if (filteringParams.get(BookFilteringParam.AnnouncementDate)) params = params.set('date', this.stringFormatterService.formatDate(announcementDate));
+    params = params.set('page', page.toString()).set('pageSize', pageSize.toString());
+    let paramsString = '?' + params.toString();
     return this.http.get(this.booksUrl + paramsString)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getBooks', []))
       );
   }
 
-  getBookSubtitle(book: Book): string {
-    const authors = this.getBookAuthorsString(book, 1);
-    return 'by ' + (authors == '' ? 'unknown' : authors);
+  getBookBySlug(slug: string): Observable<Book> {
+    return this.http.get(this.bookInfoUrl + '/' + slug)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBookBySlug', []))
+      );
   }
 
-  getBookGenresString(book: Book, count: number): string {
-    return this.stringFormatterService.arrayPrettyFormat(book.genres.map(genre => genre.name), count);
-  }
-
-  getBookAuthorsString(book: Book, count: number): string {
-    return this.stringFormatterService.arrayPrettyFormat(book.authors.map(author => author.fullName), count);
-  }
-
-  getBookBySlug(slug: string): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.errorHandlerService.handleError<any>('getBookBySlug', [])));
-  }
-
-  getBookById(id: number): Observable<any> {
+  getBookById(id: number): Observable<Book> {
     return this.http.get(this.findBookByIdUrl + id)
-      .pipe(catchError(this.errorHandlerService.handleError<any>('getBookById', [])));
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getBookById', []))
+      );
   }
 
   suggestBook(book) {
-    return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.errorHandlerService.handleError<any>('suggestBook', [])));
+    return this.http.post(this.bookCreateUrl, book)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('suggestBook', []))
+      );
   }
 }
