@@ -14,8 +14,9 @@ import {ActivateAccountComponent} from './components/activate-account/activate-a
 import {LogoutComponent} from './components/logout/logout.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
-import { BarRatingModule } from 'ngx-bar-rating';
+import {BarRatingModule} from 'ngx-bar-rating';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
@@ -109,10 +110,14 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
+    path: 'book-overview/:slug',
+    component: BookOverviewComponent
+  },
+  {
     path: 'review/add/:bookId',
     component: AddBookReviewComponent
   },
-{
+  {
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },

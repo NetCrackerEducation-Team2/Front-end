@@ -73,7 +73,7 @@ export class BookService {
 
   getBookSubtitle(book: Book): string {
     const authors = this.getBookAuthorsString(book, 1);
-    return 'by ' + (authors == '' ? 'unknown' : authors);
+    return 'by ' + (authors === '' ? 'unknown' : authors);
   }
 
   getBookGenresString(book: Book, count: number): string {
@@ -95,5 +95,11 @@ export class BookService {
 
   suggestBook(book) {
     return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.errorHandlerService.handleError<any>('suggestBook', [])));
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      return of(result as T);
+    };
   }
 }
