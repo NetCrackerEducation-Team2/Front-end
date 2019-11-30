@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Genre} from '../models/genre';
 import {catchError} from 'rxjs/operators';

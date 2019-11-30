@@ -52,7 +52,4 @@ export class AccountService {
   getCurrentUser(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
-
-
-
 }

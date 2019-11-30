@@ -1,3 +1,5 @@
+import {BookReviewComponent} from './components/book-review/book-review.component';
+import {BookReviewCommentComponent} from './components/book-review-comment/book-review-comment.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -30,10 +32,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
-import { AnnouncementsManagementComponent } from './components/announcements-management/announcements-management.component';
-import { CreateBookComponent } from './components/create-book/create-book.component';
-import { CreateAnnouncementComponent } from './components/create-announcement/create-announcement.component';
+import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
+import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
+import {CreateBookComponent} from './components/create-book/create-book.component';
+import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {AchievementsComponent} from './components/account/achievements/achievements.component';
 import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
@@ -96,6 +98,7 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     BookOverviewComponent,
     RecoverPasswordComponent,
     RecoverComponent,
+    BookReviewComponent,
     AddBookReviewComponent,
     SuggestBookComponent,
     AdminComponent,
@@ -106,6 +109,7 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     OverviewListComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    BookReviewCommentComponent,
     NotificationListComponent,
     HttpErrorComponent,
     MatSnackBarComponent,

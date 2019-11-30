@@ -1,0 +1,73 @@
+.book-overview-to-read-button {
+  width: 170px;
+  height: auto;
+  background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
+  padding: 6px;
+  color: white;
+  outline-style: none;
+  border: none;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+
+.book-overview-container{                           /*Container*/
+  display: grid;
+  margin: 0 5px;
+}
+.book-overview-title{                               /*Title*/
+  margin-top: 20px;
+  font-size: 2em;
+  align-content: start;
+}
+.book-overview-picture{                             /*Picture*/
+  min-height: 300px;
+  min-width: 300px;
+}
+.book-overview-overview{                            /*Overview*/
+  display: flex;
+  flex-direction: column;
+}
+.book-description{                                  /*Description*/
+  font-size: 20px;
+}
+
+@media screen and (max-width: 767px) {              /*Mobile version*/
+  .book-overview-container{
+    grid-template-columns: 100% ;
+  }
+  .book-overview-mat-divider{
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {              /*PC version*/
+  .book-overview-container{
+    grid-template-columns: fit-content(300px) 1fr;
+    grid-template-rows: fit-content(100px) 2px fit-content(300px) auto 1fr;
+    margin: 0 100px;
+  }
+  .book-overview-title{                              /*title*/
+    grid-column: span 2;
+    grid-row: 1;
+  }
+  .book-overview-mat-divider{                        /*divider*/
+    grid-column: span 2;
+    grid-row: 2;
+  }
+  .book-overview-picture{                            /*picture*/
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .book-overview-overview{                           /*overview*/
+    margin-left: 20px;
+    margin-top: 60px;
+    font-size: 25px;
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .book-description{                                /*description*/
+    grid-column: span 2;
+    grid-row: 4;
+  }
+}

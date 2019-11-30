@@ -8,11 +8,11 @@ export class BookOverviewPresentationService {
 
   constructor() { }
 
-  getBookOverviewTitle(bookOverview: BookOverview): string{
-    return "Overview on " + bookOverview.book.title;
+  getBookOverviewTitle(bookOverview: BookOverview): string {
+    return 'Overview on ' + bookOverview.book.title;
   }
 
-  getBookOverviewSubtitle(bookOverview: BookOverview): string{
-    return "by " + bookOverview.user.fullName;
+  getBookOverviewSubtitle(bookOverview: BookOverview): string {
+    return 'by ' + bookOverview.user.fullName;
   }
 }
