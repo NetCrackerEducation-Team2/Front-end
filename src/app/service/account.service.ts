@@ -21,7 +21,7 @@ export class AccountService {
 
   }
 
-  getUserById(userId): Observable<User> {
+  getUserById(userId: number): Observable<User> {
     return this.http.get<User>(this.API_PROFILE + '/' + userId);
   }
 

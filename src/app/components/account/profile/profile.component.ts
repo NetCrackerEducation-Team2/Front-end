@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.setDefaultAvatar();
-    const userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    const userId = Number(this.activatedRoute.snapshot.paramMap.get('userId'));
     this.accountService.getUserById(userId)
       .subscribe(
         user => {
