@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminModeratorService} from '../../service/admin-moderator.service';
+import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import { take } from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
-import * as constants from '../../state/constants';
+import {AppState} from '../../../state/app.state';
+import * as constants from '../../../state/constants';
 
 @Component({
   selector: 'app-create-admin-moderator',
@@ -13,11 +13,10 @@ import * as constants from '../../state/constants';
 export class CreateAdminModeratorComponent implements OnInit {
   adminRoles = constants.adminRoles;
   superAdminRoles = constants.superAdminRoles;
-  user = {fullName: '', email: '', password: '', photo_path: 'asdasd', roles: []};
+  user = {fullName: '', email: '', password: '', photo_path: '', roles: []};
   roles: any[];
   repeatPassword: '';
-  isError = false;
-  message: string;
+  isError: boolean;
   isCreated: boolean;
   isDownloading = true;
 
@@ -38,7 +37,9 @@ export class CreateAdminModeratorComponent implements OnInit {
   createModerAdmin(): void {
     this.admModerService.
     createAdminModer(this.user).pipe(take(1)).
-    subscribe();
+    subscribe(resp => {this.isCreated = true; this.isError = false;},
+               error => {this.isError = true; this.isCreated = false;
+               });
   }
 
 

@@ -5,14 +5,14 @@
 
 
     <div class="submit-row">
-      <label class="label" for="fullName">Enter id</label>
+      <label class="label" for="userId">Enter id</label>
       <mat-form-field class="form-field">
         <input required name="UserId" #fullName="ngModel" type="text" id="" matInput
                 placeholder="id" [(ngModel)]="user.userId">
       </mat-form-field>
     </div>
     <div class="submit-row">
-        <label class="label" for="fullName">Choose role</label>
+        <label class="label" for="role">Choose role</label>
         <mat-form-field class="form-field">
           <mat-select multiple placeholder="Roles" required name = 'role' >
             <mat-option  (onSelectionChange)="change($event)"  *ngFor="let role of roles" [value]="role" >
@@ -69,13 +69,11 @@
           <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
           <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6
             symbols</small>
-          <span class="text-danger center" *ngIf="!message && isError">
-            User with username already exists
-            <br>
-            Try again.
+          <span class="alert alert-danger center" *ngIf="isError">
+            Error has happened. User was not edited.
           </span>
-          <span class="text-danger center" *ngIf="message && isError">
-            {{message}}
+          <span class="alert alert-success center" *ngIf="isEdited">
+            User was succesfully edited.
           </span>
         </div>
         <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='editUser()'>Edit user</button>

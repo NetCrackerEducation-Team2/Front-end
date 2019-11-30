@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminModeratorService} from '../../service/admin-moderator.service';
+import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
-import * as constants from '../../state/constants';
+import {AppState} from '../../../state/app.state';
+import * as constants from '../../../state/constants';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class EditAdminModeratorComponent implements OnInit {
   roles = [constants.user, ...constants.adminRoles];
   repeatPassword: '';
   isError = false;
-  message: string;
+  isEdited = false;
 
 
   constructor(private admModerService: AdminModeratorService, private store: Store<AppState>) {
@@ -24,7 +24,6 @@ export class EditAdminModeratorComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('edit-admin', ...this.roles);
   }
 
   checkPasswords(): boolean {
@@ -34,7 +33,8 @@ export class EditAdminModeratorComponent implements OnInit {
   editUser(): void {
     this.admModerService.
     updateAdminModer(this.user).pipe(take(1)).
-    subscribe();
+    subscribe(resp => {this.isEdited = true; this.isError = false; },
+              error => {this.isError = true; this.isEdited = false; });
   }
 
 

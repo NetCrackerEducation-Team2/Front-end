@@ -51,10 +51,11 @@ import { OverviewListComponent } from './components/overview-list/overview-list.
 import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {StoreModule} from '@ngrx/store';
 import { reducers  } from './state/app.state';
-import { CreateAdminModeratorComponent } from './components/create-admin-moderator/create-admin-moderator.component';
+import { CreateAdminModeratorComponent } from './components/admin/create-admin-moderator/create-admin-moderator.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { EditAdminModeratorComponent } from './components/edit-admin-moderator/edit-admin-moderator.component';
-import { DeleteAdminModeratorComponent } from './components/delete-admin-moderator/delete-admin-moderator.component';
+import { EditAdminModeratorComponent } from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
+import { DeleteAdminModeratorComponent } from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { DeleteAdminModeratorComponent } from './components/delete-admin-moderat
     TabsComponent,
     EditAdminModeratorComponent,
     DeleteAdminModeratorComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,

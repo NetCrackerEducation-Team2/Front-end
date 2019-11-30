@@ -8,6 +8,25 @@
   margin: 10px;
 }
 
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
 .submit-form {
   display: flex;
   flex-flow: column nowrap;
@@ -30,6 +49,7 @@
 }
 
 @media (max-width: 768px) {
+
 
   .submit-row {
     flex-flow: row wrap;
@@ -74,11 +94,4 @@
 
 .center{
   text-align: center;
-}
-
-.center-margin {
-  margin: 40px 30px 30px 30px;
-  font-size: 25px;
-  color: #522bff;
-  text-align: center
 }

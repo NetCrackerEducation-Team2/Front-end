@@ -14,6 +14,12 @@
 
 
   <div class="nav-footer">
+      <span class="alert alert-danger center" *ngIf="isError">
+          Error has happened. User was not deleted.
+        </span>
+        <span class="alert alert-success center" *ngIf="isDeleted">
+          User was successfully deleted.
+        </span>
       <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='deleteUser()'>Delete user</button>
     </div>
 

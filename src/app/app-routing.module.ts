@@ -23,9 +23,9 @@ import {CreateBookComponent} from './components/create-book/create-book.componen
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
-import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
-import {EditAdminModeratorComponent} from './components/edit-admin-moderator/edit-admin-moderator.component';
-import {DeleteAdminModeratorComponent} from './components/delete-admin-moderator/delete-admin-moderator.component';
+import {CreateAdminModeratorComponent} from './components/admin/create-admin-moderator/create-admin-moderator.component';
+import {EditAdminModeratorComponent} from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
+import {DeleteAdminModeratorComponent} from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
 
 
 const routes: Routes = [
