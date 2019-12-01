@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../service/account.service';
 import {Book} from '../../models/book';
 import {UsersBooksService} from '../../service/users-books-service';
@@ -66,7 +66,7 @@ export class PersonalBooklistComponent implements OnInit {
           {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
         ],
         actionElements: [
-          {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
+          {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
         ],
         listItemCallback: null,
         additionalParams: null

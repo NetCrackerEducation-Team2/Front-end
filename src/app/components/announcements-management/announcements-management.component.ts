@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 import {Page} from '../../models/page';
 import {Announcement} from '../../models/announcement';

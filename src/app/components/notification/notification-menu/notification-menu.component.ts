@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../../../service/notification.service';
-import { Notification } from '../../../models/notification';
+import {Component, OnInit} from '@angular/core';
+import {NotificationService} from '../../../service/notification.service';
+import {Notification} from '../../../models/notification';
 import {Page} from '../../../models/page';
 
 @Component({

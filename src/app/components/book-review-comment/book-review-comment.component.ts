@@ -48,10 +48,10 @@ export class BookReviewCommentComponent implements OnInit {
       }),
       flatMap((reviewComment: BookReviewComment) => {
         tmpComments.push(reviewComment);
-        return this.accountService.getUserById(reviewComment.authorId);
+        return this.accountService.getUserById(reviewComment.userId);
       }),
       map((author: User) => {
-        const comment = tmpComments.filter(value => value.authorId === author.userId)[0];
+        const comment = tmpComments.filter(value => value.userId === author.userId)[0];
         comment.author = author;
         this.reviewComments.push(comment);
         this.loading = false;

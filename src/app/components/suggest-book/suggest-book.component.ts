@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthorService} from '../../service/author.service';
 import {GenreService} from '../../service/genre.service';
 import {BookService} from '../../service/book.service';
-import {Book} from '../../models/book';
 import {Router} from '@angular/router';
 
 @Component({

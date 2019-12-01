@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Inject  } from '@angular/core';
-import { Announcement } from '../../models/announcement';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { AnnouncementService} from '../../service/announcement.service';
-import { DOCUMENT } from '@angular/common';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Announcement} from '../../models/announcement';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DOCUMENT, Location} from '@angular/common';
+import {AnnouncementService} from '../../service/announcement.service';
 
 @Component({
   selector: 'app-announcement-item',

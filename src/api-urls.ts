@@ -23,8 +23,18 @@ export const apiUrls = {
   API_AUTHORS_URL: {
     FIND_URL: environment.BASE_URL + '/api/authors/searchByNameContains'
   },
+  API_USERS: {
+    SEARCH_USERS_URL: environment.BASE_URL + '/api/profile/search'
+  },
   API_BOOK_URL: {
     FIND_BY_ID: environment.BASE_URL + '/api/book-by-id/'
+  },
+  API_ACTIVITIES: {
+    GET_LAST_ACTIVITIES: environment.BASE_URL + '/api/activity/lastFriendActivities'
+  },
+  API_FRIENDS: {
+    API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
   },
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
