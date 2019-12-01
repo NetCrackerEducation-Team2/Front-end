@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
-import {environment} from '../../environments/environment';
 import {Page} from '../models/page';
 import {apiUrls} from 'src/api-urls';
+import * as jwt_decode from 'jwt-decode';
 
 
 @Injectable({
@@ -71,6 +71,19 @@ export class AccountService {
   }
 
   getCurrentUser(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    try {
+      return JSON.parse(localStorage.getItem('currentUser'));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  getCurrentUserRoles(): string[] {
+    const token = this.getToken();
+    if (token) {
+      return JSON.parse(JSON.stringify((jwt_decode(token)))).rol;
+    } else {
+      return null;
+    }
   }
 }
