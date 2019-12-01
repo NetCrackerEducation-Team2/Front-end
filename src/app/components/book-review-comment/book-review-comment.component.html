@@ -1,0 +1,34 @@
+<mat-card class="main-panel">
+  <mat-card-title> Comments</mat-card-title>
+
+  <div>
+    <div *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!loading">
+      <div *ngFor="let comment of reviewComments; index as commentInd">
+
+        <mat-card class="comment-review-block">
+
+          <div class="comment-review-profile-block">
+            <img *ngIf="comment.author.photoPath" class="comment-review-avatar" src="{{ comment.author.photoPath }}" alt="Avatar">
+            <img *ngIf="!comment.author.photoPath" class="comment-review-avatar" src="{{ defaultPhotoPath }}" alt="Avatar">
+          </div>
+
+          <div class="comment-review-content">
+            <mat-card-title> {{ comment.author.fullName }} </mat-card-title>
+            <mat-card-subtitle> Date: {{ comment.creationTime }} </mat-card-subtitle>
+            <p> {{ comment.content }} </p>
+          </div>
+
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+  <mat-card-actions class="main-panel-buttons">
+    <button mat-button color="primary" *ngIf="ableToExpand" (click)="expandReviewsComments()">Show more</button>
+  </mat-card-actions>
+
+</mat-card>

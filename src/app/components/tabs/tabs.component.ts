@@ -68,7 +68,7 @@ export class TabsComponent implements OnInit {
            label: 'Recommendations',
            link: './recommendations',
            index: 2,
-           access: true
+           access: state.accessMap.get('user')
       }, {
           label: 'Profile',
           link: 'profile/:userId',

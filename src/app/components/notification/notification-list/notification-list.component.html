@@ -1,0 +1,22 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav-content>
+      <ng-container *ngIf="!selectedPage.array; else loaded">
+        <div class="loading">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-container>
+      <ng-template #loaded>
+        <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+          <div class="app-announcement-list">
+            <app-list-item *ngFor="let item of selectedPage.array" [listItemInfo]="item"></app-list-item>
+            <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                           [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+            </mat-paginator>
+          </div>
+        </ng-container>
+        <ng-template #noresults>
+          <p class="no-results">No notifications yet</p>
+        </ng-template>
+      </ng-template>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

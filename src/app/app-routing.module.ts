@@ -14,8 +14,9 @@ import {ActivateAccountComponent} from './components/activate-account/activate-a
 import {LogoutComponent} from './components/logout/logout.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
+import {BookOverviewComponent} from './components/book-overview/book-overview.component';
 import {AddBookReviewComponent} from './components/add-book-review/add-book-review.component';
-import { BarRatingModule } from 'ngx-bar-rating';
+import {BarRatingModule} from 'ngx-bar-rating';
 import {SuggestBookComponent} from './components/suggest-book/suggest-book.component';
 import {AnnouncementItemComponent } from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent } from './components/announcement-list/announcement-list.component';
@@ -28,6 +29,8 @@ import {CreateAnnouncementComponent} from './components/create-announcement/crea
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { NotificationListComponent } from './components/notification/notification-list/notification-list.component';
+import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 
 const routes: Routes = [
@@ -42,6 +45,10 @@ const routes: Routes = [
   {
     path: 'book-list',
     component: BookListComponent
+  },
+  {
+    path: 'recommendations',
+    component: RecommendationsComponent
   },
   {
     path: 'register',
@@ -68,8 +75,8 @@ const routes: Routes = [
     component: AnnouncementListComponent
   },
   {
-    path: 'recommendations',
-    component: RecommendationsComponent
+    path: 'notifications',
+    component: NotificationListComponent
   },
   {
     path: 'announcements/add',
@@ -108,10 +115,14 @@ const routes: Routes = [
     component: RecoverComponent
   },
   {
+    path: 'book-overview/:slug',
+    component: BookOverviewComponent
+  },
+  {
     path: 'review/add/:bookId',
     component: AddBookReviewComponent
   },
-{
+  {
     path: 'announcements-management',
     component: AnnouncementsManagementComponent
   },
@@ -140,10 +151,14 @@ const routes: Routes = [
   {
      path: 'create-announcement',
      component: CreateAnnouncementComponent
-  },  // routing to NotFoundComponent must be in the end
+  },
   {
     path: 'book-overviews/:bookId',
     component: OverviewListComponent
+  },
+  {
+    path: 'personal-list',
+    component: PersonalBooklistComponent
   },
   // routing to NotFoundComponent must be in the end
   {

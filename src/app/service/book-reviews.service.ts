@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CheckPaginationService} from './check-pagination.service';
-import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Page} from '../models/page';
 import {catchError} from 'rxjs/operators';
 import {BookReview} from '../models/book-review';
+import {apiUrls} from '../../api-urls';
 import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class BookReviewsService {
   constructor(private http: HttpClient,
               private checkPaginationService: CheckPaginationService,
               private errorHandlerService: ErrorHandlerService) {
-    this.reviewsUrl = environment.API_REVIEWS;
+    this.reviewsUrl = apiUrls.API_REVIEWS;
   }
 
   getAllBooksReviews(page: number, pageSize: number): Observable<Page<BookReview>> {
