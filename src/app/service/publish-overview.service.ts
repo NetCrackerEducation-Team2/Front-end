@@ -14,7 +14,7 @@ export class PublishOverviewService {
   private readonly ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW;
 
   constructor(private httpClient: HttpClient,
-    private errorHandlerService: ErrorHandlerService) {
+              private errorHandlerService: ErrorHandlerService) {
     this.ADMIN_MODERATOR_PUBLISH_OVERVIEW = apiUrls.ADMIN_MODERATOR_PUBLISH_OVERVIEW;
     this.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW = apiUrls.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW;
 
