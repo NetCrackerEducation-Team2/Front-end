@@ -2,14 +2,16 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// @ts-ignore
 import {BASE_URL} from './environment.prod';
 
 export const environment = {
   production: false,
+  url: 'http://localhost:8081/',
   AUTH_LOGIN_URL: 'http://localhost:8081/auth/login',
   AUTH_REGISTER_URL: 'http://localhost:8081/auth/register',
   AUTH_ACTIVATION_URL: 'http://localhost:8081/auth/activate/',
-  API_PROFILE: 'http://localhost:8081/profile',
+  API_PROFILE: 'http://localhost:8081/api/profile',
   // AUTH_LOGIN_URL: BASE_URL + '/auth/login',
   // AUTH_REGISTER_URL: BASE_URL + '/auth/register',
   // AUTH_ACTIVATION_URL: BASE_URL + '/auth/activate/',

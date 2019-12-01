@@ -62,6 +62,8 @@ import {CreateAdminModeratorComponent} from './components/create-admin-moderator
 import {TabsComponent} from './components/tabs/tabs.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
+import {ToastrModule} from 'ngx-toastr';
+import {SocketService} from './service/socket.service';
 
 @NgModule({
   declarations: [
@@ -134,6 +136,13 @@ import { ChatComponent } from './components/chat/chat.component';
     CommonModule,
     StoreModule.forRoot(reducers),
     MatButtonToggleModule,
+    //
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    // AppRoutingModule,
+    // ToastrModule.forRoot({ timeOut: 3000 }),
+    // ReactiveFormsModule,
+    // HttpClientModule
   ],
   exports: [
     BrowserModule,
@@ -160,7 +169,8 @@ import { ChatComponent } from './components/chat/chat.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+     SocketService
   ],
 
   bootstrap: [AppComponent]

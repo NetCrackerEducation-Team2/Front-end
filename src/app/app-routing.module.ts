@@ -28,12 +28,13 @@ import {CreateAnnouncementComponent} from './components/create-announcement/crea
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import {ChatComponent} from './components/chat/chat.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
+   {
+     path: '',
+     component: HomeComponent
+   },
   {
     path: 'login',
     component: LoginComponent
@@ -62,6 +63,7 @@ const routes: Routes = [
     path: 'profile/:userId/change-password',
     component: ChangePasswordComponent
   },
+  { path: 'profile/:userId/chat', component: ChatComponent },
   {
     path: 'announcements',
     component: AnnouncementListComponent

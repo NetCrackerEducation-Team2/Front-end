@@ -54,5 +54,9 @@ export class ProfileComponent implements OnInit {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
   }
+  canChat() {
+    const currentUser = this.accountService.getCurrentUser();
+    return currentUser && this.profile.userId === currentUser.userId;
+  }
 
 }

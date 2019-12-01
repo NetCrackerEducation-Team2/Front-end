@@ -68,7 +68,7 @@ export class AnnouncementsManagementComponent implements OnInit {
               clickFunction: () => {this.publishAnnouncementService.unpublishedAnnouncement(announcement.announcementId)
                                     .subscribe();
                                     console.log(announcement);
-                                    this.getAnnouncements()}}
+                                    this.getAnnouncements(); }}
           ],
           listItemCallback: null,
           additionalParams: null
