@@ -12,15 +12,17 @@ import {apiUrls} from '../../../api-urls';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  private serverUrl = apiUrls.API_SOCKET;
+  readonly serverUrl: string;
   isLoaded = false;
   isCustomSocketOpened = false;
   private stompClient;
-  private form: FormGroup;
-  private userForm: FormGroup;
+  form: FormGroup;
+  userForm: FormGroup;
   messages: Message[] = [];
-  constructor(private socketService: SocketService
-  ) { }
+
+  constructor(private socketService: SocketService) {
+    this.serverUrl = apiUrls.API_SOCKET;
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
