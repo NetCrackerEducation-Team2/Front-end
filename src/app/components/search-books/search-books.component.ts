@@ -11,7 +11,9 @@ import {map, startWith} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {SearchingHistoryService} from '../../service/searching-history.service';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-search-books',
@@ -34,6 +36,8 @@ export class SearchBooksComponent implements OnInit {
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
+  private nextPage$ = new Subject();
+  private _onDestroy = new Subject();
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
@@ -102,7 +106,7 @@ export class SearchBooksComponent implements OnInit {
                   {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
                 ],
                 actionElements: [
-                  {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
+                  {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
                   {buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
                     disabled: false, clickFunction: () => {}}
                 ],
