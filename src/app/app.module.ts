@@ -8,7 +8,6 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
-  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -81,8 +80,6 @@ import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
-import {ToastrModule} from 'ngx-toastr';
-import {SocketService} from './service/socket.service';
 import {ActivityItemComponent} from './components/activity-item/activity-item.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
@@ -153,7 +150,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent,
-    ChatComponent
+    ChatComponent,
     ActivityItemComponent,
     ActivityListComponent,
     SearchUsersComponent,

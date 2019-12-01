@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Message} from '../../models/message';
 import {SocketService} from '../../service/socket.service';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import {apiUrls} from '../../../api-urls';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +12,7 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  private serverUrl = environment.url + 'ws';
+  private serverUrl = apiUrls.API_SOCKET;
   isLoaded = false;
   isCustomSocketOpened = false;
   private stompClient;
@@ -33,12 +33,12 @@ export class ChatComponent implements OnInit {
     this.initializeWebSocketConnection();
   }
 
-  sendMessageUsingSocket() {
-    if (this.form.valid) {
-      const message: Message = { message: this.form.value.message, fromId: this.userForm.value.fromId, toId: this.userForm.value.toId };
-      this.stompClient.send('/socket-subscriber/send/message', {}, JSON.stringify(message));
-    }
-  }
+  // sendMessageUsingSocket() {
+  //   if (this.form.valid) {
+  //     const message: Message = { message: this.form.value.message, fromId: this.userForm.value.fromId, toId: this.userForm.value.toId };
+  //     this.stompClient.send('/socket-subscriber/send/message', {}, JSON.stringify(message));
+  //   }
+  // }
 
   sendMessageUsingRest() {
     if (this.form.valid) {
@@ -66,14 +66,14 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  openSocket() {
-    if (this.isLoaded) {
-      this.isCustomSocketOpened = true;
-      this.stompClient.subscribe('/socket-publisher/' + this.userForm.value.fromId, (message) => {
-        this.handleResult(message);
-      });
-    }
-  }
+  // openSocket() {
+  //   if (this.isLoaded) {
+  //     this.isCustomSocketOpened = true;
+  //     this.stompClient.subscribe('/socket-publisher/' + this.userForm.value.fromId, (message) => {
+  //       this.handleResult(message);
+  //     });
+  //   }
+  // }
 
   handleResult(message) {
     if (message.body) {
