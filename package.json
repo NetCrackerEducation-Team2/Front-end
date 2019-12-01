@@ -37,6 +37,7 @@
     "ngx-bar-rating": "^1.1.0",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
+    "rxjs-take-while-inclusive": "^2.1.1",
     "tslib": "^1.10.0",
     "typescript": "~3.5.3",
     "zone.js": "~0.9.1"
