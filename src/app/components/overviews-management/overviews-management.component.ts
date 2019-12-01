@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Page} from '../../models/page';
-import {Announcement} from '../../models/announcement';
-import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 import {PublishOverviewService} from '../../service/publish-overview.service';
 import {PageEvent} from '@angular/material';
 import {BookOverviewService} from '../../service/book-overview.service';

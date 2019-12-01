@@ -7,6 +7,16 @@
   width: 220px;
   font-size: 18px;
   margin: 10px;
+  background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+  color: white;
+}
+
+.button:hover{
+
+  background: rgb(0,0,255,0.5);
+  color: gray;
+  outline-style: none;
+
 }
 
 .alert {
@@ -63,7 +73,10 @@
 
   .button {
     width: 180px;
+    background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+    color: white;
   }
+
 
   .form-field, .input {
     width: 300px;

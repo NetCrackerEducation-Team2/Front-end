@@ -25,7 +25,7 @@ export class TabsComponent implements OnInit, OnDestroy {
 
   }
 
-  initSubscriptions(): void {
+ private initSubscriptions(): void {
     //check undefined
     this.routerEventsSubscription = this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
@@ -38,7 +38,7 @@ export class TabsComponent implements OnInit, OnDestroy {
   }
 
 
-  updateRolesState(state) {
+ private updateRolesState(state) {
 
     for (const role of state.roles) {
       this.accessMapChange(state, role);
@@ -54,7 +54,7 @@ export class TabsComponent implements OnInit, OnDestroy {
 
   }
 
-  accessMapChange(state, role) {
+private  accessMapChange(state, role) {
     switch (role) {
       case constants.admin:
         state.accessMap.set(constants.admin, true);
@@ -74,7 +74,7 @@ export class TabsComponent implements OnInit, OnDestroy {
     }
 
 }
-  checkNavLinks(state) {
+private  checkNavLinks(state) {
     this.navLinks = [
       {
           label: 'Library',
@@ -88,7 +88,7 @@ export class TabsComponent implements OnInit, OnDestroy {
           access: true
       }, {
           label: 'Profile',
-          link: 'profile/:userId',
+          link: 'profile/' + state.id,
           index: 2,
           access: state.accessMap.get(constants.user)
       }, {
@@ -107,7 +107,7 @@ export class TabsComponent implements OnInit, OnDestroy {
                   state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Manage Books',
-          link: './books-management',
+          link: './overviews-management',
           index: 5,
           access: state.accessMap.get(constants.overviewModerator) ||
                   state.accessMap.get(constants.admin) ||

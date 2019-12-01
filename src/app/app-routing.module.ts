@@ -137,7 +137,7 @@ const routes: Routes = [
   {
      path: 'create-announcement',
      component: CreateAnnouncementComponent
-  },  // routing to NotFoundComponent must be in the end
+  },
   {
     path: 'book-overviews/:bookId',
     component: OverviewListComponent

@@ -8,7 +8,7 @@ export const APP_ACTION = {
 export class LOGIN implements Action {
 
   readonly type: any = APP_ACTION.APP_LOGIN;
-  constructor(public payload: any[]) {
+  constructor(public payload: any) {
   }
 }
 

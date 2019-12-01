@@ -104,12 +104,6 @@
     color: white;
 
   }
-  .button:hover{
-
-    background: rgb(0,0,255,0.5);
-    color: gray;
-    outline-style: none;
-    }
 
   .form-field, .input {
     width: 300px;

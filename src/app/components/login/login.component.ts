@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.isError = false;
           const a = JSON.parse(JSON.stringify((jwt_decode(resp.token))));
         //  this.store.dispatch({type: APP_ACTION.APP_LOGIN }); add supp func
-          this.store.dispatch(new LOGIN(a.rol));
+          this.store.dispatch(new LOGIN(a));
         },
         (error: HttpErrorResponse) => {
           this.isError = true;

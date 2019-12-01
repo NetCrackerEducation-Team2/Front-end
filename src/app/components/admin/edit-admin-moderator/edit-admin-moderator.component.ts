@@ -12,7 +12,7 @@ import * as constants from '../../../state/constants';
   styleUrls: ['./edit-admin-moderator.component.css']
 })
 export class EditAdminModeratorComponent implements OnInit {
-  user = {fullName: '', email: '', password: '', photo_path: 'asdasd', roles: []};
+  user = {fullName: '', email: '', password: '', photo_path: '', roles: []};
   roles = [constants.user, ...constants.adminRoles];
   repeatPassword: '';
   isError = false;
@@ -31,12 +31,13 @@ export class EditAdminModeratorComponent implements OnInit {
   }
 
   editUser(): void {
+
     this.admModerService.
     updateAdminModer(this.user).pipe(take(1)).
     subscribe(resp => {this.isEdited = true; this.isError = false; },
               error => {this.isError = true; this.isEdited = false; });
-  }
 
+  }
 
   change(event): void {
        console.log(event.source.selected, event.source.value);

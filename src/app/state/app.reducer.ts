@@ -5,6 +5,7 @@ export interface AppReducerState {
   login: boolean;
   roles: any[];
   accessMap: any;
+  id: number;
 }
 
 const initialState: AppReducerState = {
@@ -15,7 +16,8 @@ const initialState: AppReducerState = {
                        [constants.reviewModerator, false],
                        [constants.overviewModerator, false],
                        [constants.announcementModerator, false],
-                       [constants.user, false]])
+                       [constants.user, false]]),
+  id: null,
 
 };
 
@@ -27,7 +29,8 @@ export function loginReducer(state = initialState, action) {
       return {
         ...state,
         login: true,
-        roles: [...state.roles, ...action.payload]
+        roles: [...state.roles, ...action.payload.rol],
+        id: action.payload.userId
     };
     case APP_ACTION.APP_LOGOUT:
       return {
