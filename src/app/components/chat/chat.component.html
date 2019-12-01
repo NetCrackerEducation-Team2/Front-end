@@ -1,0 +1,33 @@
+
+<div id="username-page" class="username-page">
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Chat</h2>
+    </div>
+
+    <form [formGroup]="userForm" *ngIf="isLoaded" id="messageForm" name="messageForm">
+      <div class="form-group">
+        <div style="margin-bottom: 20px;">
+          <input type="text" formControlName="fromId" name="fromId" >
+        </div>
+        <input type="text" formControlName="toId" name="toId" placeholder="User id to send the message to">
+      </div>
+    </form>
+    <form [formGroup]="form">
+      <p>Message: </p>
+      <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."
+             autocomplete="off" class="form-control">
+
+      <button type="button" [disabled]="form.invalid || userForm.invalid" (click)="sendMessageUsingRest()" class="primary">
+        Send
+      </button>
+    </form>
+
+    <ul>
+      <li *ngFor="let message of messages">From: {{message.fromId}}, To: {{message.toId}},
+        Message: {{message.message}}</li>
+    </ul>
+  </div>
+
+</div>

@@ -27,13 +27,6 @@ export class ReviewsManagementComponent implements OnInit {
     this.getReviews();
   }
 
-  publish(bookId: number) {
-    this.publishReviewService.publishReview(bookId);
-  }
-
-  unpublished(bookId: number) {
-    this.publishReviewService.publishReview(bookId);
-  }
   getReviews(): void {
     this.pageLoading = true;
     this.bookReviewsService.getAllBooksReviews(this.selectedPage.currentPage, this.selectedPage.pageSize)
@@ -65,11 +58,17 @@ export class ReviewsManagementComponent implements OnInit {
           ],
           actionElements: [
             {buttonInfoId: 1, name: 'Publish', url: null, disabled: bookReview.published,
-              clickFunction: () => {console.log(bookReview.bookId);
-                                    this.publishReviewService.publishReview(bookReview.bookId); }},
+              clickFunction: () => {console.log(bookReview.bookReviewId);
+                                    this.publishReviewService.publishReview(bookReview.bookReviewId)
+                                      .subscribe();
+                                    console.log(bookReview);
+                                    this.getReviews(); }},
             {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: bookReview.published,
-              clickFunction: () => {console.log(bookReview.bookId);
-                                    this.publishReviewService.publishReview(bookReview.bookId); }}
+              clickFunction: () => {console.log(bookReview.bookReviewId);
+                                    this.publishReviewService.unpublishedReview(bookReview.bookReviewId)
+                                      .subscribe();
+                                    console.log(bookReview);
+                                    this.getReviews(); }}
           ],
           listItemCallback: null,
           additionalParams: null

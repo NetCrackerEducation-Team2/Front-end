@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
           for (const s of a.rol) {
             this.store.dispatch(new LOGIN(s));
           }
+
          // this.store.select('appReducer').subscribe(reducer => {console.log("login",reducer.login);});
+
         },
         (error: HttpErrorResponse) => {
           this.isError = true;

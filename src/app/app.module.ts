@@ -8,7 +8,6 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
-  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -37,6 +36,10 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+// import { BooksManagementComponent } from './components/books-management/books-management.component';
+// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
+// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
@@ -51,6 +54,7 @@ import {ReviewsManagementComponent} from './components/reviews-management/review
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
@@ -75,6 +79,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
 import {ActivityItemComponent} from './components/activity-item/activity-item.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
@@ -105,6 +110,23 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     AnnouncementListComponent,
     ActivateAccountComponent,
     ListItemComponent,
+    LogoutComponent,
+    BookOverviewComponent,
+    RecoverPasswordComponent,
+    RecoverComponent,
+    AdminComponent,
+    ReviewsManagementComponent,
+    // BooksManagementComponent,
+    AnnouncementsManagementComponent,
+    CreateBookComponent,
+    // CreateModeratorComponent,
+    // CreateAdminComponent,
+    CreateAnnouncementComponent,
+    ActivateAccountComponent,
+    OverviewListComponent,
+    // OverviewItemComponent,
+    ActivateAccountComponent,
+    ListItemComponent,
     AddAnnouncementComponent,
     LogoutComponent,
     BookOverviewComponent,
@@ -128,6 +150,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent,
+    ChatComponent,
     ActivityItemComponent,
     ActivityListComponent,
     SearchUsersComponent,
@@ -161,6 +184,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     MatNativeDateModule,
     MatMenuModule,
     MatExpansionModule,
+    StoreModule.forRoot( reducers),
     MatSnackBarModule,
     AngularSvgIconModule,
     MatProgressSpinnerModule,
@@ -173,8 +197,14 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    MatTooltipModule,
+    // MatTooltipModule,
     MatButtonToggleModule,
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    // AppRoutingModule,
+    // ToastrModule.forRoot({ timeOut: 3000 }),
+    // ReactiveFormsModule,
+    // HttpClientModule
   ],
   exports: [
     BrowserModule,
@@ -195,6 +225,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     MatTabsModule,
     ReactiveFormsModule,
     AnnouncementListComponent
+
   ],
   providers: [
     {
@@ -202,6 +233,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
       useClass: TokenInterceptorService,
       multi: true
     },
+    //  SocketService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
