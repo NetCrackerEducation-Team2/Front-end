@@ -65,30 +65,37 @@ export class TabsComponent implements OnInit {
           link: './announcements',
           index: 1,
           access: true
-        }, {
+        },
+        {
+          label: 'Recommendations',
+          link: './recommendations',
+          index: 2,
+          access: state.accessMap.get('user')
+        },
+        {
           label: 'Profile',
           link: 'profile/:userId',
-          index: 2,
+          index: 3,
           access: state.accessMap.get('user')
         }, {
           label: 'Manage Announcements ',
           link: './announcements-management',
-          index: 3,
+          index: 4,
           access: state.accessMap.get('ANNOUNCEMENT_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
         }, {
           label: 'Manage Reviews',
           link: './reviews-management',
-          index: 4,
+          index: 5,
           access: state.accessMap.get('REVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
         }, {
           label: 'Manage Overviews',
           link: './overviews-management',
-          index: 5,
+          index: 6,
           access: state.accessMap.get('OVERVIEW_MODERATOR') || state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
         }, {
           label: 'Admin',
           link: './admin',
-          index: 6,
+          index: 7,
           access: state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
         }
       ];

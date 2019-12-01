@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter} from '@angular/core';
 import {Author} from '../../models/author';
 import {Genre} from '../../models/genre';
 import {GenreService} from '../../service/genre.service';
@@ -6,12 +6,14 @@ import {AuthorService} from '../../service/author.service';
 import {BookFilteringParam} from '../../models/book-filtering-param';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
-import {MatAutocompleteSelectedEvent, PageEvent} from '@angular/material';
-import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteSelectedEvent, MatOptionSelectionChange, PageEvent} from '@angular/material';
+import {map, startWith, switchMap} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {SearchingHistoryService} from '../../service/searching-history.service';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-search-books',
@@ -36,9 +38,11 @@ export class SearchBooksComponent implements OnInit {
   pageLoading: boolean;
   window: Window = window;
 
-  constructor(private genreService: GenreService,
+  constructor(private searchingHistoryService: SearchingHistoryService,
+              private genreService: GenreService,
               private authorService: AuthorService,
               private bookPresentationService: BookPresentationService,
+              private accountService: AccountService,
               public bookService: BookService) { }
 
   ngOnInit() {
@@ -67,31 +71,34 @@ export class SearchBooksComponent implements OnInit {
     this.search();
   }
 
-  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void {
+  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void{
     this.author = event.option.value;
     this.search();
   }
 
-  searchWithGenre(event?: MatAutocompleteSelectedEvent): void {
+  searchWithGenre(event?: MatAutocompleteSelectedEvent): void{
     this.genre = event.option.value;
     this.search();
   }
 
-  search(): void {
+  search(): void{
     this.resetPaginator();
     this.searchPage();
   }
 
-  searchPage(): void {
+  searchPage(): void{
     this.pageLoading = true;
     const filteringParams = this.getBookFilteringParamsMap();
-    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
-      .pipe(map(page => {
-        return {
-          currentPage: page.currentPage,
-          countPages: page.countPages,
-          pageSize: page.pageSize,
-          array: page.array.map(book => {
+    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
+      switchMap(page => this.searchingHistoryService.addSearchingHistories(this.accountService.getCurrentUser(), this.getBookFilteringParamsMap(), page.array)
+        .pipe(map(res => ({res, page}))
+      )))
+      .subscribe(({res, page}) => {
+        this.selectedPage = {
+            currentPage: page.currentPage,
+            countPages: page.countPages,
+            pageSize: page.pageSize,
+            array: page.array.map(book => {
               return {
                 title: book.title,
                 subtitle: this.bookPresentationService.getBookSubtitle(book),
@@ -103,18 +110,15 @@ export class SearchBooksComponent implements OnInit {
                   {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
                 ],
                 actionElements: [
-                  {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
+                  {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
                   {buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
                     disabled: false, clickFunction: () => {}}
                 ],
                 listItemCallback: null,
                 additionalParams: null
               };
-          })
+            })
         };
-      }))
-      .subscribe(selectedPage => {
-        this.selectedPage = selectedPage;
         this.pageLoading = false;
       });
   }
@@ -125,16 +129,16 @@ export class SearchBooksComponent implements OnInit {
     this.searchPage();
   }
 
-  private getBookFilteringParamsMap(): Map<BookFilteringParam, object> {
-    const filteringParams = new Map<BookFilteringParam, object>();
-    filteringParams.set(BookFilteringParam.Title, this.title as any as object);
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, any>{
+    const filteringParams = new Map<BookFilteringParam, any>();
+    filteringParams.set(BookFilteringParam.Title, this.title);
     filteringParams.set(BookFilteringParam.Author, this.author);
     filteringParams.set(BookFilteringParam.Genre, this.genre);
     filteringParams.set(BookFilteringParam.AnnouncementDate, this.announcementDate);
     return filteringParams;
   }
 
-  private resetPaginator(): void {
+  private resetPaginator(): void{
     this.selectedPage = this.emptyPage;
   }
 
