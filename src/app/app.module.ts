@@ -84,6 +84,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     UserItemComponent,
     NotificationMenuComponent,
     PersonalBooklistComponent,
-    PersonalBookItemComponent
+    PersonalBookItemComponent,
+    RecommendationsComponent
   ],
   imports: [
     BrowserModule,

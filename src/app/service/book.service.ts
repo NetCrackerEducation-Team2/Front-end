@@ -4,8 +4,6 @@ import {Observable, of} from 'rxjs';
 import {Book} from '../models/book';
 import {catchError} from 'rxjs/operators';
 import {BookFilteringParam} from '../models/book-filtering-param';
-import {Author} from '../models/author';
-import {Genre} from '../models/genre';
 import {StringFormatterService} from './string-formatter.service';
 import {Page} from '../models/page';
 import {apiUrls} from '../../api-urls';
@@ -37,23 +35,23 @@ export class BookService {
     this.findBookByIdUrl = apiUrls.API_BOOK_URL.FIND_BY_ID;
   }
 
-  getBooks(filteringParams: Map<BookFilteringParam, object>, page: number, pageSize: number): Observable<Page<Book>> {
+  getBooks(filteringParams: Map<BookFilteringParam, any>, page: number, pageSize: number): Observable<Page<Book>> {
     let params = new HttpParams();
     let paramsString = '';
     if (filteringParams.get(BookFilteringParam.Title) != null) {
-      const title = filteringParams.get(BookFilteringParam.Title) as unknown as string;
+      const title = filteringParams.get(BookFilteringParam.Title);
       params = params.set('title', title);
     }
     if (filteringParams.get(BookFilteringParam.Author) != null) {
-      const author = filteringParams.get(BookFilteringParam.Author) as unknown as Author;
+      const author = filteringParams.get(BookFilteringParam.Author);
       params = params.set('authorId', author.authorId.toString());
     }
     if (filteringParams.get(BookFilteringParam.Genre) != null) {
-      const genre = filteringParams.get(BookFilteringParam.Genre) as unknown as Genre;
+      const genre = filteringParams.get(BookFilteringParam.Genre);
       params = params.set('genreId', genre.genreId.toString());
     }
     if (filteringParams.get(BookFilteringParam.AnnouncementDate) != null) {
-      const announcementDate = filteringParams.get(BookFilteringParam.AnnouncementDate) as unknown as Date;
+      const announcementDate = filteringParams.get(BookFilteringParam.AnnouncementDate);
       params = params.set('date', this.stringFormatterService.formatDate(announcementDate));
     }
     if (page != null) {

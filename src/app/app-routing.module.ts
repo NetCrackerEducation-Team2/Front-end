@@ -33,6 +33,7 @@ import {ActivityListComponent} from './components/activity-list/activity-list.co
 import {SearchUsersComponent} from './components/search-users/search-users.component';
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
+import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'book-list',
     component: BookListComponent
+  },
+  {
+    path: 'recommendations',
+    component: RecommendationsComponent
   },
   {
     path: 'register',
