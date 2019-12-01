@@ -1,4 +1,4 @@
-.container, .button  {
+.container, .button {
   font-size: 20px;
 }
 
@@ -6,41 +6,41 @@
   height: 50px;
 }
 
-  .container, button {
-    font-size: 20px;
-  }
+.container, button {
+  font-size: 20px;
+}
 
-  button {
-    height: 50px;
-  }
+button {
+  height: 50px;
+}
 
-  .details {
-    padding-top: 20px;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    padding-bottom: 40px;
-  }
+.details {
+  padding-top: 20px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding-bottom: 40px;
+}
 
-  .info {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-  }
-
+.info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
 
 
 @media (max-width: 768px) {
   .info {
     align-items: center;
   }
-  .button  {
+
+  .button {
     height: 45px;
   }
 }
 
 @media (max-width: 380px) {
-  .container, .button  {
+  .container, .button {
     font-size: 18px;
   }
 }
@@ -54,4 +54,14 @@
 .profile {
   display: flex;
   flex-flow: row wrap;
+}
+
+.user_actions {
+  display: flex;
+  flew-flow: row wrap;
+}
+
+.user_actions_item {
+  margin-right: auto;
+  margin-left: auto;
 }

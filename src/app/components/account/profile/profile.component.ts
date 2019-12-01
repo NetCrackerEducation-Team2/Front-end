@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: null};
+  isLogged: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initIsLoggedProperty();
     this.setDefaultAvatar();
     const userIdStr = this.activatedRoute.snapshot.paramMap.get('userId');
     let userId;
@@ -57,6 +59,10 @@ export class ProfileComponent implements OnInit {
   canEdit() {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
+  }
+
+  initIsLoggedProperty(): void {
+    this.isLogged = this.accountService.getCurrentUser() != null;
   }
 
 }

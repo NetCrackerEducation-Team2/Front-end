@@ -1,8 +1,14 @@
 <div class="container">
   <app-user-item [profile]="profile"></app-user-item>
-  <div class="button center" *ngIf="canEdit()">
-    <button class="button" mat-flat-button color="primary" [routerLink]="['edit']">
+  <div class="user_actions">
+    <button *ngIf="canEdit()" class="button user_actions_item" mat-flat-button color="primary" [routerLink]="['edit']">
       Edit profile
+    </button>
+    <button *ngIf="isLogged" class="button user_actions_item" mat-flat-button color="primary" [routerLink]="['/activities']">View
+      activities
+    </button>
+    <button *ngIf="isLogged" class="button user_actions_item" mat-flat-button color="primary" [routerLink]="['/search-users']">Search for
+      friends
     </button>
   </div>
   <mat-divider></mat-divider>
