@@ -5,6 +5,7 @@ import {Observable, Subject} from 'rxjs';
 import {Announcement} from '../models/announcement';
 import {catchError, tap} from 'rxjs/operators';
 import {ErrorHandlerService} from './error-handler.service';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class PublishAnnouncementService {
   private readonly ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
 
   constructor(private httpClient: HttpClient,
-              private errorHandlerService: ErrorHandlerService) {
-    this.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS = environment.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS;
-    this.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS = environment.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
+    private errorHandlerService: ErrorHandlerService) {
+    this.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS = apiUrls.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS;
+    this.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS = apiUrls.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
   }
 
   publishAnnouncement(announcementId: number) {

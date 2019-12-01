@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {Page} from '../../models/page';
-import { AnnouncementService } from '../../service/announcement.service';
+import {AnnouncementService} from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
@@ -19,16 +19,19 @@ export class AnnouncementListComponent implements OnInit {
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
   selectedPagePublish: Page<ListItemInfo> = new Page<ListItemInfo>();
+  isUser: boolean;
 
   constructor(private publishAnnouncementService: PublishAnnouncementService,
               public datePipe: DatePipe,
               private announcementService: AnnouncementService,
-              private accountService: AccountService) { }
+              private accountService: AccountService) {
+  }
 
   ngOnInit() {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
+    this.initIsUserProperty();
   }
 
   getAnnouncements(): void {
@@ -70,7 +73,10 @@ export class AnnouncementListComponent implements OnInit {
             {contentInfoId: 1, title: null, content: announcement.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {}}
+            {
+              buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {
+              }
+            }
           ],
           listItemCallback: null,
           additionalParams: null
@@ -91,5 +97,9 @@ export class AnnouncementListComponent implements OnInit {
 
   public isLogged(): boolean {
     return this.accountService.getToken() !== null;
+  }
+
+  private initIsUserProperty(): void {
+    this.isUser = this.accountService.getCurrentUserRoles().includes('USER');
   }
 }

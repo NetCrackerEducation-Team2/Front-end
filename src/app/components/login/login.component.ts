@@ -5,8 +5,7 @@ import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import {AppState} from '../../state/app.state';
 import {Store} from '@ngrx/store';
-import { LOGIN} from '../../state/app.action';
-
+import {LOGIN} from '../../state/app.action';
 
 
 @Component({

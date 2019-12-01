@@ -29,7 +29,6 @@
     </mat-expansion-panel-header>
     <div class="advanced-books-filter">
       <mat-form-field>
-        <!--<mat-label>Author</mat-label>-->
         <input type="text" placeholder="Author" aria-label="Author" matInput [formControl]="authorsControl"
                [matAutocomplete]="autoAuthorComplete">
         <mat-autocomplete #autoAuthorComplete="matAutocomplete" (optionSelected)="searchWithAuthor($event)" [displayWith]="displayAuthor">
@@ -39,7 +38,6 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
-        <!--<mat-label>Author</mat-label>-->
         <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genresControl"
                [matAutocomplete]="autoGenreComplete">
         <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="searchWithGenre($event)" [displayWith]="displayGenre">

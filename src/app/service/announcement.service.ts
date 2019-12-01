@@ -4,7 +4,7 @@ import {ANNOUNCEMENTS} from '../mocks/mock-announcement';
 import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {apiUrls} from '../../api-urls';
 import {CheckPaginationService} from './check-pagination.service';
 
 @Injectable({
@@ -23,9 +23,8 @@ export class AnnouncementService {
   constructor(private http: HttpClient,
               private checkPaginationService: CheckPaginationService) {
     // this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
-    this.announcementsUrl = environment.API_ANNOUNCEMENTS;
-    this.publishedAnnouncementsUrl = environment.API_PUBLISHED_ANNOUNCEMENTS;
-
+    this.announcementsUrl = apiUrls.API_ANNOUNCEMENTS;
+    this.publishedAnnouncementsUrl = apiUrls.API_PUBLISHED_ANNOUNCEMENTS;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {

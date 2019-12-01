@@ -67,7 +67,6 @@ export class SearchBooksComponent implements OnInit {
   }
 
   searchWithAuthor(event?: MatAutocompleteSelectedEvent): void{
-
     this.author = event.option.value;
     this.search();
   }
@@ -76,9 +75,8 @@ export class SearchBooksComponent implements OnInit {
     this.genre = event.option.value;
     this.search();
   }
-
-
   search(): void {
+
     this.resetPaginator();
     this.searchPage();
   }
