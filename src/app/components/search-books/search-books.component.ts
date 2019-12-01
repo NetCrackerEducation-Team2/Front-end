@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter} from '@angular/core';
 import {Author} from '../../models/author';
 import {Genre} from '../../models/genre';
 import {GenreService} from '../../service/genre.service';
@@ -6,12 +6,14 @@ import {AuthorService} from '../../service/author.service';
 import {BookFilteringParam} from '../../models/book-filtering-param';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
-import {MatAutocompleteSelectedEvent, PageEvent} from '@angular/material';
+import {MatAutocompleteSelectedEvent, MatOptionSelectionChange, PageEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {SearchingHistoryService} from '../../service/searching-history.service';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-search-books',
@@ -24,7 +26,6 @@ export class SearchBooksComponent implements OnInit {
   @Input() author: Author = null;
   @Input() genre: Genre = null;
   @Input() announcementDate: Date = null;
-
   authorsControl = new FormControl();
   genresControl = new FormControl();
   authors: Author[] = [];
@@ -35,6 +36,8 @@ export class SearchBooksComponent implements OnInit {
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
+  private nextPage$ = new Subject();
+  private _onDestroy = new Subject();
 
   constructor(private genreService: GenreService,
               private authorService: AuthorService,
@@ -67,7 +70,7 @@ export class SearchBooksComponent implements OnInit {
     this.search();
   }
 
-  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void {
+  searchWithAuthor(event?: MatAutocompleteSelectedEvent): void{
     this.author = event.option.value;
     this.search();
   }
@@ -76,8 +79,8 @@ export class SearchBooksComponent implements OnInit {
     this.genre = event.option.value;
     this.search();
   }
-
   search(): void {
+
     this.resetPaginator();
     this.searchPage();
   }

@@ -24,7 +24,7 @@ export class ActivityItemComponent implements OnInit {
       actionElements: null,
       additionalParams: null,
       contentElements: null,
-      itemId: this.activity.activityId,
+      // itemId: this.activity.activityId,
       listItemCallback: null,
       photo: null,
       publish: null

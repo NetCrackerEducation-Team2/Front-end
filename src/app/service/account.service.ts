@@ -65,6 +65,7 @@ export class AccountService {
       } catch (e) {
         return null;
       }
+
     } else {
       return null;
     }

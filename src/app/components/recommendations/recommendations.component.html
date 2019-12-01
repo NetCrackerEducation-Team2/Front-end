@@ -1,0 +1,17 @@
+<ng-container *ngIf="!selectedPage.array; else loaded">
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
+<ng-template #loaded>
+  <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+    <app-list-item *ngFor="let recommendation of selectedPage.array"
+                   [listItemInfo]="recommendation"></app-list-item>
+    <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                   [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+    </mat-paginator>
+  </ng-container>
+  <ng-template #noresults>
+    <p class="no-results">No recommendations yet</p>
+  </ng-template>
+</ng-template>

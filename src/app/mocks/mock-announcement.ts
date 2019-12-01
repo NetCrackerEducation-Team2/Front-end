@@ -3,6 +3,7 @@ import { Announcement } from '../models/announcement';
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     announcementId: 1,
+
     title: 'Title',
     description: 'Description',
     userId: 1,

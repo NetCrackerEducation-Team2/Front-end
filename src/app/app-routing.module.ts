@@ -10,7 +10,6 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {EditComponent} from './components/account/edit/edit.component';
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
-import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
 import {RecoverComponent} from './components/recover-password/recover/recover.component';
@@ -26,19 +25,22 @@ import {AdminComponent} from './components/admin/admin.component';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
+import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import {ChatComponent} from './components/chat/chat.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
+import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
+   {
+     path: '',
+     component: HomeComponent
+   },
   {
     path: 'login',
     component: LoginComponent
@@ -46,6 +48,10 @@ const routes: Routes = [
   {
     path: 'book-list',
     component: BookListComponent
+  },
+  {
+    path: 'recommendations',
+    component: RecommendationsComponent
   },
   {
     path: 'register',
@@ -67,6 +73,7 @@ const routes: Routes = [
     path: 'profile/:userId/change-password',
     component: ChangePasswordComponent
   },
+  { path: 'profile/:userId/chat', component: ChatComponent },
   {
     path: 'announcements',
     component: AnnouncementListComponent
