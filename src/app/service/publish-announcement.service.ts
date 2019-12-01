@@ -15,7 +15,7 @@ export class PublishAnnouncementService {
   private readonly ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
 
   constructor(private httpClient: HttpClient,
-    private errorHandlerService: ErrorHandlerService) {
+              private errorHandlerService: ErrorHandlerService) {
     this.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS = apiUrls.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS;
     this.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS = apiUrls.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
   }
