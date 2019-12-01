@@ -39,6 +39,7 @@
     "ngx-bar-rating": "^1.1.0",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
+    "rxjs-take-while-inclusive": "^2.1.1",
     "sockjs-client": "^1.4.0",
     "stompjs": "^2.3.3",
     "tslib": "^1.10.0",
