@@ -6,7 +6,6 @@ export interface ListItemInfo {
   title: string;
   subtitle: string;
   photo: SafeUrl;
-  itemId: number;
   publish: boolean;
   contentElements: ContentInfo[];
   actionElements: ButtonInfo[];

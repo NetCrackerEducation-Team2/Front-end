@@ -30,14 +30,6 @@ export class OverviewsManagementComponent implements OnInit {
     this.getOverviews();
   }
 
-  publish(bookId: number) {
-    this.publishOverviewService.publishOverview(bookId);
-  }
-
-  unpublished(bookId: number) {
-    this.publishOverviewService.publishOverview(bookId);
-  }
-
   getOverviews(): void {
     this.pageLoading = true;
     this.bookOverviewsService.getAllBooksOverviews(this.selectedPage.currentPage, this.selectedPage.pageSize)
@@ -56,7 +48,6 @@ export class OverviewsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(bookOverview => {
         return {
-          user: bookOverview.user,
           description: bookOverview.description,
           creationTime: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
@@ -68,12 +59,18 @@ export class OverviewsManagementComponent implements OnInit {
             {contentInfoId: 1, title: null, content: bookOverview.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'Publish', url: null, disabled: bookOverview.published,
-              clickFunction: () => {console.log(bookOverview.bookId);
-                                    this.publishOverviewService.publishOverview(bookOverview.bookId); }},
-            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: bookOverview.published,
-              clickFunction: () => {console.log(bookOverview.bookId);
-                                    this.publishOverviewService.publishOverview(bookOverview.bookId); }}
+            {buttonInfoId: 1, name: 'Publish', url: null, disabled: false,
+              clickFunction: () => {console.log(bookOverview.bookOverviewId);
+                                    this.publishOverviewService.publishOverview(bookOverview.bookOverviewId)
+                                      .subscribe();
+                                    console.log(bookOverview);
+                                    this.getOverviews(); }},
+            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: false,
+              clickFunction: () => {console.log(bookOverview.bookOverviewId);
+                                    this.publishOverviewService.unpublishedOverview(bookOverview.bookOverviewId)
+                                      .subscribe();
+                                    console.log(bookOverview);
+                                    this.getOverviews(); }}
           ],
           listItemCallback: null,
           additionalParams: null
