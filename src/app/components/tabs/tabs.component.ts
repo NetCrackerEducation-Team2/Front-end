@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../state/app.state';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-tabs',
@@ -49,10 +50,10 @@ export class TabsComponent implements OnInit {
         state.accessMap.set('OVERVIEW_MODERATOR', false);
         state.accessMap.set('REVIEW_MODERATOR', false);
         state.accessMap.set('ANNOUNCEMENT_MODERATOR', false);
-      }
-      state.accessMap.set('user', state.login);
-      console.log(state.accessMap.get('user'), 'user app');
-      console.log(state.accessMap.get('ADMIN'), 'admin app');
+       }
+       state.accessMap.set('USER', state.login);
+       console.log(state.accessMap.get('USER'), 'user app');
+       console.log(state.accessMap.get('ADMIN'), 'admin app');
 
       this.navLinks = [
         {
@@ -70,13 +71,13 @@ export class TabsComponent implements OnInit {
           label: 'Recommendations',
           link: './recommendations',
           index: 2,
-          access: state.accessMap.get('user')
+          access: state.accessMap.get('USER')
         },
         {
           label: 'Profile',
           link: 'profile/:userId',
           index: 3,
-          access: state.accessMap.get('user')
+          access: state.accessMap.get('USER')
         }, {
           label: 'Manage Announcements ',
           link: './announcements-management',
@@ -97,6 +98,7 @@ export class TabsComponent implements OnInit {
           link: './admin',
           index: 7,
           access: state.accessMap.get('ADMIN') || state.accessMap.get('SUPER_ADMIN')
+
         }
       ];
     });

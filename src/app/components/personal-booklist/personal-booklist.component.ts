@@ -59,7 +59,7 @@ export class PersonalBooklistComponent implements OnInit {
         title: book.title,
         subtitle: this.bookPresentationService.getBookSubtitle(book),
         photo: this.bookPresentationService.getBookPhoto(book),
-        itemId: null,
+        // itemId: null,
         publish: null,
         contentElements: [
           {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},

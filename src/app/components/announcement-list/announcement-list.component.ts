@@ -8,7 +8,6 @@ import {map} from 'rxjs/operators';
 import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
-
 @Component({
   selector: 'app-announcement-list',
   templateUrl: './announcement-list.component.html',
@@ -16,7 +15,6 @@ import {PublishAnnouncementService} from '../../service/publish-announcement.ser
   providers: [DatePipe]
 })
 export class AnnouncementListComponent implements OnInit {
-
   pageLoading: boolean;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
@@ -34,17 +32,6 @@ export class AnnouncementListComponent implements OnInit {
     this.getAnnouncements();
     this.getPublishedAnnouncements();
     this.initIsUserProperty();
-  }
-
-
-  publish(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.publishAnnouncement(bookId);
-  }
-
-  unpublished(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.unpublishedAnnouncement(bookId);
   }
 
   getAnnouncements(): void {
@@ -81,7 +68,6 @@ export class AnnouncementListComponent implements OnInit {
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
-          itemId: announcement.bookId,
           publish: null,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},

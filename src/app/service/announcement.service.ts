@@ -31,6 +31,7 @@ export class AnnouncementService {
     // Get from mock
     //  return of(ANNOUNCEMENTS);
     // Get from backend
+
     let paramsString: string;
     paramsString = this.checkPaginationService.checkPagination(page, pageSize);
 
@@ -50,6 +51,7 @@ export class AnnouncementService {
   }
   getAnnouncement(id: number): Observable<Announcement> {
     // Get from mock
+
     // return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
     // Return from backend
 
