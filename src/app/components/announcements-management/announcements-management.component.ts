@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 import {Page} from '../../models/page';
 import {Announcement} from '../../models/announcement';
@@ -50,6 +50,7 @@ export class AnnouncementsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(announcement => {
         return {
+          itemId: announcement.announcementId,
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,

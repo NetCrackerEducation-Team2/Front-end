@@ -47,7 +47,6 @@ export const apiUrls = {
   API_DELETE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/delete',
   API_GET_ADMIN_MODERATOR: environment.BASE_URL + '/admins',
   API_UPDATE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/update',
-
   ADMIN_MODERATOR_PUBLISH_OVERVIEW: environment.BASE_URL + '/api/book-overviews/publish/',
   ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/publish/',
   ADMIN_MODERATOR_PUBLISH_REVIEW: environment.BASE_URL + '/api/book-review/publish/',
