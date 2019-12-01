@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
+
 @Component({
   selector: 'app-achievements',
   templateUrl: './achievements.component.html',
@@ -54,6 +57,13 @@ export class AchievementsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const ws = new SockJS('http://localhost:8081/socket');
+    const stompClient = Stomp.over(ws);
+    stompClient.connect({}, (frame) => {
+      stompClient.subscribe('/topic', (message) => {
+        console.log('Message : ' + message.body);
+      });
+    });
   }
 
   getPaginatorData(event: PageEvent) {
@@ -61,7 +71,7 @@ export class AchievementsComponent implements OnInit {
     if (event.pageIndex === this.pageIndex + 1) {
       this.startIndex = this.startIndex + this.pageSize;
       this.endIndex = this.endIndex + this.pageSize;
-    }  else {
+    } else {
       this.startIndex = this.startIndex - this.pageSize;
       this.endIndex = this.endIndex - this.pageSize;
     }

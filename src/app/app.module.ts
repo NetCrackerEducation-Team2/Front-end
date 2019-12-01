@@ -73,6 +73,9 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
 import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
 import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
 import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
+import { AchievementComponent } from './components/achievement/achievement.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTreeModule} from "@angular/material/tree";
 
 @NgModule({
   declarations: [
@@ -118,7 +121,8 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     BookProfileComponent,
     NotificationMenuComponent,
     PersonalBooklistComponent,
-    PersonalBookItemComponent
+    PersonalBookItemComponent,
+    AchievementComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +159,8 @@ import { PersonalBookItemComponent } from './components/personal-book-item/perso
     CommonModule,
     StoreModule.forRoot(reducers),
     MatButtonToggleModule,
+    MatRadioModule,
+    MatTreeModule,
   ],
   exports: [
     BrowserModule,
