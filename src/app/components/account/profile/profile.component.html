@@ -16,6 +16,10 @@
       <button class="button" mat-flat-button color="primary" [routerLink]="['edit']" >
         Edit profile</button>
     </div>
+    <div class="button center" *ngIf="canChat()">
+      <button class="button" mat-flat-button color="accent" [routerLink]="['chat']" >
+        Chat </button>
+    </div>
   </div>
   <mat-divider></mat-divider>
 

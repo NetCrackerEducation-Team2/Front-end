@@ -54,38 +54,38 @@ export class SearchBooksComponent implements OnInit {
     this.filteredGenres = this.genresControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ""),
+        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
         map(name => name ? this.filterGenres(name) : this.genres.slice())
       );
     this.filteredAuthors = this.authorsControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ""),
+        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
         map(fullName => fullName ? this.filterAuthors(fullName) : this.authors.slice())
       );
     this.search();
   }
 
-
   searchWithAuthor(event?: MatAutocompleteSelectedEvent): void{
+
     this.author = event.option.value;
     this.search();
   }
 
-  searchWithGenre(event?: MatAutocompleteSelectedEvent): void{
+  searchWithGenre(event?: MatAutocompleteSelectedEvent): void {
     this.genre = event.option.value;
     this.search();
   }
 
 
-  search(): void{
+  search(): void {
     this.resetPaginator();
     this.searchPage();
   }
 
-  searchPage(): void{
+  searchPage(): void {
     this.pageLoading = true;
-    let filteringParams = this.getBookFilteringParamsMap();
+    const filteringParams = this.getBookFilteringParamsMap();
     this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
       .pipe(map(page => {
         return {
@@ -100,8 +100,8 @@ export class SearchBooksComponent implements OnInit {
                 itemId: null,
                 publish: null,
                 contentElements: [
-                  {contentInfoId: 1, title: "Genres:", content: this.bookPresentationService.getBookGenresString(book, 3)},
-                  {contentInfoId: 2, title: "Authors:", content: this.bookPresentationService.getBookAuthorsString(book, 3)}
+                  {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
+                  {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
                 ],
                 actionElements: [
                   {buttonInfoId: 1, name: 'View', url: book.slug, disabled: false, clickFunction: () => {}},
@@ -126,7 +126,7 @@ export class SearchBooksComponent implements OnInit {
     this.searchPage();
   }
 
-  private getBookFilteringParamsMap(): Map<BookFilteringParam, object>{
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, object> {
     const filteringParams = new Map<BookFilteringParam, object>();
     filteringParams.set(BookFilteringParam.Title, this.title as any as object);
     filteringParams.set(BookFilteringParam.Author, this.author);
@@ -135,7 +135,7 @@ export class SearchBooksComponent implements OnInit {
     return filteringParams;
   }
 
-  private resetPaginator(): void{
+  private resetPaginator(): void {
     this.selectedPage = this.emptyPage;
   }
 

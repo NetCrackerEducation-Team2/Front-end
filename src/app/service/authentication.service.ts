@@ -21,6 +21,7 @@ export class AuthenticationService {
     this.AUTH_ACTIVATION_URL = environment.AUTH_ACTIVATION_URL;
     this.AUTH_RECOVER_LINK_URL = environment.AUTH_RECOVER_LINK_URL;
     this.AUTH_RECOVER_PASS_URL = environment.AUTH_RECOVER_PASS_URL;
+
   }
 
   authenticate(email, password): Observable<any> {

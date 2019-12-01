@@ -21,12 +21,12 @@ export class BookReviewsService {
     this.reviewsUrl = environment.API_REVIEWS;
   }
 
-  getAllBooksReviews(page: number, pageSize: number): Observable<Page<BookReview>> {
+  getAllBooksReviews(page: number, pageSize: number): Observable<any> {
     let paramsString: string;
     paramsString = this.checkPaginationService.checkPagination(page, pageSize);
     return this.http.get(this.reviewsUrl + paramsString)
       .pipe(
-        catchError(this.errorHandlerService.handleError<any>('getAllBookOverviews', []))
+        catchError(this.errorHandlerService.handleError<any>('getAllBookReviews', []))
       );
   }
 }

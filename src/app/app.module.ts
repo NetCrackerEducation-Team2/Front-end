@@ -28,9 +28,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
-import { BooksManagementComponent } from './components/books-management/books-management.component';
-import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
-import { CreateAdminComponent } from './components/create-admin/create-admin.component';
+// import { BooksManagementComponent } from './components/books-management/books-management.component';
+// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
+// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OverviewsManagementComponent } from './components/overviews-management/overviews-management.component';
@@ -46,7 +46,7 @@ import {ChangePasswordComponent} from './components/account/change-password/chan
 import {MatPaginatorModule} from '@angular/material';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-import { OverviewItemComponent } from './components/overview-item/overview-item.component';
+// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {AddAnnouncementComponent} from './components/add-announcement/add-announcement.component';
@@ -65,6 +65,9 @@ import {reducers} from './state/app.state';
 import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
+import {ToastrModule} from 'ngx-toastr';
+import {SocketService} from './service/socket.service';
 
 @NgModule({
   declarations: [
@@ -91,15 +94,15 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     RecoverComponent,
     AdminComponent,
     ReviewsManagementComponent,
-    BooksManagementComponent,
+    // BooksManagementComponent,
     AnnouncementsManagementComponent,
     CreateBookComponent,
-    CreateModeratorComponent,
-    CreateAdminComponent,
+    // CreateModeratorComponent,
+    // CreateAdminComponent,
     CreateAnnouncementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    OverviewItemComponent,
+    // OverviewItemComponent,
     ActivateAccountComponent,
     ListItemComponent,
     AddAnnouncementComponent,
@@ -119,7 +122,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     TabsComponent,
     CreateBookComponent,
     CreateAnnouncementComponent,
-    BookProfileComponent
+    BookProfileComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -154,7 +158,12 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
     CommonModule,
     StoreModule.forRoot(reducers),
     MatButtonToggleModule,
-
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    // AppRoutingModule,
+    // ToastrModule.forRoot({ timeOut: 3000 }),
+    // ReactiveFormsModule,
+    // HttpClientModule
   ],
   exports: [
     BrowserModule,
@@ -182,7 +191,8 @@ import {BookProfileComponent} from './components/book-profile/book-profile.compo
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+     SocketService
   ],
 
   bootstrap: [AppComponent]
