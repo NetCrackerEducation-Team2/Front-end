@@ -8,7 +8,7 @@ export const environment = {
   // SERVER_DOMAIN: 'http://localhost:8081',
   SERVER_DOMAIN: 'https://netcracker2-back-end.herokuapp.com',
 
-  /// Чекните, нигде ли я не пропустил кусок URI
+  /// Чекните, нигде ли я не пропустил кусок URL
   AUTH_LOGIN_URL: '/auth/login',
   AUTH_REGISTER_URL: '/auth/register',
   AUTH_ACTIVATION_URL: '/auth/activate/',

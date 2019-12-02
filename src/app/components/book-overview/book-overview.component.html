@@ -1,19 +1,18 @@
-<div *ngIf="loadfinished; else elseBlock">
+<div *ngIf="loadFinished; else elseBlock">
 <div class="book-overview-container">
   <div class="book-overview-title">
     {{book.title}}
   </div>
   <mat-divider class="book-overview-mat-divider"></mat-divider>
   <div class="book-overview-picture">
-    <img [src]="scourcePhoto" width="300" height="300">
+    <img [src]="sourcePhoto" class="book-overview-picture" alt="No book photo">
   </div>
   <div class="book-overview-overview">
       <div>Announcement date: {{book.release}}</div>
       <div>Genres: {{genres}}</div>
       <div>Authors: {{authors}}</div>
       <div>Rating: {{book.rateSum}}</div>
-      <div>Publishing house: {{publishingHouse}} </div>
-    <button class="book-overview-to-read-button">Add to "To read"</button>
+      <div>Publishing house: {{book.publishingHouse}}</div>
   </div>
   <div class="book-description">
     <h2>Description:</h2>
@@ -27,4 +26,4 @@
 </app-book-review>
 
 </div>
-<ng-template #elseBlock><mat-spinner></mat-spinner></ng-template>
+<ng-template #elseBlock><mat-spinner class="book-overview-spinner"></mat-spinner></ng-template>

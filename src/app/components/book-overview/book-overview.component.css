@@ -10,7 +10,17 @@
   font-size: 12px;
 }
 
+.book-overview-picture{
+  width: 300px;
+  height: 300px;
+}
+.book-overview-spinner{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
 
+  align-content: center;
+}
 .book-overview-container{                           /*Container*/
   display: grid;
   margin: 0 5px;

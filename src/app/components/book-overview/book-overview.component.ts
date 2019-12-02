@@ -3,7 +3,7 @@ import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
-import {flatMap, map, mergeMap} from 'rxjs/operators';
+import {flatMap} from 'rxjs/operators';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
@@ -17,9 +17,8 @@ export class BookOverviewComponent implements OnInit {
   bookOverview: BookOverview;
   genres: string;
   authors: string;
-  scourcePhoto: SafeUrl;
-  loadfinished = 0;
-  publishingHouse: string;
+  sourcePhoto: SafeUrl;
+  loadFinished = 0;
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -37,14 +36,12 @@ export class BookOverviewComponent implements OnInit {
         this.book = resBook;
         this.authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
         this.genres = this.bookService.getBookAuthorsString(this.book, this.book.genres.length);
-
-        this.scourcePhoto = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.book.photo);
-        this.publishingHouse = resBook.publsihingHouse;
+        this.sourcePhoto = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.book.photo);
         return this.bookService.getBookOverview(this.book.bookId);
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
-        this.loadfinished = 1;
+        this.loadFinished = 1;
     });
   }
 }
