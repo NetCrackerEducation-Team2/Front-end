@@ -22,16 +22,11 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient,
               private checkPaginationService: CheckPaginationService) {
-    // this.announcemetnsUrl = 'http://localhost:8081/api/announcements';
     this.announcementsUrl = apiUrls.API_ANNOUNCEMENTS;
     this.publishedAnnouncementsUrl = apiUrls.API_PUBLISHED_ANNOUNCEMENTS;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {
-    // Get from mock
-    //  return of(ANNOUNCEMENTS);
-    // Get from backend
-
     let paramsString: string;
     paramsString = this.checkPaginationService.checkPagination(page, pageSize);
 
@@ -50,11 +45,6 @@ export class AnnouncementService {
       );
   }
   getAnnouncement(id: number): Observable<Announcement> {
-    // Get from mock
-
-    // return of(ANNOUNCEMENTS.find(announcement => announcement.announcementId === id));
-    // Return from backend
-
     return this.http.get(this.announcementsUrl + id)
       .pipe(
         catchError(this.handleError<any>('getAnnouncements', []))
