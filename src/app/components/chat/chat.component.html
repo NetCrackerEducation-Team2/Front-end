@@ -1,32 +1,29 @@
-
 <div id="username-page" class="username-page">
 
   <div class="chat-container">
     <div class="chat-header">
-      <h2>Chat</h2>
-    </div>
-
-<!--    <form [formGroup]="userForm" *ngIf="isLoaded" id="messageForm" name="messageForm">-->
-<!--      <div class="form-group">-->
-<!--        <div style="margin-bottom: 20px;">-->
-<!--          <input type="text" formControlName="fromId" name="fromId" >-->
-<!--        </div>-->
-<!--        <input type="text" formControlName="toId" name="toId" placeholder="User id to send the message to">-->
-<!--      </div>-->
-<!--    </form>-->
-    <form [formGroup]="form">
-      <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."
-             autocomplete="off" class="form-control">
-
-      <button type="button" [disabled]="form.invalid" (click)="sendMessageUsingRest()" class="primary">
-        Send
+      <button mat-button [matMenuTriggerFor]="menu">
+        <h2>Chatting</h2>
       </button>
-    </form>
-
-    <ul>
-      <li *ngFor="let message of messages">From: {{message.fromId}}, To: {{message.toId}},
-        Message: {{message.message}}</li>
+      <mat-menu #menu="matMenu">
+        <button *ngFor="let user of this.users" mat-menu-item
+                (click)="chooseChat(user.userId)">{{user.fullName}}</button>
+      </mat-menu>
+    </div>
+    <ul *ngFor="let message of messages">From: {{message.fromName}},
+      Message: {{message.message}}
     </ul>
+    <form [formGroup]="form" *ngIf="isLoaded">
+      <div class="form-group">
+        <div class="input-group clearfix">
+          <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."
+                 autocomplete="off" class="form-control">
+          <button type="button" [disabled]="form.invalid" (click)="sendMessage()" class="primary">
+            Send
+          </button>
+        </div>
+      </div>
+    </form>
+    <br>
   </div>
-
 </div>

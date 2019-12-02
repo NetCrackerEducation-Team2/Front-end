@@ -5,79 +5,90 @@ import {SocketService} from '../../service/socket.service';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {apiUrls} from '../../../api-urls';
+import {User} from '../../models/user';
+import {AccountService} from '../../service/account.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit {
   readonly serverUrl: string;
   isLoaded = false;
-  isCustomSocketOpened = false;
   private stompClient;
   form: FormGroup;
   userForm: FormGroup;
   messages: Message[] = [];
+  fullName: string;
+  email: string;
+  userId: number;
 
-  constructor(private socketService: SocketService) {
+  users: User[] = [];
+
+  constructor(private socketService: SocketService,
+              private accountService: AccountService) {
     this.serverUrl = apiUrls.API_SOCKET;
   }
 
   ngOnInit() {
+    this.getCurrentUser();
+    this.findUsersById();
     this.form = new FormGroup({
       message: new FormControl(null, [Validators.required])
     });
-    this.userForm = new FormGroup({
-      fromId: new FormControl(null, [Validators.required]),
-      toId: new FormControl(null)
-    });
-    this.initializeWebSocketConnection();
   }
 
-  // sendMessageUsingSocket() {
-  //   if (this.form.valid) {
-  //     const message: Message = { message: this.form.value.message, fromId: this.userForm.value.fromId, toId: this.userForm.value.toId };
-  //     this.stompClient.send('/socket-subscriber/send/message', {}, JSON.stringify(message));
-  //   }
-  // }
+  getCurrentUser() {
+    const currentUser = this.accountService.getCurrentUser();
+    this.fullName = currentUser.fullName;
+    this.email = currentUser.email;
+    this.userId = currentUser.userId;
+  }
 
-  sendMessageUsingRest() {
+  findUsersById() {
+    this.accountService.getUsersById(this.userId).subscribe(res => this.users = res);
+  }
+
+  sendMessage() {
     if (this.form.valid) {
-      const message: Message = { message: this.form.value.message, fromId: this.userForm.value.fromId, toId: this.userForm.value.toId };
+      const message: Message = {
+        message: this.form.value.message, fromName: this.fullName,
+        fromEmail: this.email
+      };
       console.log(message);
-      this.socketService.post(message).subscribe(res => {
+      this.socketService.sendMessage(message).subscribe(res => {
         console.log(res);
       });
     }
   }
 
-  initializeWebSocketConnection() {
+  chooseChat(chooseChatId: number) {
+    this.connect();
+    this.socketService.getMessages(this.userId, chooseChatId).subscribe(result  =>  {console.log(result); });
+    console.log(this.messages);
+  }
+
+  connect() {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, () => {
       that.isLoaded = true;
-      that.openGlobalSocket();
+      that.openSocket();
     });
   }
 
-  openGlobalSocket() {
+  openSocket() {
     this.stompClient.subscribe('/socket-publisher', (message) => {
       this.handleResult(message);
     });
   }
 
-  // openSocket() {
-  //   if (this.isLoaded) {
-  //     this.isCustomSocketOpened = true;
-  //     this.stompClient.subscribe('/socket-publisher/' + this.userForm.value.fromId, (message) => {
-  //       this.handleResult(message);
-  //     });
-  //   }
-  // }
-
   handleResult(message) {
+    console.log(message.body);
     if (message.body) {
       const messageResult: Message = JSON.parse(message.body);
       console.log(messageResult);

@@ -5,21 +5,18 @@ export class Announcement {
   userId: number;
   published: boolean;
   creationTime: string;
-  bookId: number;
 
   constructor(announcementId: number,
               title: string,
               description: string,
               userId: number,
               published: boolean,
-              creationTime: string,
-              bookId: number) {
+              creationTime: string) {
     this.announcementId = announcementId;
     this.title = title;
     this.description = description;
     this.userId = userId;
     this.published = published;
     this.creationTime = creationTime;
-    this.bookId = bookId;
   }
 }
