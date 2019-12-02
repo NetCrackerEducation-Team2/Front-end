@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {Achievement} from '../models/achievement';
 import {Page} from '../models/page';
 import {catchError} from 'rxjs/operators';
+import {AchievementReq} from '../models/achievement-req';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,13 @@ export class AchievementService {
 
   private readonly findByUserIdUrl: string;
   private readonly findByAchievementIdUrl: string;
+  private readonly createAchievementUrl: string;
 
   constructor(private httpClient: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
     this.findByUserIdUrl = apiUrls.API_ACHIEVEMENT.FIND_BY_USER_ID;
-    this.findByAchievementIdUrl = apiUrls.API_ACHIEVEMENT.FIND_BY_ACHIEVEMENT_ID;
+    this.findByAchievementIdUrl = apiUrls.API_ACHIEVEMENT.API;
+    this.createAchievementUrl = apiUrls.API_ACHIEVEMENT.API;
   }
 
   public getAchievementsByUserId(userId: number, page?: number, pageSize?: number): Observable<Page<Achievement>> {
@@ -41,6 +44,13 @@ export class AchievementService {
 
   public getAchievementById(achievementId: number): Observable<Achievement> {
     return this.httpClient.get<Achievement>(this.findByAchievementIdUrl + achievementId)
+      .pipe(
+        catchError(this.errorHandlerService.handleError)
+      );
+  }
+
+  public createAchievement(achievement: AchievementReq): Observable<Achievement> {
+    return this.httpClient.post<Achievement>(this.createAchievementUrl, achievement)
       .pipe(
         catchError(this.errorHandlerService.handleError)
       );
