@@ -33,8 +33,6 @@ export class SnackBarService {
     const errorCodeSubstringOffset = errorMessage.includes('Error code: ');
     if (errorCodeSubstringOffset >= 0) {
       const code = +errorMessage.substr(errorCodeSubstringOffset + 'Error code: '.length, 3);
-      // tslint:disable-next-line:no-bitwise
-      console.log('Error code: ', 0 | (code / 100));
       // Getting http response code category. E.g for code 404 - category 4 (code from series 4xx)
       // tslint:disable-next-line:no-bitwise
       const codeSeries = 0 | (code / 100);
