@@ -28,7 +28,7 @@ export class SnackBarService {
     const errorMessage = ((error && error.message) || error || '');
     // avoid printing error message that provides no information about error cause
     if (errorMessage.toLowerCase().indexOf('unknown error') >= 0) {
-      return '';
+      return 'It can be network error. Please, check your connection';
     }
     const errorCodeSubstringOffset = errorMessage.includes('Error code: ');
     if (errorCodeSubstringOffset >= 0) {
@@ -37,7 +37,7 @@ export class SnackBarService {
       // tslint:disable-next-line:no-bitwise
       const codeSeries = 0 | (code / 100);
       switch (codeSeries) {
-        case 5:
+        case 5: // http error code from 5xx series
           return 'There is problem with our server. Please try again later';
         // TODO add other cases
       }
