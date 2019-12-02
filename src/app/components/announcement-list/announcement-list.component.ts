@@ -19,6 +19,7 @@ export class AnnouncementListComponent implements OnInit {
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
   selectedPagePublish: Page<ListItemInfo> = new Page<ListItemInfo>();
+  isUser: boolean;
 
   constructor(private publishAnnouncementService: PublishAnnouncementService,
               public datePipe: DatePipe,
@@ -93,5 +94,9 @@ export class AnnouncementListComponent implements OnInit {
 
   public isLogged(): boolean {
     return this.accountService.getToken() !== null;
+  }
+
+  private initIsUserProperty(): void {
+    this.isUser = this.accountService.getCurrentUserRoles().includes('USER');
   }
 }

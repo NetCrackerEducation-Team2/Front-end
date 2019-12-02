@@ -90,6 +90,7 @@ import {NotificationMenuComponent} from './components/notification/notification-
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import { OptionsScrollDirective } from './directives/options-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -159,7 +160,8 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     NotificationMenuComponent,
     PersonalBooklistComponent,
     PersonalBookItemComponent,
-    RecommendationsComponent
+    RecommendationsComponent,
+    OptionsScrollDirective
   ],
   imports: [
     BrowserModule,

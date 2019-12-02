@@ -17,11 +17,13 @@ export const apiUrls = {
   API_USERS_BOOKS: environment.BASE_URL + '/api/users-book',
   API_GENRES: environment.BASE_URL + '/api/genres/',
   API_GENRES_URL: {
-    SEARCH_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchByNameContains'
+    SEARCH_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchByNameContains',
+    SEARCH_PART_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchPartByNameContains'
   },
   API_AUTHORS: environment.BASE_URL + '/api/authors',
   API_AUTHORS_URL: {
-    FIND_URL: environment.BASE_URL + '/api/authors/searchByNameContains'
+    FIND_URL: environment.BASE_URL + '/api/authors/searchByNameContains',
+    FIND_PART_URL: environment.BASE_URL + '/api/authors/searchPartByNameContains'
   },
   API_USERS: {
     SEARCH_USERS_URL: environment.BASE_URL + '/api/profile/search'

@@ -6,6 +6,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {apiUrls} from '../../api-urls';
 import {CheckPaginationService} from './check-pagination.service';
+import {ErrorHandlerService} from "./error-handler.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,10 @@ export class AnnouncementService {
   };
 
   constructor(private http: HttpClient,
-              private checkPaginationService: CheckPaginationService) {
+              private checkPaginationService: CheckPaginationService,
+              private errorHandlerService: ErrorHandlerService
+  ) {
+
     this.announcementsUrl = apiUrls.API_ANNOUNCEMENTS;
     this.publishedAnnouncementsUrl = apiUrls.API_PUBLISHED_ANNOUNCEMENTS;
   }
@@ -32,7 +36,7 @@ export class AnnouncementService {
 
     return this.http.get(this.announcementsUrl + paramsString)
       .pipe(
-        catchError(this.handleError<any>('getAnnouncements', []))
+        catchError(this.errorHandlerService.handleError<any>('getAnnouncements', []))
       );
   }
   getPublishedAnnouncements(page: number, pageSize: number): Observable<any> {
@@ -41,21 +45,21 @@ export class AnnouncementService {
     console.log(this.publishedAnnouncementsUrl + paramsString);
     return this.http.get(this.publishedAnnouncementsUrl + paramsString)
       .pipe(
-        catchError(this.handleError<any>('getPublishAnnouncements', []))
+        catchError(this.errorHandlerService.handleError<any>('getPublishAnnouncements', []))
       );
   }
   getAnnouncement(id: number): Observable<Announcement> {
     return this.http.get(this.announcementsUrl + id)
       .pipe(
-        catchError(this.handleError<any>('getAnnouncements', []))
+        catchError(this.errorHandlerService.handleError<any>('getAnnouncements', []))
       );
   }
 
   createAnnouncement(title, description, userId): Observable<Announcement> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this.http.post(this.announcementsUrl, JSON.stringify({title, description, userId}), {headers})
+    return this.http.post<Announcement>(this.announcementsUrl, JSON.stringify({title, description, userId}), {headers})
       .pipe(
-        catchError(this.handleError<any>('createAnnouncement', []))
+        catchError(this.errorHandlerService.handleError<any>('Adding announcement', null))
       );
   }
 
@@ -71,17 +75,4 @@ export class AnnouncementService {
   @param operation - name of the operation that failed
   @param result - optional value to return as the observable result
  */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 }
