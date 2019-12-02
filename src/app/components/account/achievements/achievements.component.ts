@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 
 import * as Stomp from 'stompjs';
@@ -6,7 +6,6 @@ import * as SockJS from 'sockjs-client';
 import {Page} from '../../../models/page';
 import {Achievement} from '../../../models/achievement';
 import {AchievementService} from '../../../service/achievement.service';
-import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-achievements',
@@ -60,8 +59,13 @@ export class AchievementsComponent implements OnInit {
     stompClient.connect({}, (frame) => {
       stompClient.subscribe(`/topic/achievements/${this.profileId}`, (message) => {
         console.log('Message : ' + message.body);
-        this.achievementService.getAchievementById(message.body)
-          .subscribe(achievement => this.selectedPage.array.unshift(achievement));
+        //   this.achievementService.getAchievementById(message.body)
+        //     .subscribe(achievement => {
+        //       this.selectedPage.array.unshift(achievement);
+        //     });
+        this.achievementService.getAchievementsByUserId(this.profileId)
+          .subscribe(page => this.selectedPage = page);
+        this.lengthAchievementArr++;
       });
     });
 

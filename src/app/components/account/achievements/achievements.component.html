@@ -8,7 +8,6 @@
     <div
       *ngFor="let el of selectedPage.array | slice: 0 : selectedPage.pageSize">
       <div class="achievement-row">
-        selected.currentPage = {{selectedPage.currentPage}}
         {{el.name}}
         <br>
         <small>{{el.achievementId}}</small>
@@ -18,6 +17,12 @@
   </div>
 
   <mat-paginator class="paginator" [length]="lengthAchievementArr" [pageSize]="selectedPage.pageSize"
-                 (page)="getPaginatorData($event)">
+                 (page)="getPaginatorData($event)"
+                 (change)="getPaginatorData({
+                  pageIndex: this.selectedPage.currentPage-1,
+                  previousPageIndex: this.selectedPage.currentPage<=1?0:this.selectedPage.currentPage-2,
+                  pageSize: this.selectedPage.pageSize,
+                  length: this.lengthAchievementArr
+                 })">
   </mat-paginator>
 </div>
