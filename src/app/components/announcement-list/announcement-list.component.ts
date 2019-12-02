@@ -30,7 +30,7 @@ export class AnnouncementListComponent implements OnInit {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
-    this.initIsUserProperty();
+    // this.initIsUserProperty();
   }
 
   getAnnouncements(): void {

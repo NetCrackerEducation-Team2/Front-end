@@ -60,5 +60,6 @@ export const apiUrls = {
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
   API_SOCKET: environment.BASE_URL + '/ws',
-  API_CHAT: environment.BASE_URL + '/api/ws'
+  API_CHAT: environment.BASE_URL + '/api/ws',
+  API_USERS_ID: environment.BASE_URL + '/api/users/'
 };

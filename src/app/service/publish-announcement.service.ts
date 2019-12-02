@@ -1,6 +1,5 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {Observable, Subject} from 'rxjs';
 import {Announcement} from '../models/announcement';
 import {catchError, tap} from 'rxjs/operators';
@@ -20,7 +19,7 @@ export class PublishAnnouncementService {
     this.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS = apiUrls.ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS;
   }
 
-  publishAnnouncement(announcementId: number) {
+  publishAnnouncement(announcementId: number): Observable<Announcement> {
     return this.httpClient.put<any>(this.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS + announcementId, {})
       .pipe( catchError(this.errorHandlerService.handleError<any>('publishAnnouncement', [])));
   }
