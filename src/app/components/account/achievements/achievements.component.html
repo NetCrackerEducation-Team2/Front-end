@@ -2,14 +2,22 @@
 
   <h2 class="header">Achievements</h2>
 
+
   <div class="achievements">
-    <div *ngFor="let el of arr | slice: startIndex :endIndex">
-      <div class="achievement-row">{{el}}</div>
+    <!--                                          selectedPage.currentPage: 1..3   selectedPage.pageSize:5                           -->
+    <div
+      *ngFor="let el of selectedPage.array | slice: 0 : selectedPage.pageSize">
+      <div class="achievement-row">
+        selected.currentPage = {{selectedPage.currentPage}}
+        {{el.name}}
+        <br>
+        <small>{{el.achievementId}}</small>
+      </div>
       <mat-divider></mat-divider>
     </div>
   </div>
 
-  <mat-paginator class="paginator" [length]="arr.length" [pageSize]="pageSize"
+  <mat-paginator class="paginator" [length]="lengthAchievementArr" [pageSize]="selectedPage.pageSize"
                  (page)="getPaginatorData($event)">
   </mat-paginator>
 </div>

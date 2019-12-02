@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+
+/*
+  TODO: Overwrite the whole component, using @Directive
+*/
 
 @Component({
   selector: 'app-logout',
@@ -7,7 +11,8 @@ import {Router} from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     localStorage.removeItem('currentUser');

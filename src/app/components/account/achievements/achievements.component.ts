@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import {Page} from '../../../models/page';
+import {Achievement} from '../../../models/achievement';
+import {AchievementService} from '../../../service/achievement.service';
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-achievements',
@@ -11,71 +15,76 @@ import * as SockJS from 'sockjs-client';
 })
 export class AchievementsComponent implements OnInit {
 
-  startIndex: number;
-  endIndex: number;
-  pageSize: number;
-  pageIndex: number;
+  @Input() profileId: number;
 
-  arr: string[];
+  selectedPage: Page<Achievement> = new Page<Achievement>();
+  lengthAchievementArr: number;
 
-  constructor() {
-    this.startIndex = 0;
-    this.pageSize = 5;
-    this.endIndex = this.pageSize;
-    this.pageIndex = 0;
-
-    this.arr = [
-      'Read 50 books. Today',
-      'Started following user "Alexander Pushkin". Yesterday',
-      'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-      'Started reading Bible. 03.11.2019',
-      'Some example achievement. 02.11.2019',
-      'Yet another one. 01.11.2019',
-      'Registered! 29.10.2019',
-      'Read 50 books. Today',
-      'Started following user "Alexander Pushkin". Yesterday',
-      'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-      'Started reading Bible. 03.11.2019',
-      'Some example achievement. 02.11.2019',
-      'Yet another one. 01.11.2019',
-      'Registered! 29.10.2019',
-      'Read 50 books. Today',
-      'Started following user "Alexander Pushkin". Yesterday',
-      'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-      'Started reading Bible. 03.11.2019',
-      'Some example achievement. 02.11.2019',
-      'Yet another one. 01.11.2019',
-      'Registered! 29.10.2019',
-      'Read 50 books. Today',
-      'Started following user "Alexander Pushkin". Yesterday',
-      'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-      'Started reading Bible. 03.11.2019',
-      'Some example achievement. 02.11.2019',
-      'Yet another one. 01.11.2019',
-      'Registered! 29.10.2019',
-    ];
+  constructor(private achievementService: AchievementService) {
+    // this.arr = [
+    //   'Read 50 books. Today',
+    //   'Started following user "Alexander Pushkin". Yesterday',
+    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
+    //   'Started reading Bible. 03.11.2019',
+    //   'Some example achievement. 02.11.2019',
+    //   'Yet another one. 01.11.2019',
+    //   'Registered! 29.10.2019',
+    //   'Read 50 books. Today',
+    //   'Started following user "Alexander Pushkin". Yesterday',
+    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
+    //   'Started reading Bible. 03.11.2019',
+    //   'Some example achievement. 02.11.2019',
+    //   'Yet another one. 01.11.2019',
+    //   'Registered! 29.10.2019',
+    //   'Read 50 books. Today',
+    //   'Started following user "Alexander Pushkin". Yesterday',
+    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
+    //   'Started reading Bible. 03.11.2019',
+    //   'Some example achievement. 02.11.2019',
+    //   'Yet another one. 01.11.2019',
+    //   'Registered! 29.10.2019',
+    //   'Read 50 books. Today',
+    //   'Started following user "Alexander Pushkin". Yesterday',
+    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
+    //   'Started reading Bible. 03.11.2019',
+    //   'Some example achievement. 02.11.2019',
+    //   'Yet another one. 01.11.2019',
+    //   'Registered! 29.10.2019',
+    // ];
   }
 
   ngOnInit() {
+    // connect to socket
     const ws = new SockJS('http://localhost:8081/socket');
     const stompClient = Stomp.over(ws);
     stompClient.connect({}, (frame) => {
-      stompClient.subscribe('/topic', (message) => {
+      stompClient.subscribe(`/topic/achievements/${this.profileId}`, (message) => {
         console.log('Message : ' + message.body);
+        this.achievementService.getAchievementById(message.body)
+          .subscribe(achievement => this.selectedPage.array.unshift(achievement));
       });
     });
+
+    this.achievementService.getAchievementsByUserId(this.profileId)
+      .subscribe(page => this.selectedPage = page);
+
+    this.achievementService.countAchievementsByUserId(this.profileId)
+      .subscribe(length => this.lengthAchievementArr = length);
   }
 
   getPaginatorData(event: PageEvent) {
-    // next page wanted
-    if (event.pageIndex === this.pageIndex + 1) {
-      this.startIndex = this.startIndex + this.pageSize;
-      this.endIndex = this.endIndex + this.pageSize;
+    // next page is wanted to be shown
+    if (event.pageIndex === this.selectedPage.currentPage) {
+      console.log('next');
+      const nextPage = this.selectedPage.currentPage + 1;
+      this.achievementService.getAchievementsByUserId(this.profileId, nextPage)
+        .subscribe(page => this.selectedPage = page);
     } else {
-      this.startIndex = this.startIndex - this.pageSize;
-      this.endIndex = this.endIndex - this.pageSize;
+      const prevPage = this.selectedPage.currentPage - 1;
+      this.achievementService.getAchievementsByUserId(this.profileId, prevPage)
+        .subscribe(page => {
+          this.selectedPage = page;
+        });
     }
-    this.pageIndex = event.pageIndex;
   }
-
 }

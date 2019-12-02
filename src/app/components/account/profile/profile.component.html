@@ -13,12 +13,19 @@
       <span>Registered at: {{profile.createdAt | date: ('MMM d, y')}}</span>
     </div>
     <div class="button center" *ngIf="canEdit()">
-      <button class="button" mat-flat-button color="primary" [routerLink]="['edit']" >
-        Edit profile</button>
+      <button class="button" mat-flat-button color="primary" [routerLink]="['edit']">
+        Edit profile
+      </button>
     </div>
   </div>
   <mat-divider></mat-divider>
 
-  <app-achievements></app-achievements>
+  <app-achievements *ngIf="profile.userId; else downloadingSpinner"
+                    [profileId]="this.profile.userId"></app-achievements>
+
+  <ng-template #downloadingSpinner>
+    <mat-progress-spinner>
+    </mat-progress-spinner>
+  </ng-template>
 
 </div>
