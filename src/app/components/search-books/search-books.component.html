@@ -5,52 +5,54 @@
       <mat-icon>search</mat-icon>
     </button>
   </div>
-  <ng-container *ngIf="!selectedPage.array; then loading; else loaded"></ng-container>
-  <ng-template #loading>
-    <p class="loading">Loading...</p>
-  </ng-template>
+  <ng-container *ngIf="!selectedPage.array; else loaded">
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
   <ng-template #loaded>
-    <ng-container *ngIf="selectedPage.array.length > 0; then hasresults; else noresults"></ng-container>
-    <ng-template #hasresults>
+    <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
       <div class="book-page">
-        <app-book-list [page]="selectedPage"></app-book-list>
+        <app-book-list [listItemInfos]="selectedPage.array"></app-book-list>
         <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
                        [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
         </mat-paginator>
       </div>
-    </ng-template>
+    </ng-container>
     <ng-template #noresults>
-      <p class="no-result">No results found</p>
+      <p class="no-results">No results found</p>
     </ng-template>
   </ng-template>
-    <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
-      <mat-expansion-panel-header class="books-filter-title">
-        <mat-panel-title>Apply Filters </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="advanced-books-filter">
+  <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
+    <mat-expansion-panel-header class="books-filter-title">
+      <mat-panel-title>Filters</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="advanced-books-filter">
       <mat-form-field>
-        <mat-label>Author</mat-label>
-        <mat-select [(ngModel)]="author">
-          <mat-option [value]="null"></mat-option>
-          <mat-option *ngFor="let author of authors" [value]="author">
-            {{author.fullName}}
+        <!--<mat-label>Author</mat-label>-->
+        <input type="text" placeholder="Author" aria-label="Author" matInput [formControl]="authorsControl"
+               [matAutocomplete]="autoAuthorComplete">
+        <mat-autocomplete #autoAuthorComplete="matAutocomplete" (optionSelected)="searchWithAuthor($event)" [displayWith]="displayAuthor">
+          <mat-option *ngFor="let author of filteredAuthors | async" [value]="author">
+            {{author == null ? "" : author.fullName}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Genre</mat-label>
-        <mat-select [(ngModel)]="genre">
-          <mat-option [value]="null"></mat-option>
-          <mat-option *ngFor="let genre of genres" [value]="genre">
-            {{genre.name}}
+        <!--<mat-label>Author</mat-label>-->
+        <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genresControl"
+               [matAutocomplete]="autoGenreComplete">
+        <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="searchWithGenre($event)" [displayWith]="displayGenre">
+          <mat-option *ngFor="let genre of filteredGenres | async" [value]="genre">
+            {{genre == null ? "" : genre.name}}
           </mat-option>
-        </mat-select>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate">
+        <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate" (dateChange)="search()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      </div>
-    </mat-expansion-panel>
+    </div>
+  </mat-expansion-panel>
 </div>

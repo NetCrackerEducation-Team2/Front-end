@@ -5,6 +5,7 @@ import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
 import {flatMap} from 'rxjs/operators';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {BookOverviewService} from '../../service/book-overview.service';
 
 @Component({
   selector: 'app-book-overview',
@@ -20,6 +21,7 @@ export class BookOverviewComponent implements OnInit {
   sourcePhoto: SafeUrl;
   loadFinished = 0;
   constructor(private bookService: BookService,
+              private bookOverviewService: BookOverviewService,
               private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
   ) {
@@ -31,13 +33,13 @@ export class BookOverviewComponent implements OnInit {
 
   getBookOverview(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
-    this.bookService.getBook(slug).pipe(
+    this.bookService.getBookBySlug(slug).pipe(
       flatMap((resBook: Book) => {
         this.book = resBook;
         this.authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
         this.genres = this.bookService.getBookAuthorsString(this.book, this.book.genres.length);
         this.sourcePhoto = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.book.photo);
-        return this.bookService.getBookOverview(this.book.bookId);
+        return this.bookOverviewService.getPublishedBookOverview(this.book.bookId);
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
