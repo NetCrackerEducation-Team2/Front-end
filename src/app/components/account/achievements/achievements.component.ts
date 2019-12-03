@@ -1,79 +1,56 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
-
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import {apiUrls} from '../../../../api-urls';
 import {Page} from '../../../models/page';
 import {Achievement} from '../../../models/achievement';
 import {AchievementService} from '../../../service/achievement.service';
+import {Subscription} from 'rxjs';
+import {SocketHolder} from '../../../models/socket-holder';
+
+import {PageEvent} from '@angular/material/paginator';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-achievements',
   templateUrl: './achievements.component.html',
   styleUrls: ['./achievements.component.css']
 })
-export class AchievementsComponent implements OnInit {
+export class AchievementsComponent implements OnInit, OnDestroy {
 
   @Input() profileId: number;
 
   selectedPage: Page<Achievement> = new Page<Achievement>();
   lengthAchievementArr: number;
+  socketUrl!: string;
+  socket!: SocketHolder;
 
   constructor(private achievementService: AchievementService) {
-    // this.arr = [
-    //   'Read 50 books. Today',
-    //   'Started following user "Alexander Pushkin". Yesterday',
-    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-    //   'Started reading Bible. 03.11.2019',
-    //   'Some example achievement. 02.11.2019',
-    //   'Yet another one. 01.11.2019',
-    //   'Registered! 29.10.2019',
-    //   'Read 50 books. Today',
-    //   'Started following user "Alexander Pushkin". Yesterday',
-    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-    //   'Started reading Bible. 03.11.2019',
-    //   'Some example achievement. 02.11.2019',
-    //   'Yet another one. 01.11.2019',
-    //   'Registered! 29.10.2019',
-    //   'Read 50 books. Today',
-    //   'Started following user "Alexander Pushkin". Yesterday',
-    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-    //   'Started reading Bible. 03.11.2019',
-    //   'Some example achievement. 02.11.2019',
-    //   'Yet another one. 01.11.2019',
-    //   'Registered! 29.10.2019',
-    //   'Read 50 books. Today',
-    //   'Started following user "Alexander Pushkin". Yesterday',
-    //   'Finished reading the "War and Peace" L.Tolstoy. 03.11.2019',
-    //   'Started reading Bible. 03.11.2019',
-    //   'Some example achievement. 02.11.2019',
-    //   'Yet another one. 01.11.2019',
-    //   'Registered! 29.10.2019',
-    // ];
+    this.socketUrl = apiUrls.WEBSOCKET;
+    this.socket = new SocketHolder(this.socketUrl);
   }
 
   ngOnInit() {
-    // connect to socket
-    const ws = new SockJS('http://localhost:8081/socket');
-    const stompClient = Stomp.over(ws);
-    stompClient.connect({}, (frame) => {
-      stompClient.subscribe(`/topic/achievements/${this.profileId}`, (message) => {
-        console.log('Message : ' + message.body);
-        //   this.achievementService.getAchievementById(message.body)
-        //     .subscribe(achievement => {
-        //       this.selectedPage.array.unshift(achievement);
-        //     });
-        this.achievementService.getAchievementsByUserId(this.profileId)
-          .subscribe(page => this.selectedPage = page);
-        this.lengthAchievementArr++;
-      });
-    });
+    this.openSocketConnection();
 
     this.achievementService.getAchievementsByUserId(this.profileId)
       .subscribe(page => this.selectedPage = page);
 
     this.achievementService.countAchievementsByUserId(this.profileId)
       .subscribe(length => this.lengthAchievementArr = length);
+  }
+
+  openSocketConnection() {
+    let subscription: Subscription;
+    this.socket.stompClient.connect({}, (frame) => {
+      console.log('Frame : ', frame);
+      this.socket.stompClient.subscribe(`/topic/achievements/${this.profileId}`, newAchievementId => {
+        console.log('Message : ', newAchievementId);
+        subscription = this.achievementService.getAchievementsByUserId(this.profileId)
+          .subscribe(page => {
+            this.selectedPage = page;
+            this.lengthAchievementArr++;
+          });
+      });
+    });
+    return subscription;
   }
 
   getPaginatorData(event: PageEvent) {
@@ -90,5 +67,10 @@ export class AchievementsComponent implements OnInit {
           this.selectedPage = page;
         });
     }
+  }
+
+  ngOnDestroy(): void {
+    console.log('destroying `achievements` component...');
+    this.socket.webSocket.close();
   }
 }

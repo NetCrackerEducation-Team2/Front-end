@@ -45,7 +45,8 @@ export const apiUrls = {
   ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/admins/unpublish-overview/',
   API_NOTIFICATION: environment.BASE_URL + '/api/notifications/',
   API_ACHIEVEMENT: {
+    API: environment.BASE_URL + '/api/achievement',
     FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',
-    FIND_BY_ACHIEVEMENT_ID: environment.BASE_URL + '/api/achievement/'
-  }
+  },
+  WEBSOCKET: environment.BASE_URL + '/ws'
 };
