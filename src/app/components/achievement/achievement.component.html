@@ -1,88 +1,126 @@
 <div class="container">
 
-  <div>Your chosen options
-    : {{chosenVerb}} {{chosenSubject}} {{chosenGenres | json}} {{topSize}} {{chosenDate | json}}
-    {{votersCount|json}} {{count|json}}</div>
+  <app-show-hide [label]="'Verb'" [styles]="{'margin-left': '55px'}">
+    <div class="submit-container">
+      <div *ngFor="let el of dataSource.data[0].children">
+        <mat-radio-button class="margin-row" (click)="click(el)" name="verb">
+          {{el.name}}
+        </mat-radio-button>
+      </div>
+    </div>
+  </app-show-hide>
 
-  <br>
-  <div class="tree-container">
-    <!-- Verb -->
-    <mat-tree [dataSource]="dataSource" [treeControl]="customTreeControl" class="tree">
+  <app-show-hide [label]="'Subject'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-container">
+      <div *ngFor="let el of subjectDataSource.data[0].children" class="checkbox-row">
+        <mat-radio-button class="radio-button" (click)="chooseSubject(el.name)" name="subject">
+          {{el.name}}
+        </mat-radio-button>
+      </div>
+    </div>
+  </app-show-hide>
 
-      <mat-tree-node matTreeNodeToggle *matTreeNodeDef="let node">
-        <li class="mat-tree-node">
-          <!-- use a disabled button to provide padding for tree leaf -->
-          <button mat-icon-button disabled></button>
-          <mat-radio-button class="radio-button" (click)="click(node)" name="verb">
-            {{node.name}}
-          </mat-radio-button>
-        </li>
-      </mat-tree-node>
+  <app-show-hide [label]="'Count'" [styles]="{'margin-left': '70px'}">
+    <div class="submit-row">
+      <label class="label" for="count">Count</label>
+      <mat-form-field>
+        <input matInput placeholder="for example, 25" type="number" [(ngModel)]="achievementReq.count"
+               id="count" class="name-achievement">
+      </mat-form-field>
+    </div>
+  </app-show-hide>
 
-      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-        <li>
-          <div class="mat-tree-node">
-            <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'toggle ' + node.name">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{customTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            {{node.name}}
+  <app-show-hide [label]="'Name'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-row">
+      <label class="label" for="name-achievement">Name</label>
+      <mat-form-field class="name-achievement">
+        <input matInput placeholder="'Professional book reviewer'" type="text"
+               [(ngModel)]="this.achievementReq.name" id="name-achievement">
+      </mat-form-field>
+    </div>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Books'" [styles]="{'margin-left': '55px'}">
+
+    <div>
+      <app-show-hide [label]="'Pages'" [styles]="{'margin-left': '70px'}">
+        <div class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="page-count-from">From</label>
+            <mat-form-field>
+              <input id="page-count-from" matInput placeholder="for example, 100" type="number">
+            </mat-form-field>
           </div>
-          <ul [class.invisible]="!customTreeControl.isExpanded(node)">
-            <ng-container matTreeNodeOutlet></ng-container>
-          </ul>
-        </li>
-      </mat-nested-tree-node>
-
-    </mat-tree>
-
-    <!-- Subject -->
-    <mat-tree [dataSource]="subjectDataSource" [treeControl]="treeControl" class="tree" *ngIf="achievementReq.verb">
-
-      <mat-tree-node matTreeNodeToggle *matTreeNodeDef="let node"
-                     [class.invisible]="!isSubjectAvailable(node.name)">
-        <li class="mat-tree-node">
-          <!-- use a disabled button to provide padding for tree leaf -->
-          <button mat-icon-button disabled></button>
-          <mat-radio-button class="radio-button" (click)="chooseSubject(node.name)" name="subject">
-            {{node.name}}
-          </mat-radio-button>
-        </li>
-      </mat-tree-node>
-
-      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-        <li>
-          <div class="mat-tree-node">
-            <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'toggle ' + node.name">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            {{node.name}}
+          <div class="submit-row">
+            <label class="label" for="page-count-to">To</label>
+            <mat-form-field>
+              <input id="page-count-to" matInput placeholder="for example, 430" type="number">
+            </mat-form-field>
           </div>
-          <ul [class.invisible]="!treeControl.isExpanded(node)">
-            <ng-container matTreeNodeOutlet></ng-container>
-          </ul>
-        </li>
-      </mat-nested-tree-node>
+        </div>
+      </app-show-hide>
+      <app-show-hide [label]="'Genres'" [styles]="{'margin-left': '68px'}">
+        <div class="paginator-container">
+          <div *ngFor="let el of genreNameArray | slice:startIndex :endIndex">
+            <div class="checkbox-row">
+              <mat-checkbox class="mat-checkbox" (click)="addGenre(el)" name="genreParams">
+                {{el}}
+              </mat-checkbox>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <mat-paginator class="paginator" [length]="genreNameArray.length" [pageSize]="pageSize"
+                         (page)="getPaginatorData($event)">
+          </mat-paginator>
+        </div>
+      </app-show-hide>
 
-    </mat-tree>
+      <app-show-hide [label]="'Voter count'" [styles]="{'margin-left': '105px'}">
+        <div class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="voters-count-from">From</label>
+            <mat-form-field>
+              <input id="voters-count-from" matInput placeholder="for example, 10" type="number"
+                     [(ngModel)]="votersCount.from">
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="submit-row">
+            <label class="label" for="voters-count-to">To</label>
+            <mat-form-field>
+              <input id="voters-count-to" matInput placeholder="for example, 25" type="number"
+                     [(ngModel)]="votersCount.to">
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
 
-    <!-- Reserved book params -->
-    <mat-tree [dataSource]="reservedDataSource" [treeControl]="treeControl" class="tree"
-              *ngIf="chosenSubject === 'books'">
-      <mat-tree-node matTreeNodeToggle *matTreeNodeDef="let node">
-        <li class="mat-tree-node">
-          <!-- use a disabled button to provide padding for tree leaf -->
-          <button mat-icon-button disabled></button>
-          <div style="display: flex;flex-direction: row;justify-content: center;align-items: center">
-            <mat-checkbox class="mat-checkbox" (click)="addReservedParam(node, topSize)" name="reservedParams">
-              {{node.name}}
+      <app-show-hide [label]="'Release date'" [styles]="{'margin-left': '120px'}">
+        <div *ngIf="chosenSubject==='books'" class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="from-date">From</label>
+            <mat-form-field>
+              <input matInput placeholder="for example, 10.02.1998" type="date" [(ngModel)]="chosenDate.from"
+                     id="from-date" class="name-achievement">
+            </mat-form-field>
+          </div>
+          <div class="submit-row">
+            <label class="label" for="to-date">To</label>
+            <mat-form-field>
+              <input matInput placeholder="for example, 04.11.2019" type="date" [(ngModel)]="chosenDate.to"
+                     id="to-date">
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
+
+      <app-show-hide [label]="'Reserved params'" [styles]="{'margin-left': '150px'}">
+        <div class="submit-container">
+          <div class="submit-row" *ngFor="let el of reservedDataSource.data[0].children">
+            <mat-checkbox class="label">
+              {{el.name}}
             </mat-checkbox>
-            <mat-form-field style="margin-left: 20px;width: 150px;">
+            <mat-form-field class="option-container">
               <mat-label>Select top size</mat-label>
               <mat-select [(value)]="topSize">
                 <mat-option>None</mat-option>
@@ -94,164 +132,9 @@
               </mat-select>
             </mat-form-field>
           </div>
-        </li>
-      </mat-tree-node>
-
-      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-        <li>
-          <div class="mat-tree-node">
-            <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'toggle ' + node.name">
-              <mat-icon class="mat-icon-rtl-mirror">
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            {{node.name}}
-          </div>
-          <ul [class.invisible]="!treeControl.isExpanded(node)">
-            <ng-container matTreeNodeOutlet></ng-container>
-          </ul>
-        </li>
-      </mat-nested-tree-node>
-
-    </mat-tree>
-
-  </div>
-
-  <div>
-    <label>
-      Count
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="e.g. '10'" type="number" [(ngModel)]="this.achievementReq.count" name="count">
-      </mat-form-field>
-      <br>
-    </label>
-  </div>
-
-  Count
-  <mat-tree [dataSource]="countDataSource" [treeControl]="customTreeControl" class="tree">
-    <mat-tree-node matTreeNodeToggle *matTreeNodeDef="let node">
-      <li class="mat-tree-node">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled></button>
-        <div style="display: flex;flex-direction: row;justify-content: center;align-items: center">
-          {{node.name}}
-
-          <mat-form-field>
-            <label>
-              <input matInput placeholder="e.g. '10'" type="number" [(ngModel)]="achievementReq.count" name="count">
-            </label>
-
-          </mat-form-field>
-
         </div>
-      </li>
-    </mat-tree-node>
-
-    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-      <li>
-        <div class="mat-tree-node">
-          <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'toggle ' + node.name">
-            <mat-icon class="mat-icon-rtl-mirror">
-              {{customTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-            </mat-icon>
-          </button>
-          {{node.name}}
-        </div>
-        <ul [class.invisible]="!customTreeControl.isExpanded(node)">
-          <ng-container matTreeNodeOutlet></ng-container>
-        </ul>
-      </li>
-    </mat-nested-tree-node>
-
-  </mat-tree>
-
-  <div>
-    <label>
-      Name
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="e.g. 'Professional book reviewer'" type="text"
-               [(ngModel)]="this.achievementReq.name" name="name">
-      </mat-form-field>
-      <br>
-    </label>
-  </div>
-
-  <!-- Pages -->
-  <ng-container *ngIf="chosenSubject==='books'">
-    <label>
-      Pages:
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="from, e.g. '100'" type="number">
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="to, e.g. '430'" type="number">
-      </mat-form-field>
-    </label>
-  </ng-container>
-
-  <br>
-
-  <!-- Release date -->
-  <ng-container *ngIf="chosenSubject==='books'">
-    <label>
-      Release date:
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="from" type="date" [(ngModel)]="chosenDate.from">
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="to" type="date" [(ngModel)]="chosenDate.to">
-      </mat-form-field>
-    </label>
-  </ng-container>
-
-  <!-- Voters count -->
-  <br>
-  <ng-container *ngIf="chosenSubject==='books'">
-    <label>
-      Voters count:
-      <br>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="from" type="number" [(ngModel)]="votersCount.from">
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="to" type="number" [(ngModel)]="votersCount.to">
-      </mat-form-field>
-    </label>
-  </ng-container>
-
-  <!--  Genres with paginator-->
-  <ng-container *ngIf="chosenVerb==='books'">
-    <div class="genres-container"
-         *ngIf="genreDataSource.data && genreDataSource.data[0] && genreDataSource.data[0].children">
-      <div *ngFor="let el of genreDataSource.data[0].children | slice:startIndex :endIndex">
-        <div class="achievement-row">
-          <mat-checkbox class="mat-checkbox" (click)="addGenre(el.name)" name="genreParams">
-            {{el.name}}
-          </mat-checkbox>
-        </div>
-        <mat-divider></mat-divider>
-      </div>
-      <mat-paginator class="paginator" [length]="genreDataSource.data[0].children.length" [pageSize]="pageSize"
-                     (page)="getPaginatorData($event)">
-      </mat-paginator>
+      </app-show-hide>
     </div>
-  </ng-container>
+  </app-show-hide>
 
-  <button (click)="createAchievement()">Create new achievement</button>
 </div>
-
-
-
-

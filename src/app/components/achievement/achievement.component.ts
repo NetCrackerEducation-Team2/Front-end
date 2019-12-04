@@ -7,8 +7,10 @@ import {Parameter} from '../../models/constants/parameter';
 import {TableName} from '../../models/constants/table-name';
 import {AchievementService} from '../../service/achievement.service';
 import {AchievementReq} from '../../models/achievement-req';
-import {tap} from 'rxjs/operators';
+import {concatMap, every, map, tap} from 'rxjs/operators';
 import {Verb} from '../../models/constants/verb';
+import {of} from "rxjs";
+import {Genre} from "../../models/genre";
 
 interface GenericNode<T> {
   name: T;
@@ -53,7 +55,7 @@ class Range<T> {
 export class AchievementComponent implements OnInit {
 
   chosenVerb = 'read';
-  chosenSubject: string = 'books';
+  chosenSubject = 'books';
   chosenGenres: string[] = [];
 
   treeControl = new NestedTreeControl<MyNode>(node => node.children);
@@ -88,16 +90,36 @@ export class AchievementComponent implements OnInit {
     from: any
   };
   count: number;
+  genreNameArray: string[] = [] as string[];
+  isToggled: boolean;
+  isBusy: boolean;
 
   constructor(private genreService: GenreService,
               private achievementService: AchievementService) {
+    this.isBusy = this.isToggled = false;
+
     this.achievementReq = new AchievementReq();
     this.achievementReq.extraParams = new Map<Parameter, string[]>();
     this.chosenDate = {to: {}, from: {}};
     this.votersCount = {to: {}, from: {}};
   }
 
+  toggle(): void {
+    this.isToggled = !this.isToggled;
+    this.isBusy = !this.isBusy;
+  }
+
   ngOnInit() {
+    this.genreService.getGenres()
+      .subscribe(
+        genres => {
+          const genreNames = genres.map(g => g.name);
+          genreNames.sort((n1, n2) => n1.localeCompare(n2, 'en'))
+            .forEach(n => this.genreNameArray.push(n));
+        }
+      );
+
+
     this.countDataSource.data = [
       {
         name: 'count',

@@ -75,7 +75,8 @@ import { PersonalBooklistComponent } from './components/personal-booklist/person
 import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
 import { AchievementComponent } from './components/achievement/achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatTreeModule} from "@angular/material/tree";
+import {MatTreeModule} from '@angular/material/tree';
+import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import {MatTreeModule} from "@angular/material/tree";
     NotificationMenuComponent,
     PersonalBooklistComponent,
     PersonalBookItemComponent,
-    AchievementComponent
+    AchievementComponent,
+    ShowHideComponent
   ],
   imports: [
     BrowserModule,

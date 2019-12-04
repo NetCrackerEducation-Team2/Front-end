@@ -1,32 +1,48 @@
 .container {
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.invisible {
-  display: none;
-}
-
-.tree-container {
+  font-size: 18px;
   display: flex;
   flex-flow: row wrap;
+}
+
+.container > * {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.label {
+  width: 150px;
+}
+
+.submit-row {
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.tree-container > * {
-  margin: 20px;
+.submit-container {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.genres-container {
+.paginator-container {
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
-  margin-left: 8%;
 }
 
-.achievement-row {
+
+.checkbox-row {
   padding: 10px;
+}
+
+.margin-row {
+  padding-top: 10px;
+}
+
+.name-achievement {
+  width: 250px;
 }
 
 .paginator {
@@ -35,53 +51,30 @@
   margin-bottom: 10px;
 }
 
-
-.tree ul,
-.tree li {
-  margin-top: 0;
-  margin-bottom: 0;
-  list-style-type: none;
+.option-container {
+  margin-left: 40px;
+  width: 150px;
 }
-
-.radio-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.button {
-  height: 50px;
-  width: 180px;
-  font-size: 18px;
-  margin: 10px;
-}
-
 
 @media (max-width: 768px) {
 
-  .container, .button {
-    font-size: 18px;
+  .submit-row {
+    flex-flow: row wrap;
+    justify-content: flex-start;
   }
 
-  .tree-container {
-    display: flex;
+  .container, .button, .container > * {
+    font-size: 16px;
     flex-direction: column;
   }
 
-  .tree-container > * {
-    margin: 0;
+  .option-container {
+    margin-left: 20px;
+    width: 120px;
   }
-
-}
-
-.nav-footer {
-  margin-top: 20px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
-.nav-footer:nth-child(1) {
-  order: -1;
+  .name-achievement{
+    width: 200px;
+  }
 }
 
 
