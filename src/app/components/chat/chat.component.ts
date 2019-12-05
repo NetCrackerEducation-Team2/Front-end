@@ -20,12 +20,10 @@ export class ChatComponent implements OnInit {
   isLoaded = false;
   private stompClient;
   form: FormGroup;
-  userForm: FormGroup;
   messages: Message[] = [];
   fullName: string;
   email: string;
   userId: number;
-
   users: User[] = [];
 
   constructor(private socketService: SocketService,
@@ -34,6 +32,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.connect();
     this.getCurrentUser();
     this.findUsersById();
     this.form = new FormGroup({
@@ -65,9 +64,13 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  createChat() {
+
+  }
+
   chooseChat(chooseChatId: number) {
     this.connect();
-    this.socketService.getMessages(this.userId, chooseChatId).subscribe(result  =>  {console.log(result); });
+    this.socketService.getMessages(this.userId, chooseChatId).subscribe(result  =>  this.handleResult(result));
     console.log(this.messages);
   }
 
