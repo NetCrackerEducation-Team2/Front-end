@@ -14,7 +14,7 @@ export class FriendService {
   private readonly friendStatusUrl: string;
   private readonly friendRequestUrl: string;
 
-  constructor(private http: HttpClient, private errorHadlerService: ErrorHandlerService) {
+  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {
     this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
     this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
   }
@@ -28,7 +28,7 @@ export class FriendService {
     const params = new HttpParams().set('destinationUserId', destinationUserId.toString());
     return this.http.post(this.friendRequestUrl, null, {params}).pipe(
       map(value => 'OK'), // needs because server returns null normally
-      catchError(this.errorHadlerService.handleError('Sending friend request', null))
+      catchError(this.errorHandler.handleError('Sending friend request', null))
     );
   }
 
@@ -36,7 +36,7 @@ export class FriendService {
     const params = new HttpParams().set('friendId', friendId.toString());
     return this.http.delete(this.friendRequestUrl, {params}).pipe(
       map(value => 'OK'), // needs because server returns null normally
-      catchError(this.errorHadlerService.handleError('Deleting from friends', null))
+      catchError(this.errorHandler.handleError('Deleting from friends', null))
     );
   }
 }
