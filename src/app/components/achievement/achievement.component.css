@@ -4,6 +4,15 @@
   flex-flow: row wrap;
 }
 
+header {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .container > * {
   margin-bottom: 20px;
   font-size: 18px;
@@ -60,7 +69,7 @@
   width: 150px;
 }
 
-.invisible{
+.invisible {
   display: none;
 }
 
@@ -68,10 +77,32 @@
   width: 250px;
 }
 
+.button {
+  font-size: 18px;
+  width: 120px;
+}
+
+.button-wrapper {
+  position: absolute;
+  margin-left: 33%;
+}
+
 @media (max-width: 768px) {
+  .button-wrapper {
+    position: relative;
+    margin-left: 0;
+    padding: 10px;
+  }
+
   .large-text-area {
     width: 200px;
   }
+
+  .button {
+    font-size: 16px;
+    width: 100px;
+  }
+
   .submit-row {
     flex-flow: row wrap;
     justify-content: flex-start;
@@ -81,7 +112,7 @@
     width: 150px;
   }
 
-  .container, .button, .container > * {
+  .container, .container > * {
     font-size: 16px;
     flex-direction: column;
   }

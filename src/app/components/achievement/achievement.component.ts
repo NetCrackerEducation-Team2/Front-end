@@ -6,6 +6,7 @@ import {AchievementService} from '../../service/achievement.service';
 import {AchievementReq} from '../../models/achievement-req';
 import {Verb} from '../../models/constants/verb';
 import {TableName} from '../../models/constants/table-name';
+import {tap} from 'rxjs/operators';
 
 interface Range<T> {
   from: T;
@@ -17,16 +18,15 @@ interface ConstantPair<T, C> {
   type: C;
 }
 
-class AchievementValue {
-
-}
-
 class AchievementBuilder {
   achievementReq: AchievementReq;
-  achievementVal: AchievementValue;
 
   constructor() {
     this.achievementReq = new AchievementReq();
+  }
+
+  build(): AchievementReq {
+    return this.achievementReq;
   }
 
   chooseSubject = (subject: ConstantPair<string, TableName>) => this.achievementReq.subject = subject.type;
@@ -50,42 +50,36 @@ class AchievementBuilder {
 
   changePageCount(from: number, to: number) {
     console.log('changePageCount', 'from', from, 'to', to);
-    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_PAGES);
-    if (selectedPages === undefined) {
-      this.achievementReq.extraParams.set(Parameter.BOOK_PAGES, [] as string[]);
-      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_PAGES);
-    }
+    this.achievementReq.extraParams.set(Parameter.BOOK_PAGES, [] as string[]);
+    const selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_PAGES);
     selectedPages.push(`${from}`, `${to}`);
   }
 
   changeVotersCount(from: number, to: number) {
     console.log('changeVotersCount', 'from', from, 'to', to);
-    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_VOTERS_COUNT);
-    if (selectedPages === undefined) {
-      this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, [] as string[]);
-      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_VOTERS_COUNT);
-    }
+    this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, [] as string[]);
+    const selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_VOTERS_COUNT);
     selectedPages.push(`${from}`, `${to}`);
   }
 
   changeReleaseDate(from: any, to: any) {
     console.log('changeReleaseDate', 'from', from, 'to', to);
-    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
-    if (selectedPages === undefined) {
-      this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, [] as string[]);
-      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
-    }
+    this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, [] as string[]);
+    const selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
     selectedPages.push(`${from}`, `${to}`);
   }
 
   addReservedParam(el: ConstantPair<string, Parameter>, topSize: number | string) {
     console.log('addReservedParam', el, topSize);
-    let selectedReservedParam = this.achievementReq.extraParams.get(el.type);
-    if (selectedReservedParam === undefined) {
-      this.achievementReq.extraParams.set(el.type, [] as string[]);
-      selectedReservedParam = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
-    }
-    selectedReservedParam.push(`${topSize === 'all' ? Number.MAX_VALUE : topSize}`);
+    //   if (topSize === undefined) {
+    //     topSize = 10;
+    //   }
+    //   let selectedReservedParam = this.achievementReq.extraParams.get(el.type);
+    //   if (selectedReservedParam === undefined) {
+    //     this.achievementReq.extraParams.set(el.type, [] as string[]);
+    //     selectedReservedParam = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
+    //   }
+    //   selectedReservedParam.push(`${topSize === 'all' ? Number.MAX_VALUE : topSize}`);
   }
 }
 
@@ -201,30 +195,31 @@ export class AchievementComponent implements OnInit {
     return false;
   }
 
-  //
-  // createAchievement() {
-  //   if (this.votersCount.from && this.votersCount.to) {
-  //     this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, ['' + this.votersCount.from, '' + this.votersCount.to]);
-  //   }
-  //   if (this.chosenDate.to && this.chosenDate.from) {
-  //     this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, ['' + this.chosenDate.from, '' + this.chosenDate.to]);
-  //   }
-  //   if (this.chosenVerb) {
-  //     switch (this.chosenVerb.toUpperCase()) {
-  //       case Verb.HAS:
-  //         this.achievementReq.verb = Verb.HAS;
-  //         break;
-  //       case Verb.PUBLISH:
-  //         this.achievementReq.verb = Verb.PUBLISH;
-  //         break;
-  //       case Verb.READ:
-  //         this.achievementReq.verb = Verb.READ;
-  //     }
-  //   }
-  //   this.achievementService.createAchievement(this.achievementReq)
-  //     .pipe(
-  //       tap(achievement => console.log('Created : ', achievement))
-  //     )
-  //     .subscribe();
-  // }
+  createAchievement(): void {
+    this.achievementBuilder.achievementReq.extraParams
+      = this.covertMap(this.achievementBuilder.achievementReq.extraParams);
+    console.log(this.achievementBuilder.build());
+    console.log(JSON.stringify(this.achievementBuilder.build()));
+    this.achievementService.createAchievement(this.achievementBuilder.build())
+      .pipe(
+        tap(achievement => console.log('Created : ', achievement))
+      )
+      .subscribe();
+  }
+
+  covertMap(map: Map<Parameter, string[]>) {
+    return {
+      [Parameter.RESERVED_BOOK_LARGEST.toString()]: map.get(Parameter.RESERVED_BOOK_LARGEST),
+      [Parameter.RESERVED_BOOK_NEWEST.toString()]: map.get(Parameter.RESERVED_BOOK_NEWEST),
+      [Parameter.RESERVED_BOOK_OLDER.toString()]: map.get(Parameter.RESERVED_BOOK_OLDER),
+      [Parameter.RESERVED_BOOK_RATED.toString()]: map.get(Parameter.RESERVED_BOOK_RATED),
+
+      [Parameter.BOOK_RELEASE.toString()]: map.get(Parameter.BOOK_RELEASE),
+      [Parameter.CREATION_TIME.toString()]: map.get(Parameter.CREATION_TIME),
+      [Parameter.BOOK_PAGES.toString()]: map.get(Parameter.BOOK_PAGES),
+      [Parameter.BOOK_GENRE.toString()]: map.get(Parameter.BOOK_GENRE),
+      [Parameter.BOOK_VOTERS_COUNT.toString()]: map.get(Parameter.BOOK_VOTERS_COUNT),
+      [Parameter.BOOK_RATE_SUM.toString()]: map.get(Parameter.BOOK_RATE_SUM),
+    };
+  }
 }
