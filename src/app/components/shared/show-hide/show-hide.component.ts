@@ -14,7 +14,7 @@ export class ShowHideComponent implements OnInit {
 
   @Input() label: string;
   @Input() styles?: object;
-  private isShow!: boolean;
+  isShow!: boolean;
 
   toggle = () => this.isShow = !this.isShow;
 
