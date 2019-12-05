@@ -7,11 +7,14 @@ import {BookFilteringParam} from '../../models/book-filtering-param';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
 import {MatAutocompleteSelectedEvent, PageEvent} from '@angular/material';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, exhaustMap, filter, map, scan, startWith, switchMap, tap} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {SearchingHistoryService} from '../../service/searching-history.service';
+import {AccountService} from '../../service/account.service';
+import {takeWhileInclusive} from 'rxjs-take-while-inclusive';
 
 @Component({
   selector: 'app-search-books',
@@ -27,43 +30,54 @@ export class SearchBooksComponent implements OnInit {
 
   authorsControl = new FormControl();
   genresControl = new FormControl();
-  authors: Author[] = [];
-  genres: Genre[] = [];
-  filteredAuthors: Observable<Author[]>;
-  filteredGenres: Observable<Genre[]>;
+  filteredAuthors$: Observable<Author[]>;
+  filteredGenres$: Observable<Genre[]>;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
+  private nextAuthorPage$ = new Subject();
+  private nextGenrePage$ = new Subject();
 
-  constructor(private genreService: GenreService,
+  constructor(private searchingHistoryService: SearchingHistoryService,
+              private genreService: GenreService,
               private authorService: AuthorService,
               private bookPresentationService: BookPresentationService,
-              public bookService: BookService) { }
+              private accountService: AccountService,
+              public bookService: BookService) {
+  }
 
   ngOnInit() {
-    this.genreService.getGenres().subscribe(genres => {
-      this.genres = genres;
-      this.genres.sort((g1, g2) => g1.name.localeCompare(g2.name));
-      this.genres.push(null);
-    });
-    this.authorService.getAuthors().subscribe(authors => {
-      this.authors = authors;
-      this.authors.sort((a1, a2) => a1.fullName.localeCompare(a2.fullName));
-      this.authors.push(null);
-    });
-    this.filteredGenres = this.genresControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
-        map(name => name ? this.filterGenres(name) : this.genres.slice())
-      );
-    this.filteredAuthors = this.authorsControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => value ? (typeof value === 'string' ? value : value.name)  : ''),
-        map(fullName => fullName ? this.filterAuthors(fullName) : this.authors.slice())
-      );
+    this.filteredGenres$ = this.genresControl.valueChanges
+      .pipe(startWith(''),
+      debounceTime(200),
+      filter(q => typeof q === 'string'))
+      .pipe(switchMap(filter => {
+        let currentPage = 0;
+        return this.nextGenrePage$.pipe(
+          startWith(currentPage),
+          exhaustMap(_ => this.genreService.searchPartGenres(filter, currentPage)),
+          tap(() => currentPage++),
+          takeWhileInclusive(g => g.length > 0),
+          scan((allGenres, newGenres) => allGenres.concat(newGenres), []),
+        );
+      }));
+
+    this.filteredAuthors$ = this.authorsControl.valueChanges
+      .pipe(startWith(''),
+      debounceTime(200),
+      filter(q => typeof q === 'string'))
+      .pipe(switchMap(filter => {
+        let currentPage = 0;
+        return this.nextAuthorPage$.pipe(
+          startWith(currentPage),
+          exhaustMap(_ => this.authorService.findPartAuthors(filter, currentPage)),
+          tap(() => currentPage++),
+          takeWhileInclusive(a => a.length > 0),
+          scan((allAuthors, newAuthors) => allAuthors.concat(newAuthors), []),
+        );
+      }));
+
     this.search();
   }
 
@@ -85,36 +99,43 @@ export class SearchBooksComponent implements OnInit {
   searchPage(): void {
     this.pageLoading = true;
     const filteringParams = this.getBookFilteringParamsMap();
-    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize)
-      .pipe(map(page => {
-        return {
+    this.bookService.getBooks(filteringParams, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
+      switchMap(page => this.searchingHistoryService.addSearchingHistories(
+        this.accountService.getCurrentUser(), this.getBookFilteringParamsMap(), page.array)
+        .pipe(map(res => ({res, page}))
+        )))
+      .subscribe(({res, page}) => {
+        this.selectedPage = {
           currentPage: page.currentPage,
           countPages: page.countPages,
           pageSize: page.pageSize,
           array: page.array.map(book => {
-              return {
-                title: book.title,
-                subtitle: this.bookPresentationService.getBookSubtitle(book),
-                photo: this.bookPresentationService.getBookPhoto(book),
-                itemId: null,
-                publish: null,
-                contentElements: [
-                  {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
-                  {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
-                ],
-                actionElements: [
-                  {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
-                  {buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
-                    disabled: false, clickFunction: () => {}}
-                ],
-                listItemCallback: null,
-                additionalParams: null
-              };
+            return {
+              title: book.title,
+              subtitle: this.bookPresentationService.getBookSubtitle(book),
+              photo: this.bookPresentationService.getBookPhoto(book),
+              itemId: null,
+              publish: null,
+              contentElements: [
+                {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
+                {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
+              ],
+              actionElements: [
+                {
+                  buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {
+                  }
+                },
+                {
+                  buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
+                  disabled: false, clickFunction: () => {
+                  }
+                }
+              ],
+              listItemCallback: null,
+              additionalParams: null
+            };
           })
         };
-      }))
-      .subscribe(selectedPage => {
-        this.selectedPage = selectedPage;
         this.pageLoading = false;
       });
   }
@@ -125,9 +146,9 @@ export class SearchBooksComponent implements OnInit {
     this.searchPage();
   }
 
-  private getBookFilteringParamsMap(): Map<BookFilteringParam, object> {
-    const filteringParams = new Map<BookFilteringParam, object>();
-    filteringParams.set(BookFilteringParam.Title, this.title as any as object);
+  private getBookFilteringParamsMap(): Map<BookFilteringParam, any> {
+    const filteringParams = new Map<BookFilteringParam, any>();
+    filteringParams.set(BookFilteringParam.Title, this.title);
     filteringParams.set(BookFilteringParam.Author, this.author);
     filteringParams.set(BookFilteringParam.Genre, this.genre);
     filteringParams.set(BookFilteringParam.AnnouncementDate, this.announcementDate);
@@ -138,14 +159,12 @@ export class SearchBooksComponent implements OnInit {
     this.selectedPage = this.emptyPage;
   }
 
-  private filterAuthors(fullName: string): Author[] {
-    const filterValue = fullName.toLowerCase();
-    return this.authors.filter(author => !author || author.fullName.toLowerCase().indexOf(filterValue) === 0);
+  onAuthorScroll() {
+    this.nextAuthorPage$.next();
   }
 
-  private filterGenres(name: string): Genre[] {
-    const filterValue = name.toLowerCase();
-    return this.genres.filter(genre => !genre || genre.name.toLowerCase().indexOf(filterValue) === 0);
+  onGenreScroll() {
+    this.nextGenrePage$.next();
   }
 
   displayAuthor(author: Author): string {

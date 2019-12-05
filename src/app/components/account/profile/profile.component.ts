@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {delay, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-profile',
@@ -57,6 +57,10 @@ export class ProfileComponent implements OnInit {
   }
 
   canEdit() {
+    const currentUser = this.accountService.getCurrentUser();
+    return currentUser && this.profile.userId === currentUser.userId;
+  }
+  canChat() {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
   }

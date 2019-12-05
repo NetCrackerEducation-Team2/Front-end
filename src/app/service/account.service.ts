@@ -5,6 +5,8 @@ import {User} from '../models/user';
 import {Page} from '../models/page';
 import {apiUrls} from 'src/api-urls';
 import * as jwt_decode from 'jwt-decode';
+import {catchError} from 'rxjs/operators';
+import {ErrorHandlerService} from './error-handler.service';
 
 
 @Injectable({
@@ -14,11 +16,13 @@ export class AccountService {
 
   private readonly API_PROFILE;
   private readonly API_SEARCH_USERS;
+  private readonly API_USERS_ID;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private errorHandlerService: ErrorHandlerService) {
     this.API_SEARCH_USERS = apiUrls.API_USERS.SEARCH_USERS_URL;
     this.API_PROFILE = apiUrls.API_PROFILE;
-
+    this.API_USERS_ID = apiUrls.API_USERS_ID;
   }
 
   getUserById(userId: number): Observable<User> {
@@ -65,6 +69,7 @@ export class AccountService {
       } catch (e) {
         return null;
       }
+
     } else {
       return null;
     }
@@ -85,5 +90,12 @@ export class AccountService {
     } else {
       return null;
     }
+  }
+
+  getUsersById(userId: number): Observable<User[]> {
+    return this.http.get(this.API_USERS_ID + userId)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getUsers', []))
+      );
   }
 }

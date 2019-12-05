@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 import {Page} from '../../models/page';
 import {Announcement} from '../../models/announcement';
@@ -31,6 +31,7 @@ export class AnnouncementsManagementComponent implements OnInit {
     this.getAnnouncements();
   }
 
+
   getAnnouncements(): void {
     this.pageLoading = true;
     this.announcementService.getAnnouncements(this.selectedPage.currentPage, this.selectedPage.pageSize)
@@ -49,21 +50,26 @@ export class AnnouncementsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(announcement => {
         return {
+          itemId: announcement.announcementId,
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
-          itemId: announcement.bookId,
           publish: announcement.published,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'Publish', url: null, disabled: announcement.published,
-              clickFunction: () => {console.log(announcement.bookId);
-                                    this.publishAnnouncementService.publishAnnouncement(announcement.bookId); }},
-            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: announcement.published,
-              clickFunction: () => {console.log(announcement.bookId);
-                                    this.publishAnnouncementService.unpublishedAnnouncement(announcement.bookId); }}
+            {buttonInfoId: 1, name: 'Publish', url: null, disabled: false,
+              clickFunction: () => {this.resetPaginator();
+                                    this.publishAnnouncementService.publishAnnouncement(announcement.announcementId)
+                                    .subscribe();
+                                    console.log(announcement);
+                                    this.getAnnouncements(); }},
+            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: false,
+              clickFunction: () => {this.publishAnnouncementService.unpublishedAnnouncement(announcement.announcementId)
+                                    .subscribe();
+                                    console.log(announcement);
+                                    this.getAnnouncements(); }}
           ],
           listItemCallback: null,
           additionalParams: null

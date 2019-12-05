@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {FriendStatus} from '../../models/friend-status';
 import {FriendService} from '../../service/friend.service';
+import {renderConstantPool} from "@angular/compiler-cli/ngcc/src/rendering/renderer";
+import {SnackBarService} from "../../service/presentation-services/snackBar.service";
 
 
 @Component({
@@ -13,7 +15,7 @@ export class UserItemComponent implements OnInit {
   @Input() profile: User;
   friendStatus: FriendStatus;
 
-  constructor(private friendService: FriendService) {
+  constructor(private friendService: FriendService, private snackBarService: SnackBarService) {
   }
 
   private setDefaultAvatar() {
@@ -32,17 +34,23 @@ export class UserItemComponent implements OnInit {
   }
 
   sendFriendRequest() {
-    // FIXME check if response status is OK
     this.friendService.sendFriendRequest(this.profile.userId).subscribe(response => {
-      this.friendStatus.awaitFriendRequestConfirmation = true;
+      console.log('Friend request response ', response);
+      if (response != null) {
+        this.friendStatus.awaitFriendRequestConfirmation = true;
+        this.snackBarService.openSuccessSnackBar('Friend request has been successfully sent');
+      }
     });
   }
 
   deleteFromFriends() {
     console.log('Sending delete from friends request');
     this.friendService.deleteFromFriends(this.profile.userId).subscribe(response => {
-      this.friendStatus.friend = false;
-      this.friendStatus.awaitFriendRequestConfirmation = false;
+      if (response) {
+        this.friendStatus.friend = false;
+        this.friendStatus.awaitFriendRequestConfirmation = false;
+        this.snackBarService.openSuccessSnackBar('Friend has been successfully removed');
+      }
     });
   }
 }

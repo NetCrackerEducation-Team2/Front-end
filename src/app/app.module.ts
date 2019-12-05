@@ -8,7 +8,6 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
-  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -37,6 +36,10 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+// import { BooksManagementComponent } from './components/books-management/books-management.component';
+// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
+// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
@@ -51,6 +54,7 @@ import {ReviewsManagementComponent} from './components/reviews-management/review
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
+// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
@@ -75,15 +79,21 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
 import {ActivityItemComponent} from './components/activity-item/activity-item.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
 import {UsersListComponent} from './components/users-list/users-list.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
-import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
-import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
+import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
+import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
+import { AchievementComponent } from './components/achievement/achievement.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTreeModule} from '@angular/material/tree';
+import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +112,23 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     AchievementsComponent,
     AnnouncementItemComponent,
     AnnouncementListComponent,
+    ActivateAccountComponent,
+    ListItemComponent,
+    LogoutComponent,
+    BookOverviewComponent,
+    RecoverPasswordComponent,
+    RecoverComponent,
+    AdminComponent,
+    ReviewsManagementComponent,
+    // BooksManagementComponent,
+    AnnouncementsManagementComponent,
+    CreateBookComponent,
+    // CreateModeratorComponent,
+    // CreateAdminComponent,
+    CreateAnnouncementComponent,
+    ActivateAccountComponent,
+    OverviewListComponent,
+    // OverviewItemComponent,
     ActivateAccountComponent,
     ListItemComponent,
     AddAnnouncementComponent,
@@ -127,6 +154,7 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     CreateBookComponent,
     CreateAnnouncementComponent,
     BookProfileComponent,
+    ChatComponent,
     ActivityItemComponent,
     ActivityListComponent,
     SearchUsersComponent,
@@ -134,7 +162,10 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     UserItemComponent,
     NotificationMenuComponent,
     PersonalBooklistComponent,
-    PersonalBookItemComponent
+    PersonalBookItemComponent,
+    RecommendationsComponent,
+    AchievementComponent,
+    ShowHideComponent
   ],
   imports: [
     BrowserModule,
@@ -159,6 +190,7 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     MatNativeDateModule,
     MatMenuModule,
     MatExpansionModule,
+    StoreModule.forRoot(reducers),
     MatSnackBarModule,
     AngularSvgIconModule,
     MatProgressSpinnerModule,
@@ -171,8 +203,17 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    MatTooltipModule,
+    // MatTooltipModule,
     MatButtonToggleModule,
+    MatTooltipModule,
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    // AppRoutingModule,
+    // ToastrModule.forRoot({ timeOut: 3000 }),
+    // ReactiveFormsModule,
+    // HttpClientModule
+    MatTreeModule,
+    MatRadioModule
   ],
   exports: [
     BrowserModule,
@@ -193,6 +234,7 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
     MatTabsModule,
     ReactiveFormsModule,
     AnnouncementListComponent
+
   ],
   providers: [
     {
@@ -200,6 +242,7 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
       useClass: TokenInterceptorService,
       multi: true
     },
+    //  SocketService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,

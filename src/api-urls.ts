@@ -17,11 +17,13 @@ export const apiUrls = {
   API_USERS_BOOKS: environment.BASE_URL + '/api/users-book',
   API_GENRES: environment.BASE_URL + '/api/genres/',
   API_GENRES_URL: {
-    SEARCH_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchByNameContains'
+    SEARCH_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchByNameContains',
+    SEARCH_PART_BY_NAME_SUBSTRING: environment.BASE_URL + '/api/genres/searchPartByNameContains'
   },
   API_AUTHORS: environment.BASE_URL + '/api/authors',
   API_AUTHORS_URL: {
-    FIND_URL: environment.BASE_URL + '/api/authors/searchByNameContains'
+    FIND_URL: environment.BASE_URL + '/api/authors/searchByNameContains',
+    FIND_PART_URL: environment.BASE_URL + '/api/authors/searchPartByNameContains'
   },
   API_USERS: {
     SEARCH_USERS_URL: environment.BASE_URL + '/api/profile/search'
@@ -41,17 +43,28 @@ export const apiUrls = {
   API_PUBLISHED_BOOK_OVERVIEW: environment.BASE_URL + '/api/book-overviews/published-by-book/',
   API_BOOK_OVERVIEWS_BY_BOOK: environment.BASE_URL + '/api/book-overviews/by-book/',
   API_PUBLISHED_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/published/',
-  API_OVERVIEWS: environment.BASE_URL + '/api/overviews/',
-  API_REVIEWS: environment.BASE_URL + '/api/reviews/',
+  API_OVERVIEWS: environment.BASE_URL + '/api/book-overviews/',
+  API_REVIEWS: environment.BASE_URL + '/api/book-review/',
   API_CREATE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/create',
   API_DELETE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/delete',
   API_GET_ADMIN_MODERATOR: environment.BASE_URL + '/admins',
   API_UPDATE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/update',
-  ADMIN_MODERATOR_PUBLISH_OVERVIEW: environment.BASE_URL + '/admins/publish-overview/',
-  ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS: environment.BASE_URL + '/admins/publish-announcement/',
-  ADMIN_MODERATOR_PUBLISH_REVIEW: environment.BASE_URL + '/admins/publish-review/',
-  ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS: environment.BASE_URL + '/admins/upublish-announcement/',
-  ADMIN_MODERATOR_UNPUBLISHED_REVIEW: environment.BASE_URL + '/admins/unpublish-review/',
-  ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/admins/unpublish-overview/',
+  ADMIN_MODERATOR_PUBLISH_OVERVIEW: environment.BASE_URL + '/api/book-overviews/publish/',
+  ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/publish/',
+  ADMIN_MODERATOR_PUBLISH_REVIEW: environment.BASE_URL + '/api/book-review/publish/',
+  ADMIN_MODERATOR_UNPUBLISHED_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/unpublish/',
+  ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/api/book-overviews/unpublish/',
+  ADMIN_MODERATOR_UNPUBLISHED_REVIEW: environment.BASE_URL + '/api/book-review/unpublish/',
   API_NOTIFICATION: environment.BASE_URL + '/api/notifications/',
+  API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
+  API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
+  API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
+  API_SOCKET: environment.BASE_URL + '/ws',
+  API_CHAT: environment.BASE_URL + '/api/ws',
+  API_USERS_ID: environment.BASE_URL + '/api/users/',
+  API_ACHIEVEMENT: {
+    API: environment.BASE_URL + '/api/achievement',
+    FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',
+  },
+  WEBSOCKET: environment.BASE_URL + '/ws'
 };

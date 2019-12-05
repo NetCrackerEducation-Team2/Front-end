@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {DatePipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {Page} from '../../models/page';
-import {AnnouncementService} from '../../service/announcement.service';
+import { AnnouncementService } from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
 import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
-
 @Component({
   selector: 'app-announcement-list',
   templateUrl: './announcement-list.component.html',
@@ -16,7 +15,6 @@ import {PublishAnnouncementService} from '../../service/publish-announcement.ser
   providers: [DatePipe]
 })
 export class AnnouncementListComponent implements OnInit {
-
   pageLoading: boolean;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
@@ -26,25 +24,13 @@ export class AnnouncementListComponent implements OnInit {
   constructor(private publishAnnouncementService: PublishAnnouncementService,
               public datePipe: DatePipe,
               private announcementService: AnnouncementService,
-              private accountService: AccountService) {
-  }
+              private accountService: AccountService) { }
 
   ngOnInit() {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
-    this.initIsUserProperty();
-  }
-
-
-  publish(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.publishAnnouncement(bookId);
-  }
-
-  unpublished(bookId: number) {
-    console.log(bookId);
-    this.publishAnnouncementService.unpublishedAnnouncement(bookId);
+    // this.initIsUserProperty();
   }
 
   getAnnouncements(): void {
@@ -78,19 +64,16 @@ export class AnnouncementListComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(announcement => {
         return {
+          itemId: announcement.announcementId,
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
           photo: null,
-          itemId: announcement.bookId,
           publish: null,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},
           ],
           actionElements: [
-            {
-              buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {
-              }
-            }
+            {buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {}}
           ],
           listItemCallback: null,
           additionalParams: null
