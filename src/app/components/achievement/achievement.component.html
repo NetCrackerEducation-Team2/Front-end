@@ -44,9 +44,6 @@
                id="count" class="name-achievement">
       </mat-form-field>
     </div>
-    <ng-template #hintSubject>
-      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
-    </ng-template>
   </app-show-hide>
 
   <app-show-hide [label]="'Description'" [styles]="{'margin-left': '105px'}">
@@ -75,6 +72,30 @@
     </div>
     <ng-template #hintSubject>
       <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Creation time'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-container" *ngIf="achievementBuilder.achievementReq.name; else hintName">
+      <div class="submit-row">
+        <label class="label" for="from-creation-time">From</label>
+        <mat-form-field>
+          <input matInput placeholder="for example, 11.09.2001" type="date" #fromCreatDate
+                 (change)="achievementBuilder.changeCreationTime(fromCreatDate.value, toCreatDate.value)"
+                 id="from-creation-time" class="name-achievement">
+        </mat-form-field>
+      </div>
+      <div class="submit-row">
+        <label class="label" for="to-creation-time">To</label>
+        <mat-form-field>
+          <input matInput placeholder="for example, 09.12.2019" type="date" #toCreatDate
+                 (change)="achievementBuilder.changeCreationTime(fromCreatDate.value, toCreatDate.value)"
+                 id="to-creation-time">
+        </mat-form-field>
+      </div>
+    </div>
+    <ng-template #hintName>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose name before'}"></ng-container>
     </ng-template>
   </app-show-hide>
 
@@ -148,7 +169,7 @@
           <div class="submit-row">
             <label class="label" for="from-date">From</label>
             <mat-form-field>
-              <input matInput placeholder="for example, 10.02.1998" type="date" #fromRelDate
+              <input matInput placeholder="for example, 11.09.2001" type="date" #fromRelDate
                      (change)="achievementBuilder.changeReleaseDate(fromRelDate.value, toRelDate.value)"
                      id="from-date" class="name-achievement">
             </mat-form-field>
@@ -156,7 +177,7 @@
           <div class="submit-row">
             <label class="label" for="to-date">To</label>
             <mat-form-field>
-              <input matInput placeholder="for example, 04.11.2019" type="date" #toRelDate
+              <input matInput placeholder="for example, 09.12.2019" type="date" #toRelDate
                      (change)="achievementBuilder.changeReleaseDate(fromRelDate.value, toRelDate.value)"
                      id="to-date">
             </mat-form-field>
