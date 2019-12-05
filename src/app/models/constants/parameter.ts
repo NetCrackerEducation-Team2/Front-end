@@ -8,7 +8,6 @@ export enum Parameter {
   BOOK_GENRE,
   BOOK_PAGES,
   BOOK_RELEASE,
-  BOOK_PUBLISHING_HOUSE,
 
   // Reserved book params
   RESERVED_BOOK_RATED = 'RESERVED_BOOK_RATED',

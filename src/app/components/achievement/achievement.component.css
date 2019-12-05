@@ -13,6 +13,10 @@
   width: 150px;
 }
 
+.large-label {
+  width: 250px;
+}
+
 .submit-row {
   display: flex;
   justify-content: center;
@@ -56,11 +60,25 @@
   width: 150px;
 }
 
-@media (max-width: 768px) {
+.invisible{
+  display: none;
+}
 
+.large-text-area {
+  width: 250px;
+}
+
+@media (max-width: 768px) {
+  .large-text-area {
+    width: 200px;
+  }
   .submit-row {
     flex-flow: row wrap;
     justify-content: flex-start;
+  }
+
+  .large-label {
+    width: 150px;
   }
 
   .container, .button, .container > * {
@@ -72,7 +90,8 @@
     margin-left: 20px;
     width: 120px;
   }
-  .name-achievement{
+
+  .name-achievement {
     width: 200px;
   }
 }

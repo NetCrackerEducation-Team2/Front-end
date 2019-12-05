@@ -1,48 +1,91 @@
 import {Component, OnInit} from '@angular/core';
-import {NestedTreeControl} from '@angular/cdk/tree';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {GenreService} from '../../service/genre.service';
 import {PageEvent} from '@angular/material/paginator';
 import {Parameter} from '../../models/constants/parameter';
-import {TableName} from '../../models/constants/table-name';
 import {AchievementService} from '../../service/achievement.service';
 import {AchievementReq} from '../../models/achievement-req';
-import {concatMap, every, map, tap} from 'rxjs/operators';
 import {Verb} from '../../models/constants/verb';
-import {of} from "rxjs";
-import {Genre} from "../../models/genre";
+import {TableName} from '../../models/constants/table-name';
 
-interface GenericNode<T> {
-  name: T;
-  children?: GenericNode<T>[];
-}
-
-interface TreeNode<T> {
-  name: string;
-  param?: T;
-  children?: TreeNode<T>[];
-}
-
-interface MyNode {
-  name: string;
-  children?: MyNode[];
-}
-
-
-interface ReservedBookParamNode {
-  name: string;
-  param?: Parameter;
-  subject?: TableName.BOOKS;
-  children?: ReservedBookParamNode[];
-}
-
-class Range<T> {
+interface Range<T> {
   from: T;
   to: T;
+}
 
-  constructor(from?: T, to?: T) {
-    this.from = from;
-    this.to = to;
+interface ConstantPair<T, C> {
+  name: T;
+  type: C;
+}
+
+class AchievementValue {
+
+}
+
+class AchievementBuilder {
+  achievementReq: AchievementReq;
+  achievementVal: AchievementValue;
+
+  constructor() {
+    this.achievementReq = new AchievementReq();
+  }
+
+  chooseSubject = (subject: ConstantPair<string, TableName>) => this.achievementReq.subject = subject.type;
+
+  chooseVerb = (verb: ConstantPair<string, Verb>) => this.achievementReq.verb = verb.type;
+
+  addGenre(selectedGenre: string): void {
+    let selectedGenres = this.achievementReq.extraParams.get(Parameter.BOOK_GENRE);
+    if (selectedGenres === undefined) {
+      this.achievementReq.extraParams.set(Parameter.BOOK_GENRE, [] as string[]);
+      selectedGenres = this.achievementReq.extraParams.get(Parameter.BOOK_GENRE);
+    } else {
+      const idx = selectedGenres.indexOf(selectedGenre);
+      if (idx !== -1) {
+        selectedGenres.splice(idx, 1);
+        return;
+      }
+    }
+    selectedGenres.push(selectedGenre);
+  }
+
+  changePageCount(from: number, to: number) {
+    console.log('changePageCount', 'from', from, 'to', to);
+    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_PAGES);
+    if (selectedPages === undefined) {
+      this.achievementReq.extraParams.set(Parameter.BOOK_PAGES, [] as string[]);
+      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_PAGES);
+    }
+    selectedPages.push(`${from}`, `${to}`);
+  }
+
+  changeVotersCount(from: number, to: number) {
+    console.log('changeVotersCount', 'from', from, 'to', to);
+    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_VOTERS_COUNT);
+    if (selectedPages === undefined) {
+      this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, [] as string[]);
+      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_VOTERS_COUNT);
+    }
+    selectedPages.push(`${from}`, `${to}`);
+  }
+
+  changeReleaseDate(from: any, to: any) {
+    console.log('changeReleaseDate', 'from', from, 'to', to);
+    let selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
+    if (selectedPages === undefined) {
+      this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, [] as string[]);
+      selectedPages = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
+    }
+    selectedPages.push(`${from}`, `${to}`);
+  }
+
+  addReservedParam(el: ConstantPair<string, Parameter>, topSize: number | string) {
+    console.log('addReservedParam', el, topSize);
+    let selectedReservedParam = this.achievementReq.extraParams.get(el.type);
+    if (selectedReservedParam === undefined) {
+      this.achievementReq.extraParams.set(el.type, [] as string[]);
+      selectedReservedParam = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
+    }
+    selectedReservedParam.push(`${topSize === 'all' ? Number.MAX_VALUE : topSize}`);
   }
 }
 
@@ -54,62 +97,61 @@ class Range<T> {
 })
 export class AchievementComponent implements OnInit {
 
-  chosenVerb = 'read';
-  chosenSubject = 'books';
-  chosenGenres: string[] = [];
+  achievementBuilder: AchievementBuilder;
 
-  treeControl = new NestedTreeControl<MyNode>(node => node.children);
-  customTreeControl = new NestedTreeControl<TreeNode<any>>(node => node.children);
+  // Values
+  verbNameArray: ConstantPair<string, Verb>[];
+  subjectNameArray: ConstantPair<string, TableName>[];
+  reservedBookParams: ConstantPair<string, Parameter>[];
+  pageRange: Range<number>;
+  dateRange: Range<any>;
+  releaseDateRange: Range<any>;
+  votersCountRange: Range<number>;
+  genreNameArray: string[];
 
-
-  dataSource = new MatTreeNestedDataSource<TreeNode<Verb>>();
-  subjectDataSource = new MatTreeNestedDataSource<MyNode>();
-  genreDataSource = new MatTreeNestedDataSource<MyNode>();
-  reservedDataSource = new MatTreeNestedDataSource<ReservedBookParamNode>();
-  countDataSource = new MatTreeNestedDataSource<TreeNode<number>>();
-
-  topSize: number;
-  genre: string;
-
-  genres: string[] = [];
-  // for genre paginator
+  // for genre paginator, TODO create class/interface Paginator
   startIndex = 0;
   pageSize = 10;
   endIndex = this.pageSize;
-
   pageIndex = 0;
-  achievementReq: AchievementReq;
-  chosenDate: {
-    to: any,
-    from: any
-  };
-
-  // create 'range' interface {to, from}
-  votersCount: {
-    to: any,
-    from: any
-  };
-  count: number;
-  genreNameArray: string[] = [] as string[];
-  isToggled: boolean;
-  isBusy: boolean;
 
   constructor(private genreService: GenreService,
               private achievementService: AchievementService) {
-    this.isBusy = this.isToggled = false;
-
-    this.achievementReq = new AchievementReq();
-    this.achievementReq.extraParams = new Map<Parameter, string[]>();
-    this.chosenDate = {to: {}, from: {}};
-    this.votersCount = {to: {}, from: {}};
-  }
-
-  toggle(): void {
-    this.isToggled = !this.isToggled;
-    this.isBusy = !this.isBusy;
+    this.verbNameArray = [];
+    this.subjectNameArray = [];
+    this.genreNameArray = [];
+    this.reservedBookParams = [];
+    this.pageRange = {} as Range<number>;
+    this.dateRange = {} as Range<any>;
+    this.releaseDateRange = {} as Range<any>;
+    this.votersCountRange = {} as Range<number>;
+    this.achievementBuilder = new AchievementBuilder();
   }
 
   ngOnInit() {
+    this.verbNameArray.push(
+      {name: 'has', type: Verb.HAS},
+      {name: 'read', type: Verb.READ},
+      {name: 'publish', type: Verb.PUBLISH});
+
+    this.subjectNameArray.push(
+      {name: 'books', type: TableName.BOOKS},
+      {name: 'friends', type: TableName.FRIENDS},
+      {name: 'comments', type: TableName.REVIEW_COMMENTS},
+      {name: 'announcement', type: TableName.ANNOUNCEMENTS},
+      {name: 'book reviews', type: TableName.BOOK_REVIEWS},
+      {name: 'messages', type: TableName.MESSAGES},
+      {name: 'achievements', type: TableName.ACHIEVEMENTS},
+      {name: 'book overviews', type: TableName.BOOK_OVERVIEWS}
+    );
+
+    this.reservedBookParams.push(
+      {name: 'the most rated', type: Parameter.RESERVED_BOOK_RATED},
+      {name: 'the most largest', type: Parameter.RESERVED_BOOK_LARGEST},
+      {name: 'the most newest', type: Parameter.RESERVED_BOOK_NEWEST},
+      {name: 'the most older', type: Parameter.RESERVED_BOOK_OLDER},
+    );
+
     this.genreService.getGenres()
       .subscribe(
         genres => {
@@ -118,70 +160,9 @@ export class AchievementComponent implements OnInit {
             .forEach(n => this.genreNameArray.push(n));
         }
       );
-
-
-    this.countDataSource.data = [
-      {
-        name: 'count',
-        children: [
-          {name: '', param: 0}
-        ]
-      }
-    ];
-
-    this.genreService.getGenres()
-      .subscribe(
-        genres => {
-          const genreNames = genres.map(g => g.name);
-          this.genreDataSource.data = [
-            {
-              name: 'genres',
-              children: []
-            }
-          ];
-          genreNames.sort((n1, n2) => n1.localeCompare(n2, 'en'))
-            .forEach(n => this.genreDataSource.data[0].children.push({name: n}));
-        }
-      );
-    this.dataSource.data = [
-      {
-        name: 'verb',
-        children: [
-          {name: 'read', param: Verb.READ},
-          {name: 'publish', param: Verb.PUBLISH},
-          {name: 'has', param: Verb.HAS}
-        ]
-      },
-    ];
-    this.subjectDataSource.data = [
-      {
-        name: 'subject',
-        children: [
-          {name: 'books'},
-          {name: 'friends'},
-          {name: 'comments'},
-          {name: 'announcement'},
-          {name: 'spent time'},
-          {name: 'book reviews'},
-          {name: 'book overviews'}
-        ]
-      },
-    ];
-    this.reservedDataSource.data = [
-      {
-        name: 'additional options',
-        children: [
-          {name: 'the most rated', param: Parameter.RESERVED_BOOK_RATED},
-          {name: 'the most largest', param: Parameter.RESERVED_BOOK_LARGEST},
-          {name: 'the most newest', param: Parameter.RESERVED_BOOK_NEWEST},
-          {name: 'the most older', param: Parameter.RESERVED_BOOK_OLDER},
-        ]
-      }
-    ];
   }
 
   getPaginatorData(event: PageEvent) {
-    console.log('date:' + this.chosenDate);
     // next page is wanted to be shown
     if (event.pageIndex === this.pageIndex + 1) {
       this.startIndex = this.startIndex + this.pageSize;
@@ -193,42 +174,10 @@ export class AchievementComponent implements OnInit {
     this.pageIndex = event.pageIndex;
   }
 
-  addGenre(genre) {
-    console.log(genre);
-    const idx = this.chosenGenres.indexOf(genre);
-    if (idx === -1) {
-      this.chosenGenres.push(genre);
-    } else {
-      this.chosenGenres.splice(idx, 1);
-    }
-  }
-
-  // click(verb: string): void {
-  //   if (verb !== this.chosenVerb) {
-  //     this.chosenVerb = verb;
-  //     this.chosenSubject = null;
-  //     this.chosenGenres = [];
-  //   }
-  // }
-  click(node: any): void {
-    console.log('Verb : ', node);
-  }
-
-  addReservedParam(option: TreeNode<any>, topSize) {
-    // this.params.set(option.param, [String(topSize)]);
-    console.log('Option : ', option);
-  }
-
-  chooseSubject(subject) {
-    if (subject.toUpperCase() === 'BOOKS') {
-      this.achievementReq.subject = TableName.BOOKS;
-    }
-
-    this.chosenSubject = subject;
-  }
 
   isSubjectAvailable(subject: string): boolean {
-    if (this.chosenVerb === 'has') {
+    const verb = this.achievementBuilder.achievementReq.verb;
+    if (verb === Verb.HAS) {
       switch (subject.toLowerCase()) {
         case 'comments':
         case 'friends':
@@ -237,7 +186,7 @@ export class AchievementComponent implements OnInit {
         default:
           return false;
       }
-    } else if (this.chosenVerb === 'publish') {
+    } else if (verb === Verb.PUBLISH) {
       switch (subject.toLowerCase()) {
         case 'announcement':
         case 'book reviews':
@@ -246,39 +195,36 @@ export class AchievementComponent implements OnInit {
         default:
           return false;
       }
-    } else if (this.chosenVerb === 'read') {
+    } else if (verb === Verb.READ) {
       return subject.toLowerCase() === 'books';
     }
     return false;
   }
 
-  hasChild(i, node: MyNode): boolean {
-    return !!node.children && node.children.length > 0;
-  }
-
-  createAchievement() {
-    if (this.votersCount.from && this.votersCount.to) {
-      this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, ['' + this.votersCount.from, '' + this.votersCount.to]);
-    }
-    if (this.chosenDate.to && this.chosenDate.from) {
-      this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, ['' + this.chosenDate.from, '' + this.chosenDate.to]);
-    }
-    if (this.chosenVerb) {
-      switch (this.chosenVerb.toUpperCase()) {
-        case Verb.HAS:
-          this.achievementReq.verb = Verb.HAS;
-          break;
-        case Verb.PUBLISH:
-          this.achievementReq.verb = Verb.PUBLISH;
-          break;
-        case Verb.READ:
-          this.achievementReq.verb = Verb.READ;
-      }
-    }
-    this.achievementService.createAchievement(this.achievementReq)
-      .pipe(
-        tap(achievement => console.log('Created : ', achievement))
-      )
-      .subscribe();
-  }
+  //
+  // createAchievement() {
+  //   if (this.votersCount.from && this.votersCount.to) {
+  //     this.achievementReq.extraParams.set(Parameter.BOOK_VOTERS_COUNT, ['' + this.votersCount.from, '' + this.votersCount.to]);
+  //   }
+  //   if (this.chosenDate.to && this.chosenDate.from) {
+  //     this.achievementReq.extraParams.set(Parameter.BOOK_RELEASE, ['' + this.chosenDate.from, '' + this.chosenDate.to]);
+  //   }
+  //   if (this.chosenVerb) {
+  //     switch (this.chosenVerb.toUpperCase()) {
+  //       case Verb.HAS:
+  //         this.achievementReq.verb = Verb.HAS;
+  //         break;
+  //       case Verb.PUBLISH:
+  //         this.achievementReq.verb = Verb.PUBLISH;
+  //         break;
+  //       case Verb.READ:
+  //         this.achievementReq.verb = Verb.READ;
+  //     }
+  //   }
+  //   this.achievementService.createAchievement(this.achievementReq)
+  //     .pipe(
+  //       tap(achievement => console.log('Created : ', achievement))
+  //     )
+  //     .subscribe();
+  // }
 }
