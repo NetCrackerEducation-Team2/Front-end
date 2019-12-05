@@ -87,7 +87,6 @@ import {UsersListComponent} from './components/users-list/users-list.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
-import { OptionsScrollDirective } from './directives/options-scroll.directive';
 import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
 import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
 import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
@@ -165,7 +164,6 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    OptionsScrollDirective,
     AchievementComponent,
     ShowHideComponent
   ],
