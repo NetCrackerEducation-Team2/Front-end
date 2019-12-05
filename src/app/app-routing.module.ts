@@ -20,9 +20,6 @@ import {SuggestBookComponent} from './components/suggest-book/suggest-book.compo
 import {AnnouncementItemComponent} from './components/announcement-item/announcement-item.component';
 import {AnnouncementListComponent} from './components/announcement-list/announcement-list.component';
 import {AnnouncementsManagementComponent} from './components/announcements-management/announcements-management.component';
-import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
-import {AdminComponent} from './components/admin/admin.component';
-import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
 import {CreateBookComponent} from './components/create-book/create-book.component';
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
@@ -35,12 +32,16 @@ import {SearchUsersComponent} from './components/search-users/search-users.compo
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
+import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
+import {AdminComponent} from './components/admin/admin.component';
+import {AchievementComponent} from './components/achievement/achievement.component';
 
 const routes: Routes = [
-   {
-     path: '',
-     component: HomeComponent
-   },
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -73,7 +74,10 @@ const routes: Routes = [
     path: 'profile/:userId/change-password',
     component: ChangePasswordComponent
   },
-  { path: 'profile/:userId/chat', component: ChatComponent },
+  {
+    path: 'profile/:userId/chat',
+    component: ChatComponent
+  },
   {
     path: 'announcements',
     component: AnnouncementListComponent
@@ -155,7 +159,7 @@ const routes: Routes = [
   {
     path: 'create-announcement',
     component: CreateAnnouncementComponent
-  },  // routing to NotFoundComponent must be in the end
+  },
   {
     path: 'book-overviews/:bookId',
     component: OverviewListComponent
@@ -171,6 +175,10 @@ const routes: Routes = [
   {
     path: 'personal-list',
     component: PersonalBooklistComponent
+  },
+  {
+    path: 'achievement',
+    component: AchievementComponent
   },
   // routing to NotFoundComponent must be in the end
   {

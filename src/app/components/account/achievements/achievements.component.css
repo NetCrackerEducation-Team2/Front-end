@@ -4,9 +4,14 @@
 }
 
 .container {
+  font-size: 20px;
   margin-top: 20px;
   display: flex;
   flex-flow: column nowrap;
+}
+
+.container > * {
+  font-size: 20px;
 }
 
 .achievements {

@@ -86,11 +86,15 @@ import {SearchUsersComponent} from './components/search-users/search-users.compo
 import {UsersListComponent} from './components/users-list/users-list.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
-import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
-import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 import { OptionsScrollDirective } from './directives/options-scroll.directive';
+import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
+import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
+import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
+import { AchievementComponent } from './components/achievement/achievement.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTreeModule} from '@angular/material/tree';
+import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
 
 @NgModule({
   declarations: [
@@ -161,7 +165,9 @@ import { OptionsScrollDirective } from './directives/options-scroll.directive';
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    OptionsScrollDirective
+    OptionsScrollDirective,
+    AchievementComponent,
+    ShowHideComponent
   ],
   imports: [
     BrowserModule,
@@ -208,6 +214,8 @@ import { OptionsScrollDirective } from './directives/options-scroll.directive';
     // ToastrModule.forRoot({ timeOut: 3000 }),
     // ReactiveFormsModule,
     // HttpClientModule
+    MatTreeModule,
+    MatRadioModule
   ],
   exports: [
     BrowserModule,

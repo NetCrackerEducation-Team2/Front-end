@@ -61,5 +61,10 @@ export const apiUrls = {
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
   API_SOCKET: environment.BASE_URL + '/ws',
   API_CHAT: environment.BASE_URL + '/api/ws',
-  API_USERS_ID: environment.BASE_URL + '/api/users/'
+  API_USERS_ID: environment.BASE_URL + '/api/users/',
+  API_ACHIEVEMENT: {
+    API: environment.BASE_URL + '/api/achievement',
+    FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',
+  },
+  WEBSOCKET: environment.BASE_URL + '/ws'
 };

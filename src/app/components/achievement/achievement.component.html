@@ -1,0 +1,196 @@
+<div class="container">
+
+  <header>
+    <h2 class="header">Achievement creation panel</h2>
+    <div class="button-wrapper">
+      <button (click)="createAchievement()" class="button" mat-raised-button color="primary">Create</button>
+    </div>
+  </header>
+
+  <mat-divider></mat-divider>
+
+  <app-show-hide [label]="'Verb'" [styles]="{'margin-left': '55px'}">
+    <div class="submit-container">
+      <div *ngFor="let el of verbNameArray">
+        <mat-radio-button class="margin-row" name="verb" (click)="achievementBuilder.chooseVerb(el)">
+          {{el.name}}
+        </mat-radio-button>
+      </div>
+    </div>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Subject'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-container" *ngIf="achievementBuilder.achievementReq.verb; else hintVerb">
+      <ng-container *ngFor="let el of subjectNameArray">
+        <div class="checkbox-row" *ngIf="isSubjectAvailable(el.name)">
+          <mat-radio-button class="radio-button"
+                            (click)="achievementBuilder.chooseSubject(el)" name="subject">
+            {{el.name}}
+          </mat-radio-button>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #hintVerb>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose verb before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Count'" [styles]="{'margin-left': '70px'}">
+    <div class="submit-row" *ngIf="achievementBuilder.achievementReq.subject; else hintSubject">
+      <label class="label" for="count">Count</label>
+      <mat-form-field>
+        <input matInput placeholder="for example, 25" type="number"
+               [(ngModel)]="achievementBuilder.achievementReq.count"
+               id="count" class="name-achievement">
+      </mat-form-field>
+    </div>
+    <ng-template #hintSubject>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Description'" [styles]="{'margin-left': '105px'}">
+    <div class="submit-container">
+      <div class="submit-row" *ngIf="achievementBuilder.achievementReq.count; else hintCount">
+        <label class="large-label" for="description">Achievement description</label>
+        <mat-form-field>
+          <textarea [(ngModel)]="achievementBuilder.achievementReq.description" class="large-text-area" id="description"
+                    matInput
+                    placeholder="e.g. User read 100 fiction books"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <ng-template #hintCount>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose count before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Name'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-row" *ngIf="achievementBuilder.achievementReq.subject; else hintSubject">
+      <label class="label" for="name-achievement">Name</label>
+      <mat-form-field class="name-achievement">
+        <input matInput placeholder="'Professional book reviewer'" type="text"
+               [(ngModel)]="achievementBuilder.achievementReq.name" id="name-achievement">
+      </mat-form-field>
+    </div>
+    <ng-template #hintSubject>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
+  <app-show-hide [label]="'Books'" [styles]="{'margin-left': '55px'}"
+                 *ngIf="achievementBuilder.achievementReq.subject &&
+                 achievementBuilder.achievementReq.subject.toString() === 'BOOKS'">
+
+    <div>
+      <app-show-hide [label]="'Pages'" [styles]="{'margin-left': '70px'}">
+        <div class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="page-count-from">From</label>
+            <mat-form-field>
+              <input #fromPageCount
+                     (change)="achievementBuilder.changePageCount(+fromPageCount.value, +toPageCount.value)"
+                     id="page-count-from" matInput placeholder="for example, 100"
+                     type="number">
+            </mat-form-field>
+          </div>
+          <div class="submit-row">
+            <label class="label" for="page-count-to">To</label>
+            <mat-form-field>
+              <input #toPageCount
+                     (change)="achievementBuilder.changePageCount(+fromPageCount.value, +toPageCount.value)"
+                     id="page-count-to" matInput placeholder="for example, 430" type="number">
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
+
+      <app-show-hide [label]="'Genres'" [styles]="{'margin-left': '68px'}">
+        <div class="paginator-container">
+          <div *ngFor="let genreName of genreNameArray | slice:startIndex :endIndex">
+            <div class="checkbox-row">
+              <mat-checkbox class="mat-checkbox" (click)="achievementBuilder.addGenre(genreName)" name="genreParams">
+                {{genreName}}
+              </mat-checkbox>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <mat-paginator class="paginator" [length]="genreNameArray.length" [pageSize]="pageSize"
+                         (page)="getPaginatorData($event)">
+          </mat-paginator>
+        </div>
+      </app-show-hide>
+
+      <app-show-hide [label]="'Voter count'" [styles]="{'margin-left': '105px'}">
+        <div class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="voters-count-from">From</label>
+            <mat-form-field>
+              <input #fromVotersCount
+                     (change)="achievementBuilder.changeVotersCount(+fromVotersCount.value, +toVotersCount.value)"
+                     id="voters-count-from" matInput placeholder="for example, 10" type="number">
+            </mat-form-field>
+            <br>
+          </div>
+          <div class="submit-row">
+            <label class="label" for="voters-count-to">To</label>
+            <mat-form-field>
+              <input #toVotersCount
+                     (change)="achievementBuilder.changeVotersCount(+fromVotersCount.value, +toVotersCount.value)"
+                     id="voters-count-to" matInput placeholder="for example, 25" type="number">
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
+
+      <app-show-hide [label]="'Release date'" [styles]="{'margin-left': '120px'}">
+        <div class="submit-container">
+          <div class="submit-row">
+            <label class="label" for="from-date">From</label>
+            <mat-form-field>
+              <input matInput placeholder="for example, 10.02.1998" type="date" #fromRelDate
+                     (change)="achievementBuilder.changeReleaseDate(fromRelDate.value, toRelDate.value)"
+                     id="from-date" class="name-achievement">
+            </mat-form-field>
+          </div>
+          <div class="submit-row">
+            <label class="label" for="to-date">To</label>
+            <mat-form-field>
+              <input matInput placeholder="for example, 04.11.2019" type="date" #toRelDate
+                     (change)="achievementBuilder.changeReleaseDate(fromRelDate.value, toRelDate.value)"
+                     id="to-date">
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
+
+      <app-show-hide [label]="'Reserved params'" [styles]="{'margin-left': '150px'}">
+        <div class="submit-container">
+          <div class="submit-row" *ngFor="let el of reservedBookParams">
+            <mat-checkbox class="label" (click)="achievementBuilder.addReservedParam(el, topSize.value)"
+                          [disabled]="!topSize.value">
+              {{el.name}}
+            </mat-checkbox>
+            <mat-form-field class="option-container">
+              <mat-label>Select top size</mat-label>
+              <mat-select #topSize>
+                <mat-option>None</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="20">20</mat-option>
+                <mat-option value="50">50</mat-option>
+                <mat-option value="100">100</mat-option>
+                <mat-option value="all">all</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </app-show-hide>
+
+    </div>
+  </app-show-hide>
+
+  <ng-template #hint let-message="msg">
+    <p class="message">{{message}}</p>
+  </ng-template>
+
+</div>
