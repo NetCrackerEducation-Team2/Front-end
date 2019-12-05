@@ -52,7 +52,7 @@ export class AchievementService {
   public createAchievement(achievement: AchievementReq): Observable<Achievement> {
     return this.httpClient.post<Achievement>(this.createAchievementUrl, achievement)
       .pipe(
-        catchError(this.errorHandlerService.handleError)
+        catchError(this.errorHandlerService.handleError<Achievement>('Create achievement', {} as Achievement))
       );
   }
 }

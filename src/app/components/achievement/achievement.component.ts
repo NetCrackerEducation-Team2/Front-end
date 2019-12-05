@@ -7,6 +7,7 @@ import {AchievementReq} from '../../models/achievement-req';
 import {Verb} from '../../models/constants/verb';
 import {TableName} from '../../models/constants/table-name';
 import {tap} from 'rxjs/operators';
+import {SnackBarService} from "../../service/presentation-services/snackBar.service";
 
 interface Range<T> {
   from: T;
@@ -71,15 +72,19 @@ class AchievementBuilder {
 
   addReservedParam(el: ConstantPair<string, Parameter>, topSize: number | string) {
     console.log('addReservedParam', el, topSize);
-    //   if (topSize === undefined) {
-    //     topSize = 10;
-    //   }
-    //   let selectedReservedParam = this.achievementReq.extraParams.get(el.type);
-    //   if (selectedReservedParam === undefined) {
-    //     this.achievementReq.extraParams.set(el.type, [] as string[]);
-    //     selectedReservedParam = this.achievementReq.extraParams.get(Parameter.BOOK_RELEASE);
-    //   }
-    //   selectedReservedParam.push(`${topSize === 'all' ? Number.MAX_VALUE : topSize}`);
+    if (topSize === undefined) {
+      topSize = 10;
+    }
+    this.achievementReq.extraParams.set(el.type, [] as string[]);
+    const reservedParams = this.achievementReq.extraParams.get(el.type);
+    reservedParams.push(`${topSize}`);
+  }
+
+  changeCreationTime(from: any, to: any) {
+    console.log('changeCreationTime', 'from', from, 'to', to);
+    this.achievementReq.extraParams.set(Parameter.CREATION_TIME, [] as string[]);
+    const selectedPages = this.achievementReq.extraParams.get(Parameter.CREATION_TIME);
+    selectedPages.push(`${from}`, `${to}`);
   }
 }
 
@@ -110,7 +115,8 @@ export class AchievementComponent implements OnInit {
   pageIndex = 0;
 
   constructor(private genreService: GenreService,
-              private achievementService: AchievementService) {
+              private achievementService: AchievementService,
+              private snackBarService: SnackBarService) {
     this.verbNameArray = [];
     this.subjectNameArray = [];
     this.genreNameArray = [];
@@ -196,6 +202,7 @@ export class AchievementComponent implements OnInit {
   }
 
   createAchievement(): void {
+    const map = this.achievementBuilder.achievementReq.extraParams;
     this.achievementBuilder.achievementReq.extraParams
       = this.covertMap(this.achievementBuilder.achievementReq.extraParams) as any;
     console.log(this.achievementBuilder.build());
@@ -204,7 +211,10 @@ export class AchievementComponent implements OnInit {
       .pipe(
         tap(achievement => console.log('Created : ', achievement))
       )
-      .subscribe();
+      .subscribe(() => {
+        this.snackBarService.openSuccessSnackBar('Achievement created!');
+      });
+    this.achievementBuilder.achievementReq.extraParams = map;
   }
 
   covertMap(map: Map<Parameter, string[]>) {
