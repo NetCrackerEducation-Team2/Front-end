@@ -1,12 +1,12 @@
 import {apiUrls} from '../../api-urls';
 
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {ErrorHandlerService} from './error-handler.service';
-import {Observable} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {Achievement} from '../models/achievement';
 import {Page} from '../models/page';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {AchievementReq} from '../models/achievement-req';
 
 @Injectable({
@@ -52,7 +52,11 @@ export class AchievementService {
   public createAchievement(achievement: AchievementReq): Observable<Achievement> {
     return this.httpClient.post<Achievement>(this.createAchievementUrl, achievement)
       .pipe(
-        catchError(this.errorHandlerService.handleError<Achievement>('Create achievement', {} as Achievement))
+        catchError(() => {
+          // Map error to presenting output in snack-bar
+          return throwError('');
+        }),
+        catchError(this.errorHandlerService.handleError<Achievement>('Create create-achievement', null))
       );
   }
 }

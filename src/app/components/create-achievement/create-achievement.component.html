@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!submitted; else successfullSubmit">
 
   <header>
     <h2 class="header">Achievement creation panel</h2>
@@ -101,7 +101,8 @@
 
   <app-show-hide [label]="'Books'" [styles]="{'margin-left': '55px'}"
                  *ngIf="achievementBuilder.achievementReq.subject &&
-                 achievementBuilder.achievementReq.subject.toString() === 'BOOKS'">
+                 achievementBuilder.achievementReq.subject.toString() === 'BOOKS'
+                 && achievementBuilder.achievementReq.name">
 
     <div>
       <app-show-hide [label]="'Pages'" [styles]="{'margin-left': '70px'}">
@@ -215,3 +216,10 @@
   </ng-template>
 
 </div>
+<ng-template #successfullSubmit>
+  <div class="ok-container">
+    <p class="ok-message">You created a new achievement</p>
+    <br>
+    <a mat-button routerLink="/">Home</a>
+  </div>
+</ng-template>

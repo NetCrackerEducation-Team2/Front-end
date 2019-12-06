@@ -35,7 +35,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
 import {AdminComponent} from './components/admin/admin.component';
-import {AchievementComponent} from './components/achievement/achievement.component';
+import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 
 const routes: Routes = [
   {
@@ -142,12 +142,21 @@ const routes: Routes = [
     path: 'reviews-management',
     component: ReviewsManagementComponent
   },
+  // TODO: replace path /create-achievement to /admin/create-achievement
+  {
+    path: 'create-achievement',
+    component: CreateAchievementComponent
+  },
   {
     path: 'admin',
     component: AdminComponent,
     children: [
       {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
       // {path: 'edit-moderator', component: EditModeratorComponent},
+      {
+        path: 'create-achievement',
+        component: CreateAchievementComponent
+      },
 
     ]
   },
@@ -175,10 +184,6 @@ const routes: Routes = [
   {
     path: 'personal-list',
     component: PersonalBooklistComponent
-  },
-  {
-    path: 'achievement',
-    component: AchievementComponent
   },
   // routing to NotFoundComponent must be in the end
   {
