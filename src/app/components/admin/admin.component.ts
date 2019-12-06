@@ -27,4 +27,8 @@ export class AdminComponent implements OnInit {
   showEditModerator() {
     this.router.navigate(['edit-moderator'], { relativeTo: this.route });
   }
+
+  showCreateAchievement() {
+    this.router.navigate(['create-achievement'], { relativeTo: this.route });
+  }
 }
