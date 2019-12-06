@@ -63,8 +63,8 @@ export const apiUrls = {
   API_CHAT: environment.BASE_URL + '/api/ws',
   API_USERS_ID: environment.BASE_URL + '/api/users/',
   API_ACHIEVEMENT: {
-    API: environment.BASE_URL + '/api/create-achievement',
-    FIND_BY_USER_ID: environment.BASE_URL + '/api/create-achievement/user/',
+    API: environment.BASE_URL + '/api/achievement',
+    FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',
   },
   WEBSOCKET: environment.BASE_URL + '/ws'
 };

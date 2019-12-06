@@ -164,9 +164,7 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    OptionsScrollDirective,
     CreateAchievementComponent,
-    AchievementComponent,
     ShowHideComponent
   ],
   imports: [
