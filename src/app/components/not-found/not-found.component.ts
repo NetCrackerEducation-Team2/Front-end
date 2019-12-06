@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  private readonly errorImgUrl = '../../../assets/images/error.jpg';
+  readonly errorImgUrl = '../../../assets/images/error.jpg';
 
   constructor() {
   }
