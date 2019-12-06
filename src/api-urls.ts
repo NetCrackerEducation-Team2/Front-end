@@ -36,7 +36,8 @@ export const apiUrls = {
   },
   API_FRIENDS: {
     API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
-    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
+    API_GET_FRIENDS: environment.BASE_URL + '/api/friends'
   },
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
