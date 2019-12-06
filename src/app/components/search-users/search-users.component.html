@@ -4,7 +4,7 @@
       <input matInput type="text" placeholder=" Search user..." name="search" class="search-input"
              [(ngModel)]="searchExpression">
       <div class="break" *ngIf="searchExpression && searchExpression.length < 2">
-        <mat-error >Search expression should contain at least 2 chars</mat-error>
+        <mat-error>Search expression should contain at least 2 chars</mat-error>
       </div>
     </div>
     <button (click)="search()" class="search-button">

@@ -90,7 +90,7 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
 import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
 import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
-import { AchievementComponent } from './components/achievement/achievement.component';
+import { CreateAchievementComponent } from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
@@ -164,7 +164,7 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    AchievementComponent,
+    CreateAchievementComponent,
     ShowHideComponent
   ],
   imports: [
