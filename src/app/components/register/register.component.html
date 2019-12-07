@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate *ngIf="!isRegistered; else registeredTemplate">
+  <form class="submit-form" (ngSubmit)="submit()" #regForm="ngForm" novalidate *ngIf="!isRegistered">
 
 
     <div class="submit-row">
@@ -60,7 +60,7 @@
       <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
     </div>
 </form>
-    <ng-template #registeredTemplate>
+    <div *ngIf="isRegistered">
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
-  </ng-template>
+    </div>
 </div>
