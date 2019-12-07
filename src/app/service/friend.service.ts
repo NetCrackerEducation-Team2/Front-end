@@ -5,6 +5,7 @@ import {FriendStatus} from '../models/friend-status';
 import {apiUrls} from '../../api-urls';
 import {catchError, map} from 'rxjs/operators';
 import {ErrorHandlerService} from './error-handler.service';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,16 @@ export class FriendService {
 
   private readonly friendStatusUrl: string;
   private readonly friendRequestUrl: string;
+  private readonly friends: string;
 
   constructor(private http: HttpClient, private errorHadlerService: ErrorHandlerService) {
     this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
     this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
+    this.friends = apiUrls.API_FRIENDS.API_FRIENDS_ID;
+  }
+
+  getFriends(userId): Observable<User[]> {
+    return this.http.get<User[]>(this.friends + userId);
   }
 
   getFriendStatus(targetUserId: number): Observable<FriendStatus> {

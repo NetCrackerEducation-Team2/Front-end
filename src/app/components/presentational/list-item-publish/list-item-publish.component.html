@@ -15,10 +15,12 @@
       </p>
     </div>
     <div class="mat-card-actions">
-      <button *ngFor="let element of listItemInfo.actionElements" mat-button
-              [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled"
-              (click)="element.clickFunction() ">
-        {{element.name}}</button>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle *ngFor="let element of listItemInfo.actionElements"
+                           [attr.id]="element.buttonInfoId" [routerLink]="element.url"
+                           [checked]="element.disabled"
+                           (change)="element.clickFunction()">{{element.name}}</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
   </div>
 </div>

@@ -36,7 +36,8 @@ export const apiUrls = {
   },
   API_FRIENDS: {
     API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
-    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
+    API_FRIENDS_ID: environment.BASE_URL + '/api/friends/'
   },
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
@@ -59,7 +60,11 @@ export const apiUrls = {
   API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
-  API_SOCKET: environment.BASE_URL + '/ws',
-  API_CHAT: environment.BASE_URL + '/api/ws',
+  API_CHAT: {
+    API_SOCKET: environment.BASE_URL + '/ws',
+    API_SEND: environment.BASE_URL + '/api/ws',
+    API_CHAT_CREATE: environment.BASE_URL + '/api/ws/create'
+  },
   API_USERS_ID: environment.BASE_URL + '/api/users/'
+
 };

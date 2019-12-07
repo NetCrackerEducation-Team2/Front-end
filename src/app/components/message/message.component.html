@@ -1,0 +1,29 @@
+<div id="username-page" class="username-page">
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Chatting</h2>
+    </div>
+    <ul *ngFor="let message of messages">From: {{message.fromUser}}, Message: {{message.content}} </ul>
+    <form [formGroup]="form" *ngIf="isLoaded">
+      <div class="form-group">
+        <div class="input-group clearfix">
+          <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."
+                 autocomplete="off" class="form-control">
+          <!--          [disabled]="form.invalid-->
+                    <button mat-raised-button color="primary" [disabled]="false" (click)="sendMessage()">Send</button>
+          <!--          <button type="button"  class="primary">Send</button>-->
+          <button (click)="openSocket()"></button>
+        </div>
+      </div>
+    </form>
+
+    <br>
+  </div>
+  <!--  <div *ngIf="isError">-->
+  <!--    <p class="error">-->
+  <!--      Select please a friend-->
+  <!--    </p>-->
+  <!--  </div>-->
+</div>
+<button (click)="goBack()">go back</button>

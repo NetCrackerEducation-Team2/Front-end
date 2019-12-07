@@ -35,6 +35,8 @@ import {SearchUsersComponent} from './components/search-users/search-users.compo
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import {Message} from './models/message';
+import {MessageComponent} from './components/message/message.component';
 
 const routes: Routes = [
    {
@@ -68,6 +70,10 @@ const routes: Routes = [
   {
     path: 'profile/:userId/edit',
     component: EditComponent
+  },
+  {
+    path: 'message/:friendId',
+    component: MessageComponent
   },
   {
     path: 'profile/:userId/change-password',

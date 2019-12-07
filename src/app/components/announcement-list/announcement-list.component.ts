@@ -3,11 +3,11 @@ import { DatePipe } from '@angular/common';
 import {Page} from '../../models/page';
 import { AnnouncementService } from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
-import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
 import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
+import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 @Component({
   selector: 'app-announcement-list',
   templateUrl: './announcement-list.component.html',

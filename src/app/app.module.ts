@@ -90,6 +90,8 @@ import {NotificationMenuComponent} from './components/notification/notification-
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import { ListItemPublishComponent } from './components/presentational/list-item-publish/list-item-publish.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -159,7 +161,9 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
     NotificationMenuComponent,
     PersonalBooklistComponent,
     PersonalBookItemComponent,
-    RecommendationsComponent
+    RecommendationsComponent,
+    ListItemPublishComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

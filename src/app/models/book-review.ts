@@ -1,3 +1,6 @@
+import {Book} from './book';
+import {User} from './user';
+
 export class BookReview {
   bookReviewId: number;
   description: string;
@@ -5,7 +8,8 @@ export class BookReview {
   userId: number;
   creationTime: string;
   published: boolean;
-
+  book: Book;
+  user: User;
   public constructor(bookReviewId: number,
                      description: string,
                      bookId: number,

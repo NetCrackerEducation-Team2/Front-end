@@ -1,36 +1,23 @@
 <div id="username-page" class="username-page">
-
   <div class="chat-container">
     <div class="chat-header">
-      <!--      <button mat-button [matMenuTriggerFor]="menu">-->
       <h2>Chatting</h2>
-      <!--      </button>-->
-      <!--      <mat-menu #menu="matMenu">-->
-      <!--        <button *ngFor="let user of this.users" mat-menu-item-->
-      <!--                (click)="chooseChat(user.userId)">{{user.fullName}}</button>-->
-      <!--      </mat-menu>-->
     </div>
-    <ul *ngFor="let message of messages">From: {{message.fromName}},
-      Message: {{message.message}}
-    </ul>
-    <form [formGroup]="form" *ngIf="true">
       <div class="form-group">
         <div class="input-group clearfix">
-          <mat-form-field>
-            <mat-select placeholder="Select a friend">
-              <mat-option value="option">Option</mat-option>
+          <mat-form-field >
+            <mat-select placeholder="Select a friend" [(ngModel)]="userFriendId" name="friendId">
+              <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-flat-button color="primary" (click)="createChat()" class="primary">Create chat</button>
-          <!--          <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."-->
-          <!--                 autocomplete="off" class="form-control">-->
-          <!--          [disabled]="form.invalid-->
-<!--          <button mat-raised-button color="primary" [disabled]="false" (click)="sendMessage()">Send</button>-->
-          <!--          <button type="button"  class="primary">Send</button>-->
+          <button mat-flat-button color="primary" (click)="createChat(userFriendId)"  class="accent" >Choose chat</button>
         </div>
       </div>
-    </form>
-
     <br>
+  </div>
+  <div *ngIf="isError">
+    <p class="error">
+      Select please a friend
+    </p>
   </div>
 </div>
