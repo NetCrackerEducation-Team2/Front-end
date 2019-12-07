@@ -17,7 +17,6 @@ export class BookService {
   private readonly bookUrl: string;
   private readonly booksUrl: string;
   private readonly bookTitleByIdUrl: string;
-  private readonly bookDownloadUrl: string;
   private readonly bookInfoUrl: string;
   private readonly bookCreateUrl: string;
   private readonly findBookByIdUrl: string;
@@ -29,9 +28,7 @@ export class BookService {
     this.booksUrl = apiUrls.API_BOOKS;
     this.bookInfoUrl = apiUrls.API_BOOK_INFO;
     this.bookCreateUrl = apiUrls.API_BOOK_CREATE;
-    this.bookDownloadUrl = apiUrls.API_BOOK_DOWNLOAD;
     this.bookTitleByIdUrl = apiUrls.API_BOOK_TITLE_BY_ID;
-    this.bookDownloadUrl = apiUrls.API_BOOK_DOWNLOAD;
     this.findBookByIdUrl = apiUrls.API_BOOK_URL.FIND_BY_ID;
   }
 
@@ -69,35 +66,17 @@ export class BookService {
       );
   }
 
-  getBookSubtitle(book: Book): string {
-    const authors = this.getBookAuthorsString(book, 1);
-    return 'by ' + (authors === '' ? 'unknown' : authors);
-  }
-
-  getBookGenresString(book: Book, count: number): string {
-    return this.stringFormatterService.arrayPrettyFormat(book.genres.map(genre => genre.name), count);
-  }
-
-  getBookAuthorsString(book: Book, count: number): string {
-    return this.stringFormatterService.arrayPrettyFormat(book.authors.map(author => author.fullName), count);
-  }
-
-  getBookBySlug(slug: string): Observable<any> {
-    return this.http.get(this.bookInfoUrl + '/' + slug).pipe(catchError(this.errorHandlerService.handleError<any>('getBookBySlug', [])));
+  getBookBySlug(slug: string): Observable<Book> {
+    return this.http.get(this.bookInfoUrl + '/' + slug)
+      .pipe(catchError(this.errorHandlerService.handleError<any>('getBookBySlug', [])));
   }
 
   getBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(this.findBookByIdUrl + id)
+    return this.http.get(this.findBookByIdUrl + id)
       .pipe(catchError(this.errorHandlerService.handleError<any>('getBookById', [])));
   }
 
   suggestBook(book) {
     return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.errorHandlerService.handleError<any>('suggestBook', [])));
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      return of(result as T);
-    };
   }
 }

@@ -50,7 +50,7 @@ export class NotificationListComponent implements OnInit {
         return {
           title: null,
           subtitle: this.datePipe.transform(notification.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           itemId: notification.notificationId,
           publish: null,
           contentElements: [

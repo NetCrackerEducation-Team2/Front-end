@@ -55,6 +55,10 @@ const routes: Routes = [
     component: RecommendationsComponent
   },
   {
+    path: 'recommendations/:slug',
+    redirectTo: 'book-overview/:slug'
+  },
+  {
     path: 'register',
     component: RegisterComponent
   },
