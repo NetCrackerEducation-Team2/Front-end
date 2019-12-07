@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationService} from '../../../service/notification.service';
-import {Notification} from '../../../models/notification';
 import {Page} from '../../../models/page';
+import {FullNotification} from '../../../models/full-notification';
 
 @Component({
   selector: 'app-notification-menu',
@@ -9,7 +9,7 @@ import {Page} from '../../../models/page';
   styleUrls: ['./notification-menu.component.css']
 })
 export class NotificationMenuComponent implements OnInit {
-  notifications: Page<Notification>;
+  notifications: Page<FullNotification>;
 
   constructor(private notificationService: NotificationService) { }
 
