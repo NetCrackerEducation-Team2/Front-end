@@ -35,6 +35,7 @@
                placeholder="Confirm password" [(ngModel)]="repeatPassword">
       </mat-form-field>
     </div>
+  </form>
 
     <mat-divider></mat-divider>
 
@@ -60,7 +61,6 @@
       <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
     </div>
 
-  </form>
 
   <ng-template #registeredTemplate>
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>

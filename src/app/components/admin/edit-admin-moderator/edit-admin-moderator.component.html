@@ -3,11 +3,19 @@
     <form class="submit-form" #regForm="ngForm" novalidate >
 
 
+
     <div class="submit-row">
-        <label class="label" for="fullName">Choose role</label>
+      <label class="label" for="userId">Enter id</label>
+      <mat-form-field class="form-field">
+        <input pattern = "^[0-9]*" required name="UserId" #UserId="ngModel" type="text" id="" matInput
+                placeholder="id" [(ngModel)]="user.userId">
+      </mat-form-field>
+    </div>
+    <div class="submit-row">
+        <label class="label" for="role">Choose role</label>
         <mat-form-field class="form-field">
-          <mat-select required name = 'role' #user.role="ngModel" [(ngModel)]="user.role">
-            <mat-option *ngFor="let role of roles" [value]="role" >
+          <mat-select multiple placeholder="Roles">
+            <mat-option  (onSelectionChange)="change($event)"  *ngFor="let role of roles" [value]="role" >
               {{role}}
             </mat-option>
           </mat-select>
@@ -47,31 +55,31 @@
         </mat-form-field>
       </div>
 
+    </form>
+
       <mat-divider></mat-divider>
 
 
       <div class="nav-footer">
         <div class="messages">
           <span *ngIf="isDownloading">Please wait...</span>
+          <small class="text-danger" *ngIf=" UserId.touched && UserId.invalid" >User id is required</small>
           <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
           <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
           <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
           <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
-          <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6
-            symbols</small>
-          <span class="text-danger center" *ngIf="!message && isError">
-            User with username already exists
-            <br>
-            Try again.
+          <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6 symbols</small>
+          <small class="text-danger" *ngIf="(repeatPassword != user.password) && password.touched && confirmPassword.touched">Passwords must match</small>
+          <span class="alert alert-danger center" *ngIf="isError">
+            Error has happened. User was not edited.
           </span>
-          <span class="text-danger center" *ngIf="message && isError">
-            {{message}}
+          <span class="alert alert-success center" *ngIf="isEdited">
+            User was succesfully edited.
           </span>
         </div>
-        <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='create()'>Create role</button>
+        <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='editUser()'>Edit user</button>
       </div>
 
-    </form>
 
 
 

@@ -24,8 +24,16 @@ import {CreateBookComponent} from './components/create-book/create-book.componen
 import {CreateAnnouncementComponent} from './components/create-announcement/create-announcement.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
-import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
+import {CreateAdminModeratorComponent} from './components/admin/create-admin-moderator/create-admin-moderator.component';
+import {EditAdminModeratorComponent} from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
+import {DeleteAdminModeratorComponent} from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import {AdminActivateGuardService} from './service/admin-activate-guard.service';
+import {UserActivateGuardService} from './service/user-activate-guard.service';
+import {ModerAnnouncementsActivateGuardService} from './service/moder-announcements-activate-guard.service';
+import {ModerOverviewsActivateGuardService} from './service/moder-overviews-activate-guard.service';
+import {ModerReviewsActivateGuardService} from './service/moder-reviews-activate-guard.service';
 import {ChatComponent} from './components/chat/chat.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
@@ -68,11 +76,15 @@ const routes: Routes = [
   },
   {
     path: 'profile/:userId',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'profile/:userId/edit',
-    component: EditComponent
+    component: EditComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'profile/:userId/change-password',
@@ -108,7 +120,9 @@ const routes: Routes = [
   },
   {
     path: 'book/suggest',
-    component: SuggestBookComponent
+    component: SuggestBookComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'book/slug/:slug',
@@ -136,15 +150,20 @@ const routes: Routes = [
   },
   {
     path: 'announcements-management',
-    component: AnnouncementsManagementComponent
+    component: AnnouncementsManagementComponent,
+    canActivate: [ModerAnnouncementsActivateGuardService]
+
   },
   {
     path: 'overviews-management',
-    component: OverviewsManagementComponent
+    component: OverviewsManagementComponent,
+    canActivate: [ModerOverviewsActivateGuardService]
+
   },
   {
     path: 'reviews-management',
-    component: ReviewsManagementComponent
+    component: ReviewsManagementComponent,
+    canActivate: [ModerReviewsActivateGuardService]
   },
   // TODO: replace path /create-achievement to /admin/create-achievement
   {
@@ -156,19 +175,36 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
-      // {path: 'edit-moderator', component: EditModeratorComponent},
-      {
-        path: 'create-achievement',
-        component: CreateAchievementComponent
-      },
-
-    ]
+      {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
+      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
+    ],
+    canActivate: [AdminActivateGuardService]
   },
   {
-    path: 'create-book',
-    component: CreateBookComponent
-  }
-  ,
+     path: 'create-book',
+     component: CreateBookComponent,
+     canActivate: [UserActivateGuardService]
+
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
+    canActivate: [UserActivateGuardService]
+
+  },
+  {
+     path: 'create-announcement',
+     component: CreateAnnouncementComponent,
+     canActivate: [AdminActivateGuardService]
+  },
+  {
+     path: 'create-achievement',
+     component: CreateAchievementComponent
+  },
+  {
+     path: 'create-book',
+     component: CreateBookComponent
+  },
   {
     path: 'create-announcement',
     component: CreateAnnouncementComponent
@@ -183,11 +219,15 @@ const routes: Routes = [
   },
   {
     path: 'search-users',
-    component: SearchUsersComponent
+    component: SearchUsersComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'personal-list',
-    component: PersonalBooklistComponent
+    component: PersonalBooklistComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   // routing to NotFoundComponent must be in the end
   {
@@ -199,6 +239,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), BarRatingModule],
+  providers: [AdminActivateGuardService],
   exports: [RouterModule]
 })
 
