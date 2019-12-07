@@ -43,7 +43,3 @@ export function loginReducer(state = initialState, action) {
   }
 
 }
-/*
-export const getRoles = (userState: UserState) => userState.roles;
-export const getIsLoggedIn = (userState: UserState) => userState.login;
-*/

@@ -142,7 +142,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NgOptionHighlightModule,
     CommonModule,
     StoreModule.forRoot( reducers),
-    StoreModule.forFeature('user', reducers),
     MatButtonToggleModule,
   ],
   exports: [
