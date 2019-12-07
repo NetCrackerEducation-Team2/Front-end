@@ -24,3 +24,13 @@ img.comment-review-avatar {
 .mat-spinner {
   margin: 0;
 }
+
+form.comment-content {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+mat-form-field.comment-field {
+  width: 100%;
+}

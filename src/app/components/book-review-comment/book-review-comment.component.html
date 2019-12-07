@@ -6,23 +6,24 @@
       <mat-spinner></mat-spinner>
     </div>
     <div *ngIf="!loading">
+      <mat-card-actions class="main-panel-buttons">
+        <button mat-button color="primary" *ngIf="ableToExpand" (click)="expandReviewsComments()">Show elder</button>
+      </mat-card-actions>
+
       <div *ngFor="let comment of reviewComments; index as commentInd">
 
         <mat-card class="comment-review-block">
-
           <div class="comment-review-profile-block">
             <img *ngIf="comment.author.photoPath" class="comment-review-avatar" src="{{ comment.author.photoPath }}"
                  alt="Avatar">
             <img *ngIf="!comment.author.photoPath" class="comment-review-avatar" src="{{ defaultPhotoPath }}"
                  alt="Avatar">
           </div>
-
           <div class="comment-review-content">
             <mat-card-title> {{ comment.author.fullName }} </mat-card-title>
             <mat-card-subtitle> Date: {{ comment.creationTime }} </mat-card-subtitle>
             <p> {{ comment.content }} </p>
           </div>
-
         </mat-card>
 
       </div>
@@ -42,12 +43,16 @@
         </div>
 
         <div *ngIf="isLogged" class="comment-review-content">
-          <mat-card-title> {{ loggedUser.fullName }} </mat-card-title>
-          <mat-form-field class="example-full-width">
-            <label><textarea type="text" #commentArea matInput placeholder="Leave a comment"></textarea></label>
-          </mat-form-field>
+          <form class="comment-content">
+            <mat-card-title> {{ loggedUser.fullName }} </mat-card-title>
+            <mat-form-field class="comment-field">
+              <label>
+                <textarea type="text" #commentArea matInput placeholder="Leave a comment"></textarea>
+              </label>
+            </mat-form-field>
 
-          <button mat-button color="primary" (click)="sendComment(commentArea.value)">Submit comment</button>
+            <button mat-button color="primary" (click)="sendComment(commentArea.value)">Submit comment</button>
+          </form>
         </div>
 
         <div *ngIf="!isLogged">
@@ -57,9 +62,5 @@
 
     </div>
   </div>
-
-  <mat-card-actions class="main-panel-buttons">
-    <button mat-button color="primary" *ngIf="ableToExpand" (click)="expandReviewsComments()">Show more</button>
-  </mat-card-actions>
 
 </mat-card>
