@@ -26,7 +26,7 @@ export class ActivityItemComponent implements OnInit {
       contentElements: null,
       // itemId: this.activity.activityId,
       listItemCallback: null,
-      photo: null,
+      photoPath: null,
       publish: null
     };
   }

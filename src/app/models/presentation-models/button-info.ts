@@ -3,6 +3,6 @@ export interface ButtonInfo {
   name: string;
   url: string;
   disabled: boolean;
-  // color: string;
+  hidden?: boolean;
   clickFunction: () => void;
 }

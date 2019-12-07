@@ -94,6 +94,7 @@ import { CreateAchievementComponent } from './components/create-achievement/crea
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
+import {OptionsScrollDirective} from './directives/options-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -164,6 +165,9 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
+    AchievementComponent,
+    ShowHideComponent,
+    OptionsScrollDirective
     CreateAchievementComponent,
     ShowHideComponent
   ],
@@ -210,10 +214,10 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     // BrowserAnimationsModule,
     // AppRoutingModule,
     // ToastrModule.forRoot({ timeOut: 3000 }),
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     // HttpClientModule
     MatTreeModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   exports: [
     BrowserModule,
@@ -233,8 +237,7 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     MatIconModule,
     MatTabsModule,
     ReactiveFormsModule,
-    AnnouncementListComponent
-
+    AnnouncementListComponent,
   ],
   providers: [
     {

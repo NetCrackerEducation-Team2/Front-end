@@ -83,6 +83,12 @@ export class AccountService {
     }
   }
 
+  currentUserHasRole(role: string): boolean {
+    let roles = this.getCurrentUserRoles();
+    if (!roles) return false;
+    return roles.includes(role);
+  }
+
   getCurrentUserRoles(): string[] {
     const token = this.getToken();
     if (token) {
