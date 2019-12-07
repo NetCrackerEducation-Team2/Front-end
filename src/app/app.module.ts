@@ -165,9 +165,8 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    AchievementComponent,
     ShowHideComponent,
-    OptionsScrollDirective
+    OptionsScrollDirective,
     CreateAchievementComponent,
     ShowHideComponent
   ],
