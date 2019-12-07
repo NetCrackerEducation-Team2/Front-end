@@ -55,6 +55,7 @@ export class EditComponent implements OnInit {
         (user: User) => {
           this.user.fullName = user.fullName;
           this.user.email = user.email;
+          this.user.photoPath = user.photoPath;
         },
         error => {
           console.log(error);
