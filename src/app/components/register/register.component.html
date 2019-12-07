@@ -35,7 +35,6 @@
                placeholder="Confirm password" [(ngModel)]="repeatPassword">
       </mat-form-field>
     </div>
-  </form>
 
     <mat-divider></mat-divider>
 
@@ -43,7 +42,7 @@
     <div class="nav-footer">
       <div class="messages">
         <span *ngIf="isDownloading">Please wait...</span>
-        <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
+        <small class="text-danger" *ngIf="fullName.touched && fullName.invalid">Full name is required</small>
         <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
         <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
         <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
@@ -66,5 +65,6 @@
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
   </ng-template>
 
+</form>
 
 </div>

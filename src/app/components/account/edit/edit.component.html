@@ -1,12 +1,22 @@
 <div class="container">
 
-  <form class="submit-form" #editForm="ngForm" novalidate (change)="isUpdated=true">
+  <form class="submit-form" #editForm="ngForm" novalidate (keydown)="isUpdated=true">
 
     <div class="submit-row">
       <label class="row-label" for="name">Full name</label>
       <mat-form-field class="form-field">
         <input required id="name" matInput placeholder="Full name" [(ngModel)]="user.fullName"
                name="name" #fullName="ngModel">
+      </mat-form-field>
+    </div>
+
+    <div class="submit-row">
+      <label class="row-label" for="photoPath">Photo URL</label>
+      <mat-form-field class="form-field">
+        <input id="photoPath" matInput placeholder="URL, e.g. https://facebook.com/img/1234"
+               [(ngModel)]="user.photoPath"
+               name="photoPath" #photoPath="ngModel"
+               pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$">
       </mat-form-field>
     </div>
 
@@ -21,25 +31,27 @@
     <div class="errors">
       <small class="text-danger" *ngIf="fullName.touched && fullName.invalid">Full name is required</small>
       <small class="text-danger" *ngIf="email.touched && email.invalid">Please enter a valid email</small>
+      <small class="text-danger" *ngIf="photoPath.touched && photoPath.invalid">Please enter a valid URL</small>
     </div>
 
   </form>
 
-  <div class="checkboxes">
-    <h2 class="header">Activity display options</h2>
-    <div class="checkboxList">
-      <ng-container *ngFor="let option of user.optionArr">
-        <mat-checkbox class="checkbox" [disabled]="true" [(ngModel)]="option.subscribed">{{option.title}}</mat-checkbox>
-      </ng-container>
-    </div>
-  </div>
+  <!--  <div class="checkboxes">-->
+  <!--    <h2 class="header">Activity display options</h2>-->
+  <!--    <div class="checkboxList">-->
+  <!--      <ng-container *ngFor="let option of user.optionArr">-->
+  <!--        <mat-checkbox class="checkbox" [disabled]="true" [(ngModel)]="option.subscribed">{{option.title}}</mat-checkbox>-->
+  <!--      </ng-container>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   <mat-divider></mat-divider>
 
   <div class="nav-footer">
     <a class="link" mat-flat-button color="primary" [routerLink]="['../']">Back</a>
     <a class="link" mat-stroked-button color="warn" [routerLink]="['../', 'change-password']">Change password</a>
-    <button class="button" [disabled]="editForm.invalid || !isUpdated" mat-flat-button color="primary" (click)="save()">Save changes
+    <button class="button" [disabled]="editForm.invalid || !isUpdated" mat-flat-button color="primary" (click)="save()">
+      Save changes
     </button>
   </div>
 
