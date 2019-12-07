@@ -2,11 +2,18 @@
   font-size: 20px;
 }
 
-.avatar-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 100%;
+.avatar {
+  text-align: right;
+  padding-right: 100px;
 }
+
+.avatar-image {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 210px;
+  height: 210px;
+}
+
 
 .button {
   height: 50px;
@@ -49,6 +56,11 @@
 
 @media (max-width: 768px) {
 
+  .avatar {
+    padding-right: 0;
+    text-align: center;
+  }
+
   .info {
     align-items: center;
   }
@@ -61,12 +73,6 @@
     margin: 0;
   }
 
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .profile {
