@@ -61,7 +61,6 @@
 
       <div class="nav-footer">
         <div class="messages">
-          <span *ngIf="isDownloading">Please wait...</span>
           <small class="text-danger" *ngIf=" UserId.touched && UserId.invalid" >User id is required</small>
           <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
           <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>

@@ -57,10 +57,22 @@
           {{message}}
         </span>
       </div>
-      <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
+      <button type="button" class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
     </div>
+<<<<<<< Updated upstream
 </form>
     <div *ngIf="isRegistered">
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
     </div>
+=======
+
+
+
+</form>
+
+<div *ngIf="isRegistered">
+    <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
+</div>
+
+>>>>>>> Stashed changes
 </div>
