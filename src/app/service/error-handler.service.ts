@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {ErrorHandler, Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {SnackBarService} from './presentation-services/snackBar.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorHandlerService {
+export class ErrorHandlerService implements ErrorHandler {
 
-  constructor() { }
+  constructor(private snackBarService: SnackBarService) { }
 
-  handleError<T>(operation = 'operation', result?: T){
+  handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      this.snackBarService.openErrorSnackBar(operation + ' failed.', error);
       console.log(error);
       return of(result as T);
     };

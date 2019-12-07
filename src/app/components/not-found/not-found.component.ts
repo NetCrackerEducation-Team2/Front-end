@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-not-found',
@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
+  readonly errorImgUrl = '../../../assets/images/error.jpg';
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

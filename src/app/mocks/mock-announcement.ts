@@ -3,12 +3,12 @@ import { Announcement } from '../models/announcement';
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     announcementId: 1,
+
     title: 'Title',
     description: 'Description',
     userId: 1,
     published: true,
     creationTime: '07-11-2019',
-    bookId: 1
   },
   {
     announcementId: 2,
@@ -17,6 +17,5 @@ export const ANNOUNCEMENTS: Announcement[] = [
     userId: 2,
     published: true,
     creationTime: '07-11-2019',
-    bookId: 2
   },
 ];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PublishReviewService} from '../../service/publish-review.service';
 import {BookReviewsService} from '../../service/book-reviews.service';
 import {PageEvent} from '@angular/material';
@@ -49,7 +49,7 @@ export class ReviewsManagementComponent implements OnInit {
           publish: null,
           description: bookReview.description,
           creationTime: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           title: null,
           itemId: null,
           subtitle: null,

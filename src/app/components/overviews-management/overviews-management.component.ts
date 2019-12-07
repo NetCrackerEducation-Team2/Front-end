@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Page} from '../../models/page';
 import {PublishOverviewService} from '../../service/publish-overview.service';
 import {PageEvent} from '@angular/material';
@@ -50,7 +50,7 @@ export class OverviewsManagementComponent implements OnInit {
         return {
           description: bookOverview.description,
           creationTime: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           title: null,
           itemId: null,
           subtitle: null,

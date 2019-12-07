@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AnnouncementService} from '../../service/announcement.service';
 import {Router} from '@angular/router';
-import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {User} from '../../models/user';
+import {SnackBarService} from '../../service/presentation-services/snackBar.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -12,9 +11,8 @@ import {User} from '../../models/user';
 export class AddAnnouncementComponent implements OnInit {
 
   announcement = {title: '', description: ''};
-  isError = false;
 
-  constructor(private announcementsService: AnnouncementService, private router: Router) {
+  constructor(private announcementsService: AnnouncementService, private router: Router, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
@@ -25,21 +23,17 @@ export class AddAnnouncementComponent implements OnInit {
     try {
       user = JSON.parse(localStorage.getItem('currentUser'));
     } catch (e) {
-      this.isError = true;
+      this.snackBarService.openErrorSnackBar('Error! You need to re-login');
       return;
     }
-    console.log('UserId from local storage: ', user.userId);
     this.announcementsService.createAnnouncement(this.announcement.title, this.announcement.description, user.userId)
       .subscribe(
         (response) => {
-          this.isError = false;
-          this.router.navigate(['/announcements']);
-        },
-        (error: HttpErrorResponse) => {
-          this.isError = true;
-          // TODO add error handling here
+          if (response) {
+            this.snackBarService.openSuccessSnackBar('Announcement has been sent to moderators');
+            this.router.navigate(['/announcements']);
+          }
         }
       );
   }
-
 }

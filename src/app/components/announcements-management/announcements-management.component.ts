@@ -50,9 +50,10 @@ export class AnnouncementsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(announcement => {
         return {
+          itemId: announcement.announcementId,
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           publish: announcement.published,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},
@@ -68,7 +69,7 @@ export class AnnouncementsManagementComponent implements OnInit {
               clickFunction: () => {this.publishAnnouncementService.unpublishedAnnouncement(announcement.announcementId)
                                     .subscribe();
                                     console.log(announcement);
-                                    this.getAnnouncements()}}
+                                    this.getAnnouncements(); }}
           ],
           listItemCallback: null,
           additionalParams: null

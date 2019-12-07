@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -28,5 +28,9 @@ export class AdminComponent implements OnInit {
 
   showDeleteAdminModerator() {
     this.router.navigate(['delete-admin-moderator'], { relativeTo: this.route });
+  }
+
+  showCreateAchievement() {
+    this.router.navigate(['create-achievement'], { relativeTo: this.route });
   }
 }

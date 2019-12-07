@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {AppState} from '../../state/app.state';
 import * as constants from '../../state/constants';
+import {AccountService} from '../../service/account.service';
+
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
@@ -81,41 +83,48 @@ private  checkNavLinks(state) {
           link: './',
           index: 0,
           access: true
-      }, {
+        }, {
           label: 'Announcements',
           link: './announcements',
           index: 1,
           access: true
-      }, {
+        },
+        {
+          label: 'Recommendations',
+          link: './recommendations',
+          index: 2,
+          access: state.accessMap.get(constants.user)
+        },
+        {
           label: 'Profile',
           link: 'profile/' + state.id,
-          index: 2,
+          index: 3,
           access: state.accessMap.get(constants.user)
       }, {
           label: 'Manage Announcements ',
           link: './announcements-management',
-          index: 3,
+          index: 4,
           access: state.accessMap.get(constants.announcementModerator) ||
                   state.accessMap.get(constants.admin) ||
                   state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Manage Reviews',
           link: './reviews-management',
-          index: 4,
+          index: 5,
           access: state.accessMap.get(constants.reviewModerator) ||
                   state.accessMap.get(constants.admin) ||
                   state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Manage Books',
           link: './overviews-management',
-          index: 5,
+          index: 6,
           access: state.accessMap.get(constants.overviewModerator) ||
                   state.accessMap.get(constants.admin) ||
                   state.accessMap.get(constants.superAdmin)
       }, {
           label: 'Admin',
           link: './admin',
-          index: 6,
+          index: 7,
           access: state.accessMap.get(constants.admin) ||
                   state.accessMap.get(constants.superAdmin)
       }

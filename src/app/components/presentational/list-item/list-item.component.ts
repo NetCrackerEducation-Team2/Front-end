@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ListItemInfo} from '../../../models/presentation-models/list-item-info';
 
 @Component({
@@ -14,5 +14,4 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

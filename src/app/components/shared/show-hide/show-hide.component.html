@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="link-wrapper">
+    <a mat-button (click)="toggle()" class="link">
+      <span class="label">{{this.label}}</span>
+      <mat-icon *ngIf="isShow">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="!isShow">keyboard_arrow_right</mat-icon>
+    </a>
+  </div>
+  <div *ngIf="isShow" class="content-wrapper" [ngStyle]="styles">
+    <ng-content select="div"></ng-content>
+  </div>
+</div>

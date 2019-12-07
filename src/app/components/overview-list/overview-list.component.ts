@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Page} from '../../models/page';
 import {BookOverviewService} from '../../service/book-overview.service';
 import {ActivatedRoute} from '@angular/router';
@@ -40,7 +40,7 @@ export class OverviewListComponent implements OnInit {
             return {
               title: this.bookOverviewPresentationService.getBookOverviewTitle(bookOverview),
               subtitle: this.bookOverviewPresentationService.getBookOverviewSubtitle(bookOverview),
-              photo: null,
+              photoPath: null,
               itemId: null,
               publish: null,
               contentElements: [

@@ -5,8 +5,7 @@ import {Router} from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import {AppState} from '../../state/app.state';
 import {Store} from '@ngrx/store';
-import { LOGIN} from '../../state/app.action';
-
+import {LOGIN} from '../../state/app.action';
 
 
 @Component({
@@ -47,8 +46,7 @@ export class LoginComponent implements OnInit {
 
           console.log('Successfully signed in');
           this.isError = false;
-          const a = JSON.parse(JSON.stringify((jwt_decode(resp.token))));
-        //  this.store.dispatch({type: APP_ACTION.APP_LOGIN }); add supp func
+          const a = JSON.parse(JSON.stringify((jwt_decode(resp.token))  ));
           this.store.dispatch(new LOGIN(a));
         },
         (error: HttpErrorResponse) => {

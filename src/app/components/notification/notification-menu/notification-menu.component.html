@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="animals">
+  <mat-icon>hearing</mat-icon>
+</button>
+
+<mat-menu #animals="matMenu">
+    <div *ngIf="notifications">
+        <div *ngFor="let notification of notifications.array">
+            <button mat-menu-item>{{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
+        </div>
+    </div>
+    <button mat-button routerLink="/notifications">View all</button>
+</mat-menu>
+

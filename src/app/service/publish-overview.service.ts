@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {BookOverview} from '../models/book-overview';
 import {catchError} from 'rxjs/operators';
 import {ErrorHandlerService} from './error-handler.service';
+import {apiUrls} from '../../api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,11 @@ export class PublishOverviewService {
   private readonly ADMIN_MODERATOR_PUBLISH_OVERVIEW;
   private readonly ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW;
 
-
   constructor(private httpClient: HttpClient,
               private errorHandlerService: ErrorHandlerService) {
-    this.ADMIN_MODERATOR_PUBLISH_OVERVIEW = environment.ADMIN_MODERATOR_PUBLISH_OVERVIEW;
-    this.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW = environment.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW;
+    this.ADMIN_MODERATOR_PUBLISH_OVERVIEW = apiUrls.ADMIN_MODERATOR_PUBLISH_OVERVIEW;
+    this.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW = apiUrls.ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW;
+
   }
   publishOverview(bookOverviewId: number): Observable<BookOverview> {
     return this.httpClient.put<any>(this.ADMIN_MODERATOR_PUBLISH_OVERVIEW + bookOverviewId, {})

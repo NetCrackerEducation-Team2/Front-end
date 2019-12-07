@@ -1,4 +1,4 @@
-.container, .button  {
+.container, .button {
   font-size: 20px;
 }
 
@@ -6,42 +6,52 @@
   height: 50px;
 }
 
-  .container, button {
-    font-size: 20px;
-  }
+.container, .button {
+  font-size: 20px;
+}
 
-  button {
-    height: 50px;
-  }
+.button {
+  height: 50px;
+}
 
-  .details {
-    padding-top: 20px;
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    padding-bottom: 40px;
-  }
+.details {
+  padding-top: 20px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding-bottom: 40px;
+}
 
-  .info {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-  }
+.info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
 
+.user-actions {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  margin: 10px 120px 20px;
+}
 
+.user-actions > * {
+  justify-self: center;
+  width: 180px;
+}
 
 @media (max-width: 768px) {
+
   .info {
     align-items: center;
   }
-  .button  {
-    height: 45px;
-  }
-}
 
-@media (max-width: 380px) {
-  .container, .button  {
+  .container, .button {
     font-size: 18px;
+  }
+  .user-actions{
+    margin: 0;
   }
 }
 
