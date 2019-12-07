@@ -12,7 +12,7 @@ import * as constants from '../../../state/constants';
   styleUrls: ['./edit-admin-moderator.component.css']
 })
 export class EditAdminModeratorComponent implements OnInit {
-  user = {fullName: '', email: '', password: '', photo_path: '', roles: []};
+  user = {userId: null, fullName: '', email: '', password: '', photo_path: '', roles: []};
   roles = [constants.user, ...constants.adminRoles];
   repeatPassword: '';
   isError = false;

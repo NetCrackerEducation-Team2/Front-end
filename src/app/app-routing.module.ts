@@ -30,6 +30,12 @@ import {CreateAdminModeratorComponent} from './components/admin/create-admin-mod
 import {EditAdminModeratorComponent} from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
 import {DeleteAdminModeratorComponent} from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import {AdminActivateGuardService} from './service/admin-activate-guard.service';
+import {UserActivateGuardService} from './service/user-activate-guard.service';
+import {ModerAnnouncementsActivateGuardService} from './service/moder-announcements-activate-guard.service';
+import {ModerOverviewsActivateGuardService} from './service/moder-overviews-activate-guard.service';
+import {ModerReviewsActivateGuardService} from './service/moder-reviews-activate-guard.service';
 
 const routes: Routes = [
   {
@@ -54,11 +60,15 @@ const routes: Routes = [
   },
   {
     path: 'profile/:userId',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'profile/:userId/edit',
-    component: EditComponent
+    component: EditComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'profile/:userId/change-password',
@@ -86,7 +96,9 @@ const routes: Routes = [
   },
   {
     path: 'book/suggest',
-    component: SuggestBookComponent
+    component: SuggestBookComponent,
+    canActivate: [UserActivateGuardService]
+
   },
   {
     path: 'book/slug/:slug',
@@ -108,35 +120,49 @@ const routes: Routes = [
     path: 'review/add/:bookId',
     component: AddBookReviewComponent
   },
-{
+  {
     path: 'announcements-management',
-    component: AnnouncementsManagementComponent
+    component: AnnouncementsManagementComponent,
+    canActivate: [ModerAnnouncementsActivateGuardService]
+
   },
   {
     path: 'overviews-management',
-    component: OverviewsManagementComponent
+    component: OverviewsManagementComponent,
+    canActivate: [ModerOverviewsActivateGuardService]
+
   },
   {
     path: 'reviews-management',
-    component: ReviewsManagementComponent
+    component: ReviewsManagementComponent,
+    canActivate: [ModerReviewsActivateGuardService]
   },
   {
-     path: 'admin',
-     component: AdminComponent,
-     children: [
-        {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
-        {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
-        {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
-     ]
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
+      {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
+      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
+    ],
+    canActivate: [AdminActivateGuardService]
   },
   {
      path: 'create-book',
-     component: CreateBookComponent
-  }
-  ,
+     component: CreateBookComponent,
+     canActivate: [UserActivateGuardService]
+
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
+    canActivate: [UserActivateGuardService]
+
+  },
   {
      path: 'create-announcement',
-     component: CreateAnnouncementComponent
+     component: CreateAnnouncementComponent,
+     canActivate: [AdminActivateGuardService]
   },
   {
     path: 'book-overviews/:bookId',
@@ -152,6 +178,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), BarRatingModule],
+  providers: [AdminActivateGuardService],
   exports: [RouterModule]
 })
 

@@ -20,7 +20,7 @@ export class DeleteAdminModeratorComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteUser() {
+  deleteUser(): void {
     console.log(this.email);
     this.admModerService.
     deleteAdminModer(this.email).pipe(take(1)).

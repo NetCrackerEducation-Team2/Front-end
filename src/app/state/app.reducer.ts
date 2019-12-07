@@ -1,6 +1,6 @@
 import {APP_ACTION } from './app.action';
 import * as constants from './constants';
-export interface AppReducerState {
+export interface UserState {
 
   login: boolean;
   roles: any[];
@@ -8,7 +8,7 @@ export interface AppReducerState {
   id: number;
 }
 
-const initialState: AppReducerState = {
+const initialState: UserState = {
   login: false,
   roles: [ ],
   accessMap: new Map([[constants.admin, false],
@@ -43,4 +43,7 @@ export function loginReducer(state = initialState, action) {
   }
 
 }
-
+/*
+export const getRoles = (userState: UserState) => userState.roles;
+export const getIsLoggedIn = (userState: UserState) => userState.login;
+*/

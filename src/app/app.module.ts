@@ -65,6 +65,8 @@ import { DeleteAdminModeratorComponent } from './components/admin/delete-admin-m
 import { CalendarComponent } from './components/calendar/calendar.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
 import { ChatComponent } from './components/chat/chat.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -109,6 +111,7 @@ import { ChatComponent } from './components/chat/chat.component';
     ChatComponent
   ],
   imports: [
+    MatGridListModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -138,7 +141,8 @@ import { ChatComponent } from './components/chat/chat.component';
     NgSelectModule,
     NgOptionHighlightModule,
     CommonModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot( reducers),
+    StoreModule.forFeature('user', reducers),
     MatButtonToggleModule,
   ],
   exports: [
@@ -166,7 +170,7 @@ import { ChatComponent } from './components/chat/chat.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
   ],
 
   bootstrap: [AppComponent]

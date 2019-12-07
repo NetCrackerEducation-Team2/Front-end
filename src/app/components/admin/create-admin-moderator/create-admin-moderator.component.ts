@@ -43,7 +43,7 @@ export class CreateAdminModeratorComponent implements OnInit {
   }
 
 
-  change(event) {
+  change(event): void {
        console.log(event.source.selected, event.source.value);
        if (event.source.selected) {
         this.user.roles.push({name: event.source.value});

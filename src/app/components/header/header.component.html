@@ -5,11 +5,12 @@
 
   <div class="buttons">
     <ng-container *ngIf='!isLogged;else alreadyLogged'>
-      <button type="button"  mat-stroked-button routerLink= "/login">Sign in</button>
-      <button type="button"  mat-stroked-button  routerLink="/register">Sign up</button>
+      <button class="button-header" type="button"  mat-stroked-button routerLink= "/login">Sign in</button>
+      <button class="button-header" type="button"  mat-stroked-button  routerLink="/register">Sign up</button>
     </ng-container>
     <ng-template #alreadyLogged>
-      <button  type="button"  mat-stroked-button routerLink="/logout" (click)="onLogout()">Sign out</button>
+      <mat-icon class="header-icon" routerLink="/calendar">calendar_today</mat-icon>
+      <button class="button-header" type="button"  mat-stroked-button routerLink="/logout" (click)="onLogout()">Sign out</button>
     </ng-template>
   </div>
 
