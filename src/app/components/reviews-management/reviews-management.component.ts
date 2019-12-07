@@ -49,7 +49,7 @@ export class ReviewsManagementComponent implements OnInit {
           publish: null,
           description: bookReview.description,
           creationTime: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           title: null,
           itemId: null,
           subtitle: null,

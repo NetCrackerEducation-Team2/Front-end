@@ -63,8 +63,12 @@ import {RecoverComponent} from './components/recover-password/recover/recover.co
 import {OverviewListComponent} from './components/overview-list/overview-list.component';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './state/app.state';
-import {CreateAdminModeratorComponent} from './components/create-admin-moderator/create-admin-moderator.component';
+import {CreateAdminModeratorComponent} from './components/admin/create-admin-moderator/create-admin-moderator.component';
 import {TabsComponent} from './components/tabs/tabs.component';
+import {EditAdminModeratorComponent} from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
+import {DeleteAdminModeratorComponent} from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {MatMenuModule} from '@angular/material/menu';
@@ -79,7 +83,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgOptionHighlightModule} from '@ng-select/ng-option-highlight';
 import {CommonModule} from '@angular/common';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
-import { ChatComponent } from './components/chat/chat.component';
+import {ChatComponent} from './components/chat/chat.component';
 import {ActivityItemComponent} from './components/activity-item/activity-item.component';
 import {ActivityListComponent} from './components/activity-list/activity-list.component';
 import {SearchUsersComponent} from './components/search-users/search-users.component';
@@ -87,13 +91,14 @@ import {UsersListComponent} from './components/users-list/users-list.component';
 import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
-import { NotificationMenuComponent } from './components/notification/notification-menu/notification-menu.component';
-import { PersonalBooklistComponent } from './components/personal-booklist/personal-booklist.component';
-import { PersonalBookItemComponent } from './components/personal-book-item/personal-book-item.component';
-import { AchievementComponent } from './components/achievement/achievement.component';
+import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
+import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
+import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
-import { ShowHideComponent } from './components/shared/show-hide/show-hide.component';
+import {ShowHideComponent} from './components/shared/show-hide/show-hide.component';
+import {OptionsScrollDirective} from './directives/options-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -147,6 +152,9 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     OverviewListComponent,
     CreateAdminModeratorComponent,
     TabsComponent,
+    EditAdminModeratorComponent,
+    DeleteAdminModeratorComponent,
+    CalendarComponent,
     BookReviewCommentComponent,
     NotificationListComponent,
     HttpErrorComponent,
@@ -164,10 +172,13 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
-    AchievementComponent,
+    ShowHideComponent,
+    OptionsScrollDirective,
+    CreateAchievementComponent,
     ShowHideComponent
   ],
   imports: [
+    MatGridListModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -210,10 +221,10 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     // BrowserAnimationsModule,
     // AppRoutingModule,
     // ToastrModule.forRoot({ timeOut: 3000 }),
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     // HttpClientModule
     MatTreeModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   exports: [
     BrowserModule,
@@ -233,8 +244,7 @@ import { ShowHideComponent } from './components/shared/show-hide/show-hide.compo
     MatIconModule,
     MatTabsModule,
     ReactiveFormsModule,
-    AnnouncementListComponent
-
+    AnnouncementListComponent,
   ],
   providers: [
     {

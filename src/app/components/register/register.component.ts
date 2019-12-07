@@ -47,8 +47,9 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.user.fullName, this.user.email, this.user.password)
       .subscribe(
         resp => {
-          this.isError = false;
           this.isRegistered = true;
+          console.log(this.isRegistered);
+          this.isError = false;
         },
         (err: HttpErrorResponse) => {
           this.isError = true;

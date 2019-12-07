@@ -22,9 +22,17 @@ export class AdminComponent implements OnInit {
 
   }
 
-
-
-  showEditModerator() {
-    this.router.navigate(['edit-moderator'], { relativeTo: this.route });
+  showEditAdminModerator() {
+    this.router.navigate(['edit-admin-moderator'], { relativeTo: this.route });
   }
+
+  showDeleteAdminModerator() {
+    this.router.navigate(['delete-admin-moderator'], { relativeTo: this.route });
+  }
+
+  showCreateAchievement() {
+    this.router.navigate(['create-achievement'], { relativeTo: this.route });
+  }
+
+
 }

@@ -2,15 +2,21 @@
   font-size: 20px;
 }
 
+.avatar-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
 .button {
   height: 50px;
 }
 
-.container, button {
+.container, .button {
   font-size: 20px;
 }
 
-button {
+.button {
   height: 50px;
 }
 
@@ -18,7 +24,7 @@ button {
   padding-top: 20px;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   padding-bottom: 40px;
 }
 
@@ -28,21 +34,33 @@ button {
   justify-content: center;
 }
 
+.user-actions {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  margin: 10px 15% 20px;
+}
+
+.user-actions > * {
+  justify-self: center;
+  width: 200px;
+}
 
 @media (max-width: 768px) {
+
   .info {
     align-items: center;
   }
 
-  .button {
-    height: 45px;
-  }
-}
-
-@media (max-width: 380px) {
   .container, .button {
     font-size: 18px;
   }
+
+  .user-actions {
+    margin: 0;
+  }
+
 }
 
 .center {
@@ -54,14 +72,4 @@ button {
 .profile {
   display: flex;
   flex-flow: row wrap;
-}
-
-.user_actions {
-  display: flex;
-  flew-flow: row wrap;
-}
-
-.user_actions_item {
-  margin-right: auto;
-  margin-left: auto;
 }

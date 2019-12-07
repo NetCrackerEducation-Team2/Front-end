@@ -7,7 +7,8 @@ import {AchievementReq} from '../../models/achievement-req';
 import {Verb} from '../../models/constants/verb';
 import {TableName} from '../../models/constants/table-name';
 import {tap} from 'rxjs/operators';
-import {SnackBarService} from "../../service/presentation-services/snackBar.service";
+import {SnackBarService} from '../../service/presentation-services/snackBar.service';
+import {Achievement} from '../../models/achievement';
 
 interface Range<T> {
   from: T;
@@ -91,12 +92,14 @@ class AchievementBuilder {
 
 @Component({
   selector: 'app-achievement',
-  templateUrl: './achievement.component.html',
-  styleUrls: ['./achievement.component.css']
+  templateUrl: './create-achievement.component.html',
+  styleUrls: ['./create-achievement.component.css']
 })
-export class AchievementComponent implements OnInit {
+export class CreateAchievementComponent implements OnInit {
 
   achievementBuilder: AchievementBuilder;
+  achievementResp: Achievement;
+  submitted: boolean;
 
   // Values
   verbNameArray: ConstantPair<string, Verb>[];
@@ -126,6 +129,7 @@ export class AchievementComponent implements OnInit {
     this.releaseDateRange = {} as Range<any>;
     this.votersCountRange = {} as Range<number>;
     this.achievementBuilder = new AchievementBuilder();
+    this.submitted = false;
   }
 
   ngOnInit() {
@@ -205,15 +209,19 @@ export class AchievementComponent implements OnInit {
     const map = this.achievementBuilder.achievementReq.extraParams;
     this.achievementBuilder.achievementReq.extraParams
       = this.covertMap(this.achievementBuilder.achievementReq.extraParams) as any;
-    console.log(this.achievementBuilder.build());
-    console.log(JSON.stringify(this.achievementBuilder.build()));
     this.achievementService.createAchievement(this.achievementBuilder.build())
       .pipe(
-        tap(achievement => console.log('Created : ', achievement))
+        tap(resp => console.log('Response : ', resp))
       )
-      .subscribe(() => {
-        this.snackBarService.openSuccessSnackBar('Achievement created!');
-      });
+      .subscribe(
+        (resp: Achievement) => {
+          if (resp != null) {
+            this.snackBarService.openSuccessSnackBar('Achievement created!');
+            this.submitted = true;
+            this.achievementResp = resp;
+          }
+        }
+      );
     this.achievementBuilder.achievementReq.extraParams = map;
   }
 

@@ -8,11 +8,12 @@ export const apiUrls = {
   API_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/',
   AUTH_RECOVER_LINK_URL: environment.BASE_URL + '/auth/recovery-link/',
   AUTH_RECOVER_PASS_URL: environment.BASE_URL + '/auth/recover/',
+  API_FILE_DOWNLOAD: environment.BASE_URL + '/api/file/download/',
+  API_FILE_IMAGE: environment.BASE_URL + '/api/file/image/',
   API_BOOK: environment.BASE_URL + '/api/book-by-id/',
   API_BOOKS: environment.BASE_URL + '/api/books',
   API_BOOK_INFO: environment.BASE_URL + '/api/book',
   API_BOOK_CREATE: environment.BASE_URL + '/api/book',
-  API_BOOK_DOWNLOAD: environment.BASE_URL + '/api/book/download',
   API_BOOK_REVIEW: environment.BASE_URL + '/api/book-review',
   API_USERS_BOOKS: environment.BASE_URL + '/api/users-book',
   API_GENRES: environment.BASE_URL + '/api/genres/',
@@ -36,7 +37,10 @@ export const apiUrls = {
   },
   API_FRIENDS: {
     API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
-    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
+    API_GET_FRIENDS: environment.BASE_URL + '/api/friends',
+    ACCEPT_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/accept/',
+    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/'
   },
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',

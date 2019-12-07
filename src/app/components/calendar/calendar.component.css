@@ -1,0 +1,38 @@
+.tiles-container {
+  max-width: 90%;
+  margin: auto;
+
+}
+
+
+.calendar-tile-header{
+text-align: center;
+}
+
+.icon-calendar{
+  margin: 1vh 2px;
+}
+
+.icon-calendar:hover{
+  cursor: pointer;
+  opacity: 0.3;
+}
+.calendar-year-month {
+  text-align: center;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  width: 50vw;
+
+}
+.calendar-buttons {
+
+  display: flex;
+  justify-content: center;
+
+}
+

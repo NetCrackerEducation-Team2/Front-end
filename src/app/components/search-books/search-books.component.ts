@@ -113,7 +113,7 @@ export class SearchBooksComponent implements OnInit {
             return {
               title: book.title,
               subtitle: this.bookPresentationService.getBookSubtitle(book),
-              photo: this.bookPresentationService.getBookPhoto(book),
+              photoPath: book.photoPath,
               itemId: null,
               publish: null,
               contentElements: [
@@ -122,13 +122,10 @@ export class SearchBooksComponent implements OnInit {
               ],
               actionElements: [
                 {
-                  buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {
-                  }
+                  buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}
                 },
                 {
-                  buttonInfoId: 2, name: 'View Overviews', url: 'book-overviews/' + book.bookId,
-                  disabled: false, clickFunction: () => {
-                  }
+                  buttonInfoId: 2, name: 'Overviews', url: 'book-overviews/' + book.bookId, disabled: false, hidden: !this.accountService.currentUserHasRole('OVERVIEW_MODERATOR'), clickFunction: () => {}
                 }
               ],
               listItemCallback: null,
@@ -160,10 +157,12 @@ export class SearchBooksComponent implements OnInit {
   }
 
   onAuthorScroll() {
+    console.log('author-scroll');
     this.nextAuthorPage$.next();
   }
 
   onGenreScroll() {
+    console.log('genre-scroll');
     this.nextGenrePage$.next();
   }
 

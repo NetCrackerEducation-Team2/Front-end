@@ -7,6 +7,9 @@ import {Page} from '../../../models/page';
 import {map} from 'rxjs/operators';
 import {PageEvent} from '@angular/material';
 import {AccountService} from '../../../service/account.service';
+import {FullNotification} from '../../../models/full-notification';
+import {FriendService} from '../../../service/friend.service';
+import {SnackBarService} from '../../../service/presentation-services/snackBar.service';
 
 @Component({
   selector: 'app-notification-list',
@@ -22,7 +25,11 @@ export class NotificationListComponent implements OnInit {
 
   constructor(private notificationService: NotificationService,
               public datePipe: DatePipe,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private friendService: FriendService,
+              private snackBarService: SnackBarService
+              ) {
+  }
 
   ngOnInit() {
     this.resetPaginator();
@@ -32,35 +39,91 @@ export class NotificationListComponent implements OnInit {
   getNotifications(): void {
     this.pageLoading = true;
     this.notificationService.getNotifications(this.selectedPage.currentPage, this.selectedPage.pageSize)
-    .pipe(map(page => {
-      return this.mapPage(page);
-    }))
-    .subscribe(selectedPage => {
-      this.selectedPage = selectedPage;
-      this.pageLoading = false;
-    });
+      .pipe(map(page => {
+        return this.mapPage(page);
+      }))
+      .subscribe(selectedPage => {
+        this.selectedPage = selectedPage;
+        this.pageLoading = false;
+      });
   }
 
-  private mapPage(page: Page<Notification>): Page<ListItemInfo> {
+  private mapPage(page: Page<FullNotification>): Page<ListItemInfo> {
     return {
       currentPage: page.currentPage,
       countPages: page.countPages,
       pageSize: page.pageSize,
       array: page.array.map(notification => {
-        return {
-          title: null,
-          subtitle: this.datePipe.transform(notification.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
-          itemId: notification.notificationId,
-          publish: null,
-          contentElements: [
-            {contentInfoId: 1, title: null, content: notification.notificationMessage},
-          ],
-          actionElements: null,
-          listItemCallback: null,
-          additionalParams: null
-        };
+        if (notification.notificationObject.notificationType.notificationTypeName === 'invitations') {
+          return this.mapFriendInvitationNotification(notification);
+        } else {
+          return {
+            title: null,
+            subtitle: this.datePipe.transform(notification.notificationObject.creationTime, 'd LLLL yyyy, h:mm'),
+            photoPath: null,
+            itemId: notification.notificationId,
+            publish: null,
+            contentElements: [
+              {
+                contentInfoId: 1,
+                title: null,
+                content: notification.notificationObject.notificationMessage.notificationMessageText
+              },
+            ],
+            actionElements: null,
+            listItemCallback: null,
+            additionalParams: null
+          };
+        }
       })
+    };
+  }
+
+  private mapFriendInvitationNotification(friendInvitationNotification: FullNotification): ListItemInfo {
+    return {
+      title: null,
+      subtitle: this.datePipe.transform(friendInvitationNotification.notificationObject.creationTime, 'd LLLL yyyy, h:mm'),
+      photoPath: null,
+      publish: null,
+      contentElements: [
+        {
+          contentInfoId: 1,
+          title: null,
+          content: friendInvitationNotification.notificationObject.notificationMessage.notificationMessageText
+        },
+      ],
+      actionElements: [
+        {
+          buttonInfoId: friendInvitationNotification.notificationId,
+          disabled: false,
+          name: 'Accept',
+          url: '.',
+          clickFunction: () => {
+            console.log('Accepting friend request...');
+            this.friendService.acceptFriendRequest(friendInvitationNotification.notificationObject.entityId).subscribe(response => {
+              if (response) {
+                this.snackBarService.openSuccessSnackBar('Friend request has been successfully accepted');
+              }
+            });
+          },
+        },
+        {
+          buttonInfoId: friendInvitationNotification.notificationId,
+          disabled: false,
+          name: 'Decline',
+          url: '.',
+          clickFunction: () => {
+            console.log('Declining friend request...');
+            this.friendService.declineFriendRequest(friendInvitationNotification.notificationObject.entityId).subscribe(response => {
+              if (response) {
+                this.snackBarService.openSuccessSnackBar('Friend request has been successfully declined');
+              }
+            });
+          },
+        }
+      ],
+      listItemCallback: null,
+      additionalParams: null
     };
   }
 
