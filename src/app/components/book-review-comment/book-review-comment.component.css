@@ -21,6 +21,6 @@ img.comment-review-avatar {
   max-width: 60px;
 }
 
-div.comment-review-content {
-
+.mat-spinner {
+  margin: 0;
 }

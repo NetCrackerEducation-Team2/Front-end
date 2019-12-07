@@ -11,8 +11,10 @@
         <mat-card class="comment-review-block">
 
           <div class="comment-review-profile-block">
-            <img *ngIf="comment.author.photoPath" class="comment-review-avatar" src="{{ comment.author.photoPath }}" alt="Avatar">
-            <img *ngIf="!comment.author.photoPath" class="comment-review-avatar" src="{{ defaultPhotoPath }}" alt="Avatar">
+            <img *ngIf="comment.author.photoPath" class="comment-review-avatar" src="{{ comment.author.photoPath }}"
+                 alt="Avatar">
+            <img *ngIf="!comment.author.photoPath" class="comment-review-avatar" src="{{ defaultPhotoPath }}"
+                 alt="Avatar">
           </div>
 
           <div class="comment-review-content">
@@ -24,6 +26,35 @@
         </mat-card>
 
       </div>
+
+      <div *ngIf="reviewComments.length == 0">
+        <mat-card class="comment-review-block">
+          <p> The review have no comments. Be first!</p>
+        </mat-card>
+      </div>
+
+      <mat-card class="comment-review-block">
+        <div *ngIf="isLogged" class="comment-review-profile-block">
+          <img *ngIf="loggedUser.photoPath" class="comment-review-avatar" src="{{ loggedUser.photoPath }}"
+               alt="Avatar">
+          <img *ngIf="!loggedUser.photoPath" class="comment-review-avatar" src="{{ defaultPhotoPath }}"
+               alt="Avatar">
+        </div>
+
+        <div *ngIf="isLogged" class="comment-review-content">
+          <mat-card-title> {{ loggedUser.fullName }} </mat-card-title>
+          <mat-form-field class="example-full-width">
+            <label><textarea type="text" #commentArea matInput placeholder="Leave a comment"></textarea></label>
+          </mat-form-field>
+
+          <button mat-button color="primary" (click)="sendComment(commentArea.value)">Submit comment</button>
+        </div>
+
+        <div *ngIf="!isLogged">
+          <mat-card-title>You are not logged for writing comments</mat-card-title>
+        </div>
+      </mat-card>
+
     </div>
   </div>
 

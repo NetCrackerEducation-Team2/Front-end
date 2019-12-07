@@ -16,6 +16,8 @@ export class BookReviewCommentComponent implements OnInit {
   pageSize = 2;
   page: number;
   loading: boolean;
+  isLogged: boolean;
+  loggedUser: User;
 
   @Input() reviewId: number;
   reviewComments: BookReviewComment[];
@@ -29,6 +31,8 @@ export class BookReviewCommentComponent implements OnInit {
     this.reviewComments = [];
     this.ableToExpand = true;
     this.loading = true;
+    this.isLogged = localStorage.getItem('currentUser') != null;
+    this.loggedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.getReviewComment();
   }
 
@@ -61,5 +65,10 @@ export class BookReviewCommentComponent implements OnInit {
   expandReviewsComments(): void {
     this.page += 1;
     this.getReviewComment();
+  }
+  sendComment(commentText: string): void {
+    if (commentText === '') {
+      return;
+    }
   }
 }
