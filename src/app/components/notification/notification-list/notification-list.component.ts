@@ -83,7 +83,7 @@ export class NotificationListComponent implements OnInit {
     return {
       title: null,
       subtitle: this.datePipe.transform(friendInvitationNotification.notificationObject.creationTime, 'd LLLL yyyy, h:mm'),
-      photo: null,
+      photoPath: null,
       publish: null,
       contentElements: [
         {
@@ -99,7 +99,7 @@ export class NotificationListComponent implements OnInit {
           name: 'Accept',
           url: '.',
           clickFunction: () => {
-            console.log('Accepting friend request...')
+            console.log('Accepting friend request...');
             this.friendService.acceptFriendRequest(friendInvitationNotification.notificationObject.entityId).subscribe(response => {
               if (response) {
                 this.snackBarService.openSuccessSnackBar('Friend request has been successfully accepted');
@@ -113,7 +113,7 @@ export class NotificationListComponent implements OnInit {
           name: 'Decline',
           url: '.',
           clickFunction: () => {
-            console.log('Declining friend request...')
+            console.log('Declining friend request...');
             this.friendService.declineFriendRequest(friendInvitationNotification.notificationObject.entityId).subscribe(response => {
               if (response) {
                 this.snackBarService.openSuccessSnackBar('Friend request has been successfully declined');
