@@ -21,6 +21,16 @@ img.comment-review-avatar {
   max-width: 60px;
 }
 
-div.comment-review-content {
+.mat-spinner {
+  margin: 0;
+}
 
+form.comment-content {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+mat-form-field.comment-field {
+  width: 100%;
 }
