@@ -1,26 +1,37 @@
-<div id="username-page" class="username-page">
-
-  <div class="chat-container">
-    <div class="chat-header">
-      <h2>Chatting</h2>
+<div class="chat_window">
+  <div class="top_menu">
+    <div class="buttons">
+      <div class="button close" (click)="goBack()"></div>
     </div>
-    <ul *ngFor="let message of messages">From: {{message.fromUserName}}, Message: {{message.content}} </ul>
-    <form [formGroup]="form" *ngIf="isLoaded">
-      <div class="form-group">
-        <div class="input-group clearfix">
-          <input type="text" formControlName="message" name="message" id="message" placeholder="Type a message..."
-                 autocomplete="off" class="form-control">
-          <button mat-raised-button color="primary" [disabled]="false" (click)="sendMessage()">Send</button>
-        </div>
-      </div>
-    </form>
-
-    <br>
+    <div class="title">Chat</div>
   </div>
-  <!--  <div *ngIf="isError">-->
-  <!--    <p class="error">-->
-  <!--      Select please a friend-->
-  <!--    </p>-->
-  <!--  </div>-->
+  <br>
+
+<ul class="message" *ngFor="let message of messages">
+  <div class="avatar">
+    <div id="message_template" class="message_template">
+    </div>
+    <div class="text_wrapper" >
+      <div class="currentUser" *ngIf="checkCurrentUser(message.fromUserName)">
+        {{message.fromUserName}}: {{message.content}}
+      </div>
+      <div class="friend" *ngIf="checkFriend(message.fromUserName)">
+        {{message.fromUserName}}: {{message.content}}
+      </div>
+    </div>
+  </div>
+</ul>
+
+<form [formGroup]="form" *ngIf="isLoaded">
+  <div class="bottom_wrapper clearfix">
+    <div class="message_input_wrapper">
+      <input type="text" formControlName="message" name="message"
+             id="message_input_value" class="message_input"
+             placeholder="Type your message here..."/>
+    </div>
+    <button mat-raised-button color="primary" class="send_message" [disabled]="form.invalid" (click)="sendMessage()">
+      Send
+    </button>
+  </div>
+</form>
 </div>
-<button (click)="goBack()">go back</button>

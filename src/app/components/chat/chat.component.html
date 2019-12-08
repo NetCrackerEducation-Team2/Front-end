@@ -1,8 +1,10 @@
-<div id="username-page" class="username-page">
+<div id="chat-page" class="chat-page">
   <div class="chat-container">
+
     <div class="chat-header">
-      <h2>Chatting</h2>
+      <h2>Library chat</h2>
     </div>
+
       <div class="form-group">
         <div class="input-group clearfix">
           <mat-form-field >
@@ -10,14 +12,16 @@
               <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-flat-button color="primary" (click)="createChat(userFriendId)"  class="accent" >Choose chat</button>
+          <button mat-flat-button color="primary" (click)="createChat(userFriendId)"  >Choose chat</button>
         </div>
       </div>
     <br>
   </div>
+
   <div *ngIf="isError">
     <p class="error">
       Select please a friend
     </p>
   </div>
+
 </div>

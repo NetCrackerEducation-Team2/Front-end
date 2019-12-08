@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {Message} from '../../models/message';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../models/user';
@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {apiUrls} from '../../../api-urls';
+
 
 @Component({
   selector: 'app-message',
@@ -30,16 +31,13 @@ export class MessageComponent implements OnInit {
   users: User[] = [];
   user: User;
   isError = false;
-  isNoError = true;
+  isCurrentUser = false;
 
   constructor(private location: Location,
               private route: ActivatedRoute,
               private socketService: SocketService,
-              private accountService: AccountService,
-              private friendsService: FriendService,
-              private chatService: ChatService,
-              private router: Router) {
-     this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
+              private accountService: AccountService) {
+    this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
   }
 
   ngOnInit() {
@@ -50,6 +48,13 @@ export class MessageComponent implements OnInit {
       message: new FormControl(null, [Validators.required])
     });
     this.getMessages();
+  }
+
+  checkCurrentUser(userName: string) {
+    return userName === this.fullName;
+  }
+  checkFriend(userName: string) {
+    return userName !== this.fullName;
   }
 
   getFriend(): void {
@@ -65,6 +70,7 @@ export class MessageComponent implements OnInit {
         toUser: this.user.userId, fromUserName: this.fullName
       };
       this.socketService.sendMessage(message).subscribe();
+      this.form.reset();
     }
   }
 
@@ -90,8 +96,9 @@ export class MessageComponent implements OnInit {
       (result: Message[]) => {
         for (const res of result) {
           this.messages.push(res);
-      } }
-      );
+        }
+      }
+    );
   }
 
   openSocket() {
@@ -102,8 +109,8 @@ export class MessageComponent implements OnInit {
 
   handleResult(message) {
     if (message.body) {
-       const messageResult: Message = JSON.parse(message.body);
-       this.messages.push(messageResult);
+      const messageResult: Message = JSON.parse(message.body);
+      this.messages.push(messageResult);
     }
   }
 
