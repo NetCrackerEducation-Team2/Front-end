@@ -5,12 +5,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../models/user';
 import {SocketService} from '../../service/socket.service';
 import {AccountService} from '../../service/account.service';
-import {FriendService} from '../../service/friend.service';
-import {ChatService} from '../../service/chat.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {apiUrls} from '../../../api-urls';
+import {Chat} from '../../models/chat';
 
 
 @Component({
@@ -31,7 +30,7 @@ export class MessageComponent implements OnInit {
   users: User[] = [];
   user: User;
   isError = false;
-  isCurrentUser = false;
+  chat: Chat;
 
   constructor(private location: Location,
               private route: ActivatedRoute,
@@ -47,6 +46,7 @@ export class MessageComponent implements OnInit {
     this.form = new FormGroup({
       message: new FormControl(null, [Validators.required])
     });
+    this.getChat();
     this.getMessages();
   }
 
@@ -58,12 +58,16 @@ export class MessageComponent implements OnInit {
   }
 
   getFriend(): void {
-    const id = +this.route.snapshot.paramMap.get('friendId');
-    this.userFriendId = id;
-    this.accountService.getUserById(id).subscribe(resp => this.user = resp);
+    const friendId = +this.route.snapshot.paramMap.get('friendId');
+    this.userFriendId = friendId;
+    this.accountService.getUserById(friendId).subscribe(resp => this.user = resp);
   }
 
-  sendMessage() {
+  getChat(): void {
+      this.socketService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => this.chat = resp);
+  }
+
+  sendMessage(): void {
     if (this.form.valid) {
       const message: Message = {
         content: this.form.value.message, fromUser: this.userCurrentId,
@@ -74,7 +78,7 @@ export class MessageComponent implements OnInit {
     }
   }
 
-  getCurrentUser() {
+  getCurrentUser(): void {
     const currentUser = this.accountService.getCurrentUser();
     this.fullName = currentUser.fullName;
     this.email = currentUser.email;
@@ -100,9 +104,9 @@ export class MessageComponent implements OnInit {
       }
     );
   }
-
+/////////////////////////////////////
   openSocket() {
-    this.stompClient.subscribe('/socket-publisher/' + this.user.userId, (message) => {
+    this.stompClient.subscribe('/socket-publisher/' + this.chat.chatId, (message) => {
       this.handleResult(message);
     });
   }
