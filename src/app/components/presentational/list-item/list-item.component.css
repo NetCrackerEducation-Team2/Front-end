@@ -70,23 +70,42 @@
 }
 
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) and (orientation: landscape){
   .item-photo{
-    min-width: 10vw;
-    max-width: 10vw;
-    max-height: 15vw;
+    min-width: 12vw;
+    max-width: 12vw;
+    max-height: 18vw;
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation: portrait){
+  .item-photo{
+    min-width: 15vw;
+    max-width: 15vw;
+    max-height: 22.5vw;
   }
 }
 
 @media screen and (max-width: 767px){
-
   .mat-card-subtitle{
     display: none;
   }
+}
+
+@media screen and (max-width: 767px) and (orientation: landscape){
 
   .item-photo{
-    min-width: 20vw;
-    max-width: 20vw;
-    max-height: 30vw;
+    min-width: 18vw;
+    max-width: 18vw;
+    max-height: 27vw;
+  }
+}
+
+@media screen and (max-width: 767px) and (orientation: portrait){
+
+  .item-photo{
+    min-width: 24vw;
+    max-width: 24vw;
+    max-height: 36vw;
   }
 }
