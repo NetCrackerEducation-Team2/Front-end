@@ -99,6 +99,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {ShowHideComponent} from './components/shared/show-hide/show-hide.component';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
+import {RecaptchaModule} from "ng-recaptcha";
 
 @NgModule({
   declarations: [
@@ -225,6 +226,7 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     // HttpClientModule
     MatTreeModule,
     MatRadioModule,
+    RecaptchaModule.forRoot()
   ],
   exports: [
     BrowserModule,

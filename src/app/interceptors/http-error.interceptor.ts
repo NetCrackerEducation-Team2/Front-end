@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -7,16 +7,21 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {retry, catchError} from 'rxjs/operators';
+
 //import {MatSnackBarComponent} from '../components/presentational/mat-snack-bar/mat-snack-bar.component';
 
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector/*, private snackBar: MatSnackBarComponent*/) { }
+  constructor(private injector: Injector/*, private snackBar: MatSnackBarComponent*/) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.url.includes('/auth/')) {
+      return next.handle(request);
+    }
     return next.handle(request)
       .pipe(
         retry(1),
