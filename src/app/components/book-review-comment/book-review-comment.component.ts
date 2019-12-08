@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AccountService} from '../../service/account.service';
 import {BookReviewCommentService} from '../../service/book-review-comment.service';
-import {flatMap, map} from 'rxjs/operators';
+import {flatMap, map, switchMap} from 'rxjs/operators';
 import {Page} from '../../models/page';
 import {User} from '../../models/user';
 import {BookReviewComment} from '../../models/book-review-comment';
@@ -51,7 +51,7 @@ export class BookReviewCommentComponent implements OnInit {
         }
         return reviewCommentList;
       }),
-      flatMap((reviewComment: BookReviewComment) => {
+      switchMap((reviewComment: BookReviewComment) => {
         tmpComments.push(reviewComment);
         return this.accountService.getUserById(reviewComment.userId);
       }),
@@ -61,7 +61,7 @@ export class BookReviewCommentComponent implements OnInit {
         comments
           .filter(comment => doneComments[comment.commentId] == null)
           .forEach((comment) => {
-            doneComments[comment.commentId] = author;
+            doneComments[comment.commentId] = true;
             comment.author = author;
             this.reviewComments.unshift(comment);
         });

@@ -39,6 +39,11 @@
         </div>
 
       </div>
+      <div *ngIf="reviews.length == 0">
+        <mat-card class="review-block">
+          <p> The book have no reviews.</p>
+        </mat-card>
+      </div>
     </div>
   </div>
 
