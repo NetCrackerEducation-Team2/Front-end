@@ -49,19 +49,20 @@ export class MessageComponent implements OnInit {
     this.form = new FormGroup({
       message: new FormControl(null, [Validators.required])
     });
+    this.getMessages();
   }
 
   getFriend(): void {
     const id = +this.route.snapshot.paramMap.get('friendId');
+    this.userFriendId = id;
     this.accountService.getUserById(id).subscribe(resp => this.user = resp);
   }
 
   sendMessage() {
-    console.log(this.messages);
     if (this.form.valid) {
       const message: Message = {
-        content: this.form.value.message, fromUser: this.email,
-        toUser: this.user.email
+        content: this.form.value.message, fromUser: this.userCurrentId,
+        toUser: this.user.userId, fromUserName: this.fullName
       };
       this.socketService.sendMessage(message).subscribe();
     }
@@ -84,9 +85,17 @@ export class MessageComponent implements OnInit {
     });
   }
 
+  getMessages() {
+    this.socketService.getMessages(this.userFriendId, this.userCurrentId).subscribe(
+      (result: Message[]) => {
+        for (const res of result) {
+          this.messages.push(res);
+      } }
+      );
+  }
+
   openSocket() {
-    console.log('OpenSocket');
-    this.stompClient.subscribe('/socket-publisher', (message) => {
+    this.stompClient.subscribe('/socket-publisher/' + this.user.userId, (message) => {
       this.handleResult(message);
     });
   }

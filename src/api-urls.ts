@@ -63,6 +63,7 @@ export const apiUrls = {
   API_CHAT: {
     API_SOCKET: environment.BASE_URL + '/ws',
     API_SEND: environment.BASE_URL + '/api/ws',
+    API_GET_MESSAGES: environment.BASE_URL + '/api/ws/',
     API_CHAT_CREATE: environment.BASE_URL + '/api/ws/create'
   },
   API_USERS_ID: environment.BASE_URL + '/api/users/'

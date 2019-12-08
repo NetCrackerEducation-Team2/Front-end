@@ -12,9 +12,12 @@ import {Observable} from 'rxjs';
 })
 export class SocketService {
   private readonly API_SEND;
+  private readonly API_GET_MESSAGES;
+
   constructor(private http: HttpClient,
               private handleErrorService: ErrorHandlerService) {
     this.API_SEND = apiUrls.API_CHAT.API_SEND;
+    this.API_GET_MESSAGES = apiUrls.API_CHAT.API_GET_MESSAGES;
   }
 
   sendMessage(message: Message): Observable<Message> {
@@ -22,6 +25,20 @@ export class SocketService {
       .pipe(
       catchError(this.handleErrorService.handleError<any>('sendMessage', []))
     );
+  }
+  getMessages(friendId: number, userCurrentId: number): Observable<Message[]> {
+    let params = new HttpParams();
+    let paramsString = '';
+    params = params.set('friendId', friendId.toString());
+    params = params.set('currentUserId', userCurrentId.toString());
+    if (params.keys().length > 0) {
+      paramsString = '?' + params.toString();
+    }
+    return this.http.get(this.API_GET_MESSAGES + paramsString)
+      .pipe(
+        catchError(this.handleErrorService.handleError<any>('getMessages', []))
+      );
+
   }
 
 }
