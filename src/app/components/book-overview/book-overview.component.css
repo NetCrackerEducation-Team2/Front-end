@@ -1,4 +1,4 @@
-.book-overview-to-read-button {
+.book-overview-button {
   width: 170px;
   height: auto;
   background: linear-gradient(to bottom left, rgb(101, 115, 255), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(206, 107, 168));
@@ -8,8 +8,8 @@
   outline-style: none;
   border: none;
   border-radius: 5px;
+  display: block;
   font-size: 12px;
-  margin: 10px 0 0;
 }
 
 .bolder-text{
@@ -89,12 +89,32 @@
   }
 }
 
-@media screen and (max-width: 767px) and (orientation: landscape) {
+@media screen and (min-width: 768px) and (orientation: portrait){
   .book-overview-picture{
-    min-width: 20vw;
-    max-width: 20vw;
-    min-height: 30vw;
-    max-height: 30vw;
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 37.5vw;
+    max-height: 37.5vw;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation: landscape){
+  .book-overview-picture{
+    min-width: 16vw;
+    max-width: 16vw;
+    min-height: 24vw;
+    max-height: 24vw;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 767px) and (orientation: landscape){
+  .book-overview-picture{
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 37.5vw;
+    max-height: 37.5vw;
     border-radius: 20px;
   }
 
@@ -157,7 +177,7 @@
     margin-bottom: 10px;
   }
 
-  .book-overview-to-read-button{
-    margin: 10px auto 0;
+  .book-overview-button{
+    margin: 0 auto;
   }
 }

@@ -1,24 +1,25 @@
 <div *ngIf="loaded; else elseBlock">
-<div class="book-overview-container">
-  <h1 class="book-overview-title">{{book.title}}</h1>
-  <mat-divider class="book-overview-mat-divider"></mat-divider>
-  <img [src]="book.photoPath" alt="" (error)="img.src = 'assets/images/not_found.jpg'" class="book-overview-picture" #img/>
-  <div class="book-overview-overview">
-    <div><span class="bolder-text">Announcement date:</span> {{book.release}}</div>
-    <div><span class="bolder-text">Genres:</span> {{genres}}</div>
-    <div><span class="bolder-text">Authors:</span> {{authors}}</div>
-    <div><span class="bolder-text">Rating:</span> {{book.rateSum}}</div>
-    <div><span class="bolder-text">Publishing house:</span> {{book.publishingHouse}} </div>
-    <button class="book-overview-to-read-button">Add to "To read"</button>
+  <div class="book-overview-container">
+    <h1 class="book-overview-title">{{book.title}}</h1>
+    <mat-divider class="book-overview-mat-divider"></mat-divider>
+    <img [src]="book.photoPath" alt="" (error)="img.src = 'assets/images/not_found.jpg'" class="book-overview-picture" #img/>
+    <div class="book-overview-overview">
+      <div><span class="bolder-text">Announcement date: </span>{{book.release}}</div>
+      <div><span class="bolder-text">Genres: </span>{{genres}}</div>
+      <div><span class="bolder-text">Authors: </span>{{authors}}</div>
+      <div><span class="bolder-text">Rating: </span>{{book.rateSum}}</div>
+      <div><span class="bolder-text">Publishing house: </span>{{book.publishingHouse}}</div>
+      <div><button class="book-overview-button">Add to "To read"</button></div>
+      <div><button class="book-overview-button">Read</button></div>
+    </div>
+    <div class="book-description">
+      <h2 class="book-description-header">Description:</h2>
+      <p>{{bookOverview.description}}</p>
+    </div>
+    <mat-divider class="book-overview-mat-divider"></mat-divider>
   </div>
-  <div class="book-description">
-    <h2 class="book-description-header">Description:</h2>
-    <p>{{bookOverview.description}}</p>
-  </div>
-  <mat-divider class="book-overview-mat-divider"></mat-divider>
+  <app-book-review [bookId]="book.bookId"></app-book-review>
 </div>
-
-<app-book-review [bookId]="book.bookId"></app-book-review>
-
-</div>
-<ng-template #elseBlock><mat-spinner></mat-spinner></ng-template>
+<ng-template #elseBlock>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -93,7 +93,6 @@
 }
 
 @media screen and (max-width: 767px) and (orientation: landscape){
-
   .item-photo{
     min-width: 18vw;
     max-width: 18vw;
@@ -102,7 +101,6 @@
 }
 
 @media screen and (max-width: 767px) and (orientation: portrait){
-
   .item-photo{
     min-width: 24vw;
     max-width: 24vw;
