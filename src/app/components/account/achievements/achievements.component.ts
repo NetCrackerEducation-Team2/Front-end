@@ -56,7 +56,6 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   getPaginatorData(event: PageEvent) {
     // next page is wanted to be shown
     if (event.pageIndex === this.selectedPage.currentPage) {
-      console.log('next');
       const nextPage = this.selectedPage.currentPage + 1;
       this.achievementService.getAchievementsByUserId(this.profileId, nextPage)
         .subscribe(page => this.selectedPage = page);
