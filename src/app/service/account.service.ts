@@ -51,7 +51,8 @@ export class AccountService {
     newUser.enabled = currUser.enabled;
     console.log('newUser', JSON.stringify(newUser));
     console.log('currUser', JSON.stringify(currUser));
-    return this.http.put(this.API_PROFILE + '/update', [currUser, newUser]);
+    newUser.roles = [newUser.roles] as any;
+    return this.http.put(this.API_PROFILE + '/update', [newUser, newUser]);
   }
 
   updatePassword(oldPassword: string, newPassword: string): Observable<any> {
