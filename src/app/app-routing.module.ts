@@ -28,7 +28,7 @@ import {CreateAdminModeratorComponent} from './components/admin/create-admin-mod
 import {EditAdminModeratorComponent} from './components/admin/edit-admin-moderator/edit-admin-moderator.component';
 import {DeleteAdminModeratorComponent} from './components/admin/delete-admin-moderator/delete-admin-moderator.component';
 import {BookProfileComponent} from './components/book-profile/book-profile.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
 import {AdminActivateGuardService} from './service/admin-activate-guard.service';
 import {UserActivateGuardService} from './service/user-activate-guard.service';
 import {ModerAnnouncementsActivateGuardService} from './service/moder-announcements-activate-guard.service';
@@ -165,25 +165,21 @@ const routes: Routes = [
     component: ReviewsManagementComponent,
     canActivate: [ModerReviewsActivateGuardService]
   },
-  // TODO: replace path /create-achievement to /admin/create-achievement
-  {
-    path: 'create-achievement',
-    component: CreateAchievementComponent
-  },
   {
     path: 'admin',
     component: AdminComponent,
     children: [
       {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
       {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
-      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
+      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent},
+      {path: 'create-achievement', component: CreateAchievementComponent},
     ],
     canActivate: [AdminActivateGuardService]
   },
   {
-     path: 'create-book',
-     component: CreateBookComponent,
-     canActivate: [UserActivateGuardService]
+    path: 'create-book',
+    component: CreateBookComponent,
+    canActivate: [UserActivateGuardService]
 
   },
   {
@@ -193,17 +189,13 @@ const routes: Routes = [
 
   },
   {
-     path: 'create-announcement',
-     component: CreateAnnouncementComponent,
-     canActivate: [AdminActivateGuardService]
+    path: 'create-announcement',
+    component: CreateAnnouncementComponent,
+    canActivate: [AdminActivateGuardService]
   },
   {
-     path: 'create-achievement',
-     component: CreateAchievementComponent
-  },
-  {
-     path: 'create-book',
-     component: CreateBookComponent
+    path: 'create-book',
+    component: CreateBookComponent
   },
   {
     path: 'create-announcement',

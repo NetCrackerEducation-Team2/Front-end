@@ -20,4 +20,9 @@ export class BookReviewCommentService {
     const url = '/comment/all/' + bookId + '?page=' + page + '&pageSize=' + pageSize;
     return this.http.get<Page<BookReviewComment>>(this.bookReviewUrl + url);
   }
+
+  addReviewComment(newComment: BookReviewComment): Observable<BookReviewComment> {
+    const url = '/comment/add/';
+    return this.http.post<BookReviewComment>(this.bookReviewUrl + url, newComment);
+  }
 }
