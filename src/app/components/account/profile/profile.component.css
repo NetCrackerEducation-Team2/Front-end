@@ -2,6 +2,20 @@
   font-size: 20px;
 }
 
+.avatar {
+  text-align: right;
+  padding-right: 100px;
+}
+
+.avatar-image {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 210px;
+  height: 210px;
+  border: 1px solid #c5b0ff;
+}
+
+
 .button {
   height: 50px;
 }
@@ -33,15 +47,20 @@
   grid-gap: 10px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   align-items: center;
-  margin: 10px 120px 20px;
+  margin: 10px 15% 20px;
 }
 
 .user-actions > * {
   justify-self: center;
-  width: 180px;
+  width: 200px;
 }
 
 @media (max-width: 768px) {
+
+  .avatar {
+    padding-right: 0;
+    text-align: center;
+  }
 
   .info {
     align-items: center;
@@ -50,15 +69,11 @@
   .container, .button {
     font-size: 18px;
   }
-  .user-actions{
-    margin: 0;
-  }
-}
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .user-actions {
+    margin: 0 0 20px 0;
+  }
+
 }
 
 .profile {

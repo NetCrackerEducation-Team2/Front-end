@@ -1,0 +1,75 @@
+<div class="container">
+
+    <form class="submit-form" #regForm="ngForm" novalidate >
+
+
+    <div class="submit-row">
+        <label class="label" for="role">Choose role</label>
+        <mat-form-field class="form-field">
+          <mat-select multiple placeholder="Roles" required name = 'role' >
+            <mat-option  (onSelectionChange)="change($event)"  *ngFor="let role of roles" [value]="role" >
+              {{role}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="submit-row">
+        <label class="label" for="fullName">Enter full name</label>
+        <mat-form-field class="form-field">
+          <input required name="fullName" #fullName="ngModel" type="text" id="fullName" matInput
+                 placeholder="Full name" [(ngModel)]="user.fullName">
+        </mat-form-field>
+      </div>
+
+      <div class="submit-row">
+        <label class="label" for="email">Enter email</label>
+        <mat-form-field class="form-field">
+          <input required name="email" #email="ngModel" type="email" id="email" matInput placeholder="Email"
+                 [(ngModel)]="user.email" email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        </mat-form-field>
+      </div>
+
+      <div class="submit-row">
+        <label class="label" for="password">Enter password</label>
+        <mat-form-field class="form-field">
+          <input pattern="^.{6,}" required name="password" #password="ngModel" type="password" id="password" matInput
+                 placeholder="Password" [(ngModel)]="user.password">
+        </mat-form-field>
+      </div>
+
+      <div class="submit-row">
+        <label class="label" for="confirmPassword">Confirm password</label>
+        <mat-form-field class="form-field">
+          <input pattern="^.{6,}" required name="confirmPassword" #confirmPassword="ngModel" type="password"
+                 id="confirmPassword" matInput
+                 placeholder="Confirm password" [(ngModel)]="repeatPassword">
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+
+      <div class="nav-footer">
+        <div class="messages">
+          <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
+          <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
+          <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
+          <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
+          <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6 symbols</small>
+          <small class="text-danger" *ngIf="(repeatPassword != user.password) && password.touched && confirmPassword.touched">Passwords must match</small>
+          <span class="alert alert-danger center" *ngIf=" isError">
+            Error has happened. User was not created.
+          </span>
+          <span class="alert alert-success center" *ngIf=" isCreated">
+            User was successfully created.
+          </span>
+        </div>
+        <button class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='createModerAdmin()'>Create role</button>
+      </div>
+
+    </form>
+
+
+
+  </div>

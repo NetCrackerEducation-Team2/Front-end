@@ -9,7 +9,7 @@ import {delay, tap} from 'rxjs/operators';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: null};
+  profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: ''};
   isLogged: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,

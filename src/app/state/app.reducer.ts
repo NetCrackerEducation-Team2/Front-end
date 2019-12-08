@@ -1,20 +1,23 @@
-import {APP_ACTION,  LOGIN, LOGOUT } from './app.action';
+import {APP_ACTION } from './app.action';
+import * as constants from './constants';
+export interface UserState {
 
-export interface AppReducerState {
   login: boolean;
   roles: any[];
   accessMap: any;
+  id: number;
 }
 
-const initialState: AppReducerState = {
+const initialState: UserState = {
   login: false,
   roles: [ ],
-  accessMap: new Map([['ANNOUNCEMENT_MODERATOR', false],
-                       ['REVIEW_MODERATOR', false],
-                       ['OVERVIEW_MODERATOR', false],
-                       ['ADMIN', false],
-                       ['SUPER_ADMIN', false],
-                       ['user', false]])
+  accessMap: new Map([[constants.admin, false],
+                       [constants.superAdmin, false],
+                       [constants.reviewModerator, false],
+                       [constants.overviewModerator, false],
+                       [constants.announcementModerator, false],
+                       [constants.user, false]]),
+  id: null,
 
 };
 
@@ -26,7 +29,8 @@ export function loginReducer(state = initialState, action) {
       return {
         ...state,
         login: true,
-        roles: state.roles.concat(action.payload)
+        roles: [...state.roles, ...action.payload.rol],
+        id: action.payload.userId
     };
     case APP_ACTION.APP_LOGOUT:
       return {
@@ -39,4 +43,3 @@ export function loginReducer(state = initialState, action) {
   }
 
 }
-
