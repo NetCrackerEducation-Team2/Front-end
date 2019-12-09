@@ -15,32 +15,32 @@
             <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-flat-button color="primary" (click)="createChat(userFriendId)">Create chat</button>
+        <button mat-flat-button color="primary" (click)="createChat(userFriendId)">Select chat</button>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             Group chat
           </mat-panel-title>
-          <!--          <mat-panel-description>-->
-          <!--            Creating a group chat-->
-          <!--          </mat-panel-description>-->
         </mat-expansion-panel-header>
-        <!--        <form [formGroup]="form" *ngIf="isLoaded">-->
-
-        <input class="input" [(ngModel)]="chatName" type="text" name="nameChat" placeholder="Enter chat name">
+        <input class="input" [(ngModel)]="chatName" type="text" name="nameChat" placeholder="Enter chat name"/>
         <br>
         <br>
         <mat-form-field>
           <mat-select placeholder="Select friends" multiple [(ngModel)]="usersId">
             <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
           </mat-select>
-
         </mat-form-field>
         <button mat-flat-button color="primary" (click)="createGroupChat(usersId)">
           Create chat
         </button>
-        <!--        </form>-->
+        <br>
+        <mat-form-field>
+          <mat-select placeholder="Select a chat" [(ngModel)]="chatName" name="friendId">
+            <mat-option *ngFor="let chat of this.chats" [value]="chat.chatName">{{chat.chatName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="chooseGroupChat(chatName)">Select chat</button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

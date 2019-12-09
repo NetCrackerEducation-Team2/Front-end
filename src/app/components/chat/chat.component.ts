@@ -7,6 +7,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ChatService} from '../../service/chat.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Chat} from '../../models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -21,10 +22,10 @@ export class ChatComponent implements OnInit {
   userCurrentId: number;
   userFriendId: number;
   users: User[] = [];
+  chats: Chat[] = [];
   isError = false;
-  // form: FormGroup;
   chatName: string;
-  usersId: number;
+  usersId: number[];
 
   constructor(private socketService: SocketService,
               private accountService: AccountService,
@@ -36,10 +37,8 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.findUsersById();
+    this.getGroupsChat();
     this.isLoaded = true;
-    // this.form = new FormGroup({
-    //   nameChat: new FormControl(null, [Validators.required])
-    // });
   }
 
   getCurrentUser() {
@@ -53,22 +52,41 @@ export class ChatComponent implements OnInit {
     this.friendsService.getFriends(this.userCurrentId).subscribe(res => this.users = res);
   }
 
+  chooseGroupChat(chatName: string) {
+    this.router.navigate(['/message/groupChat', chatName]);
+  }
+
+  getGroupsChat() {
+    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => this.chats = res);
+  }
+
   createChat(friendId: number) {
     this.isError = false;
-    this.chatService.createChat(friendId, this.userCurrentId).subscribe(
-      () => {
-        this.router.navigate(['/message', friendId]);
-      }, (error: HttpErrorResponse) => {
-        this.isError = true;
-      }
-    );
+    if (friendId === 0) {
+      this.isError = true;
+    } else {
+      this.chatService.createChat(friendId, this.userCurrentId).subscribe(
+        () => {
+          this.router.navigate(['/message', friendId]);
+        }, (error: HttpErrorResponse) => {
+          this.isError = true;
+        }
+      );
+    }
   }
-  createGroupChat(usersId: number) {
-    console.log(this.chatName);
-    // if (this.form.valid) {
-    //   console.log(this.form.value.nameChat);
-    // }
-
-
+  createGroupChat(usersId: number[]) {
+    this.isError = false;
+    usersId.push(this.userCurrentId);
+    if (this.chatName == null) {
+      this.isError = true;
+    } else {
+      this.chatService.createGroupChat(usersId, this.chatName).subscribe(
+        () => {
+          this.router.navigate(['/message/groupChat', this.chatName]);
+        }, (error: HttpErrorResponse) => {
+          this.isError = true;
+        }
+      );
+    }
   }
 }
