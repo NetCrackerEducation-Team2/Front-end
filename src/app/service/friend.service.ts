@@ -23,14 +23,15 @@ export class FriendService {
   constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
     this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
     this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
-    // this.friends = apiUrls.API_FRIENDS.API_FRIENDS_ID;
+    this.friends = apiUrls.API_FRIENDS.API_GET_FRIENDS;
     this.getFriendsUrl = apiUrls.API_FRIENDS.API_GET_FRIENDS;
     this.acceptFriendRequestUrl = apiUrls.API_FRIENDS.ACCEPT_FRIEND_REQUEST;
     this.declineFriendRequestUrl = apiUrls.API_FRIENDS.DECLINE_FRIEND_REQUEST;
   }
-  // getFriends(userId): Observable<User[]> {
-  //   return this.http.get<User[]>(this.friends + userId);
-  // }
+
+  getFriendsById(userId): Observable<User[]> {
+    return this.http.get<User[]>(this.friends + userId);
+  }
 
   getFriendStatus(targetUserId: number): Observable<FriendStatus> {
     const params = new HttpParams().set('targetUserId', targetUserId.toString());

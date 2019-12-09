@@ -7,7 +7,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {
   MatButtonToggleModule,
   MatExpansionModule,
-  MatInputModule, 
+  MatInputModule,
   MatListModule,
   MatNativeDateModule,
   MatPaginatorModule,
@@ -105,7 +105,7 @@ import {ShowHideComponent} from './components/shared/show-hide/show-hide.compone
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {UiSwitchModule} from 'ngx-ui-switch';
-import {SettingsComponent} from "./components/account/settings/settings.component";
+import {SettingsComponent} from './components/account/settings/settings.component';
 
 @NgModule({
   declarations: [

@@ -75,6 +75,7 @@ export const apiUrls = {
     API_GET_GROUP_MESSAGES: environment.BASE_URL + '/api/ws/getGroupMessages',
     API_GET_GROUP_CHATS: environment.BASE_URL + '/api/ws/getGroupChats'
   },
+  API_USERS_ID: environment.BASE_URL + '/api/users/',
   API_ACHIEVEMENT: {
     API: environment.BASE_URL + '/api/achievement',
     FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',

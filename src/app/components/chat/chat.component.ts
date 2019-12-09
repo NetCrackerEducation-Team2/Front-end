@@ -49,7 +49,7 @@ export class ChatComponent implements OnInit {
   }
 
   findUsersById() {
-    this.friendsService.getFriends(this.userCurrentId).subscribe(res => this.users = res);
+    this.friendsService.getFriendsById(this.userCurrentId).subscribe(res => this.users = res);
   }
 
   chooseGroupChat(chatName: string) {

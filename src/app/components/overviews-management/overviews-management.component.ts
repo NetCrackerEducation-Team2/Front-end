@@ -53,7 +53,6 @@ export class OverviewsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(bookOverview => {
         return {
-          photo: null,
           title: bookOverview.book.title,
           description: bookOverview.description,
           creationTime: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
