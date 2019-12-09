@@ -8,6 +8,7 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
+  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -36,7 +37,6 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material';
 // import { BooksManagementComponent } from './components/books-management/books-management.component';
 // import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
 // import { CreateAdminComponent } from './components/create-admin/create-admin.component';
@@ -99,7 +99,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {ShowHideComponent} from './components/shared/show-hide/show-hide.component';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
-import {RecaptchaModule} from "ng-recaptcha";
+import {RecaptchaModule} from 'ng-recaptcha';
+import {UiSwitchModule} from 'ngx-ui-switch';
+import {SettingsComponent} from "./components/account/settings/settings.component";
 
 @NgModule({
   declarations: [
@@ -113,6 +115,7 @@ import {RecaptchaModule} from "ng-recaptcha";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    SettingsComponent,
     EditComponent,
     ChangePasswordComponent,
     AchievementsComponent,
@@ -226,7 +229,8 @@ import {RecaptchaModule} from "ng-recaptcha";
     // HttpClientModule
     MatTreeModule,
     MatRadioModule,
-    RecaptchaModule.forRoot()
+    RecaptchaModule.forRoot(),
+    UiSwitchModule
   ],
   exports: [
     BrowserModule,

@@ -42,6 +42,7 @@ export const apiUrls = {
     ACCEPT_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/accept/',
     DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/'
   },
+  API_SETTINGS: environment.BASE_URL + '/api/settings',
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: environment.BASE_URL + '/api/book-overviews/published-by-book/',
