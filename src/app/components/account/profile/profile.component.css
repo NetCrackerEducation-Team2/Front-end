@@ -80,3 +80,15 @@
   display: flex;
   flex-flow: row wrap;
 }
+
+
+.settings_bar {
+
+}
+.settings_switch {
+  text-align: center;
+}
+.header {
+  text-align: center;
+  padding-bottom: 15px;
+}
