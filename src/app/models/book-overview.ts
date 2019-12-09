@@ -9,5 +9,5 @@ export class BookOverview {
   userId: number;
   user: User;
   published: boolean;
-  creationTime: Date;
+  creationTime: string;
 }

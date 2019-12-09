@@ -8,6 +8,7 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
+  MatListModule,
   MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
@@ -94,6 +95,9 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import { ListItemPublishComponent } from './components/presentational/list-item-publish/list-item-publish.component';
+import { MessageComponent } from './components/message/message.component';
+import { MessageGroupComponent } from './components/message-group/message-group.component';
 import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
@@ -101,7 +105,7 @@ import {ShowHideComponent} from './components/shared/show-hide/show-hide.compone
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {UiSwitchModule} from 'ngx-ui-switch';
-import {SettingsComponent} from "./components/account/settings/settings.component";
+import {SettingsComponent} from './components/account/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +180,9 @@ import {SettingsComponent} from "./components/account/settings/settings.componen
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
+    ListItemPublishComponent,
+    MessageComponent,
+    MessageGroupComponent,
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
@@ -218,15 +225,10 @@ import {SettingsComponent} from "./components/account/settings/settings.componen
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    // MatTooltipModule,
     MatButtonToggleModule,
+    MatListModule,
     MatTooltipModule,
-    // BrowserModule,
-    // BrowserAnimationsModule,
-    // AppRoutingModule,
-    // ToastrModule.forRoot({ timeOut: 3000 }),
     ReactiveFormsModule,
-    // HttpClientModule
     MatTreeModule,
     MatRadioModule,
     RecaptchaModule.forRoot(),

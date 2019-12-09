@@ -9,8 +9,9 @@
     </ng-container>
     <ng-template #loaded>
       <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
-        <div class="app-announcement-list">
-          <app-list-item *ngFor="let review of selectedPage.array" [listItemInfo]="review"></app-list-item>
+        <div class="app-announcements-management">
+          <app-list-item-publish *ngFor="let announcement of selectedPage.array"
+                                 [listItemInfo]="announcement"></app-list-item-publish>
           <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
                          [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
           </mat-paginator>

@@ -1,0 +1,26 @@
+<div class="mat-card">
+  <ng-container *ngIf="listItemInfo.photoPath">
+    <img [src]="listItemInfo.photoPath" alt="item-photo" class="item-photo"/>
+  </ng-container>
+  <div class="item-info">
+    <div class="mat-card-header">
+      <div class="mat-card-header-text">
+        <div class="mat-card-title">{{listItemInfo.title}}</div>
+        <div class="mat-card-subtitle">{{listItemInfo.subtitle}}</div>
+      </div>
+    </div>
+    <div class="mat-card-content">
+      <p *ngFor="let element of listItemInfo.contentElements" [attr.id]="element.contentInfoId">
+        <span class="bolder-text">{{element.title}}</span> {{element.content}}
+      </p>
+    </div>
+    <div class="mat-card-actions">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle *ngFor="let element of listItemInfo.actionElements"
+                           [attr.id]="element.buttonInfoId" [routerLink]="element.url"
+                           [checked]="element.disabled"
+                           (change)="element.clickFunction()">{{element.name}}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 export interface Message {
-  message: string;
-  fromName: string;
-  // toName: string;
-  fromEmail: string;
+  content: string;
+  fromUser: number;
+  toUser: number;
+  fromUserName: string;
+  chatName: string;
 }
