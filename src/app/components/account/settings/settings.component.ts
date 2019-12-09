@@ -26,8 +26,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loadSettingsSubscription.unsubscribe();
-    this.updateSettingsSubscription.unsubscribe();
+    if (this.loadSettingsSubscription) {
+      this.loadSettingsSubscription.unsubscribe();
+    }
+    if (this.updateSettingsSubscription) {
+      this.updateSettingsSubscription.unsubscribe();
+    }
   }
 
   loadUserSettings(): void {

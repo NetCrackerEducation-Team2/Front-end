@@ -11,10 +11,8 @@ import {SettingsService} from '../../../service/settings.service';
 })
 export class ProfileComponent implements OnInit {
   profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: ''};
-  settings: Settings;
   isLogged: boolean;
 
-  loadSettingsSubscription: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
@@ -27,7 +25,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadUserSettings();
     this.initIsLoggedProperty();
     this.setDefaultAvatar();
     const userIdStr = this.activatedRoute.snapshot.paramMap.get('userId');
@@ -58,11 +55,6 @@ export class ProfileComponent implements OnInit {
       );
   }
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnDestroy() {
-    this.loadSettingsSubscription.unsubscribe();
-  }
-
   edit() {
     console.log('edit button clicked');
   }
@@ -81,9 +73,4 @@ export class ProfileComponent implements OnInit {
     this.isLogged = this.accountService.getCurrentUser() != null;
   }
 
-  loadUserSettings(): void {
-    this.loadSettingsSubscription = this.settingsService.getCurrentUserSettings().subscribe(settings => {
-      this.settings = settings;
-    });
-  }
 }
