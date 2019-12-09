@@ -1,27 +1,56 @@
 <div id="chat-page" class="chat-page">
   <div class="chat-container">
-
     <div class="chat-header">
       <h2>Library chat</h2>
     </div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Local chat
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <mat-select placeholder="Select a friend" [(ngModel)]="userFriendId" name="friendId">
+            <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="createChat(userFriendId)">Create chat</button>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Group chat
+          </mat-panel-title>
+          <!--          <mat-panel-description>-->
+          <!--            Creating a group chat-->
+          <!--          </mat-panel-description>-->
+        </mat-expansion-panel-header>
+        <!--        <form [formGroup]="form" *ngIf="isLoaded">-->
 
-      <div class="form-group">
-        <div class="input-group clearfix">
-          <mat-form-field >
-            <mat-select placeholder="Select a friend" [(ngModel)]="userFriendId" name="friendId">
-              <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button mat-flat-button color="primary" (click)="createChat(userFriendId)"  >Choose chat</button>
-        </div>
-      </div>
-    <br>
+        <input class="input" [(ngModel)]="chatName" type="text" name="nameChat" placeholder="Enter chat name">
+        <br>
+        <br>
+        <mat-form-field>
+          <mat-select placeholder="Select friends" multiple [(ngModel)]="usersId">
+            <mat-option *ngFor="let user of this.users" [value]="user.userId">{{user.fullName}}</mat-option>
+          </mat-select>
+
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="createGroupChat(usersId)">
+          Create chat
+        </button>
+        <!--        </form>-->
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
-
+  <br>
   <div *ngIf="isError">
     <p class="error">
       Select please a friend
     </p>
   </div>
-
 </div>
+
+
+

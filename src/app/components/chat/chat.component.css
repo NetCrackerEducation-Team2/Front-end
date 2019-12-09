@@ -46,3 +46,9 @@ button {
   padding: 15px;
   border-bottom: 1px solid #ececec;
 }
+
+.input {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}

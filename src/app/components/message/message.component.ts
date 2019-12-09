@@ -104,7 +104,6 @@ export class MessageComponent implements OnInit {
       }
     );
   }
-/////////////////////////////////////
   openSocket() {
     this.stompClient.subscribe('/socket-publisher/' + this.chat.chatId, (message) => {
       this.handleResult(message);

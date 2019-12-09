@@ -6,6 +6,7 @@ import {FriendService} from '../../service/friend.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ChatService} from '../../service/chat.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -16,10 +17,14 @@ import {Router} from '@angular/router';
 export class ChatComponent implements OnInit {
   fullName: string;
   email: string;
+  isLoaded = false;
   userCurrentId: number;
   userFriendId: number;
   users: User[] = [];
   isError = false;
+  // form: FormGroup;
+  chatName: string;
+  usersId: number;
 
   constructor(private socketService: SocketService,
               private accountService: AccountService,
@@ -31,6 +36,10 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.findUsersById();
+    this.isLoaded = true;
+    // this.form = new FormGroup({
+    //   nameChat: new FormControl(null, [Validators.required])
+    // });
   }
 
   getCurrentUser() {
@@ -53,5 +62,13 @@ export class ChatComponent implements OnInit {
         this.isError = true;
       }
     );
+  }
+  createGroupChat(usersId: number) {
+    console.log(this.chatName);
+    // if (this.form.valid) {
+    //   console.log(this.form.value.nameChat);
+    // }
+
+
   }
 }

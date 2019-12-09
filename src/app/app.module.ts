@@ -7,7 +7,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {
   MatButtonToggleModule,
   MatExpansionModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -188,7 +188,7 @@ import { MessageComponent } from './components/message/message.component';
     MatNativeDateModule,
     MatMenuModule,
     MatExpansionModule,
-    StoreModule.forRoot( reducers),
+    StoreModule.forRoot(reducers),
     MatSnackBarModule,
     AngularSvgIconModule,
     MatProgressSpinnerModule,
@@ -201,14 +201,8 @@ import { MessageComponent } from './components/message/message.component';
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    // MatTooltipModule,
     MatButtonToggleModule,
-    // BrowserModule,
-    // BrowserAnimationsModule,
-    // AppRoutingModule,
-    // ToastrModule.forRoot({ timeOut: 3000 }),
-    // ReactiveFormsModule,
-    // HttpClientModule
+    MatListModule,
   ],
   exports: [
     BrowserModule,
