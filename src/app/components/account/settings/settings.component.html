@@ -1,7 +1,7 @@
 <!--  User settings bar-->
 <div class="settings_bar">
   <h2 class="header">Settings</h2>
-  <div class="settings_switch">
+  <div class="settings_switch" *ngIf="settings">
     <span>Disable notifications </span>
     <ui-switch [(ngModel)]="settings.disableNotifications"></ui-switch>
   </div>
