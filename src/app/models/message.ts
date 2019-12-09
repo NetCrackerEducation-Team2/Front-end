@@ -3,4 +3,5 @@ export interface Message {
   fromUser: number;
   toUser: number;
   fromUserName: string;
+  chatName: string;
 }

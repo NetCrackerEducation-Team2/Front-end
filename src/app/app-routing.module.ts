@@ -37,6 +37,7 @@ import {PersonalBooklistComponent} from './components/personal-booklist/personal
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 import {Message} from './models/message';
 import {MessageComponent} from './components/message/message.component';
+import {MessageGroupComponent} from './components/message-group/message-group.component';
 
 const routes: Routes = [
    {
@@ -74,6 +75,10 @@ const routes: Routes = [
   {
     path: 'message/:friendId',
     component: MessageComponent
+  },
+  {
+    path: 'message/groupChat/:chatName',
+    component: MessageGroupComponent
   },
   {
     path: 'profile/:userId/change-password',

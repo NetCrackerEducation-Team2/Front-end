@@ -92,6 +92,7 @@ import {PersonalBookItemComponent} from './components/personal-book-item/persona
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 import { ListItemPublishComponent } from './components/presentational/list-item-publish/list-item-publish.component';
 import { MessageComponent } from './components/message/message.component';
+import { MessageGroupComponent } from './components/message-group/message-group.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +164,8 @@ import { MessageComponent } from './components/message/message.component';
     PersonalBookItemComponent,
     RecommendationsComponent,
     ListItemPublishComponent,
-    MessageComponent
+    MessageComponent,
+    MessageGroupComponent
   ],
   imports: [
     BrowserModule,
