@@ -85,15 +85,19 @@ export class AccountService {
   }
 
   currentUserHasRole(role: string): boolean {
-    let roles = this.getCurrentUserRoles();
-    if (!roles) return false;
+    const roles = this.getCurrentUserRoles();
+    if (!roles) {
+      return false;
+    }
     return roles.includes(role);
   }
 
   getCurrentUserRoles(): string[] {
     const token = this.getToken();
     if (token) {
-      return JSON.parse(JSON.stringify((jwt_decode(token)))).rol;
+      const decodedToken = jwt_decode(token);
+      console.log('Decoded JWT token content: ', decodedToken);
+      return JSON.parse(JSON.stringify((decodedToken))).rol;
     } else {
       return null;
     }
