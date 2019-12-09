@@ -1,0 +1,32 @@
+
+<div class="calendar-header">
+  <div class="calendar-year-month">
+    <h1> {{currentYear}} {{currentMonthLabel}}</h1>
+  </div>
+  <div class="calendar-buttons">
+      <mat-icon class="icon-calendar" (click)="back()">arrow_back</mat-icon>
+      <mat-icon class="icon-calendar"> today</mat-icon>
+      <mat-icon class="icon-calendar" (click)="forward()">arrow_forward</mat-icon>
+  </div>
+</div>
+
+<div class="tiles-container">
+  <mat-grid-list cols="7" gutterSize ="5px">
+  <mat-grid-tile *ngFor="let tile of tiles"
+  [colspan]="tile.cols"
+  [rowspan]="tile.rows">
+
+    <div class="calendar-tile">
+
+       <div class="calendar-tile-header">
+         {{tile.day}}
+       </div>
+       <div>
+         {{tile.text}}
+       </div>
+       <div>
+       </div>
+      </div>
+  </mat-grid-tile>
+  </mat-grid-list>
+</div>

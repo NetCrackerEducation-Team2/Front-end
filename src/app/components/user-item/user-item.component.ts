@@ -28,9 +28,12 @@ export class UserItemComponent implements OnInit {
   }
 
   private loadFriendStatus() {
-    this.friendService.getFriendStatus(this.profile.userId).subscribe(friendStatus => {
-      this.friendStatus = friendStatus;
-    });
+    const targetUserId = this.profile.userId;
+    if (targetUserId) {
+      this.friendService.getFriendStatus(targetUserId).subscribe(friendStatus => {
+        this.friendStatus = friendStatus;
+      });
+    }
   }
 
   sendFriendRequest() {

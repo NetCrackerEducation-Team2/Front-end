@@ -53,7 +53,7 @@ export class AnnouncementsManagementComponent implements OnInit {
           itemId: announcement.announcementId,
           title: announcement.title,
           subtitle: this.datePipe.transform(announcement.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
+          photoPath: null,
           publish: announcement.published,
           contentElements: [
             {contentInfoId: 1, title: null, content: announcement.description},

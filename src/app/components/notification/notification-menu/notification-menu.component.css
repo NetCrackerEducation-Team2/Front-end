@@ -4,3 +4,13 @@
 .mat-button {
     padding: 0px;
 }
+
+.header-icon{
+  cursor: pointer;
+  margin-bottom: 0.5vh;
+
+}
+
+.header-icon:hover{
+  opacity: 0.5;
+}

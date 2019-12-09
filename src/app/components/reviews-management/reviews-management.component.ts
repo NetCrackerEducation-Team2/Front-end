@@ -55,6 +55,8 @@ export class ReviewsManagementComponent implements OnInit {
           description: bookReview.description,
           photo: null,
           title: bookReview.book.title,
+          creationTime: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
+          photoPath: null,
           itemId: null,
           subtitle: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
           contentElements: [

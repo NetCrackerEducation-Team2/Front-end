@@ -12,7 +12,7 @@
     margin-left: 5vw;
   }
 
-  button{
+ .button{
     background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
     border: none;
     outline: none;
@@ -20,9 +20,10 @@
     outline-style: none;
     font-size: 15px;
     margin-right: 10vw;
+    width: auto;
   }
 
-  button:hover{
+  .button:hover{
 
     background: rgb(0,0,255,0.5);
     color: gray;
@@ -50,7 +51,7 @@
 
 
   }
-  button{
+  .button{
     background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
     border: none;
     outline: none;
@@ -59,10 +60,11 @@
     font-size: 15px;
     margin-right: 10vw;
     margin-bottom: 4vh;
+    width: auto;
 
   }
 
-  button:hover{
+  .button:hover{
 
     background: rgb(0,0,255,0.5);
     color: gray;

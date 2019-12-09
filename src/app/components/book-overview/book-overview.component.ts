@@ -6,6 +6,7 @@ import {BookOverview} from '../../models/book-overview';
 import {flatMap} from 'rxjs/operators';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {BookOverviewService} from '../../service/book-overview.service';
+import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 
 @Component({
   selector: 'app-book-overview',
@@ -18,35 +19,30 @@ export class BookOverviewComponent implements OnInit {
   bookOverview: BookOverview;
   genres: string;
   authors: string;
-  scourcePhoto: SafeUrl;
-  loadfinished = 0;
-  publishingHouse: string;
+  loaded: boolean;
+
   constructor(private bookService: BookService,
+              private bookPresentationService: BookPresentationService,
               private bookOverviewService: BookOverviewService,
-              private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-  ) {
-  }
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getBookOverview();
   }
 
   getBookOverview(): void {
+    this.loaded = false;
     const slug = this.route.snapshot.paramMap.get('slug');
     this.bookService.getBookBySlug(slug).pipe(
       flatMap((resBook: Book) => {
         this.book = resBook;
-        this.authors = this.bookService.getBookGenresString(this.book, this.book.authors.length);
-        this.genres = this.bookService.getBookAuthorsString(this.book, this.book.genres.length);
-
-        this.scourcePhoto = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.book.photo);
-        this.publishingHouse = resBook.publishingHouse;
+        this.authors = this.bookPresentationService.getBookGenresString(this.book, this.book.authors.length);
+        this.genres = this.bookPresentationService.getBookAuthorsString(this.book, this.book.genres.length);
         return this.bookOverviewService.getPublishedBookOverview(this.book.bookId);
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
-        this.loadfinished = 1;
+        this.loaded = true;
     });
   }
 }

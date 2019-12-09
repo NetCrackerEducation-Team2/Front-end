@@ -2,15 +2,29 @@
   font-size: 20px;
 }
 
+.avatar {
+  text-align: right;
+  padding-right: 100px;
+}
+
+.avatar-image {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 210px;
+  height: 210px;
+  border: 1px solid #c5b0ff;
+}
+
+
 .button {
   height: 50px;
 }
 
-.container, button {
+.container, .button {
   font-size: 20px;
 }
 
-button {
+.button {
   height: 50px;
 }
 
@@ -18,7 +32,7 @@ button {
   padding-top: 20px;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   padding-bottom: 40px;
 }
 
@@ -28,27 +42,38 @@ button {
   justify-content: center;
 }
 
+.user-actions {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  margin: 10px 15% 20px;
+}
+
+.user-actions > * {
+  justify-self: center;
+  width: 200px;
+}
 
 @media (max-width: 768px) {
+
+  .avatar {
+    padding-right: 0;
+    text-align: center;
+  }
+
   .info {
     align-items: center;
   }
 
-  .button {
-    height: 45px;
-  }
-}
-
-@media (max-width: 380px) {
   .container, .button {
     font-size: 18px;
   }
-}
 
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .user-actions {
+    margin: 0 0 20px 0;
+  }
+
 }
 
 .profile {
@@ -56,12 +81,14 @@ button {
   flex-flow: row wrap;
 }
 
-.user_actions {
-  display: flex;
-  flew-flow: row wrap;
-}
 
-.user_actions_item {
-  margin-right: auto;
-  margin-left: auto;
+.settings_bar {
+
+}
+.settings_switch {
+  text-align: center;
+}
+.header {
+  text-align: center;
+  padding-bottom: 15px;
 }

@@ -55,6 +55,9 @@ export class OverviewsManagementComponent implements OnInit {
         return {
           photo: null,
           title: bookOverview.book.title,
+          description: bookOverview.description,
+          creationTime: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
+          photoPath: null,
           itemId: null,
           subtitle: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
           publish: null,

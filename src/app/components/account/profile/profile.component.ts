@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import {Settings} from '../../../models/settings';
+import {SettingsService} from '../../../service/settings.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +10,14 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: null};
+  profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: ''};
   isLogged: boolean;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
-              private router: Router) {
+              private router: Router,
+              private settingsService: SettingsService) {
   }
 
   private setDefaultAvatar() {
@@ -60,6 +63,7 @@ export class ProfileComponent implements OnInit {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
   }
+
   canChat() {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;

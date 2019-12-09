@@ -11,10 +11,6 @@ export class BookPresentationService {
   constructor(private sanitizer: DomSanitizer,
               private stringFormatterService: StringFormatterService) {}
 
-  getBookPhoto(book: Book): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + book.photo);
-  }
-
   getBookSubtitle(book: Book): string {
     const authors = this.getBookAuthorsString(book, 1);
     return 'by ' + (authors === '' ? 'unknown' : authors);

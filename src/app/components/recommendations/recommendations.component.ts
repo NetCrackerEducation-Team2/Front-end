@@ -4,10 +4,9 @@ import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {PageEvent} from '@angular/material';
 import {AccountService} from '../../service/account.service';
 import {RecommendationsService} from '../../service/recommendations.service';
-import {map, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {Book} from '../../models/book';
-import {User} from '../../models/user';
 
 @Component({
   selector: 'app-recommendations',
@@ -49,7 +48,7 @@ export class RecommendationsComponent implements OnInit {
         return {
           title: book.title,
           subtitle: this.bookPresentationService.getBookSubtitle(book),
-          photo: this.bookPresentationService.getBookPhoto(book),
+          photoPath: book.photoPath,
           itemId: null,
           publish: null,
           contentElements: [
