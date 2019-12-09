@@ -5,8 +5,12 @@ import {PageEvent} from '@angular/material';
 import {BookOverviewService} from '../../service/book-overview.service';
 import {BookOverview} from '../../models/book-overview';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
-import {map} from 'rxjs/operators';
+import {map, subscribeOn} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
+import {BookService} from '../../service/book.service';
+import {Book} from '../../models/book';
+import {Observable, of} from 'rxjs';
+import {BookOverviewPresentationService} from '../../service/presentation-services/book-overview-presentation.service';
 
 @Component({
   selector: 'app-books-management',
@@ -21,10 +25,9 @@ export class OverviewsManagementComponent implements OnInit {
 
   constructor(private publishOverviewService: PublishOverviewService,
               public datePipe: DatePipe,
+              private bookService: BookService,
               private bookOverviewsService: BookOverviewService) {
-
   }
-
   ngOnInit() {
     this.resetPaginator();
     this.getOverviews();
@@ -34,6 +37,7 @@ export class OverviewsManagementComponent implements OnInit {
     this.pageLoading = true;
     this.bookOverviewsService.getAllBooksOverviews(this.selectedPage.currentPage, this.selectedPage.pageSize)
       .pipe(map(page => {
+        console.log(page);
         return this.mapPage(page);
       }))
       .subscribe(selectedPage => {
@@ -41,6 +45,7 @@ export class OverviewsManagementComponent implements OnInit {
         this.pageLoading = false;
       });
   }
+
   private mapPage(page: Page<BookOverview>): Page<ListItemInfo> {
     return {
       currentPage: page.currentPage,
@@ -48,29 +53,31 @@ export class OverviewsManagementComponent implements OnInit {
       pageSize: page.pageSize,
       array: page.array.map(bookOverview => {
         return {
+          title: bookOverview.book.title,
           description: bookOverview.description,
           creationTime: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
           photoPath: null,
-          title: null,
           itemId: null,
-          subtitle: null,
+          subtitle: this.datePipe.transform(bookOverview.creationTime, 'd LLLL yyyy, h:mm'),
           publish: null,
           contentElements: [
             {contentInfoId: 1, title: null, content: bookOverview.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'Publish', url: null, disabled: false,
-              clickFunction: () => {console.log(bookOverview.bookOverviewId);
-                                    this.publishOverviewService.publishOverview(bookOverview.bookOverviewId)
-                                      .subscribe();
-                                    console.log(bookOverview);
-                                    this.getOverviews(); }},
-            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: false,
-              clickFunction: () => {console.log(bookOverview.bookOverviewId);
-                                    this.publishOverviewService.unpublishedOverview(bookOverview.bookOverviewId)
-                                      .subscribe();
-                                    console.log(bookOverview);
-                                    this.getOverviews(); }}
+            {
+              buttonInfoId: 1, name: 'Publish', url: null, disabled: bookOverview.published,
+              clickFunction: () => {
+                const subscription = this.publishOverviewService.publishOverview(bookOverview.bookOverviewId)
+                  .subscribe(() => subscription.unsubscribe());
+              }
+            },
+            {
+              buttonInfoId: 2, name: 'Unpublish', url: null, disabled: !bookOverview.published,
+              clickFunction: () => {
+                const subscription = this.publishOverviewService.unpublishedOverview(bookOverview.bookOverviewId)
+                  .subscribe(() => subscription.unsubscribe());
+              }
+            }
           ],
           listItemCallback: null,
           additionalParams: null

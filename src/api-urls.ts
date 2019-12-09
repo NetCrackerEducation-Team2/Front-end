@@ -64,8 +64,17 @@ export const apiUrls = {
   API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
-  API_SOCKET: environment.BASE_URL + '/ws',
-  API_CHAT: environment.BASE_URL + '/api/ws',
+  API_CHAT: {
+    API_SOCKET: environment.BASE_URL + '/ws',
+    API_SEND: environment.BASE_URL + '/api/ws',
+    API_SEND_GROUP: environment.BASE_URL + '/api/ws/group',
+    API_GET_MESSAGES: environment.BASE_URL + '/api/ws/',
+    API_CHAT_CREATE: environment.BASE_URL + '/api/ws/create',
+    API_GET_CHAT: environment.BASE_URL + '/api/ws/getChat',
+    API_GROUP_CHAT_CREATE: environment.BASE_URL + '/api/ws/create/groupChat',
+    API_GET_GROUP_MESSAGES: environment.BASE_URL + '/api/ws/getGroupMessages',
+    API_GET_GROUP_CHATS: environment.BASE_URL + '/api/ws/getGroupChats'
+  },
   API_USERS_ID: environment.BASE_URL + '/api/users/',
   API_ACHIEVEMENT: {
     API: environment.BASE_URL + '/api/achievement',

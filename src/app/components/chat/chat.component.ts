@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Message} from '../../models/message';
 import {SocketService} from '../../service/socket.service';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
-import {apiUrls} from '../../../api-urls';
 import {User} from '../../models/user';
 import {AccountService} from '../../service/account.service';
-import {Observable, Subscription} from 'rxjs';
+import {FriendService} from '../../service/friend.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ChatService} from '../../service/chat.service';
+import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Chat} from '../../models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -16,83 +16,77 @@ import {Observable, Subscription} from 'rxjs';
 })
 
 export class ChatComponent implements OnInit {
-  readonly serverUrl: string;
-  isLoaded = false;
-  private stompClient;
-  form: FormGroup;
-  userForm: FormGroup;
-  messages: Message[] = [];
   fullName: string;
   email: string;
-  userId: number;
-
+  isLoaded = false;
+  userCurrentId: number;
+  userFriendId: number;
   users: User[] = [];
+  chats: Chat[] = [];
+  isError = false;
+  chatName: string;
+  usersId: number[];
 
   constructor(private socketService: SocketService,
-              private accountService: AccountService) {
-    this.serverUrl = apiUrls.API_SOCKET;
+              private accountService: AccountService,
+              private friendsService: FriendService,
+              private chatService: ChatService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.getCurrentUser();
     this.findUsersById();
-    this.form = new FormGroup({
-      message: new FormControl(null, [Validators.required])
-    });
+    this.getGroupsChat();
+    this.isLoaded = true;
   }
 
   getCurrentUser() {
     const currentUser = this.accountService.getCurrentUser();
     this.fullName = currentUser.fullName;
     this.email = currentUser.email;
-    this.userId = currentUser.userId;
+    this.userCurrentId = currentUser.userId;
   }
 
   findUsersById() {
-    this.accountService.getUsersById(this.userId).subscribe(res => this.users = res);
+    this.friendsService.getFriendsById(this.userCurrentId).subscribe(res => this.users = res);
   }
 
-  sendMessage() {
-    if (this.form.valid) {
-      const message: Message = {
-        message: this.form.value.message, fromName: this.fullName,
-        fromEmail: this.email
-      };
-      console.log(message);
-      this.socketService.sendMessage(message).subscribe(res => {
-        console.log(res);
-      });
+  chooseGroupChat(chatName: string) {
+    this.router.navigate(['/message/groupChat', chatName]);
+  }
+
+  getGroupsChat() {
+    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => this.chats = res);
+  }
+
+  createChat(friendId: number) {
+    this.isError = false;
+    if (friendId === 0) {
+      this.isError = true;
+    } else {
+      this.chatService.createChat(friendId, this.userCurrentId).subscribe(
+        () => {
+          this.router.navigate(['/message', friendId]);
+        }, (error: HttpErrorResponse) => {
+          this.isError = true;
+        }
+      );
     }
   }
-
-  chooseChat(chooseChatId: number) {
-    this.connect();
-    this.socketService.getMessages(this.userId, chooseChatId).subscribe(result  =>  {console.log(result); });
-    console.log(this.messages);
-  }
-
-  connect() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    const that = this;
-    this.stompClient.connect({}, () => {
-      that.isLoaded = true;
-      that.openSocket();
-    });
-  }
-
-  openSocket() {
-    this.stompClient.subscribe('/socket-publisher', (message) => {
-      this.handleResult(message);
-    });
-  }
-
-  handleResult(message) {
-    console.log(message.body);
-    if (message.body) {
-      const messageResult: Message = JSON.parse(message.body);
-      console.log(messageResult);
-      this.messages.push(messageResult);
+  createGroupChat(usersId: number[]) {
+    this.isError = false;
+    usersId.push(this.userCurrentId);
+    if (this.chatName == null) {
+      this.isError = true;
+    } else {
+      this.chatService.createGroupChat(usersId, this.chatName).subscribe(
+        () => {
+          this.router.navigate(['/message/groupChat', this.chatName]);
+        }, (error: HttpErrorResponse) => {
+          this.isError = true;
+        }
+      );
     }
   }
 }
