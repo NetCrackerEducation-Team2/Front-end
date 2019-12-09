@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {Page} from '../../models/page';
-import { AnnouncementService } from '../../service/announcement.service';
+import {AnnouncementService} from '../../service/announcement.service';
 import {PageEvent} from '@angular/material';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {map} from 'rxjs/operators';
 import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
+import {AppState} from '../../state/app.state';
+import {Store} from '@ngrx/store';
+import {UserState} from '../../state/app.reducer';
+
 @Component({
   selector: 'app-announcement-list',
   templateUrl: './announcement-list.component.html',
@@ -20,17 +24,29 @@ export class AnnouncementListComponent implements OnInit {
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
   selectedPagePublish: Page<ListItemInfo> = new Page<ListItemInfo>();
   isUser: boolean;
+  storeSubscription: any;
 
   constructor(private publishAnnouncementService: PublishAnnouncementService,
               public datePipe: DatePipe,
               private announcementService: AnnouncementService,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private store: Store<AppState>
+  ) {
+  }
 
   ngOnInit() {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
-    // this.initIsUserProperty();
+    this.storeSubscription = this.store.select('appReducer').subscribe(reducer => {
+      this.initIsUserProperty(reducer);
+    });
+
+  }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnDestroy(): void {
+    this.storeSubscription.unsubscribe();
   }
 
   getAnnouncements(): void {
@@ -73,7 +89,10 @@ export class AnnouncementListComponent implements OnInit {
             {contentInfoId: 1, title: null, content: announcement.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {}}
+            {
+              buttonInfoId: 1, name: 'View', url: '/', disabled: false, clickFunction: () => {
+              }
+            }
           ],
           listItemCallback: null,
           additionalParams: null
@@ -96,7 +115,7 @@ export class AnnouncementListComponent implements OnInit {
     return this.accountService.getToken() !== null;
   }
 
-  private initIsUserProperty(): void {
-    this.isUser = this.accountService.getCurrentUserRoles().includes('USER');
+  private initIsUserProperty(reducer: UserState): void {
+    this.isUser = reducer.login;
   }
 }
