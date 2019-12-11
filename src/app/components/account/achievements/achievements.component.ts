@@ -7,6 +7,7 @@ import {SocketHolder} from '../../../models/socket-holder';
 
 import {PageEvent} from '@angular/material/paginator';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {SnackBarService} from "../../../service/presentation-services/snackBar.service";
 
 @Component({
   selector: 'app-achievements',
@@ -22,7 +23,8 @@ export class AchievementsComponent implements OnInit, OnDestroy {
   socketUrl!: string;
   socket!: SocketHolder;
 
-  constructor(private achievementService: AchievementService) {
+  constructor(private achievementService: AchievementService,
+              private snackBar: SnackBarService) {
     this.socketUrl = apiUrls.WEBSOCKET;
     this.socket = new SocketHolder(this.socketUrl);
   }
@@ -47,6 +49,7 @@ export class AchievementsComponent implements OnInit, OnDestroy {
           .subscribe(page => {
             this.selectedPage = page;
             this.lengthAchievementArr++;
+            this.snackBar.openSuccessSnackBar('You got new achievement!');
           });
       });
     });
