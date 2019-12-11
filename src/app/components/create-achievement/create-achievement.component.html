@@ -46,6 +46,19 @@
     </div>
   </app-show-hide>
 
+  <app-show-hide [label]="'Name'" [styles]="{'margin-left': '65px'}">
+    <div class="submit-row" *ngIf="achievementBuilder.achievementReq.subject; else hintSubject">
+      <label class="label" for="name-achievement">Name</label>
+      <mat-form-field class="name-achievement">
+        <input matInput placeholder="'Professional book reviewer'" type="text"
+               [(ngModel)]="achievementBuilder.achievementReq.name" id="name-achievement">
+      </mat-form-field>
+    </div>
+    <ng-template #hintSubject>
+      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
+    </ng-template>
+  </app-show-hide>
+
   <app-show-hide [label]="'Description'" [styles]="{'margin-left': '105px'}">
     <div class="submit-container">
       <div class="submit-row" *ngIf="achievementBuilder.achievementReq.count; else hintCount">
@@ -62,21 +75,10 @@
     </ng-template>
   </app-show-hide>
 
-  <app-show-hide [label]="'Name'" [styles]="{'margin-left': '65px'}">
-    <div class="submit-row" *ngIf="achievementBuilder.achievementReq.subject; else hintSubject">
-      <label class="label" for="name-achievement">Name</label>
-      <mat-form-field class="name-achievement">
-        <input matInput placeholder="'Professional book reviewer'" type="text"
-               [(ngModel)]="achievementBuilder.achievementReq.name" id="name-achievement">
-      </mat-form-field>
-    </div>
-    <ng-template #hintSubject>
-      <ng-container *ngTemplateOutlet="hint; context: {msg: 'You must choose subject before'}"></ng-container>
-    </ng-template>
-  </app-show-hide>
-
-  <app-show-hide [label]="'Creation time'" [styles]="{'margin-left': '65px'}">
-    <div class="submit-container" *ngIf="achievementBuilder.achievementReq.name; else hintName">
+  <app-show-hide [label]="'Creation time'" [styles]="{'margin-left': '65px'}"
+                 *ngIf="achievementBuilder.achievementReq.subject?.toString()!='MESSAGES'">
+    <div class="submit-container"
+         *ngIf="achievementBuilder.achievementReq.name; else hintName">
       <div class="submit-row">
         <label class="label" for="from-creation-time">From</label>
         <mat-form-field>
@@ -101,7 +103,7 @@
 
   <app-show-hide [label]="'Books'" [styles]="{'margin-left': '55px'}"
                  *ngIf="achievementBuilder.achievementReq.subject &&
-                 achievementBuilder.achievementReq.subject.toString() === 'BOOKS'
+                 achievementBuilder.achievementReq.subject.toString().toUpperCase() === 'BOOKS'
                  && achievementBuilder.achievementReq.name">
 
     <div>
