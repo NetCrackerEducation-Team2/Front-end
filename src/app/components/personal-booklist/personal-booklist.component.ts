@@ -17,7 +17,7 @@ import {FileService} from '../../service/file.service';
   styleUrls: ['./personal-booklist.component.css']
 })
 export class PersonalBooklistComponent implements OnInit {
-  userId = 832;
+  userId: number;
   selectedPage: Page<ListItemInfo>;
   usersBooks: UsersBook[];
   books: Book[];
@@ -33,7 +33,7 @@ export class PersonalBooklistComponent implements OnInit {
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.usersBooks = [];
     this.books = [];
-    console.log('Hello');
+
     this.loadPage();
   }
 
