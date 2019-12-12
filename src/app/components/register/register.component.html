@@ -44,9 +44,12 @@
         <span *ngIf="isDownloading">Please wait...</span>
         <small class="text-danger" *ngIf="fullName.touched && fullName.invalid">Full name is required</small>
         <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
-        <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>
-        <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is required</small>
-        <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at least 6
+        <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid
+          email</small>
+        <small class="text-danger" *ngIf="!password.dirty && password.touched && password.invalid">Password is
+          required</small>
+        <small class="text-danger" *ngIf="password.dirty && password.touched && password.invalid">Password must be at
+          least 6
           symbols</small>
         <span class="text-danger center" *ngIf="!message && isError">
           User with username already exists
@@ -57,10 +60,13 @@
           {{message}}
         </span>
       </div>
-      <button type="button" class="button" [disabled]="!regForm.valid" mat-flat-button color="primary" (click)='register()'>Sign up</button>
+      <re-captcha id="captcha" (resolved)="resolvedCaptcha = true" [siteKey]="siteKey"></re-captcha>
+      <button type="button" class="button" [disabled]="!regForm.valid || !resolvedCaptcha" mat-flat-button
+              color="primary" (click)='register()'>Sign up
+      </button>
     </div>
-</form>
-    <div *ngIf="isRegistered">
+  </form>
+  <div *ngIf="isRegistered">
     <p class="center-margin">We have sent activation link to your email. Go to your email to finish registration.</p>
-    </div>
+  </div>
 </div>

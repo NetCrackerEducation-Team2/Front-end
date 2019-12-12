@@ -15,6 +15,10 @@
       </p>
     </div>
     <div class="mat-card-actions">
+      <!-- <button *ngFor="let element of listItemInfo.actionElements" mat-button
+              [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled"
+              (click)="element.clickFunction() ">
+        {{element.name}}</button> -->
       <ng-container *ngFor="let element of listItemInfo.actionElements">
         <button *ngIf="!element.hidden" mat-button [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled" (click)="element.clickFunction()">
           {{element.name}}

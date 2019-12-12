@@ -8,6 +8,7 @@ import {ErrorHandlerService} from './error-handler.service';
 import {User} from '../models/user';
 import {Page} from '../models/page';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,16 +16,21 @@ export class FriendService {
 
   private readonly friendStatusUrl: string;
   private readonly friendRequestUrl: string;
+  private readonly friends: string;
   private readonly getFriendsUrl: string;
   private readonly acceptFriendRequestUrl: string;
   private readonly declineFriendRequestUrl: string;
-
   constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
     this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
     this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
+    this.friends = apiUrls.API_FRIENDS.API_GET_FRIENDS;
     this.getFriendsUrl = apiUrls.API_FRIENDS.API_GET_FRIENDS;
     this.acceptFriendRequestUrl = apiUrls.API_FRIENDS.ACCEPT_FRIEND_REQUEST;
     this.declineFriendRequestUrl = apiUrls.API_FRIENDS.DECLINE_FRIEND_REQUEST;
+  }
+
+  getFriendsById(userId): Observable<User[]> {
+    return this.http.get<User[]>(this.friends + userId);
   }
 
   getFriendStatus(targetUserId: number): Observable<FriendStatus> {

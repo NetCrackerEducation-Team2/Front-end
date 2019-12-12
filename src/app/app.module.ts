@@ -8,6 +8,8 @@ import {
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -36,7 +38,6 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material';
 // import { BooksManagementComponent } from './components/books-management/books-management.component';
 // import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
 // import { CreateAdminComponent } from './components/create-admin/create-admin.component';
@@ -94,11 +95,17 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import { ListItemPublishComponent } from './components/presentational/list-item-publish/list-item-publish.component';
+import { MessageComponent } from './components/message/message.component';
+import { MessageGroupComponent } from './components/message-group/message-group.component';
 import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {ShowHideComponent} from './components/shared/show-hide/show-hide.component';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
+import {RecaptchaModule} from 'ng-recaptcha';
+import {UiSwitchModule} from 'ngx-ui-switch';
+import {SettingsComponent} from './components/account/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +119,7 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    SettingsComponent,
     EditComponent,
     ChangePasswordComponent,
     AchievementsComponent,
@@ -172,6 +180,9 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
+    ListItemPublishComponent,
+    MessageComponent,
+    MessageGroupComponent,
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
@@ -214,17 +225,14 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    // MatTooltipModule,
     MatButtonToggleModule,
+    MatListModule,
     MatTooltipModule,
-    // BrowserModule,
-    // BrowserAnimationsModule,
-    // AppRoutingModule,
-    // ToastrModule.forRoot({ timeOut: 3000 }),
     ReactiveFormsModule,
-    // HttpClientModule
     MatTreeModule,
     MatRadioModule,
+    RecaptchaModule.forRoot(),
+    UiSwitchModule
   ],
   exports: [
     BrowserModule,

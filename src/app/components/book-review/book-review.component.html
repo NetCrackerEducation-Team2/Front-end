@@ -19,7 +19,7 @@
             <div class="review-content">
               <mat-card-title> {{ authors[review.userId].fullName }} ({{review.bookReviewId}}) </mat-card-title>
               <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
-              <mat-card-title> Rate:  </mat-card-title>
+              <mat-card-title> Rate: <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="true"></star-rating> </mat-card-title>
               <p> {{ review.description }} </p>
             </div>
 

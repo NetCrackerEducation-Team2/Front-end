@@ -19,36 +19,30 @@ export class BookOverviewComponent implements OnInit {
   bookOverview: BookOverview;
   genres: string;
   authors: string;
-  sourcePhoto: SafeUrl;
-  loadfinished = 0;
-  publishingHouse: string;
+  loaded: boolean;
+
   constructor(private bookService: BookService,
               private bookPresentationService: BookPresentationService,
               private bookOverviewService: BookOverviewService,
-              private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-  ) {
-  }
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getBookOverview();
   }
 
   getBookOverview(): void {
+    this.loaded = false;
     const slug = this.route.snapshot.paramMap.get('slug');
     this.bookService.getBookBySlug(slug).pipe(
       flatMap((resBook: Book) => {
         this.book = resBook;
         this.authors = this.bookPresentationService.getBookGenresString(this.book, this.book.authors.length);
         this.genres = this.bookPresentationService.getBookAuthorsString(this.book, this.book.genres.length);
-
-        this.sourcePhoto = resBook.photoPath;
-        this.publishingHouse = resBook.publishingHouse;
         return this.bookOverviewService.getPublishedBookOverview(this.book.bookId);
       }),
       ).subscribe((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
-        this.loadfinished = 1;
+        this.loaded = true;
     });
   }
 }

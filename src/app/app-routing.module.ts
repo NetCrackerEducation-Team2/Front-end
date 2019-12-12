@@ -40,6 +40,9 @@ import {SearchUsersComponent} from './components/search-users/search-users.compo
 import {NotificationListComponent} from './components/notification/notification-list/notification-list.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
+import {Message} from './models/message';
+import {MessageComponent} from './components/message/message.component';
+import {MessageGroupComponent} from './components/message-group/message-group.component';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
 import {AdminComponent} from './components/admin/admin.component';
@@ -85,6 +88,14 @@ const routes: Routes = [
     component: EditComponent,
     canActivate: [UserActivateGuardService]
 
+  },
+  {
+    path: 'message/:friendId',
+    component: MessageComponent
+  },
+  {
+    path: 'message/groupChat/:chatName',
+    component: MessageGroupComponent
   },
   {
     path: 'profile/:userId/change-password',
