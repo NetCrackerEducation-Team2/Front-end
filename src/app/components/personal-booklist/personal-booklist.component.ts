@@ -33,6 +33,7 @@ export class PersonalBooklistComponent implements OnInit {
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.usersBooks = [];
     this.books = [];
+    console.log('Hello');
     this.loadPage();
   }
 
@@ -45,6 +46,7 @@ export class PersonalBooklistComponent implements OnInit {
       this.selectedPage.countPages = response.countPages;
       this.selectedPage.currentPage = response.currentPage;
       this.selectedPage.pageSize = response.pageSize;
+      console.log(JSON.stringify(response));
       return response.array;
     }),
     flatMap((userBook: UsersBook[]) => {
@@ -56,45 +58,13 @@ export class PersonalBooklistComponent implements OnInit {
     }),
     ).subscribe((book: Book) => {
       this.books.push(book);
-      const res: ListItemInfo = {
-        title: book.title,
-        subtitle: this.bookPresentationService.getBookSubtitle(book),
-        photoPath: book.photoPath,
-        // itemId: null,
-        publish: null,
-        contentElements: [
-          {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
-          {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
-        ],
-        actionElements: [
-          {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
-        ],
-        listItemCallback: null,
-        additionalParams: null
-      };
       const usersBook = this.usersBooks.filter(value => value.bookId === book.bookId)[0];
-      if (usersBook.favoriteMark) {
-        res.actionElements.push(
-          {buttonInfoId: 2, name: 'Remove from Favorite', url: book.slug, disabled: false, clickFunction: () => {}}
-        );
-      } else {
-        res.actionElements.push(
-          {buttonInfoId: 2, name: 'Add to Favorite', url: book.slug, disabled: false, clickFunction: () => {}}
-        );
-      }
-      if (usersBook.readMark) {
-        res.actionElements.push(
-          {buttonInfoId: 3, name: 'Remove read mark', url: book.slug, disabled: false, clickFunction: () => {}}
-        );
-      } else {
-        res.actionElements.push(
-          {buttonInfoId: 3, name: 'Set read mark', url: book.slug, disabled: false, clickFunction: () => {}}
-        );
-      }
+      const res: ListItemInfo = this.makeListItemFromBook(book, usersBook);
       this.selectedPage.array.push(res);
       this.loading = false;
     });
   }
+
   handlePage(event?: PageEvent): void {
     if (this.loading) {
       return;
@@ -102,5 +72,44 @@ export class PersonalBooklistComponent implements OnInit {
     this.selectedPage.currentPage = event.pageIndex + 1;
     this.selectedPage.pageSize = event.pageSize;
     this.loadPage();
+  }
+
+  makeListItemFromBook(book: Book, userBook: UsersBook): ListItemInfo {
+    const item: ListItemInfo = {
+      title: book.title,
+        subtitle: this.bookPresentationService.getBookSubtitle(book),
+      photoPath: book.photoPath,
+      // itemId: null,
+      publish: null,
+      contentElements: [
+      {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
+      {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
+    ],
+      actionElements: [
+      {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
+    ],
+      listItemCallback: null,
+      additionalParams: null
+    };
+
+    if (userBook.favoriteMark) {
+      item.actionElements.push(
+        {buttonInfoId: 2, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction: () => {}}
+      );
+    } else {
+      item.actionElements.push(
+        {buttonInfoId: 2, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction: () => {}}
+      );
+    }
+    if (userBook.readMark) {
+      item.actionElements.push(
+        {buttonInfoId: 3, name: 'Remove read mark', url: '/personal-list', disabled: false, clickFunction: () => {}}
+      );
+    } else {
+      item.actionElements.push(
+        {buttonInfoId: 3, name: 'Set read mark', url: '/personal-list', disabled: false, clickFunction: () => {}}
+      );
+    }
+    return item;
   }
 }

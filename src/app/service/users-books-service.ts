@@ -21,4 +21,20 @@ export class UsersBooksService {
     const url = '/get-page-by-user/' + userId + '?page=' + page + '&pageSize=' + pageSize;
     return this.http.get<Page<UsersBook>>(this.usersBookUrl + url);
   }
+
+  addUsersBook(usersBooks: UsersBook): Observable<UsersBook> {
+    return null;
+  }
+
+  deleteUsersBook(usersBookId: number): Observable<boolean> {
+    return null;
+  }
+
+  setReadMark(usersBookId: number, value: boolean): Observable<UsersBook> {
+    return null;
+  }
+
+  setFavoriteMark(usersBookId: number, value: boolean): Observable<UsersBook> {
+    return null;
+  }
 }
