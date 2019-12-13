@@ -185,6 +185,7 @@ export class CreateAchievementComponent implements OnInit {
       switch (subject.toLowerCase()) {
         case 'comments':
         case 'friends':
+        case 'messages':
         case 'spent time':
           return true;
         default:
