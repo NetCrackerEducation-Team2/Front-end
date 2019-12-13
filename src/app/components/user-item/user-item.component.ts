@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {FriendStatus} from '../../models/friend-status';
 import {FriendService} from '../../service/friend.service';
-import {renderConstantPool} from "@angular/compiler-cli/ngcc/src/rendering/renderer";
-import {SnackBarService} from "../../service/presentation-services/snackBar.service";
+import {renderConstantPool} from '@angular/compiler-cli/ngcc/src/rendering/renderer';
+import {SnackBarService} from '../../service/presentation-services/snackBar.service';
 
 
 @Component({
@@ -28,9 +28,12 @@ export class UserItemComponent implements OnInit {
   }
 
   private loadFriendStatus() {
-    this.friendService.getFriendStatus(this.profile.userId).subscribe(friendStatus => {
-      this.friendStatus = friendStatus;
-    });
+    const targetUserId = this.profile.userId;
+    if (targetUserId) {
+      this.friendService.getFriendStatus(targetUserId).subscribe(friendStatus => {
+        this.friendStatus = friendStatus;
+      });
+    }
   }
 
   sendFriendRequest() {

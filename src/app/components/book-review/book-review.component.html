@@ -17,9 +17,9 @@
             </div>
 
             <div class="review-content">
-              <mat-card-title> {{ authors[review.userId].fullName }} </mat-card-title>
+              <mat-card-title> {{ authors[review.userId].fullName }} ({{review.bookReviewId}}) </mat-card-title>
               <mat-card-subtitle> Date: {{ review.creationTime }} </mat-card-subtitle>
-              <mat-card-title> Rate:  </mat-card-title>
+              <mat-card-title> Rate: <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="true"></star-rating> </mat-card-title>
               <p> {{ review.description }} </p>
             </div>
 
@@ -38,6 +38,11 @@
           </app-book-review-comment>
         </div>
 
+      </div>
+      <div *ngIf="reviews.length == 0">
+        <mat-card class="review-block">
+          <p> The book have no reviews.</p>
+        </mat-card>
       </div>
     </div>
   </div>

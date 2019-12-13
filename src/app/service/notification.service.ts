@@ -8,6 +8,7 @@ import {ErrorHandlerService} from './error-handler.service';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {Page} from '../models/page';
+import {FullNotification} from "../models/full-notification";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class NotificationService {
     this.notificationsUrl = apiUrls.API_NOTIFICATION;
   }
 
-  getNotifications(page: number, pageSize: number): Observable<Page<Notification>>  {
+  getNotifications(page: number, pageSize: number): Observable<Page<FullNotification>>  {
     let params = new HttpParams();
     let paramsString = '';
     const user = this.accountService.getCurrentUser();
@@ -43,7 +44,7 @@ export class NotificationService {
       );
     } else {
       // Get from mock
-      //return of(NOTIFICATIONS);
+      // return of(NOTIFICATIONS);
       return null;
     }
   }

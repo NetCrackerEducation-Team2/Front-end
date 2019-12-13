@@ -1,0 +1,113 @@
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.container {
+  font-size: 20px;
+}
+
+.button {
+  height: 50px;
+  width: 220px;
+  font-size: 18px;
+  margin: 10px;
+  background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+  color: white;
+
+}
+.button:hover{
+
+  background: rgb(0,0,255,0.5);
+  color: gray;
+  outline-style: none;
+
+}
+
+.submit-form {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.submit-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-field {
+  width: 600px;
+}
+
+.label {
+  width: 170px;
+}
+
+
+.nav-footer {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.text-danger {
+  color: red;
+}
+
+.center{
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+
+  .submit-row {
+    flex-flow: row wrap;
+    text-align: center;
+  }
+
+  .container, .button {
+    font-size: 18px;
+  }
+
+  .button {
+    width: 180px;
+    background:linear-gradient(to top right, rgba(155, 1, 139, 1.0), rgba(40, 23, 142, 1.0));
+    color: white;
+
+  }
+
+  .form-field, .input {
+    width: 300px;
+  }
+
+}
+

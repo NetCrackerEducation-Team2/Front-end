@@ -8,11 +8,12 @@ export const apiUrls = {
   API_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/',
   AUTH_RECOVER_LINK_URL: environment.BASE_URL + '/auth/recovery-link/',
   AUTH_RECOVER_PASS_URL: environment.BASE_URL + '/auth/recover/',
+  API_FILE_DOWNLOAD: environment.BASE_URL + '/api/file/download/',
+  API_FILE_IMAGE: environment.BASE_URL + '/api/file/image/',
   API_BOOK: environment.BASE_URL + '/api/book-by-id/',
   API_BOOKS: environment.BASE_URL + '/api/books',
   API_BOOK_INFO: environment.BASE_URL + '/api/book',
   API_BOOK_CREATE: environment.BASE_URL + '/api/book',
-  API_BOOK_DOWNLOAD: environment.BASE_URL + '/api/book/download',
   API_BOOK_REVIEW: environment.BASE_URL + '/api/book-review',
   API_USERS_BOOKS: environment.BASE_URL + '/api/users-book',
   API_GENRES: environment.BASE_URL + '/api/genres/',
@@ -36,8 +37,12 @@ export const apiUrls = {
   },
   API_FRIENDS: {
     API_FRIENDS_STATUS: environment.BASE_URL + '/api/friends/getFriendInfo',
-    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest'
+    API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
+    API_GET_FRIENDS: environment.BASE_URL + '/api/friends/',
+    ACCEPT_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/accept/',
+    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/'
   },
+  API_SETTINGS: environment.BASE_URL + '/api/settings',
   API_REVIEW: environment.BASE_URL + '/api/book-review',
   API_BOOK_TITLE_BY_ID: environment.BASE_URL + '/api/book-title/',
   API_PUBLISHED_BOOK_OVERVIEW: environment.BASE_URL + '/api/book-overviews/published-by-book/',
@@ -59,7 +64,21 @@ export const apiUrls = {
   API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',
-  API_SOCKET: environment.BASE_URL + '/ws',
-  API_CHAT: environment.BASE_URL + '/api/ws',
-  API_USERS_ID: environment.BASE_URL + '/api/users/'
+  API_CHAT: {
+    API_SOCKET: environment.BASE_URL + '/ws',
+    API_SEND: environment.BASE_URL + '/api/ws',
+    API_SEND_GROUP: environment.BASE_URL + '/api/ws/group',
+    API_GET_MESSAGES: environment.BASE_URL + '/api/ws/',
+    API_CHAT_CREATE: environment.BASE_URL + '/api/ws/create',
+    API_GET_CHAT: environment.BASE_URL + '/api/ws/getChat',
+    API_GROUP_CHAT_CREATE: environment.BASE_URL + '/api/ws/create/groupChat',
+    API_GET_GROUP_MESSAGES: environment.BASE_URL + '/api/ws/getGroupMessages',
+    API_GET_GROUP_CHATS: environment.BASE_URL + '/api/ws/getGroupChats'
+  },
+  API_USERS_ID: environment.BASE_URL + '/api/users/',
+  API_ACHIEVEMENT: {
+    API: environment.BASE_URL + '/api/achievement',
+    FIND_BY_USER_ID: environment.BASE_URL + '/api/achievement/user/',
+  },
+  WEBSOCKET: environment.BASE_URL + '/ws'
 };

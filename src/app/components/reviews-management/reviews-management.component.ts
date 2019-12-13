@@ -6,7 +6,8 @@ import {Page} from '../../models/page';
 import {BookReview} from '../../models/book-review';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {DatePipe} from '@angular/common';
-import {map} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
+import {Book} from '../../models/book';
 
 @Component({
   selector: 'app-reviews-management',
@@ -18,9 +19,12 @@ export class ReviewsManagementComponent implements OnInit {
   pageLoading: boolean;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
+  book: Book;
+
   constructor(private publishReviewService: PublishReviewService,
               public datePipe: DatePipe,
-              private bookReviewsService: BookReviewsService) { }
+              private bookReviewsService: BookReviewsService) {
+  }
 
   ngOnInit() {
     this.resetPaginator();
@@ -38,6 +42,7 @@ export class ReviewsManagementComponent implements OnInit {
         this.pageLoading = false;
       });
   }
+
   private mapPage(page: Page<BookReview>): Page<ListItemInfo> {
     return {
       currentPage: page.currentPage,
@@ -48,27 +53,29 @@ export class ReviewsManagementComponent implements OnInit {
           user: null,
           publish: null,
           description: bookReview.description,
+          title: bookReview.book.title,
           creationTime: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
-          photo: null,
-          title: null,
+          photoPath: null,
           itemId: null,
-          subtitle: null,
+          subtitle: this.datePipe.transform(bookReview.creationTime, 'd LLLL yyyy, h:mm'),
           contentElements: [
             {contentInfoId: 1, title: null, content: bookReview.description},
           ],
           actionElements: [
-            {buttonInfoId: 1, name: 'Publish', url: null, disabled: bookReview.published,
-              clickFunction: () => {console.log(bookReview.bookReviewId);
-                                    this.publishReviewService.publishReview(bookReview.bookReviewId)
-                                      .subscribe();
-                                    console.log(bookReview);
-                                    this.getReviews(); }},
-            {buttonInfoId: 2, name: 'Unpublish', url: null, disabled: bookReview.published,
-              clickFunction: () => {console.log(bookReview.bookReviewId);
-                                    this.publishReviewService.unpublishedReview(bookReview.bookReviewId)
-                                      .subscribe();
-                                    console.log(bookReview);
-                                    this.getReviews(); }}
+            {
+              buttonInfoId: 1, name: 'Publish', url: null, disabled: bookReview.published,
+              clickFunction: () => {
+                const subscription = this.publishReviewService.publishReview(bookReview.bookReviewId)
+                  .subscribe(() => subscription.unsubscribe());
+              }
+            },
+            {
+              buttonInfoId: 2, name: 'Unpublish', url: null, disabled: !bookReview.published,
+              clickFunction: () => {
+                const subscription = this.publishReviewService.unpublishedReview(bookReview.bookReviewId)
+                  .subscribe(() => subscription.unsubscribe());
+              }
+            }
           ],
           listItemCallback: null,
           additionalParams: null
@@ -82,6 +89,7 @@ export class ReviewsManagementComponent implements OnInit {
     this.selectedPage.pageSize = event.pageSize;
     this.getReviews();
   }
+
   private resetPaginator() {
     this.selectedPage = this.emptyPage;
   }

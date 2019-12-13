@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {SearchingHistory} from '../models/searching-history';
 import {HttpClient} from '@angular/common/http';
 import {ErrorHandlerService} from './error-handler.service';
 import {catchError} from 'rxjs/operators';
@@ -38,7 +37,7 @@ export class SearchingHistoryService {
           );
       }
     }
-    return of({});
+    return of(null);
   }
 
   private isEmptyValues(filteringParams: Map<BookFilteringParam, any>): boolean{

@@ -28,7 +28,6 @@ export class AuthenticationService {
   }
 
   register(fullName, email, password): Observable<any> {
-    console.log(fullName, email, password);
     return this.httpClient.post<any>(this.AUTH_REG_URL, {fullName, email, password});
   }
 

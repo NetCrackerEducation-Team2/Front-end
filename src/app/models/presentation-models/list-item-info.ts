@@ -1,11 +1,10 @@
-import {SafeUrl} from '@angular/platform-browser';
 import {ContentInfo} from './content-info';
 import {ButtonInfo} from './button-info';
 
 export interface ListItemInfo {
   title: string;
   subtitle: string;
-  photo: SafeUrl;
+  photoPath: string;
   publish: boolean;
   contentElements: ContentInfo[];
   actionElements: ButtonInfo[];

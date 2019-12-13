@@ -34,8 +34,10 @@ export class OptionsScrollDirective implements OnDestroy {
   }
 
   private removeScrollEventListener() {
-    this.autoComplete.panel.nativeElement
-      .removeEventListener('scroll', this.onScroll);
+    if(this.autoComplete.panel) {
+      this.autoComplete.panel.nativeElement
+        .removeEventListener('scroll', this.onScroll);
+    }
   }
 
   ngOnDestroy() {
@@ -48,7 +50,7 @@ export class OptionsScrollDirective implements OnDestroy {
     if (this.thresholdPercent === undefined) {
       this.scroll.next({autoComplete: this.autoComplete, scrollEvent: event});
     } else {
-      const threshold = this.thresholdPercent * 100 * event.target.scrollHeight / 100;
+      const threshold = this.thresholdPercent * event.target.scrollHeight;
       const current = event.target.scrollTop + event.target.clientHeight;
 
       if (current > threshold) {

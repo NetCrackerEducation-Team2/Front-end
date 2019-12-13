@@ -1,11 +1,11 @@
 <button mat-button [matMenuTriggerFor]="animals">
-    <svg-icon class="bell" src="assets/images/notifications.svg"></svg-icon>
+  <mat-icon class="header-icon">hearing</mat-icon>
 </button>
 
 <mat-menu #animals="matMenu">
     <div *ngIf="notifications">
         <div *ngFor="let notification of notifications.array">
-            <button mat-menu-item>{{notification.notificationMessage}}</button>
+            <button mat-menu-item>{{notification.notificationObject.creationTime | dateAgo}} | {{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
         </div>
     </div>
     <button mat-button routerLink="/notifications">View all</button>

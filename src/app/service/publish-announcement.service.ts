@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {Announcement} from '../models/announcement';
@@ -21,7 +21,7 @@ export class PublishAnnouncementService {
 
   publishAnnouncement(announcementId: number): Observable<Announcement> {
     return this.httpClient.put<any>(this.ADMIN_MODERATOR_PUBLISH_ANNOUNCEMENTS + announcementId, {})
-      .pipe( catchError(this.errorHandlerService.handleError<any>('publishAnnouncement', [])));
+      .pipe(catchError(this.errorHandlerService.handleError<any>('publishAnnouncement', [])));
   }
 
   unpublishedAnnouncement(announcementId: number): Observable<Announcement> {

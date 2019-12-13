@@ -9,6 +9,7 @@ import {BookService} from '../../service/book.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {PageEvent} from '@angular/material';
+import {FileService} from '../../service/file.service';
 
 @Component({
   selector: 'app-personal-booklist',
@@ -58,7 +59,7 @@ export class PersonalBooklistComponent implements OnInit {
       const res: ListItemInfo = {
         title: book.title,
         subtitle: this.bookPresentationService.getBookSubtitle(book),
-        photo: this.bookPresentationService.getBookPhoto(book),
+        photoPath: book.photoPath,
         // itemId: null,
         publish: null,
         contentElements: [

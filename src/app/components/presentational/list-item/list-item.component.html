@@ -1,6 +1,6 @@
 <div class="mat-card">
-  <ng-container *ngIf="listItemInfo.photo">
-    <img [src]="listItemInfo.photo" alt="item-photo" class="item-photo"/>
+  <ng-container *ngIf="listItemInfo.photoPath">
+    <img [src]="listItemInfo.photoPath" alt="" (error)="img.src = 'assets/images/not_found.jpg'" class="item-photo" #img/>
   </ng-container>
   <div class="item-info">
     <div class="mat-card-header">
@@ -15,9 +15,15 @@
       </p>
     </div>
     <div class="mat-card-actions">
-      <button *ngFor="let element of listItemInfo.actionElements" mat-button
-              [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled" (click)="element.clickFunction() ">
-        {{element.name}}</button>
+      <!-- <button *ngFor="let element of listItemInfo.actionElements" mat-button
+              [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled"
+              (click)="element.clickFunction() ">
+        {{element.name}}</button> -->
+      <ng-container *ngFor="let element of listItemInfo.actionElements">
+        <button *ngIf="!element.hidden" mat-button [attr.id]="element.buttonInfoId" [routerLink]="element.url" [disabled]="element.disabled" (click)="element.clickFunction()">
+          {{element.name}}
+        </button>
+      </ng-container>
     </div>
   </div>
 </div>

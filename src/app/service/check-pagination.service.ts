@@ -8,14 +8,14 @@ export class CheckPaginationService {
 
   constructor(private http: HttpClient) { }
 
-  checkPagination(page: number, pageSize: number): string {
+  checkPagination(paramOne: number, paramTwo: number): string {
     let params = new HttpParams();
     let paramsString = '';
-    if (page != null) {
-      params = params.set('page', page.toString());
+    if (paramOne != null) {
+      params = params.set('page', paramOne.toString());
     }
-    if (pageSize != null) {
-      params = params.set('pageSize', pageSize.toString());
+    if (paramTwo != null) {
+      params = params.set('pageSize', paramTwo.toString());
     }
     if (params.keys().length > 0) {
       paramsString = '?' + params.toString();
