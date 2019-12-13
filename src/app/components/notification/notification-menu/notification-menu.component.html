@@ -5,7 +5,7 @@
 <mat-menu #animals="matMenu">
     <div *ngIf="notifications">
         <div *ngFor="let notification of notifications.array">
-            <button mat-menu-item>{{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
+            <button mat-menu-item>{{notification.notificationObject.creationTime | dateAgo}} | {{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
         </div>
     </div>
     <button mat-button routerLink="/notifications">View all</button>
