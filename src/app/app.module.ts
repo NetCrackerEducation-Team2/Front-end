@@ -106,6 +106,7 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {UiSwitchModule} from 'ngx-ui-switch';
 import {SettingsComponent} from './components/account/settings/settings.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -186,7 +187,8 @@ import {SettingsComponent} from './components/account/settings/settings.componen
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
-    ShowHideComponent
+    ShowHideComponent,
+    DateAgoPipe
   ],
   imports: [
     MatGridListModule,
