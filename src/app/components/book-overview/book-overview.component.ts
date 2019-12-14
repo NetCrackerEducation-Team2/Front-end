@@ -4,9 +4,10 @@ import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookOverview} from '../../models/book-overview';
 import {flatMap} from 'rxjs/operators';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {BookOverviewService} from '../../service/book-overview.service';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
+import {UsersBooksService} from '../../service/users-books-service';
+import {UserBook} from '../../models/users-book';
 
 @Component({
   selector: 'app-book-overview',
@@ -14,6 +15,9 @@ import {BookPresentationService} from '../../service/presentation-services/book-
   styleUrls: ['./book-overview.component.css']
 })
 export class BookOverviewComponent implements OnInit {
+  loggedUserId: number;
+  isLogged: boolean;
+  userBook: UserBook;
 
   book: Book;
   bookOverview: BookOverview;
@@ -24,9 +28,12 @@ export class BookOverviewComponent implements OnInit {
   constructor(private bookService: BookService,
               private bookPresentationService: BookPresentationService,
               private bookOverviewService: BookOverviewService,
+              private usersBooksService: UsersBooksService,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.loggedUserId = 1007; // temporary
+    this.isLogged = true; // temporary
     this.getBookOverview();
   }
 
@@ -40,10 +47,30 @@ export class BookOverviewComponent implements OnInit {
         this.genres = this.bookPresentationService.getBookAuthorsString(this.book, this.book.genres.length);
         return this.bookOverviewService.getPublishedBookOverview(this.book.bookId);
       }),
-      ).subscribe((resOverview: BookOverview) => {
+      flatMap((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
         this.loaded = true;
+        return this.usersBooksService.getUserBook(this.book.bookId, this.loggedUserId);
+      })
+      ).subscribe((userBook: UserBook) => {
+        if (userBook.userBookId !== -1) {
+          this.userBook = userBook;
+        }
     });
+  }
+  addToRead(): void {
+    (document.getElementById('addButton')).disabled = true;
+    this.usersBooksService.addUsersBook(this.book, this.loggedUserId)
+      .subscribe((newUsersBook: UserBook) => {
+        document.getElementById('addButton').disabled = false;
+        this.userBook = newUsersBook;
+      });
+  }
+  removeFromRead(): void {
+    this.usersBooksService.deleteUsersBook(this.userBook.userBookId)
+      .subscribe(() => {
+        this.userBook = null;
+      });
   }
 }
 

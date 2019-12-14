@@ -1,5 +1,5 @@
-export class UsersBook {
-  usersBookId: number;
+export class UserBook {
+  userBookId: number;
   bookId: number;
   userId: number;
   favoriteMark: boolean;

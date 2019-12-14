@@ -9,8 +9,15 @@
       <div><span class="bolder-text">Authors: </span>{{authors}}</div>
       <div><span class="bolder-text">Rating: </span>{{book.rateSum}}</div>
       <div><span class="bolder-text">Publishing house: </span>{{book.publishingHouse}}</div>
-      <div><button class="book-overview-button">Add to "To read"</button></div>
-      <div><button class="book-overview-button">Read</button></div>
+      <div *ngIf="isLogged">
+        <div *ngIf="userBook == null">
+          <button id="addButton" class="book-overview-button" (click)="addToRead()">Add to "To read"</button>
+        </div>
+        <div *ngIf="userBook != null">
+          <button class="book-overview-button" (click)="removeFromRead()">Remove to "To read"</button>
+        </div>
+        <div><button class="book-overview-button">Read</button></div>
+      </div>
     </div>
     <div class="book-description">
       <h2 class="book-description-header">Description:</h2>

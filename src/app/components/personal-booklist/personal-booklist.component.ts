@@ -3,13 +3,12 @@ import {AccountService} from '../../service/account.service';
 import {Book} from '../../models/book';
 import {UsersBooksService} from '../../service/users-books-service';
 import {flatMap, map} from 'rxjs/operators';
-import {UsersBook} from '../../models/users-book';
+import {UserBook} from '../../models/users-book';
 import {Page} from '../../models/page';
 import {BookService} from '../../service/book.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {PageEvent} from '@angular/material';
-import {FileService} from '../../service/file.service';
 
 @Component({
   selector: 'app-personal-booklist',
@@ -19,7 +18,7 @@ import {FileService} from '../../service/file.service';
 export class PersonalBooklistComponent implements OnInit {
   userId: number;
   selectedPage: Page<ListItemInfo>;
-  usersBooks: UsersBook[];
+  usersBooks: UserBook[];
   books: Book[];
   loading = false;
 
@@ -30,6 +29,7 @@ export class PersonalBooklistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userId = 1007;
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.usersBooks = [];
     this.books = [];
@@ -42,19 +42,19 @@ export class PersonalBooklistComponent implements OnInit {
     this.selectedPage.array = [];
 
     this.usersBooksService.getUsersBookPage(this.userId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
-    map((response: Page<UsersBook> ) => {
+    map((response: Page<UserBook> ) => {
       this.selectedPage.countPages = response.countPages;
       this.selectedPage.currentPage = response.currentPage;
       this.selectedPage.pageSize = response.pageSize;
       console.log(JSON.stringify(response));
       return response.array;
     }),
-    flatMap((userBook: UsersBook[]) => {
+    flatMap((userBook: UserBook[]) => {
       return userBook;
     }),
-    flatMap((usersBook: UsersBook) => {
-      this.usersBooks.push(usersBook);
-      return this.bookService.getBookById(usersBook.bookId);
+    flatMap((userBook: UserBook) => {
+      this.usersBooks.push(userBook);
+      return this.bookService.getBookById(userBook.bookId);
     }),
     ).subscribe((book: Book) => {
       this.books.push(book);
@@ -74,7 +74,7 @@ export class PersonalBooklistComponent implements OnInit {
     this.loadPage();
   }
 
-  makeListItemFromBook(book: Book, userBook: UsersBook): ListItemInfo {
+  makeListItemFromBook(book: Book, userBook: UserBook): ListItemInfo {
     const item: ListItemInfo = {
       title: book.title,
         subtitle: this.bookPresentationService.getBookSubtitle(book),
