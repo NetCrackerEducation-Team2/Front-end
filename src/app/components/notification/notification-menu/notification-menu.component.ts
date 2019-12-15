@@ -54,6 +54,7 @@ export class NotificationMenuComponent implements OnInit {
       console.log('Frame : ', frame);
       this.socket.stompClient.subscribe(`/topic/notifications/${this.profileId}`, notification => {
         this.snackBarService.openSuccessSnackBar('You have new notification');
+        this.isNewNotification = true;
         console.log("You have new notification", notification.body);
         this.notificationCount = parseInt(notification.body);
         subscription = this.notificationService.getNotifications(0, 5)
