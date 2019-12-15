@@ -16,11 +16,13 @@ import {FullNotification} from "../models/full-notification";
 export class NotificationService {
 
   private readonly notificationsUrl: string;
+  private readonly notificationsCountUrl: string;
 
   constructor(private http: HttpClient,
               private errorHandlerService: ErrorHandlerService,
               private accountService: AccountService) {
     this.notificationsUrl = apiUrls.API_NOTIFICATION;
+    this.notificationsCountUrl = apiUrls.API_NOTIFICATION_COUNT;
   }
 
   getNotifications(page: number, pageSize: number): Observable<Page<FullNotification>>  {
@@ -47,5 +49,26 @@ export class NotificationService {
       // return of(NOTIFICATIONS);
       return null;
     }
+  }
+
+  getNotificationsCount():Observable<any> {
+    let params = new HttpParams();
+    let paramsString = '';
+    const user = this.accountService.getCurrentUser();
+    if (user != null && user.userId != null) {
+      params = params.set('userId', user.userId.toString());
+      if (params.keys().length > 0) {
+        paramsString = '?' + params.toString();
+      }
+      return this.http.get(this.notificationsCountUrl + paramsString)
+        .pipe(
+          catchError(this.errorHandlerService.handleError<any>('getNotificationsCount', []))
+      );
+    } else {
+      // Get from mock
+      // return of(NOTIFICATIONS);
+      return null;
+    }
+
   }
 }
