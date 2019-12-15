@@ -8,7 +8,13 @@ export class DateAgoPipe implements PipeTransform {
 
     transform(value: any, args?: any): any {
         if (value) {
-            const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
+            let convertedDateString = new Date(value).toLocaleString("en-US", {timeZone: "Europe/Kiev"});
+            console.log(convertedDateString);
+            /*convertedDateString = convertedDateString.replace('at ', '');
+            console.log(convertedDateString);
+            const twoHoursSeconds = 2 * 60 * 60;*/
+          //  console.log(value);
+            const seconds = Math.floor((+new Date() - +new Date(value)) / 1000 /*+ twoHoursSeconds*/);
             if (seconds < 29) // less than 30 seconds ago will show as 'Just now'
                 return 'Just now';
             const intervals = {

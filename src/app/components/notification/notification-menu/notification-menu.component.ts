@@ -18,6 +18,8 @@ export class NotificationMenuComponent implements OnInit {
   socketUrl!: string;
   socket!: SocketHolder;
   profileId: number;
+  isNewNotification: boolean;
+  notificationCount: number;
 
   constructor(private notificationService: NotificationService, private accountService: AccountService,
               private snackBarService: SnackBarService) {
@@ -28,11 +30,18 @@ export class NotificationMenuComponent implements OnInit {
   ngOnInit() {
     this.openSocketConnection();
     this.getNotifications();
+    this.isNewNotification = false;
+    this.getNotificationsCount();
   }
 
   getNotifications(): void {
     this.notificationService.getNotifications(0, 5)
         .subscribe(result => this.notifications = result);
+  }
+
+  getNotificationsCount(): void {
+    this.notificationService.getNotificationsCount()
+        .subscribe(result => this.notificationCount = result);
   }
 
   openSocketConnection() {
@@ -45,7 +54,8 @@ export class NotificationMenuComponent implements OnInit {
       console.log('Frame : ', frame);
       this.socket.stompClient.subscribe(`/topic/notifications/${this.profileId}`, notification => {
         this.snackBarService.openSuccessSnackBar('You have new notification');
-        console.log("You have new notification", notification);
+        console.log("You have new notification", notification.body);
+        this.notificationCount = parseInt(notification.body);
         subscription = this.notificationService.getNotifications(0, 5)
         .subscribe(result => this.notifications = result);
       });
