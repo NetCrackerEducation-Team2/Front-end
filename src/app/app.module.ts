@@ -12,7 +12,8 @@ import {
   MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatBadgeModule
 } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -210,6 +211,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
+    MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
