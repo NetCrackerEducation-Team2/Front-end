@@ -11,11 +11,12 @@ import {SnackBarService} from '../../service/presentation-services/snackBar.serv
 export class AddAnnouncementComponent implements OnInit {
 
   announcement = {title: '', description: ''};
-
+  awaitingResponse: boolean;
   constructor(private announcementsService: AnnouncementService, private router: Router, private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
+    this.awaitingResponse = false;
   }
 
   sendAnnouncement() {
