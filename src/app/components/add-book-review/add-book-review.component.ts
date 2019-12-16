@@ -4,6 +4,7 @@ import {Book} from '../../models/book';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SnackBarService} from '../../service/presentation-services/snackBar.service';
+import {StarRatingComponent} from 'ng-starrating';
 
 @Component({
   selector: 'app-add-book-review',
@@ -12,7 +13,7 @@ import {SnackBarService} from '../../service/presentation-services/snackBar.serv
 })
 export class AddBookReviewComponent implements OnInit, OnDestroy {
   @Input() book: Book;
-  review = {rating: 5, description: ''};
+  review = {rating: 3, description: ''};
   private createReviewSubscription: Subscription;
   private sendButtonDisabled;
 
@@ -35,12 +36,16 @@ export class AddBookReviewComponent implements OnInit, OnDestroy {
     this.sendButtonDisabled = true;
     this.createReviewSubscription = this.reviewService
       .createReview(this.review.rating, this.review.description, this.book.bookId).subscribe(
-      (response) => {
-        this.sendButtonDisabled = false;
-        if (response) {
-          this.snackBarService.openSuccessSnackBar('Book review has been successfully sent');
-          this.review = {rating: 5, description: ''};
-        }
-      });
+        (response) => {
+          this.sendButtonDisabled = false;
+          if (response) {
+            this.snackBarService.openSuccessSnackBar('Book review has been successfully sent');
+            this.review = {rating: 5, description: ''};
+          }
+        });
+  }
+
+  onRate(event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+    this.review.rating = event.newValue;
   }
 }
