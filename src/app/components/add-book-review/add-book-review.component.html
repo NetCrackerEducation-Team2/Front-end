@@ -3,7 +3,7 @@
     <div class="submit-row">
       <span class="rating-span">Rating</span>
       <div style="text-align:center">
-        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false"></star-rating>
+        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
       </div>
     </div>
     <div class="submit-row">
