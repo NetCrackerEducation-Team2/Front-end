@@ -24,6 +24,7 @@ export class BookOverviewComponent implements OnInit {
   genres: string;
   authors: string;
   loaded: boolean;
+  addBookDisabled: boolean;
 
   constructor(private bookService: BookService,
               private bookPresentationService: BookPresentationService,
@@ -34,6 +35,7 @@ export class BookOverviewComponent implements OnInit {
   ngOnInit() {
     this.loggedUserId = 1007; // temporary
     this.isLogged = true; // temporary
+    this.addBookDisabled = false;
     this.getBookOverview();
   }
 
@@ -59,10 +61,10 @@ export class BookOverviewComponent implements OnInit {
     });
   }
   addToRead(): void {
-    (document.getElementById('addButton')).disabled = true;
+    this.addBookDisabled = true;
     this.usersBooksService.addUsersBook(this.book, this.loggedUserId)
       .subscribe((newUsersBook: UserBook) => {
-        document.getElementById('addButton').disabled = false;
+        this.addBookDisabled = false;
         this.userBook = newUsersBook;
       });
   }

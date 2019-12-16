@@ -29,7 +29,6 @@ export class UsersBooksService {
 
   addUsersBook(book: Book, userId: number): Observable<UserBook> {
     const url = '/addUserBook?book=' + book.bookId + '&user=' + userId;
-    console.log(this.userBookUrl + url);
     return this.http.put<UserBook>(this.userBookUrl + url, '');
   }
 

@@ -11,10 +11,10 @@
       <div><span class="bolder-text">Publishing house: </span>{{book.publishingHouse}}</div>
       <div *ngIf="isLogged">
         <div *ngIf="userBook == null">
-          <button id="addButton" class="book-overview-button" (click)="addToRead()">Add to "To read"</button>
+          <button id="addButton" class="book-overview-button" [disabled]="addBookDisabled" (click)="addToRead()">Add to "To read"</button>
         </div>
         <div *ngIf="userBook != null">
-          <button class="book-overview-button" (click)="removeFromRead()">Remove to "To read"</button>
+          <button class="book-overview-button" [disabled]="addBookDisabled" (click)="removeFromRead()">Remove to "To read"</button>
         </div>
         <div><button class="book-overview-button">Read</button></div>
       </div>

@@ -77,16 +77,15 @@ export class PersonalBooklistComponent implements OnInit {
   makeListItemFromBook(book: Book, userBook: UserBook): ListItemInfo {
     const item: ListItemInfo = {
       title: book.title,
-        subtitle: this.bookPresentationService.getBookSubtitle(book),
+      subtitle: this.bookPresentationService.getBookSubtitle(book),
       photoPath: book.photoPath,
-      // itemId: null,
       publish: null,
       contentElements: [
       {contentInfoId: 1, title: 'Genres:', content: this.bookPresentationService.getBookGenresString(book, 3)},
       {contentInfoId: 2, title: 'Authors:', content: this.bookPresentationService.getBookAuthorsString(book, 3)}
     ],
       actionElements: [
-      {buttonInfoId: 1, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
+      {buttonInfoId: 0, name: 'View', url: '/book-overview/' + book.slug, disabled: false, clickFunction: () => {}},
     ],
       listItemCallback: null,
       additionalParams: null
@@ -94,22 +93,67 @@ export class PersonalBooklistComponent implements OnInit {
 
     if (userBook.favoriteMark) {
       item.actionElements.push(
-        {buttonInfoId: 2, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction: () => {}}
+        {buttonInfoId: 1, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction:
+            () => { this.makeFavoriteMark(item, userBook.userBookId, false); }}
       );
     } else {
       item.actionElements.push(
-        {buttonInfoId: 2, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction: () => {}}
+        {buttonInfoId: 1, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction:
+            () => { this.makeFavoriteMark(item, userBook.userBookId, true); }}
       );
     }
     if (userBook.readMark) {
       item.actionElements.push(
-        {buttonInfoId: 3, name: 'Remove read mark', url: '/personal-list', disabled: false, clickFunction: () => {}}
+        {buttonInfoId: 2, name: 'Remove read mark', url: '/personal-list', disabled: false, clickFunction:
+            () => { this.makeReadMark(item, userBook.userBookId, false); }}
       );
     } else {
       item.actionElements.push(
-        {buttonInfoId: 3, name: 'Set read mark', url: '/personal-list', disabled: false, clickFunction: () => {}}
+        {buttonInfoId: 2, name: 'Set read mark', url: '/personal-list', disabled: false, clickFunction:
+            () => { this.makeReadMark(item, userBook.userBookId, true); }}
       );
     }
+
+    item.actionElements.push(
+      {buttonInfoId: 3, name: 'Remove book', url: '/personal-list', disabled: false, clickFunction:
+          () => { this.removeFromList(userBook.userBookId); }}
+    );
+
     return item;
+  }
+
+  makeFavoriteMark(item: ListItemInfo, userBookId: number, value: boolean): void {
+    this.usersBooksService.setFavoriteMark(userBookId, value)
+      .subscribe((userBook: UserBook) => {
+        if (userBook.favoriteMark) {
+          item.actionElements[2] = {
+            buttonInfoId: 1, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction:
+              () => { this.makeFavoriteMark(item, userBook.userBookId, false); }};
+        } else {
+          item.actionElements[2] = {
+            buttonInfoId: 1, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction:
+              () => { this.makeFavoriteMark(item, userBook.userBookId, true); }};
+        }
+      });
+  }
+  makeReadMark(item: ListItemInfo, userBookId: number, value: boolean): void {
+    this.usersBooksService.setReadMark(userBookId, value)
+      .subscribe((userBook: UserBook) => {
+        if (userBook.readMark) {
+          item.actionElements[2] = {
+            buttonInfoId: 2, name: 'Remove read mark', url: '/personal-list', disabled: false, clickFunction:
+                () => { this.makeReadMark(item, userBook.userBookId, false); }};
+        } else {
+          item.actionElements[2] = {
+            buttonInfoId: 2, name: 'Set read mark', url: '/personal-list', disabled: false, clickFunction:
+                () => { this.makeReadMark(item, userBook.userBookId, true); }};
+        }
+      });
+  }
+  removeFromList(userBookId: number): void {
+    this.usersBooksService.deleteUsersBook(userBookId)
+      .subscribe(() => {
+        this.loadPage();
+      });
   }
 }
