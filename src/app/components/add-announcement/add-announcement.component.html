@@ -12,7 +12,7 @@
       <div>
         <mat-form-field>
         <textarea #announcementBody="ngModel" required type="text" name="announcement_body" id="announcement_body" matInput placeholder="Enter announcement content" rows="6"
-                  [(ngModel)]="announcement.description" min="20"></textarea>
+                  [(ngModel)]="announcement.description" minlength="20"></textarea>
         </mat-form-field>
       </div>
     </div>
