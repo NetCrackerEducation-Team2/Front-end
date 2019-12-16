@@ -3,7 +3,7 @@ import {AnnouncementService} from '../../service/announcement.service';
 import {Router} from '@angular/router';
 import {SnackBarService} from '../../service/presentation-services/snackBar.service';
 import {User} from '../../models/user';
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-add-announcement',

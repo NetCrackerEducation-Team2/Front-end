@@ -33,9 +33,23 @@ mat-form-field {
 .nav-footer {
   margin-top: 20px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
 }
 
+.text-danger {
+  color: red;
+}
+.messages {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 5px 0 15px;
+}
+.button-card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
 
 
