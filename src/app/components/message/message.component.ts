@@ -27,6 +27,7 @@ export class MessageComponent implements OnInit {
   email: string;
   userCurrentId: number;
   userFriendId: number;
+  chatId: number;
   users: User[] = [];
   user: User;
   isError = false;
@@ -40,13 +41,14 @@ export class MessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.connect();
+    console.log('NGONINIT');
     this.getCurrentUser();
     this.getFriend();
+    this.getChat();
+
     this.form = new FormGroup({
       message: new FormControl(null, [Validators.required])
     });
-    this.getChat();
     this.getMessages();
   }
 
@@ -64,7 +66,7 @@ export class MessageComponent implements OnInit {
   }
 
   getChat(): void {
-      this.socketService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => this.chat = resp);
+    this.socketService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => { this.connect(resp.chatId); } );
   }
 
   sendMessage(): void {
@@ -85,13 +87,13 @@ export class MessageComponent implements OnInit {
     this.userCurrentId = currentUser.userId;
   }
 
-  connect() {
+  connect(chatId: number) {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, () => {
       that.isLoaded = true;
-      that.openSocket();
+      that.openSocket(chatId);
     });
   }
 
@@ -104,8 +106,8 @@ export class MessageComponent implements OnInit {
       }
     );
   }
-  openSocket() {
-    this.stompClient.subscribe('/socket-publisher/' + this.chat.chatId, (message) => {
+  openSocket(chatId: number) {
+    this.stompClient.subscribe('/socket-publisher/' + chatId, (message) => {
       this.handleResult(message);
     });
   }
@@ -115,6 +117,9 @@ export class MessageComponent implements OnInit {
       const messageResult: Message = JSON.parse(message.body);
       this.messages.push(messageResult);
     }
+  }
+  handleRes(chatId: number) {
+    this.chatId = chatId;
   }
 
   goBack(): void {

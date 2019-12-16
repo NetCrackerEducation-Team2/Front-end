@@ -2,32 +2,40 @@
   <div class="top_menu">
     <div class="buttons">
       <div class="button close" (click)="goBack()"></div>
-    </div>
-    <div class="title">Chat</div>
-  </div>
-  <br>
+      <div class="button choose" [matMenuTriggerFor]="friends"></div>
+        <mat-menu #friends="matMenu">
+          <mat-form-field>
+            <mat-select placeholder="Select friends" multiple [(ngModel)]="usersId" (closed)="openAfterClosingSelect()" >
+              <mat-option *ngFor="let user of this.users" [value]="user.userId" >{{user.fullName}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <button class="button position" mat-flat-button color="primary" (click)="addFriendsToChat(usersId)">
+            Add friends
+          </button>
+        </mat-menu>
+      </div>
 
-  <ul class="message" *ngFor="let message of messages">
-    <div class="avatar">
-      <div id="message_template" class="message_template">
+    <div class="title">{{chatName}}</div>
+  </div>
+  <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                               class="example-viewport" #scroll [scrollTop]="scroll.scrollToIndex(count)">
+    <ul class="message" *ngFor="let message of messages">
+      <div class="currentUser" *ngIf="checkCurrentUser(message.fromUserName)">
+        {{message.fromUserName}}: {{message.content}}
       </div>
-      <div class="text_wrapper" >
-        <div class="currentUser" *ngIf="checkCurrentUser(message.fromUserName)">
-          {{message.fromUserName}}: {{message.content}}
-        </div>
-        <div class="friend" *ngIf="checkFriend(message.fromUserName)">
-          {{message.fromUserName}}: {{message.content}}
-        </div>
+      <div class="friend" *ngIf="checkFriend(message.fromUserName)">
+        {{message.fromUserName}}: {{message.content}}
       </div>
-    </div>
-  </ul>
+    </ul>
+  </cdk-virtual-scroll-viewport>
 
   <form [formGroup]="form" *ngIf="isLoaded">
     <div class="bottom_wrapper clearfix">
       <div class="message_input_wrapper">
         <input type="text" formControlName="message" name="message"
                id="message_input_value" class="message_input"
-               placeholder="Type your message here..."/>
+               placeholder="Message"/>
       </div>
       <button mat-raised-button color="primary" class="send_message" [disabled]="form.invalid" (click)="sendMessage()">
         Send
@@ -35,3 +43,4 @@
     </div>
   </form>
 </div>
+

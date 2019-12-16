@@ -107,6 +107,7 @@ import {RecaptchaModule} from 'ng-recaptcha';
 import {UiSwitchModule} from 'ngx-ui-switch';
 import {SettingsComponent} from './components/account/settings/settings.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -234,7 +235,8 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     MatTreeModule,
     MatRadioModule,
     RecaptchaModule.forRoot(),
-    UiSwitchModule
+    UiSwitchModule,
+    ScrollingModule
   ],
   exports: [
     BrowserModule,

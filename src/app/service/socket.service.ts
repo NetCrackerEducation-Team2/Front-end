@@ -69,10 +69,7 @@ export class SocketService {
   }
 
   getChatId(userFriendId: number, userCurrentId: number): Observable<Chat> {
-    return this.http.get(this.API_GET_CHAT + this.requestParameters(userFriendId, userCurrentId))
-      .pipe(
-        catchError(this.handleErrorService.handleError<any>('getChat', []))
-      );
+    return this.http.get<Chat>(this.API_GET_CHAT + this.requestParameters(userFriendId, userCurrentId));
   }
 
   sendMessageGroup(message: Message) {

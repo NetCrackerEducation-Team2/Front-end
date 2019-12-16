@@ -49,7 +49,7 @@ export class ChatComponent implements OnInit {
   }
 
   findUsersById() {
-    this.friendsService.getFriendsById(this.userCurrentId).subscribe(res => this.users = res);
+     this.friendsService.getFriendsById(this.userCurrentId).subscribe(res => this.users = res);
   }
 
   chooseGroupChat(chatName: string) {
@@ -57,7 +57,7 @@ export class ChatComponent implements OnInit {
   }
 
   getGroupsChat() {
-    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => this.chats = res);
+    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => {this.chats = res; });
   }
 
   createChat(friendId: number) {
