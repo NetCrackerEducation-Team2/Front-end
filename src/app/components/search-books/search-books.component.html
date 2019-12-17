@@ -23,36 +23,56 @@
       <p class="no-results">No results found</p>
     </ng-template>
   </ng-template>
-  <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
-    <mat-expansion-panel-header class="books-filter-title">
-      <mat-panel-title>Filters</mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="advanced-books-filter">
-      <mat-form-field>
-        <input type="text" placeholder="Author" aria-label="Author" matInput [formControl]="authorsControl"
-               [matAutocomplete]="autoAuthorComplete">
-        <mat-autocomplete #autoAuthorComplete="matAutocomplete" (optionSelected)="searchWithAuthor($event)" [displayWith]="displayAuthor" (optionsScroll)="onAuthorScroll()">
-          <mat-option [value]="null">[Turn off filter]</mat-option>
-          <mat-option *ngFor="let author of filteredAuthors$ | async" [value]="author">
-            {{author.fullName}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genresControl"
-               [matAutocomplete]="autoGenreComplete">
-        <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="searchWithGenre($event)" [displayWith]="displayGenre" (optionsScroll)="onGenreScroll()">
-          <mat-option [value]="null">[Turn off filter]</mat-option>
-          <mat-option *ngFor="let genre of filteredGenres$ | async" [value]="genre">
-            {{genre.name}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate" (dateChange)="search()">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </mat-expansion-panel>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="false" class="suggest-book-expansion-panel" *ngIf="isLogged">
+      <mat-expansion-panel-header class="expansion-panel-title">
+        <mat-panel-title>Suggest book</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="suggest-book-expansion-panel-content">
+        <mat-card>
+          <p>Here you can suggest a new book. Admins will consider your suggestion and post book if there is
+            everything
+            OK with it</p>
+        </mat-card>
+        <div>
+          <button mat-stroked-button class="button" (click)="suggestBook()">Suggest</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
+      <mat-expansion-panel-header class="books-filter-title">
+        <mat-panel-title>Filters</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="advanced-books-filter">
+        <mat-form-field>
+          <input type="text" placeholder="Author" aria-label="Author" matInput [formControl]="authorsControl"
+                 [matAutocomplete]="autoAuthorComplete">
+          <mat-autocomplete #autoAuthorComplete="matAutocomplete" (optionSelected)="searchWithAuthor($event)"
+                            [displayWith]="displayAuthor" (optionsScroll)="onAuthorScroll()">
+            <mat-option [value]="null">[Turn off filter]</mat-option>
+            <mat-option *ngFor="let author of filteredAuthors$ | async" [value]="author">
+              {{author.fullName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genresControl"
+                 [matAutocomplete]="autoGenreComplete">
+          <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="searchWithGenre($event)"
+                            [displayWith]="displayGenre" (optionsScroll)="onGenreScroll()">
+            <mat-option [value]="null">[Turn off filter]</mat-option>
+            <mat-option *ngFor="let genre of filteredGenres$ | async" [value]="genre">
+              {{genre.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate"
+                 (dateChange)="search()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

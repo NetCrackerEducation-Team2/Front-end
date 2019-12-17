@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Author} from '../../models/author';
 import {Genre} from '../../models/genre';
 import {GenreService} from '../../service/genre.service';
@@ -11,17 +11,20 @@ import {debounceTime, exhaustMap, filter, map, scan, startWith, switchMap, tap} 
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {FormControl} from '@angular/forms';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {SearchingHistoryService} from '../../service/searching-history.service';
 import {AccountService} from '../../service/account.service';
 import {takeWhileInclusive} from 'rxjs-take-while-inclusive';
+import {AppState} from "../../state/app.state";
+import {Store} from "@ngrx/store";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-books',
   templateUrl: './search-books.component.html',
   styleUrls: ['./search-books.component.css']
 })
-export class SearchBooksComponent implements OnInit {
+export class SearchBooksComponent implements OnInit, OnDestroy {
 
   @Input() title: string = null;
   @Input() author: Author = null;
@@ -36,18 +39,24 @@ export class SearchBooksComponent implements OnInit {
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
+  isLogged: boolean;
   private nextAuthorPage$ = new Subject();
   private nextGenrePage$ = new Subject();
+  // Subscriptions
+  private isLoggedFieldLoadingSubscription: Subscription;
 
   constructor(private searchingHistoryService: SearchingHistoryService,
               private genreService: GenreService,
               private authorService: AuthorService,
               private bookPresentationService: BookPresentationService,
               private accountService: AccountService,
-              public bookService: BookService) {
+              public bookService: BookService,
+              private store: Store<AppState>,
+              private router: Router) {
   }
 
   ngOnInit() {
+    this.initIsLogged();
     this.filteredGenres$ = this.genresControl.valueChanges
       .pipe(startWith(''),
       debounceTime(200),
@@ -80,6 +89,14 @@ export class SearchBooksComponent implements OnInit {
 
     this.search();
   }
+
+  ngOnDestroy(): void {
+    if (this.isLoggedFieldLoadingSubscription) {
+      this.isLoggedFieldLoadingSubscription.unsubscribe();
+    }
+  }
+
+
 
   searchWithAuthor(event?: MatAutocompleteSelectedEvent): void {
     this.author = event.option.value;
@@ -172,5 +189,13 @@ export class SearchBooksComponent implements OnInit {
 
   displayGenre(genre: Genre): string {
     return genre ? genre.name : null;
+  }
+
+  initIsLogged() {
+    this.isLoggedFieldLoadingSubscription = this.store.select('appReducer').subscribe(reducer => {this.isLogged = reducer.login;} );
+  }
+
+  suggestBook() {
+    this.router.navigate(['/book/suggest']);
   }
 }
