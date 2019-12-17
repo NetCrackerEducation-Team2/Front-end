@@ -95,7 +95,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
-import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
 import {ListItemPublishComponent} from './components/presentational/list-item-publish/list-item-publish.component';
 import {MessageComponent} from './components/message/message.component';
 import {MessageGroupComponent} from './components/message-group/message-group.component';
@@ -183,7 +182,6 @@ import {FriendRequestNotificationItemComponent} from "./components/notification/
     UserItemComponent,
     NotificationMenuComponent,
     PersonalBooklistComponent,
-    PersonalBookItemComponent,
     RecommendationsComponent,
     ListItemPublishComponent,
     MessageComponent,

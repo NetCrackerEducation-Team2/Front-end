@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AccountService} from '../../service/account.service';
 import {Book} from '../../models/book';
 import {UsersBooksService} from '../../service/users-books-service';
@@ -9,14 +9,20 @@ import {BookService} from '../../service/book.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {PageEvent} from '@angular/material';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../state/app.state';
 
 @Component({
   selector: 'app-personal-booklist',
   templateUrl: './personal-booklist.component.html',
   styleUrls: ['./personal-booklist.component.css']
 })
-export class PersonalBooklistComponent implements OnInit {
-  userId: number;
+export class PersonalBooklistComponent implements OnInit, OnDestroy {
+  loggedUserId: number;
+  isLoggedSubscription: Subscription;
+
   selectedPage: Page<ListItemInfo>;
   usersBooks: UserBook[];
   books: Book[];
@@ -26,10 +32,16 @@ export class PersonalBooklistComponent implements OnInit {
               private usersBooksService: UsersBooksService,
               private bookService: BookService,
               private bookPresentationService: BookPresentationService,
+              private route: ActivatedRoute,
+              private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.userId = 1007;
+    this.isLoggedSubscription = this.store.select('appReducer')
+      .subscribe(reducer => {
+        this.loggedUserId = reducer.id;
+      });
+
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.usersBooks = [];
     this.books = [];
@@ -37,11 +49,17 @@ export class PersonalBooklistComponent implements OnInit {
     this.loadPage();
   }
 
+  ngOnDestroy(): void {
+    if (this.isLoggedSubscription) {
+      this.isLoggedSubscription.unsubscribe();
+    }
+  }
+
   loadPage(): void  {
     this.loading = true;
     this.selectedPage.array = [];
 
-    this.usersBooksService.getUsersBookPage(this.userId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
+    this.usersBooksService.getUsersBookPage(this.loggedUserId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
     map((response: Page<UserBook> ) => {
       this.selectedPage.countPages = response.countPages;
       this.selectedPage.currentPage = response.currentPage;

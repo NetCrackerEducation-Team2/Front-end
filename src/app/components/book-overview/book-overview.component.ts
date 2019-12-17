@@ -21,12 +21,14 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
 
   book: Book;
   bookOverview: BookOverview;
+  userBook: UserBook;
   genres: string;
   authors: string;
   loaded: boolean;
   addBookDisabled: boolean;
 
   isLogged: boolean;
+  loggedUserId: number;
   isLoggedSubscription: Subscription;
 
   constructor(private bookService: BookService,
@@ -37,11 +39,13 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
               private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.loggedUserId = 1007; // temporary
-    this.isLogged = true; // temporary
+    this.isLoggedSubscription = this.store.select('appReducer')
+      .subscribe(reducer => {
+        this.isLogged = reducer.login;
+        this.loggedUserId = reducer.id;
+      });
     this.addBookDisabled = false;
     this.getBookOverview();
-    this.isLoggedSubscription = this.store.select('appReducer').subscribe(reducer => {this.isLogged = reducer.login; } );
   }
 
   ngOnDestroy(): void {
