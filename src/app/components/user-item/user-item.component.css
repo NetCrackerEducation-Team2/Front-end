@@ -79,6 +79,10 @@ button {
   color: yellow;
 }
 
+.red-color {
+  color: red;
+}
+
 #user_operations {
   display: flex;
   align-items: center;
