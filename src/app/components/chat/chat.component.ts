@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SocketService} from '../../service/socket.service';
 import {User} from '../../models/user';
 import {AccountService} from '../../service/account.service';
 import {FriendService} from '../../service/friend.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ChatService} from '../../service/chat.service';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Chat} from '../../models/chat';
 
 @Component({
@@ -29,8 +27,7 @@ export class ChatComponent implements OnInit {
   chatGroupName: string;
   usersId: number[];
 
-  constructor(private socketService: SocketService,
-              private accountService: AccountService,
+  constructor(private accountService: AccountService,
               private friendsService: FriendService,
               private chatService: ChatService,
               private router: Router) {

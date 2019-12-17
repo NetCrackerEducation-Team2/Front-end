@@ -3,13 +3,13 @@ import {Location} from '@angular/common';
 import {Message} from '../../models/message';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../models/user';
-import {SocketService} from '../../service/socket.service';
 import {AccountService} from '../../service/account.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {apiUrls} from '../../../api-urls';
 import {Chat} from '../../models/chat';
+import {ChatService} from '../../service/chat.service';
 
 
 @Component({
@@ -27,7 +27,6 @@ export class MessageComponent implements OnInit {
   email: string;
   userCurrentId: number;
   userFriendId: number;
-  chatId: number;
   users: User[] = [];
   user: User;
   isError = false;
@@ -35,13 +34,12 @@ export class MessageComponent implements OnInit {
 
   constructor(private location: Location,
               private route: ActivatedRoute,
-              private socketService: SocketService,
+              private chatService: ChatService,
               private accountService: AccountService) {
     this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
   }
 
   ngOnInit() {
-    console.log('NGONINIT');
     this.getCurrentUser();
     this.getFriend();
     this.getChat();
@@ -66,7 +64,7 @@ export class MessageComponent implements OnInit {
   }
 
   getChat(): void {
-    this.socketService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => { this.connect(resp.chatId); } );
+    this.chatService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => { this.connect(resp.chatId); } );
   }
 
   sendMessage(): void {
@@ -75,7 +73,7 @@ export class MessageComponent implements OnInit {
         content: this.form.value.message, fromUser: this.userCurrentId,
         toUser: this.user.userId, fromUserName: this.fullName, chatName: null
       };
-      this.socketService.sendMessage(message).subscribe();
+      this.chatService.sendMessage(message).subscribe();
       this.form.reset();
     }
   }
@@ -98,7 +96,7 @@ export class MessageComponent implements OnInit {
   }
 
   getMessages() {
-    this.socketService.getMessages(this.userFriendId, this.userCurrentId).subscribe(
+    this.chatService.getMessages(this.userFriendId, this.userCurrentId).subscribe(
       (result: Message[]) => {
         for (const res of result) {
           this.messages.push(res);
@@ -117,9 +115,6 @@ export class MessageComponent implements OnInit {
       const messageResult: Message = JSON.parse(message.body);
       this.messages.push(messageResult);
     }
-  }
-  handleRes(chatId: number) {
-    this.chatId = chatId;
   }
 
   goBack(): void {

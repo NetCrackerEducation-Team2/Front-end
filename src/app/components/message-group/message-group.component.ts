@@ -4,8 +4,7 @@ import {Message} from '../../models/message';
 import {User} from '../../models/user';
 import {Chat} from '../../models/chat';
 import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SocketService} from '../../service/socket.service';
+import {ActivatedRoute} from '@angular/router';
 import {AccountService} from '../../service/account.service';
 import {apiUrls} from '../../../api-urls';
 import * as SockJS from 'sockjs-client';
@@ -22,10 +21,12 @@ import {SnackBarService} from '../../service/presentation-services/snackBar.serv
   styleUrls: ['./message-group.component.css']
 })
 export class MessageGroupComponent implements OnInit {
+
   @ViewChild(MatMenuTrigger, {static: false}) clickHoverMenuTrigger: MatMenuTrigger;
+
   readonly serverUrl: string;
-  isLoaded = false;
   private stompClient;
+  isLoaded = false;
   form: FormGroup;
   messages: Message[] = [];
   fullName: string;
@@ -42,12 +43,11 @@ export class MessageGroupComponent implements OnInit {
 
   constructor(private location: Location,
               private route: ActivatedRoute,
-              private socketService: SocketService,
               private chatService: ChatService,
               private accountService: AccountService,
               private friendsService: FriendService,
               private snackBarService: SnackBarService) {
-    this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
+     this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
   }
   openAfterClosingSelect() {
     this.clickHoverMenuTrigger.openMenu();
@@ -136,7 +136,7 @@ export class MessageGroupComponent implements OnInit {
         content: this.form.value.message, fromUser: this.userCurrentId,
         toUser: null, fromUserName: this.fullName, chatName: this.chatName
       };
-      this.socketService.sendMessageGroup(message).subscribe();
+      this.chatService.sendMessageGroup(message).subscribe();
       this.form.reset();
     }
   }
@@ -159,7 +159,7 @@ export class MessageGroupComponent implements OnInit {
   }
 
   getMessages() {
-    this.socketService.getGroupMessages(this.chatName).subscribe(
+    this.chatService.getGroupMessages(this.chatName).subscribe(
       (result: Message[]) => {
         for (const res of result) {
           this.messages.push(res);

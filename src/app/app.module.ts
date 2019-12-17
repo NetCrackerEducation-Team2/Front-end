@@ -38,9 +38,6 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-// import { BooksManagementComponent } from './components/books-management/books-management.component';
-// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
-// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
@@ -55,7 +52,6 @@ import {ReviewsManagementComponent} from './components/reviews-management/review
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
@@ -135,15 +131,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     RecoverComponent,
     AdminComponent,
     ReviewsManagementComponent,
-    // BooksManagementComponent,
     AnnouncementsManagementComponent,
     CreateBookComponent,
-    // CreateModeratorComponent,
-    // CreateAdminComponent,
     CreateAnnouncementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    // OverviewItemComponent,
     ActivateAccountComponent,
     ListItemComponent,
     AddAnnouncementComponent,
@@ -264,7 +256,6 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
       useClass: TokenInterceptorService,
       multi: true
     },
-    //  SocketService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
