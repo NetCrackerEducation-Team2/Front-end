@@ -1,12 +1,9 @@
 <div class="container">
-
   <div class="details">
-
     <div class="avatar center">
       <img width="128" height="128" style="border-radius: 100%;"
            [src]="profile.photoPath" alt="Avatar">
     </div>
-
     <div class="info">
       <span>Full name: {{profile.fullName}}</span>
       <span>Email: {{profile.email}}</span>
@@ -14,7 +11,7 @@
     </div>
     <div id="user_operations">
       <button class="custom-button round-button"
-              *ngIf="(this.friendStatus) && (this.friendStatus.friend === false) && (this.friendStatus.awaitFriendRequestConfirmation === false)"
+              *ngIf="this.friendStatus && !this.friendStatus.friend && !this.friendStatus.awaitFriendRequestConfirmation && !this.friendStatus.declinedFriendRequest"
               (click)="sendFriendRequest()"
               mat-stroked-button
               matTooltip="Send friend request"
@@ -33,6 +30,13 @@
               matTooltip="Friend request has been sent"
       >
         <mat-icon class="yellow-color">person_add</mat-icon>
+      </button>
+      <button class="round-button custom-button"
+              *ngIf="this.friendStatus && (this.friendStatus.friend === false) && (this.friendStatus.declinedFriendRequest === true)"
+              mat-stroked-button
+              matTooltip="User declined your friend request"
+      >
+        <mat-icon class="red-color">person_add_disabled</mat-icon>
       </button>
     </div>
   </div>

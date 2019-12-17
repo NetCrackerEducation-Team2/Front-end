@@ -7,6 +7,7 @@ import {catchError, map} from 'rxjs/operators';
 import {ErrorHandlerService} from './error-handler.service';
 import {User} from '../models/user';
 import {Page} from '../models/page';
+import {FriendInvitation} from "../models/friend-invitation";
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class FriendService {
   private readonly getFriendsUrl: string;
   private readonly acceptFriendRequestUrl: string;
   private readonly declineFriendRequestUrl: string;
+  private readonly friendInvitationStatus: string;
   constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
     this.friendStatusUrl = apiUrls.API_FRIENDS.API_FRIENDS_STATUS;
     this.friendRequestUrl = apiUrls.API_FRIENDS.API_FRIEND_REQUEST;
@@ -27,6 +29,7 @@ export class FriendService {
     this.getFriendsUrl = apiUrls.API_FRIENDS.API_GET_FRIENDS;
     this.acceptFriendRequestUrl = apiUrls.API_FRIENDS.ACCEPT_FRIEND_REQUEST;
     this.declineFriendRequestUrl = apiUrls.API_FRIENDS.DECLINE_FRIEND_REQUEST;
+    this.friendInvitationStatus = apiUrls.API_FRIENDS.API_FRIEND_INVITATION_STATUS;
   }
 
   getFriendsById(userId): Observable<User[]> {
@@ -52,6 +55,11 @@ export class FriendService {
       map(value => 'OK'), // needs because server returns null normally
       catchError(this.errorHandlerService.handleError('Deleting from friends', null))
     );
+  }
+
+  getFriendInvitation(friendInvitationId: number): Observable<FriendInvitation> {
+    const params = new HttpParams().set('invitationId', friendInvitationId.toString());
+    return this.http.get<FriendInvitation>(this.friendInvitationStatus, {params});
   }
 
   getFriends(page: number, pageSize: number): Observable<Page<User>> {
