@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {Book} from '../../models/book';
@@ -8,16 +8,16 @@ import {BookOverviewService} from '../../service/book-overview.service';
 import {BookPresentationService} from '../../service/presentation-services/book-presentation.service';
 import {UsersBooksService} from '../../service/users-books-service';
 import {UserBook} from '../../models/users-book';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../state/app.state';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-book-overview',
   templateUrl: './book-overview.component.html',
   styleUrls: ['./book-overview.component.css']
 })
-export class BookOverviewComponent implements OnInit {
-  loggedUserId: number;
-  isLogged: boolean;
-  userBook: UserBook;
+export class BookOverviewComponent implements OnInit, OnDestroy {
 
   book: Book;
   bookOverview: BookOverview;
@@ -26,18 +26,30 @@ export class BookOverviewComponent implements OnInit {
   loaded: boolean;
   addBookDisabled: boolean;
 
+  isLogged: boolean;
+  isLoggedSubscription: Subscription;
+
   constructor(private bookService: BookService,
               private bookPresentationService: BookPresentationService,
               private bookOverviewService: BookOverviewService,
               private usersBooksService: UsersBooksService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private store: Store<AppState>) {}
 
   ngOnInit() {
     this.loggedUserId = 1007; // temporary
     this.isLogged = true; // temporary
     this.addBookDisabled = false;
     this.getBookOverview();
+    this.isLoggedSubscription = this.store.select('appReducer').subscribe(reducer => {this.isLogged = reducer.login; } );
   }
+
+  ngOnDestroy(): void {
+    if (this.isLoggedSubscription) {
+      this.isLoggedSubscription.unsubscribe();
+    }
+  }
+
 
   getBookOverview(): void {
     this.loaded = false;
@@ -75,4 +87,3 @@ export class BookOverviewComponent implements OnInit {
       });
   }
 }
-

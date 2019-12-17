@@ -1,29 +1,51 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ReviewService} from '../../service/review.service';
+import {Book} from '../../models/book';
+import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
+import {SnackBarService} from '../../service/presentation-services/snackBar.service';
+import {StarRatingComponent} from 'ng-starrating';
 
 @Component({
   selector: 'app-add-book-review',
   templateUrl: './add-book-review.component.html',
   styleUrls: ['./add-book-review.component.css']
 })
-export class AddBookReviewComponent implements OnInit {
-  review = {rating: 5, description: ''};
-  bookId = null;
+export class AddBookReviewComponent implements OnInit, OnDestroy {
+  @Input() book: Book;
+  review = {rating: 3, description: ''};
+  private createReviewSubscription: Subscription;
+  private sendButtonDisabled;
 
-  constructor(private activatedRoute: ActivatedRoute, private reviewService: ReviewService, private router: Router) {
+  constructor(private reviewService: ReviewService, private router: Router, private snackBarService: SnackBarService) {
   }
 
-  ngOnInit() {
-    this.bookId = this.activatedRoute.snapshot.paramMap.get('bookId');
+  ngOnInit(): void {
+    this.sendButtonDisabled = false;
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.createReviewSubscription) {
+      this.createReviewSubscription.unsubscribe();
+    }
   }
 
 
   sendReview() {
-    this.reviewService.createReview(this.review.rating, this.review.description, this.bookId).subscribe(
-      (response) => {
-        console.log('Successfully send review');
-        this.router.navigate(['/book/id', this.bookId]);
-      });
+    this.sendButtonDisabled = true;
+    this.createReviewSubscription = this.reviewService
+      .createReview(this.review.rating, this.review.description, this.book.bookId).subscribe(
+        (response) => {
+          this.sendButtonDisabled = false;
+          if (response) {
+            this.snackBarService.openSuccessSnackBar('Book review has been successfully sent');
+            this.review = {rating: 5, description: ''};
+          }
+        });
+  }
+
+  onRate(event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+    this.review.rating = event.newValue;
   }
 }

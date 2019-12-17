@@ -1,21 +1,32 @@
 <div class="add-book-review-container">
-  <form class="submit-form" (ngSubmit)="sendReview()">
+  <form class="submit-form" (ngSubmit)="sendReview()" #reviewForm="ngForm">
     <div class="submit-row">
       <span class="rating-span">Rating</span>
       <div style="text-align:center">
-        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false"></star-rating>
+        <star-rating [value]="review.rating" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
       </div>
     </div>
     <div class="submit-row">
-      <mat-form-field class="form-field">
-        <textarea type="text" name="announcement_body" id="announcement_body" matInput
+      <mat-form-field>
+        <textarea #reviewBody="ngModel"
+          type="text" required name="announcement_body" id="announcement_body" matInput
                   placeholder="Enter review content" rows="6"
-                  [(ngModel)]="review.description"></textarea>
+                  [(ngModel)]="review.description" minlength="2"></textarea>
       </mat-form-field>
     </div>
-    <mat-divider></mat-divider>
     <div class="nav-footer">
-      <button class="button" type="submit" mat-flat-button color="primary">Send</button>
+      <div class="messages">
+        <small class="text-danger" *ngIf="!reviewBody.dirty && reviewBody.touched && reviewBody.invalid">Review content is required</small>
+        <small class="text-danger" *ngIf="reviewBody.dirty && reviewBody.touched && reviewBody.invalid">
+          Review body must consists of at least 2 characters
+        </small>
+      </div>
+      <div class="button-card">
+        <button type="submit" mat-flat-button color="primary"
+                [disabled]="!reviewForm.valid || sendButtonDisabled">
+          Send
+        </button>
+      </div>
     </div>
   </form>
 </div>

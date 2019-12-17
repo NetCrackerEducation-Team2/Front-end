@@ -5,6 +5,7 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
+  MatBadgeModule,
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
@@ -95,9 +96,9 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
-import { ListItemPublishComponent } from './components/presentational/list-item-publish/list-item-publish.component';
-import { MessageComponent } from './components/message/message.component';
-import { MessageGroupComponent } from './components/message-group/message-group.component';
+import {ListItemPublishComponent} from './components/presentational/list-item-publish/list-item-publish.component';
+import {MessageComponent} from './components/message/message.component';
+import {MessageGroupComponent} from './components/message-group/message-group.component';
 import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
@@ -106,6 +107,10 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {UiSwitchModule} from 'ngx-ui-switch';
 import {SettingsComponent} from './components/account/settings/settings.component';
+import {DateAgoPipe} from './pipes/date-ago.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
+import {FriendRequestNotificationItemComponent} from "./components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component";
 
 @NgModule({
   declarations: [
@@ -186,7 +191,10 @@ import {SettingsComponent} from './components/account/settings/settings.componen
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
-    ShowHideComponent
+    ShowHideComponent,
+    DateAgoPipe,
+    ConfirmDeleteFromFriendsDialog,
+    FriendRequestNotificationItemComponent
   ],
   imports: [
     MatGridListModule,
@@ -208,6 +216,7 @@ import {SettingsComponent} from './components/account/settings/settings.componen
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
+    MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
@@ -232,7 +241,8 @@ import {SettingsComponent} from './components/account/settings/settings.componen
     MatTreeModule,
     MatRadioModule,
     RecaptchaModule.forRoot(),
-    UiSwitchModule
+    UiSwitchModule,
+    MatDialogModule
   ],
   exports: [
     BrowserModule,
@@ -267,7 +277,9 @@ import {SettingsComponent} from './components/account/settings/settings.componen
       multi: true
     }
   ],
-
+  entryComponents: [
+    ConfirmDeleteFromFriendsDialog
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

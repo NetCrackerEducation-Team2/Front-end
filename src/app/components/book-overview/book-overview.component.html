@@ -25,6 +25,9 @@
     </div>
     <mat-divider class="book-overview-mat-divider"></mat-divider>
   </div>
+  <mat-divider></mat-divider>
+  <app-add-book-review *ngIf="isLogged" [book]="book"></app-add-book-review>
+  <mat-divider></mat-divider>
   <app-book-review [bookId]="book.bookId"></app-book-review>
 </div>
 <ng-template #elseBlock>

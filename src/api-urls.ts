@@ -40,7 +40,8 @@ export const apiUrls = {
     API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
     API_GET_FRIENDS: environment.BASE_URL + '/api/friends/',
     ACCEPT_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/accept/',
-    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/'
+    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/',
+    API_FRIEND_INVITATION_STATUS: environment.BASE_URL + '/api/friends/friendRequestStatus'
   },
   API_SETTINGS: environment.BASE_URL + '/api/settings',
   API_REVIEW: environment.BASE_URL + '/api/book-review',
@@ -61,6 +62,7 @@ export const apiUrls = {
   ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/api/book-overviews/unpublish/',
   ADMIN_MODERATOR_UNPUBLISHED_REVIEW: environment.BASE_URL + '/api/book-review/unpublish/',
   API_NOTIFICATION: environment.BASE_URL + '/api/notifications/',
+  API_NOTIFICATION_COUNT: environment.BASE_URL + '/api/notifications/count',
   API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',

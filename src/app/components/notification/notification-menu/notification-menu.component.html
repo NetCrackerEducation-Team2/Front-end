@@ -1,13 +1,17 @@
-<button mat-button [matMenuTriggerFor]="animals">
-  <mat-icon class="header-icon">hearing</mat-icon>
+<button mat-button [matMenuTriggerFor]="messages">
+  <div *ngIf="isNewNotification; else nonew">
+    <mat-icon matBadge="{{notificationCount}}" class="header-icon">notifications_active</mat-icon>
+  </div>
+  <ng-template #nonew>
+    <mat-icon matBadge="{{notificationCount}}" class="header-icon">notifications</mat-icon>
+  </ng-template>
 </button>
 
-<mat-menu #animals="matMenu">
+<mat-menu #messages="matMenu">
     <div *ngIf="notifications">
         <div *ngFor="let notification of notifications.array">
-            <button mat-menu-item>{{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
+            <button mat-menu-item>{{notification.notificationObject.creationTime | dateAgo}} | {{notification.notificationObject.notificationMessage.notificationMessageText}}</button>
         </div>
     </div>
     <button mat-button routerLink="/notifications">View all</button>
 </mat-menu>
-

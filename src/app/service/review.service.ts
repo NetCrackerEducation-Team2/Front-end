@@ -21,7 +21,7 @@ export class ReviewService {
     try {
       userId = JSON.parse(localStorage.getItem('currentUser')).userId;
     } catch (e) {
-      // TODO error handling here
+      this.errorHandlerService.handleError('Creating new book review', e);
       return;
     }
     return this.http.post(this.reviewUrl, {
@@ -30,7 +30,7 @@ export class ReviewService {
       rating,
       description
     }).pipe(
-      catchError(this.errorHandlerService.handleError<any>('searchGenres', []))
+      catchError(this.errorHandlerService.handleError<any>('Creating new book review', null))
     );
   }
 }
