@@ -61,6 +61,7 @@ export const apiUrls = {
   ADMIN_MODERATOR_UNPUBLISHED_OVERVIEW: environment.BASE_URL + '/api/book-overviews/unpublish/',
   ADMIN_MODERATOR_UNPUBLISHED_REVIEW: environment.BASE_URL + '/api/book-review/unpublish/',
   API_NOTIFICATION: environment.BASE_URL + '/api/notifications/',
+  API_NOTIFICATION_COUNT: environment.BASE_URL + '/api/notifications/count',
   API_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/get/',
   API_PREPARE_RECOMMENDATIONS: environment.BASE_URL + '/api/books-recommendations/prepare/',
   API_ADD_SEARCHING_HISTORIES: environment.BASE_URL + '/api/searching-history/add',

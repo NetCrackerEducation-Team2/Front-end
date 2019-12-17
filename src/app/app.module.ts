@@ -12,7 +12,8 @@ import {
   MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatBadgeModule
 } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -203,6 +204,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
+    MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
