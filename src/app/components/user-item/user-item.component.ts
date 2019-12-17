@@ -49,7 +49,7 @@ export class UserItemComponent implements OnInit {
 
   deleteFromFriends() {
     const confirmationDialogRef = this.dialog.open(ConfirmDeleteFromFriendsDialog, {
-      width: '500px',
+      width: '400px',
       height: '150px',
       data: {username: this.profile.fullName}
     });

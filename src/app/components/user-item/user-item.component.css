@@ -16,9 +16,8 @@ button {
 
 .details {
   padding-top: 20px;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 40px;
 }
 
@@ -83,5 +82,5 @@ button {
 #user_operations {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
 }
