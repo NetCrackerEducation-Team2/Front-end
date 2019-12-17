@@ -11,7 +11,7 @@
     </div>
     <div id="user_operations">
       <button class="custom-button round-button"
-              *ngIf="this.friendStatus && this.friendStatus.friend && this.friendStatus.awaitFriendRequestConfirmation && !this.friendStatus.declinedFriendRequest"
+              *ngIf="this.friendStatus && !this.friendStatus.friend && !this.friendStatus.awaitFriendRequestConfirmation && !this.friendStatus.declinedFriendRequest"
               (click)="sendFriendRequest()"
               mat-stroked-button
               matTooltip="Send friend request"
