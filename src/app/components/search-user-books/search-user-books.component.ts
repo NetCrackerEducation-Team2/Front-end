@@ -121,6 +121,10 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   }
 
   searchPage(): void {
+    this.usersBooks = [];
+    this.books = [];
+    this.selectedPage.array = [];
+
     this.pageLoading = true;
     this.isLoggedSubscription = this.store.select('appReducer').pipe(
       flatMap((reducer: UserState) => {
@@ -157,8 +161,6 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   }
 
   private resetPaginator(): void {
-    this.usersBooks = [];
-    this.books = [];
     this.selectedPage = {currentPage: 0, pageSize: 5, countPages: 0, array: []};
   }
 

@@ -18,7 +18,7 @@ import {UserState} from '../../state/app.reducer';
 })
 export class BookReviewCommentComponent implements OnInit, OnDestroy {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  pageSize = 3;
+  pageSize = 5;
   page: number;
   loading: boolean;
 
