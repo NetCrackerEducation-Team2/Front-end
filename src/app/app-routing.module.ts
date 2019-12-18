@@ -165,18 +165,14 @@ const routes: Routes = [
     component: ReviewsManagementComponent,
     canActivate: [ModerReviewsActivateGuardService]
   },
-  // TODO: replace path /create-achievement to /admin/create-achievement
-  {
-    path: 'create-achievement',
-    component: CreateAchievementComponent
-  },
   {
     path: 'admin',
     component: AdminComponent,
     children: [
       {path: 'create-admin-moderator', component: CreateAdminModeratorComponent},
       {path: 'edit-admin-moderator', component: EditAdminModeratorComponent},
-      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent}
+      {path: 'delete-admin-moderator', component: DeleteAdminModeratorComponent},
+      {path: 'create-achievement', component: CreateAchievementComponent}
     ],
     canActivate: [AdminActivateGuardService]
   },

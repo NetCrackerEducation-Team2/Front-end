@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import {take} from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NotificationService} from '../../../service/notification.service';
 import {Notification} from '../../../models/notification';
@@ -22,7 +22,6 @@ export class NotificationListComponent implements OnInit {
   pageLoading: boolean;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
-
   constructor(private notificationService: NotificationService,
               public datePipe: DatePipe,
               private accountService: AccountService,

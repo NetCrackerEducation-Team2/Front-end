@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PublishReviewService} from '../../service/publish-review.service';
 import {BookReviewsService} from '../../service/book-reviews.service';
 import {PageEvent} from '@angular/material';

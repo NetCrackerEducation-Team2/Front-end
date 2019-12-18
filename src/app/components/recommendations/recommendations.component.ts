@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Page} from '../../models/page';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
 import {PageEvent} from '@angular/material';

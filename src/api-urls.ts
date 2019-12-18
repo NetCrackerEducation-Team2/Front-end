@@ -47,6 +47,7 @@ export const apiUrls = {
   API_PUBLISHED_BOOK_OVERVIEW: environment.BASE_URL + '/api/book-overviews/published-by-book/',
   API_BOOK_OVERVIEWS_BY_BOOK: environment.BASE_URL + '/api/book-overviews/by-book/',
   API_PUBLISHED_ANNOUNCEMENTS: environment.BASE_URL + '/api/announcements/published/',
+  API_GET_PUBLISHED_ANNOUNCEMENT_BY_DATE: environment.BASE_URL + '/api/announcements/date/',
   API_OVERVIEWS: environment.BASE_URL + '/api/book-overviews/',
   API_REVIEWS: environment.BASE_URL + '/api/book-review/',
   API_CREATE_ADMIN_MODERATOR: environment.BASE_URL + '/admins/create',

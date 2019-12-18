@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Page} from '../../models/page';
 import {PublishOverviewService} from '../../service/publish-overview.service';
 import {PageEvent} from '@angular/material';
@@ -29,7 +29,6 @@ export class OverviewsManagementComponent implements OnInit {
     this.resetPaginator();
     this.getOverviews();
   }
-
   getOverviews(): void {
     this.pageLoading = true;
     this.bookOverviewsService.getAllBooksOverviews(this.selectedPage.currentPage, this.selectedPage.pageSize)

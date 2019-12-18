@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-recover-password',
@@ -14,7 +14,6 @@ export class RecoverPasswordComponent implements OnInit {
   isError: boolean;
   submitted = false;
   isDownloading = false;
-
   constructor(private authService: AuthenticationService) {
   }
 

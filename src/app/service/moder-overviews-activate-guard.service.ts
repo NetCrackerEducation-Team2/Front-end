@@ -1,23 +1,28 @@
-import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { take } from 'rxjs/operators';
+import {Injectable, OnDestroy} from '@angular/core';
+import {CanActivate} from '@angular/router';
+import {Store } from '@ngrx/store';
+import {State } from '../state/app.state';
+import {take} from 'rxjs/operators';
+import * as constants from '../state/constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModerOverviewsActivateGuardService implements CanActivate{
+export class ModerOverviewsActivateGuardService implements CanActivate, OnDestroy{
+  subscriptionUserState: any;
+  constructor(private store: Store<State>) { }
 
-  constructor(private store: Store<AppState>) { }
-
+  ngOnDestroy() {
+    this.subscriptionUserState.unsubscribe();
+  }
   canActivate(): boolean {
     let access = false;
-    this.store.select('appReducer')
+    this.subscriptionUserState =
+    this.store.select('user')
     .pipe(take(1))
-    .subscribe( state => {  if ( (state.roles.includes('OVERVIEW_MODERATOR') ||
-                                  state.roles.includes('ADMIN') ||
-                                  state.roles.includes('SUPER_ADMIN')) &&
+    .subscribe( state => {  if ( (state.roles.includes(constants.overviewModerator) ||
+                                  state.roles.includes(constants.admin) ||
+                                  state.roles.includes(constants.superAdmin)) &&
                                   state.login) {
       access = true;
     }} );

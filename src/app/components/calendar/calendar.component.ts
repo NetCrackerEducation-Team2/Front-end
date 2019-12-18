@@ -1,66 +1,110 @@
-import { Component, OnInit } from '@angular/core';
-import {Tile} from '../../models/calendar-models';
-import * as constants from '../../state/constants';
+
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import * as moment from 'moment';
+import {DateService} from '../../service/date.service';
+import {AnnouncementService} from '../../service/announcement.service';
+import {Announcement} from '../../models/announcement';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+
+
+import {ANNOUNCEMENTS } from '../../mocks/mock-announcement';
+interface Day {
+  value: moment.Moment;
+  active: boolean;
+  disabled: boolean;
+  selected: boolean;
+  announcements: Announcement[];
+}
+
+interface Week {
+  days: Day[];
+}
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
-})
-export class CalendarComponent implements OnInit {
+  styleUrls: ['./calendar.component.css'],
+  providers: [DatePipe]
 
-  tiles: Tile[];
-  currentYear: number;
-  currentMonth: number;
-  currentMonthLabel: string;
-  constructor() { }
+})
+export class CalendarComponent implements OnInit, OnDestroy {
+
+  calendar: Week[];
+  subscriptionDataService: Subscription;
+  announcement: Announcement;
+  announcements = [];
+  subscriptions = [];
+  constructor(private dateService: DateService, private announcementService: AnnouncementService) {
+  }
 
   ngOnInit() {
-    this.currentYear = new Date().getFullYear();
-    this.currentMonth = new Date().getMonth();
-    this.currentMonthLabel = constants.months[this.currentMonth];
-    this.updateTiles();
+    this.subscriptionDataService = this.dateService.date.subscribe(this.generate.bind(this));
   }
 
-  updateTiles(): void {
-    this.tiles = [];
-    for(let i = 1; i <= this.daysInMonth(this.currentMonth % 12 + 1, this.currentYear); i++) {
-      this.tiles.push(new Tile(i));
+
+  ngOnDestroy() {
+    this.subscriptionDataService.unsubscribe();
+
+  }
+
+  initCalendarAnnouncements(startDay: moment.Moment, endDay: moment.Moment) {
+    const date = startDay.clone().subtract(1, 'day');
+
+    while (date.isBefore(endDay, 'day')) {
+      date.add(1, 'day').clone();
+      this.announcementService.
+      getPublishedAnnouncementByDate( date.format('YYYY') + '-' + date.format('MM') + '-' + date.format('DD')).
+      subscribe(announcement => {this.announcements.push(new Announcement(  announcement.announcementId,
+                                                                            announcement.title,
+                                                                            announcement.description,
+                                                                            announcement.userId,
+                                                                            announcement.published,
+                                                                            announcement.creationTime)); });
+
     }
-    if (constants.months[0] === constants.months[this.currentMonth]){
 
+  }
+
+  unsubscribeAnnouncementSubscriptions() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  generate(now: moment.Moment) {
+    const startDay = now.clone().startOf('month').startOf('week');
+    const endDay = now.clone().endOf('month').endOf('week');
+    const date = startDay.clone().subtract(1, 'day');
+    const calendar = [];
+
+
+    while (date.isBefore(endDay, 'day')) {
+
+      calendar.push({
+        days: Array(7)
+          .fill(0)
+          .map(() => {
+            const value = date.add(1, 'day').clone();
+            const active = moment().isSame(value, 'date');
+            const disabled = !now.isSame(value, 'month');
+            const selected = now.isSame(value, 'date');
+            const announcements = ANNOUNCEMENTS;
+
+            return {
+              value, active, disabled, selected, announcements
+            };
+          })
+      });
     }
-    this.tiles.forEach(tile => tile.text = 'lala');
 
-
-
+    this.calendar = calendar;
   }
 
-  daysInMonth(month, year): number {
-    return (new Date(year, month, 0)).getDate();
+  select(day: moment.Moment) {
+    this.dateService.changeDate(day);
   }
-
-  forward(): void {
-    console.log(this.currentMonth);
-    if (this.currentMonth === 12 - 1) {
-      this.currentYear += 1;
-    }
-    this.currentMonth = (this.currentMonth + 1) % 12;
-    this.currentMonthLabel = constants.months[this.currentMonth];
-    this.updateTiles();
-
-  }
-
-  back(): void {
-    if (this.currentMonth === 0) {
-      this.currentYear -= 1;
-    }
-    this.currentMonth = (this.currentMonth + (12 - 1)) % 12;
-    this.currentMonthLabel = constants.months[this.currentMonth];
-    this.updateTiles();
-  }
-  today(): void {
-
-
+  hasAnyAnnouncements(day: Day) {
+    return !(day.announcements.length === 0);
   }
 
 }

@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { TooltipModule } from 'ng2-tooltip-directive';
 import {
   MatButtonToggleModule,
   MatExpansionModule,
@@ -99,6 +100,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {ShowHideComponent} from './components/shared/show-hide/show-hide.component';
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
+import { MomentPipe } from './service/moment.pipe';
+import { SelectorComponent } from './components/calendar/selector/selector.component';
 
 @NgModule({
   declarations: [
@@ -175,9 +178,12 @@ import {OptionsScrollDirective} from './directives/options-scroll.directive';
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
-    ShowHideComponent
+    ShowHideComponent,
+    MomentPipe,
+    SelectorComponent
   ],
   imports: [
+    TooltipModule,
     MatGridListModule,
     BrowserModule,
     AppRoutingModule,

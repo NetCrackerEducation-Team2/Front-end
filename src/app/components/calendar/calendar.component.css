@@ -1,38 +1,85 @@
-.tiles-container {
+
+.calendar-container {
   max-width: 90%;
   margin: auto;
+  height: auto;
+}
 
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+  font-size: calc(4px + 0.5vw );
 }
 
 
-.calendar-tile-header{
-text-align: center;
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
 }
 
-.icon-calendar{
-  margin: 1vh 2px;
-}
 
-.icon-calendar:hover{
-  cursor: pointer;
-  opacity: 0.3;
-}
-.calendar-year-month {
-  text-align: center;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
   margin: auto;
-  width: 50vw;
-
-}
-.calendar-buttons {
-
-  display: flex;
-  justify-content: center;
-
+  border-collapse: collapse;
+  border-collapse: collapse !important;
 }
 
+.table th,
+.table td {
+  padding: 0.5rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  background-color: #fff !important;
+
+}
+
+
+
+table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+
+.table-bordered td .active {
+
+  border-color: 2px solid red !important;
+
+}
+
+table .disabled {
+  opacity: 0.5;
+}
+table td:hover:not(.disabled) {
+  background: #eee;
+  cursor: pointer;
+}
+
+table .active {
+  color: #dc3545;
+}
+table .selected {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.075)!important;
+  border-color: 2px solid red !important;
+}
+
+.calendar-announcement-icon {
+  color: black !important;
+}
+
+.calendar-announcement-icon:hover {
+  opacity: 0.5;
+
+}
