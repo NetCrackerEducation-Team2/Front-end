@@ -109,6 +109,7 @@ import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-del
 import {FriendRequestNotificationItemComponent} from './components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component';
 import {ValidationErrorMessageComponent} from './components/suggest-book/validation-error-message/validation-error-message.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {SettingsDialogComponent} from "./components/account/profile/settigns-dialog/settings-dialog.component";
 
 @NgModule({
   declarations: [
@@ -189,7 +190,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     DateAgoPipe,
     ConfirmDeleteFromFriendsDialog,
     FriendRequestNotificationItemComponent,
-    ValidationErrorMessageComponent
+    ValidationErrorMessageComponent,
+    SettingsDialogComponent
   ],
   imports: [
     MatGridListModule,
@@ -273,7 +275,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     }
   ],
   entryComponents: [
-    ConfirmDeleteFromFriendsDialog
+    ConfirmDeleteFromFriendsDialog,
+    SettingsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

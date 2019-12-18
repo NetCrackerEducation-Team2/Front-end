@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Settings} from '../../../models/settings';
 import {SettingsService} from '../../../service/settings.service';
+import {ConfirmDeleteFromFriendsDialog} from "../../user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component";
+import {flatMap} from "rxjs/operators";
+import {EMPTY} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {SettingsDialogComponent} from "./settigns-dialog/settings-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
               private router: Router,
-              private settingsService: SettingsService) {
+              private settingsService: SettingsService,
+              private dialog: MatDialog) {
   }
 
   private setDefaultAvatar() {
@@ -73,4 +78,10 @@ export class ProfileComponent implements OnInit {
     this.isLogged = this.accountService.getCurrentUser() != null;
   }
 
+  openSettings() {
+    this.dialog.open(SettingsDialogComponent, {
+      width: '400px',
+      height: '370px'
+    });
+  }
 }

@@ -5,6 +5,8 @@ import {FriendService} from '../../service/friend.service';
 import {SnackBarService} from '../../service/presentation-services/snackBar.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDeleteFromFriendsDialog} from './confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
+import {flatMap} from 'rxjs/operators';
+import {Observable, EMPTY} from 'rxjs';
 
 
 @Component({
@@ -53,16 +55,21 @@ export class UserItemComponent implements OnInit {
       height: '150px',
       data: {username: this.profile.fullName}
     });
-    // FIXME asem subscribe into subscribe
-    confirmationDialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.friendService.deleteFromFriends(this.profile.userId).subscribe(response => {
-          if (response) {
-            this.friendStatus.friend = false;
-            this.friendStatus.awaitFriendRequestConfirmation = false;
-            this.snackBarService.openSuccessSnackBar('Friend has been successfully removed');
+    confirmationDialogRef.afterClosed().pipe(
+      flatMap(
+        result => {
+          if (result) {
+            return this.friendService.deleteFromFriends(this.profile.userId);
+          } else {
+            return EMPTY;
           }
-        });
+        }
+      )
+    ).subscribe(response => {
+      if (response) {
+        this.friendStatus.friend = false;
+        this.friendStatus.awaitFriendRequestConfirmation = false;
+        this.snackBarService.openSuccessSnackBar('Friend has been successfully removed');
       }
     });
   }
