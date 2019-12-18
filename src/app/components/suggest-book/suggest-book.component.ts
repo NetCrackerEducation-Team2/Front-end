@@ -24,6 +24,7 @@ export class SuggestBookComponent implements OnInit {
     publishingHouse: null
   };
   awaitingResponse: boolean;
+
   constructor(private authorService: AuthorService,
               private genreService: GenreService,
               private bookService: BookService,
@@ -37,6 +38,8 @@ export class SuggestBookComponent implements OnInit {
 
   submit() {
     this.awaitingResponse = true;
+    this.prepareBook();
+    console.log('Suggesting book ', this.book);
     this.bookService.suggestBook(this.book).subscribe((response) => {
       this.awaitingResponse = false;
       if (response) {
@@ -46,11 +49,27 @@ export class SuggestBookComponent implements OnInit {
     });
   }
 
+  private prepareBook() {
+    this.book.authors.map(a => {
+      if (a.label) {
+        a.fullName = a.label;
+      }
+      return a;
+    });
+    this.book.genres.map(g => {
+      if (g.label) {
+        g.name = g.label;
+      }
+    });
+    return this.book;
+  }
+
   searchGenres(event) {
     this.genreService.searchGenres(event.term).subscribe(genres => {
       this.genres = genres;
     });
   }
+
   searchAuthors(event) {
     this.authorService.findAuthors(event.term).subscribe(authors => {
       this.authors = authors;
