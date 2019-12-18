@@ -21,7 +21,12 @@
     </div>
     <div class="book-description">
       <h2 class="book-description-header">Description:</h2>
-      <p>{{bookOverview.description}}</p>
+      <div *ngIf="bookOverview == null">
+        <p> There is no published description.</p>
+      </div>
+      <div *ngIf="bookOverview != null">
+        <p>{{bookOverview.description}}</p>
+      </div>
     </div>
     <mat-divider class="book-overview-mat-divider"></mat-divider>
   </div>

@@ -25,7 +25,10 @@ export class UsersBooksService {
 
   getUserBook(bookId: number, userId: number): Observable<UserBook> {
     const url = '/getUserBook?book=' + bookId + '&user=' + userId;
-    return this.http.get<UserBook>(this.userBookUrl + url);
+    return this.http.get<UserBook>(this.userBookUrl + url)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getUserBook', []))
+      );
   }
 
   getFilteredUserBook(filteringParams: Map<UserBookFilteringParam, any>, page: number, pageSize: number): Observable<Page<UserBook>> {
@@ -50,7 +53,7 @@ export class UsersBooksService {
     if (filteringParams.get(UserBookFilteringParam.AnnouncementDate) != null) {
       const announcementDate = filteringParams.get(UserBookFilteringParam.AnnouncementDate);
       console.log(announcementDate);
-      params = params.set('date', announcementDate);
+      params = params.set('date', this.stringFormatterService.formatDate(announcementDate));
     }
     if (filteringParams.get(UserBookFilteringParam.ReadMark) != null) {
       const readMark = filteringParams.get(UserBookFilteringParam.ReadMark);
@@ -72,33 +75,48 @@ export class UsersBooksService {
     console.log(paramsString);
     return this.http.get(this.userBookUrl + '/getFilteredUserBook' + paramsString)
       .pipe(
-        catchError(this.errorHandlerService.handleError<any>('getBooks', []))
+        catchError(this.errorHandlerService.handleError<any>('getFilteredUserBook', []))
       );
   }
 
   getUsersBookPage(userId: number, page: number, pageSize: number): Observable<Page<UserBook>> {
     const url = '/get-page-by-user/' + userId + '?page=' + page + '&pageSize=' + pageSize;
-    return this.http.get<Page<UserBook>>(this.userBookUrl + url);
+    return this.http.get<Page<UserBook>>(this.userBookUrl + url)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getUsersBookPage', []))
+      );
   }
 
   addUsersBook(book: Book, userId: number): Observable<UserBook> {
     const url = '/addUserBook?book=' + book.bookId + '&user=' + userId;
-    return this.http.put<UserBook>(this.userBookUrl + url, '');
+    return this.http.put<UserBook>(this.userBookUrl + url, '')
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('addUsersBook', []))
+      );
   }
 
   deleteUsersBook(usersBookId: number): Observable<any> {
     const url = '/deleteUserBook?userBook=' + usersBookId;
     console.log(this.userBookUrl + url);
-    return this.http.put<UserBook>(this.userBookUrl + url, '');
+    return this.http.put<UserBook>(this.userBookUrl + url, '')
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('deleteUsersBook', []))
+      );
   }
 
   setReadMark(usersBookId: number, value: boolean): Observable<UserBook> {
     const url = '/markReadUserBook?userBook=' + usersBookId + '&value=' + value;
-    return this.http.put<UserBook>(this.userBookUrl + url, '');
+    return this.http.put<UserBook>(this.userBookUrl + url, '')
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('setReadMark', []))
+      );
   }
 
   setFavoriteMark(usersBookId: number, value: boolean): Observable<UserBook> {
     const url = '/markFavoriteUserBook?userBook=' + usersBookId + '&value=' + value;
-    return this.http.put<UserBook>(this.userBookUrl + url, '');
+    return this.http.put<UserBook>(this.userBookUrl + url, '')
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('setFavoriteMark', []))
+      );
   }
 }

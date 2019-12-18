@@ -252,35 +252,19 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   makeFavoriteMark(item: ListItemInfo, userBookId: number, value: boolean): void {
     this.usersBooksService.setFavoriteMark(userBookId, value)
       .subscribe((userBook: UserBook) => {
-        if (userBook.favoriteMark) {
-          item.actionElements[1] = {
-            buttonInfoId: 1, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction:
-              () => { this.makeFavoriteMark(item, userBook.userBookId, false); }};
-        } else {
-          item.actionElements[1] = {
-            buttonInfoId: 1, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction:
-              () => { this.makeFavoriteMark(item, userBook.userBookId, true); }};
-        }
+        this.search();
       });
   }
   makeReadMark(item: ListItemInfo, userBookId: number, value: boolean): void {
     this.usersBooksService.setReadMark(userBookId, value)
       .subscribe((userBook: UserBook) => {
-        if (userBook.readMark) {
-          item.actionElements[2] = {
-            buttonInfoId: 2, name: 'Remove read mark', url: '/personal-list', disabled: false, clickFunction:
-              () => { this.makeReadMark(item, userBook.userBookId, false); }};
-        } else {
-          item.actionElements[2] = {
-            buttonInfoId: 2, name: 'Set read mark', url: '/personal-list', disabled: false, clickFunction:
-              () => { this.makeReadMark(item, userBook.userBookId, true); }};
-        }
+        this.search();
       });
   }
   removeFromList(userBookId: number): void {
     this.usersBooksService.deleteUsersBook(userBookId)
       .subscribe(() => {
-        this.searchPage();
+        this.search();
       });
   }
 }

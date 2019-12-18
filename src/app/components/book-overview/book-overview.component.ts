@@ -10,7 +10,8 @@ import {UsersBooksService} from '../../service/users-books-service';
 import {UserBook} from '../../models/users-book';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../state/app.state';
-import {Subscription} from 'rxjs';
+import {of, Subscription} from 'rxjs';
+import {UserState} from '../../state/app.reducer';
 
 @Component({
   selector: 'app-book-overview',
@@ -39,11 +40,6 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
               private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.isLoggedSubscription = this.store.select('appReducer')
-      .subscribe(reducer => {
-        this.isLogged = reducer.login;
-        this.loggedUserId = reducer.id;
-      });
     this.addBookDisabled = false;
     this.getBookOverview();
   }
@@ -58,7 +54,12 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
   getBookOverview(): void {
     this.loaded = false;
     const slug = this.route.snapshot.paramMap.get('slug');
-    this.bookService.getBookBySlug(slug).pipe(
+    this.isLoggedSubscription = this.store.select('appReducer').pipe(
+      flatMap((reducer: UserState) => {
+        this.isLogged = reducer.login;
+        this.loggedUserId = reducer.id;
+        return this.bookService.getBookBySlug(slug);
+      }),
       flatMap((resBook: Book) => {
         this.book = resBook;
         this.authors = this.bookPresentationService.getBookAuthorsString(this.book, this.book.authors.length);
@@ -68,13 +69,17 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
       flatMap((resOverview: BookOverview) => {
         this.bookOverview = resOverview;
         this.loaded = true;
-        return this.usersBooksService.getUserBook(this.book.bookId, this.loggedUserId);
-      })
-      ).subscribe((userBook: UserBook) => {
-        if (userBook.userBookId !== -1 && this.isLogged) {
-          this.userBook = userBook;
+        if (this.loggedUserId == null) {
+          const res: UserBook = { userBookId: -1, favoriteMark: null, bookId: null, creationTime: null, readMark: null, userId: null };
+          return of(res);
         }
-    });
+        return this.usersBooksService.getUserBook(this.book.bookId, this.loggedUserId);
+      }))
+      .subscribe((userBook: UserBook) => {
+      if (userBook.userBookId !== -1 && this.isLogged) {
+        this.userBook = userBook;
+      }
+      });
   }
   addToRead(): void {
     this.addBookDisabled = true;
