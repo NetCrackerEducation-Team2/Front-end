@@ -91,8 +91,6 @@ import {UserItemComponent} from './components/user-item/user-item.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RecommendationsComponent} from './components/recommendations/recommendations.component';
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
-import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
-import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
 import {ListItemPublishComponent} from './components/presentational/list-item-publish/list-item-publish.component';
 import {MessageComponent} from './components/message/message.component';
 import {MessageGroupComponent} from './components/message-group/message-group.component';
@@ -110,9 +108,10 @@ import {DateAgoPipe} from './pipes/date-ago.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
 import {FriendRequestNotificationItemComponent} from './components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component';
+import { SearchUserBooksComponent } from './components/search-user-books/search-user-books.component';
 import {ValidationErrorMessageComponent} from './components/suggest-book/validation-error-message/validation-error-message.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import {SettingsDialogComponent} from "./components/account/profile/settigns-dialog/settings-dialog.component";
+import {SettingsDialogComponent} from './components/account/profile/settigns-dialog/settings-dialog.component';
 
 @NgModule({
   declarations: [
@@ -180,8 +179,6 @@ import {SettingsDialogComponent} from "./components/account/profile/settigns-dia
     UsersListComponent,
     UserItemComponent,
     NotificationMenuComponent,
-    PersonalBooklistComponent,
-    PersonalBookItemComponent,
     RecommendationsComponent,
     ListItemPublishComponent,
     MessageComponent,
@@ -196,7 +193,8 @@ import {SettingsDialogComponent} from "./components/account/profile/settigns-dia
     ConfirmDeleteFromFriendsDialog,
     FriendRequestNotificationItemComponent,
     ValidationErrorMessageComponent,
-    SettingsDialogComponent
+    SettingsDialogComponent,
+    SearchUserBooksComponent
   ],
   imports: [
     TooltipModule,

@@ -16,6 +16,9 @@
   </div>
 
   <div class="user-actions">
+    <button *ngIf="isLogged" class="button" mat-flat-button color="primary" [routerLink]="['/personal-list']">
+      Personal book list
+    </button>
     <button *ngIf="canEdit()" class="button" mat-flat-button color="primary" [routerLink]="['edit']">
       Edit profile
     </button>

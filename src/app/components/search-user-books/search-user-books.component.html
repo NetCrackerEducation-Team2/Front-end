@@ -1,0 +1,64 @@
+<div class="filtered-book-list-container">
+  <div class="simple-books-filter">
+    <input type="text" placeholder=" Search book..." name="search" class="search-input" [(ngModel)]="title">
+    <button (click)="search()" class="search-button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="!selectedPage.array; else loaded">
+    <div class="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+  <ng-template #loaded>
+    <ng-container *ngIf="selectedPage.array.length > 0; else noresults">
+      <div class="book-page">
+        <app-book-list [listItemInfos]="selectedPage.array"></app-book-list>
+        <mat-paginator [pageSize]="selectedPage.pageSize" [length]="selectedPage.countPages * selectedPage.pageSize"
+                       [pageIndex]="selectedPage.currentPage" (page)="handlePage($event)">
+        </mat-paginator>
+      </div>
+    </ng-container>
+    <ng-template #noresults>
+      <p class="no-results">No results found</p>
+    </ng-template>
+  </ng-template>
+  <mat-expansion-panel [expanded]="window.innerWidth >= 768" class="advanced-books-filter-exp-panel">
+    <mat-expansion-panel-header class="books-filter-title">
+      <mat-panel-title>Filters</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="advanced-books-filter">
+
+      <mat-form-field>
+        <input type="text" placeholder="Author" aria-label="Author" matInput [formControl]="authorsControl"
+               [matAutocomplete]="autoAuthorComplete">
+        <mat-autocomplete #autoAuthorComplete="matAutocomplete" (optionSelected)="searchWithAuthor($event)" [displayWith]="displayAuthor" (optionsScroll)="onAuthorScroll()">
+          <mat-option [value]="null">[Turn off filter]</mat-option>
+          <mat-option *ngFor="let author of filteredAuthors$ | async" [value]="author">
+            {{author.fullName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" placeholder="Genre" aria-label="Genre" matInput [formControl]="genresControl"
+               [matAutocomplete]="autoGenreComplete">
+        <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="searchWithGenre($event)" [displayWith]="displayGenre" (optionsScroll)="onGenreScroll()">
+          <mat-option [value]="null">[Turn off filter]</mat-option>
+          <mat-option *ngFor="let genre of filteredGenres$ | async" [value]="genre">
+            {{genre.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Announcement date" [(ngModel)]="announcementDate" (dateChange)="search()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+
+    </div>
+  </mat-expansion-panel>
+</div>

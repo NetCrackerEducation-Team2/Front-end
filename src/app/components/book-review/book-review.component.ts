@@ -13,7 +13,7 @@ import {flatMap, map, switchMap} from 'rxjs/operators';
 })
 export class BookReviewComponent implements OnInit {
   defaultPhotoPath = '../../../assets/images/default_avatar.jpg';
-  pageSize = 2;
+  pageSize = 3;
   page: number;
   loading: boolean;
 
