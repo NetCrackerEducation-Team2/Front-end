@@ -82,7 +82,7 @@ export class NotificationListComponent implements OnInit {
   private mapFriendInvitationNotification(friendInvitationNotification: FullNotification): ListItemInfo {
     return {
       title: null,
-      subtitle: this.datePipe.transform(friendInvitationNotification.notificationObject.creationTime, 'd LLLL yyyy, h:mm'),
+      subtitle: this.datePipe.transform(friendInvitationNotification.notificationObject.creationTime, 'd LLLL yyyy, H:mm'),
       photoPath: null,
       publish: null,
       contentElements: [
