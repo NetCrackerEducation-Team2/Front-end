@@ -71,7 +71,7 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
         return this.usersBooksService.getUserBook(this.book.bookId, this.loggedUserId);
       })
       ).subscribe((userBook: UserBook) => {
-        if (userBook.userBookId !== -1) {
+        if (userBook.userBookId !== -1 && this.isLogged) {
           this.userBook = userBook;
         }
     });

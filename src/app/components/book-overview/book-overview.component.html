@@ -7,14 +7,14 @@
       <div><span class="bolder-text">Announcement date: </span>{{book.release}}</div>
       <div><span class="bolder-text">Genres: </span>{{genres}}</div>
       <div><span class="bolder-text">Authors: </span>{{authors}}</div>
-      <div><span class="bolder-text">Rating: </span>{{book.rateSum}}</div>
+      <div><span class="bolder-text">Rating: </span> <star-rating [value]="book.rateSum" checkedcolor="yellow" uncheckedcolor="black" size="24px" readonly="true"></star-rating> </div>
       <div><span class="bolder-text">Publishing house: </span>{{book.publishingHouse}}</div>
       <div *ngIf="isLogged">
         <div *ngIf="userBook == null">
           <button id="addButton" class="book-overview-button" [disabled]="addBookDisabled" (click)="addToRead()">Add to "To read"</button>
         </div>
         <div *ngIf="userBook != null">
-          <button class="book-overview-button" [disabled]="addBookDisabled" (click)="removeFromRead()">Remove to "To read"</button>
+          <button class="book-overview-button" [disabled]="addBookDisabled" (click)="removeFromRead()">Remove from "To read"</button>
         </div>
         <div><button class="book-overview-button">Read</button></div>
       </div>
