@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../state/app.state';
+import {UserState} from '../../state/app.reducer';
 
 @Component({
   selector: 'app-personal-booklist',
@@ -37,11 +38,6 @@ export class PersonalBooklistComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.isLoggedSubscription = this.store.select('appReducer')
-      .subscribe(reducer => {
-        this.loggedUserId = reducer.id;
-      });
-
     this.selectedPage = {currentPage: 1, pageSize: 5, countPages: 0, array: []};
     this.usersBooks = [];
     this.books = [];
@@ -58,22 +54,29 @@ export class PersonalBooklistComponent implements OnInit, OnDestroy {
   loadPage(): void  {
     this.loading = true;
     this.selectedPage.array = [];
-
-    this.usersBooksService.getUsersBookPage(this.loggedUserId, this.selectedPage.currentPage, this.selectedPage.pageSize).pipe(
-    map((response: Page<UserBook> ) => {
-      this.selectedPage.countPages = response.countPages;
-      this.selectedPage.currentPage = response.currentPage;
-      this.selectedPage.pageSize = response.pageSize;
-      console.log(JSON.stringify(response));
-      return response.array;
-    }),
-    flatMap((userBook: UserBook[]) => {
-      return userBook;
-    }),
-    flatMap((userBook: UserBook) => {
-      this.usersBooks.push(userBook);
-      return this.bookService.getBookById(userBook.bookId);
-    }),
+    this.isLoggedSubscription = this.store.select('appReducer').pipe(
+      flatMap((reducer: UserState) => {
+        this.loggedUserId = reducer.id;
+        return this.usersBooksService.getUsersBookPage(
+          this.loggedUserId,
+          this.selectedPage.currentPage,
+          this.selectedPage.pageSize
+        );
+      }),
+      map((response: Page<UserBook> ) => {
+        this.selectedPage.countPages = response.countPages;
+        this.selectedPage.currentPage = response.currentPage;
+        this.selectedPage.pageSize = response.pageSize;
+        console.log(JSON.stringify(response));
+        return response.array;
+      }),
+      flatMap((userBook: UserBook[]) => {
+        return userBook;
+      }),
+      flatMap((userBook: UserBook) => {
+        this.usersBooks.push(userBook);
+        return this.bookService.getBookById(userBook.bookId);
+      })
     ).subscribe((book: Book) => {
       this.books.push(book);
       const usersBook = this.usersBooks.filter(value => value.bookId === book.bookId)[0];
@@ -144,11 +147,11 @@ export class PersonalBooklistComponent implements OnInit, OnDestroy {
     this.usersBooksService.setFavoriteMark(userBookId, value)
       .subscribe((userBook: UserBook) => {
         if (userBook.favoriteMark) {
-          item.actionElements[2] = {
+          item.actionElements[1] = {
             buttonInfoId: 1, name: 'Remove from Favorite', url: '/personal-list', disabled: false, clickFunction:
               () => { this.makeFavoriteMark(item, userBook.userBookId, false); }};
         } else {
-          item.actionElements[2] = {
+          item.actionElements[1] = {
             buttonInfoId: 1, name: 'Add to Favorite', url: '/personal-list', disabled: false, clickFunction:
               () => { this.makeFavoriteMark(item, userBook.userBookId, true); }};
         }
