@@ -111,6 +111,7 @@ import {DateAgoPipe} from './pipes/date-ago.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
 import {FriendRequestNotificationItemComponent} from "./components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component";
+import {ValidationErrorMessageComponent} from "./components/suggest-book/validation-error-message/validation-error-message.component";
 
 @NgModule({
   declarations: [
@@ -194,7 +195,8 @@ import {FriendRequestNotificationItemComponent} from "./components/notification/
     ShowHideComponent,
     DateAgoPipe,
     ConfirmDeleteFromFriendsDialog,
-    FriendRequestNotificationItemComponent
+    FriendRequestNotificationItemComponent,
+    ValidationErrorMessageComponent
   ],
   imports: [
     MatGridListModule,

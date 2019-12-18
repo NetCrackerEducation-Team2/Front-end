@@ -77,6 +77,9 @@ export class BookService {
   }
 
   suggestBook(book) {
-    return this.http.post(this.bookCreateUrl, book).pipe(catchError(this.errorHandlerService.handleError<any>('suggestBook', [])));
+    return this.http.post(this.bookCreateUrl, book)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('Suggest book', null))
+      );
   }
 }
