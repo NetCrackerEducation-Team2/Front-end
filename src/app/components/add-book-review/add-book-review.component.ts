@@ -14,8 +14,8 @@ import {StarRatingComponent} from 'ng-starrating';
 export class AddBookReviewComponent implements OnInit, OnDestroy {
   @Input() book: Book;
   review = {rating: 3, description: ''};
-  private createReviewSubscription: Subscription;
-  private sendButtonDisabled;
+  createReviewSubscription: Subscription;
+  sendButtonDisabled;
 
   constructor(private reviewService: ReviewService, private router: Router, private snackBarService: SnackBarService) {
   }
