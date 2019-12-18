@@ -1,10 +1,10 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
+import {State} from '../../state/app.state';
 import * as constants from '../../state/constants';
-import {AccountService} from '../../service/account.service';
-
+import {updateRolesState} from '../../state/user';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
@@ -15,7 +15,8 @@ export class TabsComponent implements OnInit, OnDestroy {
   activeLinkIndex: number;
   storeSubscription: any;
   routerEventsSubscription: any;
-  constructor(private router: Router, private store: Store<AppState>) {
+
+  constructor(private router: Router, private store: Store<State>) {
   }
 
   ngOnInit(): void {
@@ -23,58 +24,22 @@ export class TabsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.storeSubscription.unsubscribe();
-
-  }
+    this.unsubscribeSubscriptions();
+    }
 
  private initSubscriptions(): void {
 
     this.routerEventsSubscription = this.router.events.subscribe((res) => {
       this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
     });
-    this.storeSubscription = this.store.select('appReducer').subscribe(state => {
-       this.updateRolesState(state);
+    this.storeSubscription = this.store.select('user').subscribe(state => {
+       updateRolesState(state);
        this.checkNavLinks(state);
     });
 
   }
-
-
- private updateRolesState(state) {
-
-    for (const role of state.roles) {
-      this.accessMapChange(state, role);
-    }
-    if (state.roles.length < 1) {
-     state.accessMap.set(constants.admin, false);
-     state.accessMap.set(constants.superAdmin, false);
-     state.accessMap.set(constants.overviewModerator, false);
-     state.accessMap.set(constants.reviewModerator, false);
-     state.accessMap.set(constants.announcementModerator, false);
-    }
-    state.accessMap.set(constants.user, state.login);
-
-  }
-
-private  accessMapChange(state, role) {
-    switch (role) {
-      case constants.admin:
-        state.accessMap.set(constants.admin, true);
-        break;
-      case constants.superAdmin:
-        state.accessMap.set(constants.superAdmin, true);
-        break;
-      case constants.overviewModerator:
-        state.accessMap.set(constants.overviewModerator, true);
-        break;
-      case constants.reviewModerator:
-        state.accessMap.set(constants.reviewModerator, true);
-        break;
-      case constants.announcementModerator:
-        state.accessMap.set(constants.announcementModerator, true);
-        break;
-    }
-
+private unsubscribeSubscriptions(){
+  this.routerEventsSubscription.unsubscribe();
 }
 private  checkNavLinks(state) {
     this.navLinks = [

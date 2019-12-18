@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {NotificationService} from '../../../service/notification.service';
 import {Notification} from '../../../models/notification';

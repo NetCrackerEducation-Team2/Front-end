@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import { take } from 'rxjs/operators';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../../state/app.state';
+import {State, getUserRoles} from '../../../state/app.state';
 import * as constants from '../../../state/constants';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-admin-moderator',
@@ -17,29 +18,32 @@ export class CreateAdminModeratorComponent implements OnInit {
   roles: any[];
   repeatPassword: '';
   isError: boolean;
+  rolesSubscription: any;
   isCreated: boolean;
   isDownloading = true;
 
-  constructor(private admModerService: AdminModeratorService, private store: Store<AppState>) {
+  constructor(private admModerService: AdminModeratorService, private store: Store<State>) {
   }
 
   ngOnInit() {
-    this.store.select('appReducer').
+    this.rolesSubscription = this.store.select(getUserRoles).
     pipe(take(1)).
-    subscribe(state => { if (state.roles.includes(constants.superAdmin)) { this.roles = this.superAdminRoles; }
-                         else if (state.roles.includes(constants.admin)) { this.roles = this.adminRoles; }  } );
+    subscribe(roles => { if (roles.includes(constants.superAdmin)) { this.roles = this.superAdminRoles; } else
+                         if (roles.includes(constants.admin)) { this.roles = this.adminRoles; }  } ).unsubscribe();
   }
+
+
 
   checkPasswords(): boolean {
     return this.repeatPassword === this.user.password;
   }
 
   createModerAdmin(): void {
-    this.admModerService.
-    createAdminModer(this.user).pipe(take(1)).
-    subscribe(resp => {this.isCreated = true; this.isError = false;},
-               error => {this.isError = true; this.isCreated = false;
-               });
+      this.admModerService.
+      createAdminModer(this.user).pipe(take(1)).
+      subscribe(resp => {this.isCreated = true; this.isError = false;},
+                error => {this.isError = true; this.isCreated = false;
+                });
   }
 
 

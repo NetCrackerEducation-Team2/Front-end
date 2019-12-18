@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthorService} from '../../service/author.service';
 import {GenreService} from '../../service/genre.service';
 import {BookService} from '../../service/book.service';
@@ -36,10 +36,10 @@ export class SuggestBookComponent implements OnInit {
     this.awaitingResponse = false;
   }
 
+
   submit() {
     this.awaitingResponse = true;
     this.prepareBook();
-    console.log('Suggesting book ', this.book);
     this.bookService.suggestBook(this.book).subscribe((response) => {
       this.awaitingResponse = false;
       if (response) {
@@ -65,13 +65,13 @@ export class SuggestBookComponent implements OnInit {
   }
 
   searchGenres(event) {
-    this.genreService.searchGenres(event.term).subscribe(genres => {
+      this.genreService.searchGenres(event.term).subscribe(genres => {
       this.genres = genres;
     });
   }
 
   searchAuthors(event) {
-    this.authorService.findAuthors(event.term).subscribe(authors => {
+      this.authorService.findAuthors(event.term).subscribe(authors => {
       this.authors = authors;
     });
   }

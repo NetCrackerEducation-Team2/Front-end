@@ -1,0 +1,11 @@
+<div class="selector-container">
+  <div class="selector-date">
+    <h1>{{ dateService.date | async | moment }}</h1>
+  </div>
+
+  <div class="selector-icons">
+    <i class="material-icons" (click)="go(-1)">arrow_left</i>
+    <i class="material-icons" (click)="today()">today</i>
+    <i class="material-icons" (click)="go(1)">arrow_right</i>
+  </div>
+  </div>

@@ -9,9 +9,9 @@ import {BookPresentationService} from '../../service/presentation-services/book-
 import {UsersBooksService} from '../../service/users-books-service';
 import {UserBook} from '../../models/users-book';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
 import {of, Subscription} from 'rxjs';
-import {UserState} from '../../state/app.reducer';
+import {State} from '../../state/app.state';
+import {UserState} from '../../state/user';
 
 @Component({
   selector: 'app-book-overview',
@@ -37,7 +37,7 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
               private bookOverviewService: BookOverviewService,
               private usersBooksService: UsersBooksService,
               private route: ActivatedRoute,
-              private store: Store<AppState>) {}
+              private store: Store<State>) {}
 
   ngOnInit() {
     this.addBookDisabled = false;
@@ -54,7 +54,7 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
   getBookOverview(): void {
     this.loaded = false;
     const slug = this.route.snapshot.paramMap.get('slug');
-    this.isLoggedSubscription = this.store.select('appReducer').pipe(
+    this.isLoggedSubscription = this.store.select('user').pipe(
       flatMap((reducer: UserState) => {
         this.isLogged = reducer.login;
         this.loggedUserId = reducer.id;

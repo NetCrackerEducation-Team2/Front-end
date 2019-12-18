@@ -10,7 +10,7 @@
     </ng-container>
     <ng-template #alreadyLogged>
       <app-notification-menu></app-notification-menu>
-      <mat-icon class="header-icon" routerLink="/calendar">calendar_today</mat-icon>
+      <button mat-button> <mat-icon class="header-icon" routerLink="/calendar">calendar_today</mat-icon></button>
       <button class="button-header" type="button"  mat-stroked-button routerLink="/logout" (click)="onLogout()">Sign out</button>
     </ng-template>
   </div>

@@ -9,3 +9,6 @@ export const adminRoles = [announcementModerator, overviewModerator, reviewModer
 export const superAdminRoles = [admin, announcementModerator, overviewModerator, reviewModerator];
 export const months = [ 'January', 'February', 'March', 'April', 'May', 'June',
                         'July', 'August', 'September', 'October', 'November', 'December'];
+export const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const numberOfMonth = 12;
+export const numberOfWeekDays = 7;

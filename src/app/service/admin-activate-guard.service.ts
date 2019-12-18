@@ -1,24 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate} from '@angular/router';
 import { Store } from '@ngrx/store';
-import {AppState} from '../state/app.state';
+import {State} from '../state/app.state';
 import {take} from 'rxjs/operators';
-
+import * as constants from '../state/constants';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminActivateGuardService implements CanActivate {
+export class AdminActivateGuardService implements CanActivate, OnDestroy {
 
-  constructor(private store: Store<AppState>) { }
-
-
+  constructor(private store: Store<State>) { }
+  subscriptionUserState: any;
+  ngOnDestroy(){
+    this.subscriptionUserState.unsubscribe();
+  }
   canActivate(): boolean {
     let access = false;
 
-    this.store.select('appReducer')
+    this.subscriptionUserState =
+    this.store.select('user')
     .pipe(take(1))
-    .subscribe( state => {  if ((state.roles.includes('ADMIN') ||
-                                 state.roles.includes('SUPER_ADMIN')) &&
+    .subscribe( state => {  if ((state.roles.includes(constants.admin) ||
+                                 state.roles.includes(constants.superAdmin)) &&
                                  state.login) {
       access = true;
     }} );

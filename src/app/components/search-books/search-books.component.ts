@@ -15,7 +15,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {SearchingHistoryService} from '../../service/searching-history.service';
 import {AccountService} from '../../service/account.service';
 import {takeWhileInclusive} from 'rxjs-take-while-inclusive';
-import {AppState} from "../../state/app.state";
+import {State} from "../../state/app.state";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
 
@@ -51,7 +51,7 @@ export class SearchBooksComponent implements OnInit, OnDestroy {
               private bookPresentationService: BookPresentationService,
               private accountService: AccountService,
               public bookService: BookService,
-              private store: Store<AppState>,
+              private store: Store<State>,
               private router: Router) {
   }
 
@@ -192,7 +192,7 @@ export class SearchBooksComponent implements OnInit, OnDestroy {
   }
 
   initIsLogged() {
-    this.isLoggedFieldLoadingSubscription = this.store.select('appReducer').subscribe(reducer => {this.isLogged = reducer.login;} );
+    this.isLoggedFieldLoadingSubscription = this.store.select('user').subscribe(reducer => {this.isLogged = reducer.login;} );
   }
 
   suggestBook() {

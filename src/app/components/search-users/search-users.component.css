@@ -10,16 +10,16 @@
   font-size: 12px;
 }
 
+
+.search-input{
+  height: auto;
+  width: 65vw;
+}
+
 .search-button:hover {
   background: rgba(0, 0, 255, 0.5);
   color: gray;
   outline-style: none;
-}
-
-.search-input {
-  height: 35px;
-  width: 65vw;
-  border: solid black 1px;
 }
 
 .simple-users-filter {

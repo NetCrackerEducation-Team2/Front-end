@@ -20,8 +20,8 @@ import {Book} from '../../models/book';
 import {UserBook} from '../../models/users-book';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
-import {UserState} from '../../state/app.reducer';
+import {State} from '../../state/app.state';
+import {UserState} from '../../state/user';
 
 @Component({
   selector: 'app-search-user-books',
@@ -60,7 +60,7 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
               private bookService: BookService,
               private usersBooksService: UsersBooksService,
               private route: ActivatedRoute,
-              private store: Store<AppState>) {
+              private store: Store<State>) {
   }
 
   ngOnInit() {
@@ -126,7 +126,7 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
     this.selectedPage.array = [];
 
     this.pageLoading = true;
-    this.isLoggedSubscription = this.store.select('appReducer').pipe(
+    this.isLoggedSubscription = this.store.select('user').pipe(
       flatMap((reducer: UserState) => {
         this.loggedUserId = reducer.id;
         const filteringParams = this.getUserBookFilteringParamsMap();

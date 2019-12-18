@@ -8,9 +8,9 @@ import {Announcement} from '../../models/announcement';
 import {AccountService} from '../../service/account.service';
 import {PublishAnnouncementService} from '../../service/publish-announcement.service';
 import {ListItemInfo} from '../../models/presentation-models/list-item-info';
-import {AppState} from '../../state/app.state';
+import {State} from '../../state/app.state';
 import {Store} from '@ngrx/store';
-import {UserState} from '../../state/app.reducer';
+import {UserState} from '../../state/user';
 
 @Component({
   selector: 'app-announcement-list',
@@ -30,7 +30,7 @@ export class AnnouncementListComponent implements OnInit {
               public datePipe: DatePipe,
               private announcementService: AnnouncementService,
               private accountService: AccountService,
-              private store: Store<AppState>
+              private store: Store<State>
   ) {
   }
 
@@ -38,7 +38,7 @@ export class AnnouncementListComponent implements OnInit {
     this.resetPaginator();
     this.getAnnouncements();
     this.getPublishedAnnouncements();
-    this.storeSubscription = this.store.select('appReducer').subscribe(reducer => {
+    this.storeSubscription = this.store.select('user').subscribe(reducer => {
       this.initIsUserProperty(reducer);
     });
 

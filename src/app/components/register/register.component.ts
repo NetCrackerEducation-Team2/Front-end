@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
   user = {fullName: '', email: '', password: ''};
   repeatPassword: '';
   isDownloading: boolean;
-
   isError: boolean;
   message: string;
   isRegistered: boolean;

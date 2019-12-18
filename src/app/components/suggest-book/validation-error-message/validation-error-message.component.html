@@ -1,2 +1,2 @@
-<small class="text-danger" *ngIf="in.touched && in.invalid">{{requiredMessage}}</small>
+<small class="text-danger" *ngIf="!in.dirty && in.touched && in.invalid">{{requiredMessage}}</small>
 <small class="text-danger" *ngIf="in.dirty && in.touched && in.invalid">{{invalidFormatMessage}}</small>

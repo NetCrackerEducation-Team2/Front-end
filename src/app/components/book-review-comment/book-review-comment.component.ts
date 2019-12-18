@@ -8,8 +8,8 @@ import {BookReviewComment} from '../../models/book-review-comment';
 import {of, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../state/app.state';
-import {UserState} from '../../state/app.reducer';
+import {State} from '../../state/app.state';
+import {UserState} from '../../state/user';
 
 @Component({
   selector: 'app-book-review-comment',
@@ -34,7 +34,7 @@ export class BookReviewCommentComponent implements OnInit, OnDestroy {
   constructor( private bookReviewCommentService: BookReviewCommentService,
                private accountService: AccountService,
                private route: ActivatedRoute,
-               private store: Store<AppState>) { }
+               private store: Store<State>) { }
 
   ngOnInit() {
     this.page = 1;
@@ -42,7 +42,7 @@ export class BookReviewCommentComponent implements OnInit, OnDestroy {
     this.ableToExpand = true;
     this.loading = true;
 
-    this.isLoggedSubscription = this.store.select('appReducer').pipe(
+    this.isLoggedSubscription = this.store.select('user').pipe(
       switchMap((reducer: UserState) => {
         this.isLogged = reducer.login;
         this.loggedUserId = reducer.id;
