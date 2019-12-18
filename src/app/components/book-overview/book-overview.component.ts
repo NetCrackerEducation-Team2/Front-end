@@ -61,8 +61,8 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
     this.bookService.getBookBySlug(slug).pipe(
       flatMap((resBook: Book) => {
         this.book = resBook;
-        this.authors = this.bookPresentationService.getBookGenresString(this.book, this.book.authors.length);
-        this.genres = this.bookPresentationService.getBookAuthorsString(this.book, this.book.genres.length);
+        this.authors = this.bookPresentationService.getBookAuthorsString(this.book, this.book.authors.length);
+        this.genres = this.bookPresentationService.getBookGenresString(this.book, this.book.genres.length);
         return this.bookOverviewService.getPublishedBookOverview(this.book.bookId);
       }),
       flatMap((resOverview: BookOverview) => {

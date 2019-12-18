@@ -67,7 +67,6 @@ export class PersonalBooklistComponent implements OnInit, OnDestroy {
         this.selectedPage.countPages = response.countPages;
         this.selectedPage.currentPage = response.currentPage;
         this.selectedPage.pageSize = response.pageSize;
-        console.log(JSON.stringify(response));
         return response.array;
       }),
       flatMap((userBook: UserBook[]) => {

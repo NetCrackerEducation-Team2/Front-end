@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Settings} from '../../../models/settings';
 import {SettingsService} from '../../../service/settings.service';
 
 @Component({

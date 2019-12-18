@@ -47,6 +47,7 @@ import {OverviewsManagementComponent} from './components/overviews-management/ov
 import {ReviewsManagementComponent} from './components/reviews-management/reviews-management.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
+import {SearchUserBooksComponent} from './components/search-user-books/search-user-books.component';
 
 const routes: Routes = [
   {
@@ -227,8 +228,14 @@ const routes: Routes = [
 
   },
   {
-    path: 'personal-list',
+    path: 'personal-list1',
     component: PersonalBooklistComponent,
+    // canActivate: [UserActivateGuardService]
+
+  },
+  {
+    path: 'personal-list',
+    component: SearchUserBooksComponent,
     // canActivate: [UserActivateGuardService]
 
   },
