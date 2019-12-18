@@ -4,7 +4,7 @@ import {User} from '../../models/user';
 import {BookReview} from '../../models/book-review';
 import {BookReviewService} from '../../service/book-review.service';
 import {AccountService} from '../../service/account.service';
-import {flatMap, map} from 'rxjs/operators';
+import {flatMap, map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-review',
@@ -39,6 +39,7 @@ export class BookReviewComponent implements OnInit {
   getReviews(): void {
     this.prepareComments(this.reviews.length + this.pageSize);
     const tmpReviews: BookReview[] = [];
+    const addedReviews: { [reviewId: number]: boolean; } = { };
     this.bookReviewService.getBookReview(this.bookId, this.page, this.pageSize).pipe(
       map((respPage: Page<BookReview>) => {
         return respPage.array;
@@ -50,15 +51,20 @@ export class BookReviewComponent implements OnInit {
         }
         return reviewList;
       }),
-      flatMap((review: BookReview) => {
+      switchMap((review: BookReview) => {
         tmpReviews.push(review);
         return this.accountService.getUserById(review.userId);
       }),
       map((author: User) => {
-        const review = tmpReviews.filter(value => value.userId === author.userId)[0];
-        this.authors[author.userId] = author;
-        this.reviews.push(review);
-        this.loading = false;
+        const reviews = tmpReviews.filter(value => value.userId === author.userId);
+        for (const review of reviews) {
+          if (addedReviews[review.bookReviewId] == null) {
+            addedReviews[review.bookReviewId] = true;
+            this.authors[author.userId] = author;
+            this.reviews.push(review);
+            this.loading = false;
+          }
+        }
       }),
     ).subscribe();
   }

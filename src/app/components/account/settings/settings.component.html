@@ -1,0 +1,31 @@
+<!--  User settings bar-->
+<div class="settings_bar">
+  <h2 class="header">Settings</h2>
+  <div class="settings_switch" *ngIf="settings">
+    <span>Disable notifications </span>
+    <ui-switch [(ngModel)]="settings.disableNotifications"></ui-switch>
+  </div>
+  <div class="settings_switch" *ngIf="settings">
+    <span class="settings_switch_content">Make private </span>
+    <ui-switch [(ngModel)]="settings.makePrivate" class="settings_switch_content"></ui-switch>
+  </div>
+  <div class="settings_switch" *ngIf="settings">
+    <span class="settings_switch_content">Show my favourite books </span>
+    <ui-switch [(ngModel)]="settings.showMyFavouriteBooks" class="settings_switch_content"></ui-switch>
+  </div>
+  <div class="settings_switch" *ngIf="settings">
+    <span class="settings_switch_content">Show my announcements </span>
+    <ui-switch [(ngModel)]="settings.showMyAnnouncements" class="settings_switch_content"></ui-switch>
+  </div>
+  <div class="settings_switch" *ngIf="settings">
+    <span class="settings_switch_content">Show my book reviews </span>
+    <ui-switch [(ngModel)]="settings.showMyBookReviews" class="settings_switch_content"></ui-switch>
+  </div>
+  <div class="settings_switch" *ngIf="settings">
+    <span class="settings_switch_content">Show my book overviews</span>
+    <ui-switch [(ngModel)]="settings.showMyBookOverviews" class="settings_switch_content"></ui-switch>
+  </div>
+  <div class="update_bar">
+    <button class="button" mat-flat-button color="primary" (click)="updateSettings()">Update</button>
+  </div>
+</div>

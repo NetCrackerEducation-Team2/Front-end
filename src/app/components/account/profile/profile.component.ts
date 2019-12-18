@@ -1,7 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {delay, tap} from 'rxjs/operators';
+import {SettingsService} from '../../../service/settings.service';
+import {ConfirmDeleteFromFriendsDialog} from "../../user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component";
+import {flatMap} from "rxjs/operators";
+import {EMPTY} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {SettingsDialogComponent} from "./settigns-dialog/settings-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +17,12 @@ export class ProfileComponent implements OnInit {
   profile = {userId: null, fullName: null, email: null, createdAt: null, photoPath: ''};
   isLogged: boolean;
 
+
   constructor(private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
-              private router: Router) {
+              private router: Router,
+              private settingsService: SettingsService,
+              private dialog: MatDialog) {
   }
 
   private setDefaultAvatar() {
@@ -60,6 +68,7 @@ export class ProfileComponent implements OnInit {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
   }
+
   canChat() {
     const currentUser = this.accountService.getCurrentUser();
     return currentUser && this.profile.userId === currentUser.userId;
@@ -69,4 +78,10 @@ export class ProfileComponent implements OnInit {
     this.isLogged = this.accountService.getCurrentUser() != null;
   }
 
+  openSettings() {
+    this.dialog.open(SettingsDialogComponent, {
+      width: '400px',
+      height: '370px'
+    });
+  }
 }

@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Message} from '../../models/message';
-import {SocketService} from '../../service/socket.service';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
-import {apiUrls} from '../../../api-urls';
 import {User} from '../../models/user';
 import {AccountService} from '../../service/account.service';
-import {Observable, Subscription} from 'rxjs';
+import {FriendService} from '../../service/friend.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ChatService} from '../../service/chat.service';
+import {Router} from '@angular/router';
+import {Chat} from '../../models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -16,83 +14,88 @@ import {Observable, Subscription} from 'rxjs';
 })
 
 export class ChatComponent implements OnInit {
-  readonly serverUrl: string;
-  isLoaded = false;
-  private stompClient;
-  form: FormGroup;
-  userForm: FormGroup;
-  messages: Message[] = [];
   fullName: string;
   email: string;
-  userId: number;
-
+  isLoaded = false;
+  userCurrentId: number;
+  userFriendId: number;
   users: User[] = [];
+  chats: Chat[] = [];
+  isErrorChooseGroup = false;
+  isErrorCreate = false;
+  chatName: string;
+  chatGroupName: string;
+  usersId: number[];
 
-  constructor(private socketService: SocketService,
-              private accountService: AccountService) {
-    this.serverUrl = apiUrls.API_SOCKET;
+  constructor(private accountService: AccountService,
+              private friendsService: FriendService,
+              private chatService: ChatService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.getCurrentUser();
     this.findUsersById();
-    this.form = new FormGroup({
-      message: new FormControl(null, [Validators.required])
-    });
+    this.getGroupsChat();
+    this.isLoaded = true;
   }
 
   getCurrentUser() {
     const currentUser = this.accountService.getCurrentUser();
     this.fullName = currentUser.fullName;
     this.email = currentUser.email;
-    this.userId = currentUser.userId;
+    this.userCurrentId = currentUser.userId;
   }
 
   findUsersById() {
-    this.accountService.getUsersById(this.userId).subscribe(res => this.users = res);
+    this.friendsService.getFriendsById(this.userCurrentId).subscribe(res => this.users = res);
   }
 
-  sendMessage() {
-    if (this.form.valid) {
-      const message: Message = {
-        message: this.form.value.message, fromName: this.fullName,
-        fromEmail: this.email
-      };
-      console.log(message);
-      this.socketService.sendMessage(message).subscribe(res => {
-        console.log(res);
-      });
+  chooseGroupChat(chatName: string) {
+    this.isErrorChooseGroup = false;
+    this.isErrorCreate = false;
+    if (typeof chatName !== 'undefined') {
+      this.router.navigate(['/message/groupChat', chatName]);
+    } else {
+      this.isErrorChooseGroup = true;
     }
   }
 
-  chooseChat(chooseChatId: number) {
-    this.connect();
-    this.socketService.getMessages(this.userId, chooseChatId).subscribe(result  =>  {console.log(result); });
-    console.log(this.messages);
+  getGroupsChat() {
+    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => {this.chats = res; });
   }
 
-  connect() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    const that = this;
-    this.stompClient.connect({}, () => {
-      that.isLoaded = true;
-      that.openSocket();
-    });
+  createChat(friendId: number) {
+    this.isErrorCreate = false;
+    this.isErrorChooseGroup = false;
+    if (typeof friendId === 'undefined') {
+      this.isErrorCreate = true;
+    } else {
+      this.chatService.createChat(friendId, this.userCurrentId).subscribe(
+        () => {
+          this.router.navigate(['/message', friendId]);
+        }, (error: HttpErrorResponse) => {
+          this.isErrorCreate = false;
+        }
+      );
+    }
   }
 
-  openSocket() {
-    this.stompClient.subscribe('/socket-publisher', (message) => {
-      this.handleResult(message);
-    });
-  }
-
-  handleResult(message) {
-    console.log(message.body);
-    if (message.body) {
-      const messageResult: Message = JSON.parse(message.body);
-      console.log(messageResult);
-      this.messages.push(messageResult);
+  createGroupChat(usersId: number[]) {
+    this.isErrorChooseGroup = false;
+    this.isErrorCreate = false;
+    if (typeof usersId === 'undefined') {
+      this.isErrorCreate = true;
+    } else if (typeof this.chatName === 'undefined') {
+      this.isErrorCreate = true;
+    } else {
+      usersId.push(this.userCurrentId);
+      this.chatService.createGroupChat(usersId, this.chatName).subscribe(
+        () => {
+          this.router.navigate(['/message/groupChat', this.chatName]);
+        }, (error: HttpErrorResponse) => {
+        }
+      );
     }
   }
 }

@@ -6,9 +6,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import {
+  MatBadgeModule,
   MatButtonToggleModule,
   MatExpansionModule,
   MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -37,10 +40,6 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material';
-// import { BooksManagementComponent } from './components/books-management/books-management.component';
-// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
-// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
@@ -55,7 +54,6 @@ import {ReviewsManagementComponent} from './components/reviews-management/review
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
@@ -95,6 +93,9 @@ import {RecommendationsComponent} from './components/recommendations/recommendat
 import {NotificationMenuComponent} from './components/notification/notification-menu/notification-menu.component';
 import {PersonalBooklistComponent} from './components/personal-booklist/personal-booklist.component';
 import {PersonalBookItemComponent} from './components/personal-book-item/personal-book-item.component';
+import {ListItemPublishComponent} from './components/presentational/list-item-publish/list-item-publish.component';
+import {MessageComponent} from './components/message/message.component';
+import {MessageGroupComponent} from './components/message-group/message-group.component';
 import {CreateAchievementComponent} from './components/create-achievement/create-achievement.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
@@ -102,6 +103,16 @@ import {ShowHideComponent} from './components/shared/show-hide/show-hide.compone
 import {OptionsScrollDirective} from './directives/options-scroll.directive';
 import { MomentPipe } from './service/moment.pipe';
 import { SelectorComponent } from './components/calendar/selector/selector.component';
+import {RecaptchaModule} from 'ng-recaptcha';
+import {UiSwitchModule} from 'ngx-ui-switch';
+import {SettingsComponent} from './components/account/settings/settings.component';
+import {DateAgoPipe} from './pipes/date-ago.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
+import {FriendRequestNotificationItemComponent} from './components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component';
+import {ValidationErrorMessageComponent} from './components/suggest-book/validation-error-message/validation-error-message.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {SettingsDialogComponent} from "./components/account/profile/settigns-dialog/settings-dialog.component";
 
 @NgModule({
   declarations: [
@@ -115,6 +126,7 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    SettingsComponent,
     EditComponent,
     ChangePasswordComponent,
     AchievementsComponent,
@@ -128,15 +140,11 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
     RecoverComponent,
     AdminComponent,
     ReviewsManagementComponent,
-    // BooksManagementComponent,
     AnnouncementsManagementComponent,
     CreateBookComponent,
-    // CreateModeratorComponent,
-    // CreateAdminComponent,
     CreateAnnouncementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    // OverviewItemComponent,
     ActivateAccountComponent,
     ListItemComponent,
     AddAnnouncementComponent,
@@ -175,12 +183,20 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
     PersonalBooklistComponent,
     PersonalBookItemComponent,
     RecommendationsComponent,
+    ListItemPublishComponent,
+    MessageComponent,
+    MessageGroupComponent,
     ShowHideComponent,
     OptionsScrollDirective,
     CreateAchievementComponent,
     ShowHideComponent,
     MomentPipe,
-    SelectorComponent
+    SelectorComponent,
+    DateAgoPipe,
+    ConfirmDeleteFromFriendsDialog,
+    FriendRequestNotificationItemComponent,
+    ValidationErrorMessageComponent,
+    SettingsDialogComponent
   ],
   imports: [
     TooltipModule,
@@ -203,6 +219,7 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
     MatTabsModule,
     MatSidenavModule,
     MatSelectModule,
+    MatBadgeModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
@@ -220,17 +237,16 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
     CommonModule,
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
-    // MatTooltipModule,
     MatButtonToggleModule,
+    MatListModule,
     MatTooltipModule,
-    // BrowserModule,
-    // BrowserAnimationsModule,
-    // AppRoutingModule,
-    // ToastrModule.forRoot({ timeOut: 3000 }),
     ReactiveFormsModule,
-    // HttpClientModule
     MatTreeModule,
     MatRadioModule,
+    RecaptchaModule.forRoot(),
+    UiSwitchModule,
+    MatDialogModule,
+    ScrollingModule,
   ],
   exports: [
     BrowserModule,
@@ -258,14 +274,16 @@ import { SelectorComponent } from './components/calendar/selector/selector.compo
       useClass: TokenInterceptorService,
       multi: true
     },
-    //  SocketService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
     }
   ],
-
+  entryComponents: [
+    ConfirmDeleteFromFriendsDialog,
+    SettingsDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

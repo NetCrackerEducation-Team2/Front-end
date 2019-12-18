@@ -22,7 +22,7 @@ export class RecoverComponent implements OnInit {
     this.authService.getRecoveryPassword(link)
       .subscribe(
         () =>
-          this.message = 'New password sent to your password. ',
+          this.message = 'New password sent to your email. ',
         () => {
           this.message = 'Invalid recovery link';
           this.isError = true;

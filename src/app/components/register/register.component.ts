@@ -16,11 +16,12 @@ export class RegisterComponent implements OnInit {
   isError: boolean;
   message: string;
   isRegistered: boolean;
+  resolvedCaptcha: boolean;
+  siteKey: string;
 
-
-  constructor(private authService: AuthenticationService, private router: Router) {
-    this.isRegistered = false;
-    this.isError = false;
+  constructor(private authService: AuthenticationService) {
+    this.isError = this.resolvedCaptcha = this.isRegistered = false;
+    this.siteKey = '6LdAsMYUAAAAACmTbwvEd_H-nE9jnhVRF_zoo7WQ';
   }
 
   ngOnInit() {
@@ -51,7 +52,8 @@ export class RegisterComponent implements OnInit {
           console.log(this.isRegistered);
           this.isError = false;
         },
-        (err: HttpErrorResponse) => {
+        (err: any) => {
+          console.log('Error', err);
           this.isError = true;
           if (typeof err.error === 'string') {
             this.message = err.error;

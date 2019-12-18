@@ -20,8 +20,9 @@ import {SnackBarService} from '../../../service/presentation-services/snackBar.s
 export class NotificationListComponent implements OnInit {
   notifications: Notification[];
   pageLoading: boolean;
-  emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
-  selectedPage: Page<ListItemInfo> = new Page<ListItemInfo>();
+  emptyPage: Page<FullNotification> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
+  selectedPage: Page<FullNotification> = new Page<FullNotification>();
+
   constructor(private notificationService: NotificationService,
               public datePipe: DatePipe,
               private accountService: AccountService,
@@ -38,9 +39,7 @@ export class NotificationListComponent implements OnInit {
   getNotifications(): void {
     this.pageLoading = true;
     this.notificationService.getNotifications(this.selectedPage.currentPage, this.selectedPage.pageSize)
-      .pipe(map(page => {
-        return this.mapPage(page);
-      }))
+      .pipe()
       .subscribe(selectedPage => {
         this.selectedPage = selectedPage;
         this.pageLoading = false;
@@ -76,6 +75,29 @@ export class NotificationListComponent implements OnInit {
         }
       })
     };
+  }
+
+  private mapNotification(notification: FullNotification): ListItemInfo {
+    if (notification.notificationObject.notificationType.notificationTypeName === 'invitations') {
+      return this.mapFriendInvitationNotification(notification);
+    } else {
+      return {
+        title: null,
+        subtitle: this.datePipe.transform(notification.notificationObject.creationTime, 'd LLLL yyyy, h:mm'),
+        photoPath: null,
+        publish: null,
+        contentElements: [
+          {
+            contentInfoId: 1,
+            title: null,
+            content: notification.notificationObject.notificationMessage.notificationMessageText
+          },
+        ],
+        actionElements: null,
+        listItemCallback: null,
+        additionalParams: null
+      };
+    }
   }
 
   private mapFriendInvitationNotification(friendInvitationNotification: FullNotification): ListItemInfo {

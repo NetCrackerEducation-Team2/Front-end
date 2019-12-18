@@ -3,6 +3,10 @@ import {User} from '../../models/user';
 import {FriendStatus} from '../../models/friend-status';
 import {FriendService} from '../../service/friend.service';
 import {SnackBarService} from '../../service/presentation-services/snackBar.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDeleteFromFriendsDialog} from './confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
+import {flatMap} from 'rxjs/operators';
+import {Observable, EMPTY} from 'rxjs';
 
 
 @Component({
@@ -14,7 +18,7 @@ export class UserItemComponent implements OnInit {
   @Input() profile: User;
   friendStatus: FriendStatus;
 
-  constructor(private friendService: FriendService, private snackBarService: SnackBarService) {
+  constructor(private friendService: FriendService, private snackBarService: SnackBarService, private dialog: MatDialog) {
   }
 
   private setDefaultAvatar() {
@@ -46,8 +50,22 @@ export class UserItemComponent implements OnInit {
   }
 
   deleteFromFriends() {
-    console.log('Sending delete from friends request');
-    this.friendService.deleteFromFriends(this.profile.userId).subscribe(response => {
+    const confirmationDialogRef = this.dialog.open(ConfirmDeleteFromFriendsDialog, {
+      width: '400px',
+      height: '150px',
+      data: {username: this.profile.fullName}
+    });
+    confirmationDialogRef.afterClosed().pipe(
+      flatMap(
+        result => {
+          if (result) {
+            return this.friendService.deleteFromFriends(this.profile.userId);
+          } else {
+            return EMPTY;
+          }
+        }
+      )
+    ).subscribe(response => {
       if (response) {
         this.friendStatus.friend = false;
         this.friendStatus.awaitFriendRequestConfirmation = false;
@@ -56,3 +74,4 @@ export class UserItemComponent implements OnInit {
     });
   }
 }
+

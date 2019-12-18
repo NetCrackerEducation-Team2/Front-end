@@ -36,7 +36,7 @@ export class BookOverviewService {
       );
   }
 
-  getAllBooksOverviews(page: number, pageSize: number): Observable<any> {
+  getAllBooksOverviews(page: number, pageSize: number): Observable<Page<BookOverview>> {
     let paramsString: string;
     paramsString = this.checkPaginationService.checkPagination(page, pageSize);
     return this.http.get(this.overviewsUrl + paramsString)

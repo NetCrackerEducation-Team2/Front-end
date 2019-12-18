@@ -3,6 +3,7 @@ import {AuthorService} from '../../service/author.service';
 import {GenreService} from '../../service/genre.service';
 import {BookService} from '../../service/book.service';
 import {Router} from '@angular/router';
+import {SnackBarService} from "../../service/presentation-services/snackBar.service";
 
 @Component({
   selector: 'app-suggest-book',
@@ -22,21 +23,45 @@ export class SuggestBookComponent implements OnInit {
     isbn: null,
     publishingHouse: null
   };
+  awaitingResponse: boolean;
 
   constructor(private authorService: AuthorService,
               private genreService: GenreService,
               private bookService: BookService,
-              private router: Router) {
+              private router: Router,
+              private snackBarService: SnackBarService) {
   }
 
   ngOnInit() {
+    this.awaitingResponse = false;
   }
 
 
   submit() {
-      this.bookService.suggestBook(this.book).subscribe((response) => {
-      this.router.navigate(['/']);
+    this.awaitingResponse = true;
+    this.prepareBook();
+    this.bookService.suggestBook(this.book).subscribe((response) => {
+      this.awaitingResponse = false;
+      if (response) {
+        this.snackBarService.openSuccessSnackBar('You book has been sent to moderators. Thank you!');
+        this.router.navigate(['/']);
+      }
     });
+  }
+
+  private prepareBook() {
+    this.book.authors.map(a => {
+      if (a.label) {
+        a.fullName = a.label;
+      }
+      return a;
+    });
+    this.book.genres.map(g => {
+      if (g.label) {
+        g.name = g.label;
+      }
+    });
+    return this.book;
   }
 
   searchGenres(event) {
@@ -44,6 +69,7 @@ export class SuggestBookComponent implements OnInit {
       this.genres = genres;
     });
   }
+
   searchAuthors(event) {
       this.authorService.findAuthors(event.term).subscribe(authors => {
       this.authors = authors;

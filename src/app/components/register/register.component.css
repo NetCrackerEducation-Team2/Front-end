@@ -8,7 +8,6 @@
   font-size: 18px;
   margin: 10px;
 }
-
 .submit-form {
   display: flex;
   flex-flow: column nowrap;
@@ -52,7 +51,7 @@
 }
 
 .nav-footer {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -67,13 +66,14 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  margin: 5px 0 15px;
 }
 
 .text-danger {
   color: red;
 }
 
-.center{
+.center {
   text-align: center;
 }
 

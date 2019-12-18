@@ -2,8 +2,10 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import {take} from 'rxjs/operators';
 import * as constants from '../../../state/constants';
-
-
+import {AccountService} from '../../../service/account.service';
+import {User} from '../../../models/user';
+import {Store} from '@ngrx/store';
+import {State} from '../../../state/app.state';
 @Component({
   selector: 'app-edit-admin-moderator',
   templateUrl: './edit-admin-moderator.component.html',
@@ -15,25 +17,37 @@ export class EditAdminModeratorComponent implements OnInit {
   repeatPassword: '';
   isError = false;
   isEdited = false;
+  email: string;
 
-  constructor(private admModerService: AdminModeratorService) {
+
+  constructor(private admModerService: AdminModeratorService, private store: Store<State>,
+              private accountService: AccountService) {
   }
 
 
   ngOnInit() {
+    this.getCurrentUser();
   }
 
   checkPasswords(): boolean {
     return this.repeatPassword === this.user.password;
   }
 
+  getCurrentUser() {
+    const currentUser = this.accountService.getCurrentUser();
+    this.email = currentUser.email;
+  }
+
   editUser(): void {
-
-    this.admModerService.
-    updateAdminModer(this.user).pipe(take(1)).
-    subscribe(resp => {this.isEdited = true; this.isError = false; },
-              error => {this.isError = true; this.isEdited = false; });
-
+    if (this.email !== this.user.email) {
+      this.admModerService.
+      updateAdminModer(this.user).pipe(take(1)).
+      subscribe(resp => {this.isEdited = true; this.isError = false; },
+                error => {this.isError = true; this.isEdited = false; });
+    } else {
+      this.isError = true;
+      this.isEdited = false;
+    }
   }
 
   change(event): void {

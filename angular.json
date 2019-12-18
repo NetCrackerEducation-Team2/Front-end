@@ -45,7 +45,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/fonts/font.css"
+              "src/assets/fonts/font.css",
+              "./node_modules/ngx-ui-switch/ui-switch.component.css"
             ],
             "scripts": []
           },
