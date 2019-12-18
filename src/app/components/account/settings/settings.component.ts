@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Settings} from '../../../models/settings';
 import {SettingsService} from '../../../service/settings.service';
 import {SnackBarService} from '../../../service/presentation-services/snackBar.service';
@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit, OnDestroy {
+  @Input() onSaveCallback: () => void;
   settings: Settings;
 
   loadSettingsSubscription: Subscription;
@@ -42,6 +43,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.updateSettingsSubscription = this.settingsService.updateUserSettings(this.settings).subscribe(response => {
       if (response) {
         this.snackBarService.openSuccessSnackBar('Settings successfully updated');
+        this.onSaveCallback();
       }
     });
   }
