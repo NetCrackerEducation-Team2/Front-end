@@ -228,16 +228,9 @@ const routes: Routes = [
 
   },
   {
-    path: 'personal-list1',
-    component: PersonalBooklistComponent,
-    // canActivate: [UserActivateGuardService]
-
-  },
-  {
     path: 'personal-list',
     component: SearchUserBooksComponent,
     // canActivate: [UserActivateGuardService]
-
   },
   // routing to NotFoundComponent must be in the end
   {

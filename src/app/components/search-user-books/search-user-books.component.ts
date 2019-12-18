@@ -43,7 +43,6 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   genresControl = new FormControl();
   filteredAuthors$: Observable<Author[]>;
   filteredGenres$: Observable<Genre[]>;
-  emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: []};
   selectedPage: Page<ListItemInfo>;
   pageLoading: boolean;
   window: Window = window;
@@ -158,7 +157,9 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   }
 
   private resetPaginator(): void {
-    this.selectedPage = this.emptyPage;
+    this.usersBooks = [];
+    this.books = [];
+    this.selectedPage = {currentPage: 0, pageSize: 5, countPages: 0, array: []};
   }
 
   onAuthorScroll() {
