@@ -1,24 +1,41 @@
 <div class="add-announcement-container">
-  <form class="submit-form" (ngSubmit)="sendAnnouncement()">
+  <form class="submit-form" (ngSubmit)="sendAnnouncement()" #postAnnouncementForm="ngForm">
     <div class="submit-row">
       <div>
         <mat-form-field>
-          <input type="text" id="announcement_subject" name="announcement_subject" matInput placeholder="Enter announcement subject"
-                 [(ngModel)]="announcement.title">
+          <input #announcementSubject="ngModel" required type="text" id="announcement_subject" name="announcement_subject" matInput placeholder="Enter announcement subject"
+                 [(ngModel)]="announcement.title" min="3">
         </mat-form-field>
       </div>
     </div>
     <div class="submit-row">
       <div>
         <mat-form-field>
-        <textarea type="text" name="announcement_body" id="announcement_body" matInput placeholder="Enter announcement content" rows="6"
-                  [(ngModel)]="announcement.description"></textarea>
+        <textarea #announcementBody="ngModel" required type="text" name="announcement_body" id="announcement_body" matInput placeholder="Enter announcement content" rows="6"
+                  [(ngModel)]="announcement.description" minlength="20"></textarea>
         </mat-form-field>
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="nav-footer">
-      <button type="submit" mat-flat-button color="primary">Send</button>
+      <div class="messages">
+        <small class="text-danger" *ngIf="!announcementSubject.dirty && announcementSubject.touched && announcementSubject.invalid">Announcement subject required</small>
+        <small class="text-danger" *ngIf="announcementSubject.dirty && announcementSubject.touched && announcementSubject.invalid">
+          Announcement subject must consists of at least 3 symbols
+        </small>
+        <small class="text-danger" *ngIf="!announcementBody.dirty && announcementBody.touched && announcementBody.invalid">
+          Announcement content required
+        </small>
+        <small class="text-danger" *ngIf="announcementBody.dirty && announcementBody.touched && announcementBody.invalid">
+          Announcement body should consists of at least 20 symbols
+        </small>
+      </div>
+      <div class="button-card">
+        <button type="submit" mat-flat-button color="primary"
+                [disabled]="!postAnnouncementForm.valid || awaitingResponse">
+          Send
+        </button>
+      </div>
     </div>
   </form>
 </div>

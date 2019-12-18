@@ -40,7 +40,8 @@ export const apiUrls = {
     API_FRIEND_REQUEST: environment.BASE_URL + '/api/friends/friendRequest',
     API_GET_FRIENDS: environment.BASE_URL + '/api/friends/',
     ACCEPT_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/accept/',
-    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/'
+    DECLINE_FRIEND_REQUEST: environment.BASE_URL + '/api/friend/friendRequest/decline/',
+    API_FRIEND_INVITATION_STATUS: environment.BASE_URL + '/api/friends/friendRequestStatus'
   },
   API_SETTINGS: environment.BASE_URL + '/api/settings',
   API_REVIEW: environment.BASE_URL + '/api/book-review',

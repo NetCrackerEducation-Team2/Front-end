@@ -1,0 +1,8 @@
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.center {
+  text-align: center;
+}
