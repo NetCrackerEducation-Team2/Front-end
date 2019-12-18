@@ -39,7 +39,6 @@ export class SuggestBookComponent implements OnInit {
   submit() {
     this.awaitingResponse = true;
     this.prepareBook();
-    console.log('Suggesting book ', this.book);
     this.bookService.suggestBook(this.book).subscribe((response) => {
       this.awaitingResponse = false;
       if (response) {
