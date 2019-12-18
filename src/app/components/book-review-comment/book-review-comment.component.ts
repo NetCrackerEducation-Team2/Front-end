@@ -42,23 +42,6 @@ export class BookReviewCommentComponent implements OnInit, OnDestroy {
     this.ableToExpand = true;
     this.loading = true;
 
-    this.isLoggedSubscription = this.store.select('user').pipe(
-      switchMap((reducer: UserState) => {
-        this.isLogged = reducer.login;
-        this.loggedUserId = reducer.id;
-        if (this.isLogged) {
-          return this.accountService.getUserById(reducer.id);
-        }
-        const emptyUser: User = {userId: -1, email: '', photoPath: '', fullName: '', createdAt: '', enabled: false, roles: {name: ''}};
-        return of(emptyUser);
-      }),
-      map((user: User) => {
-        if (user.userId !== -1) {
-          this.loggedUser = user;
-        }
-      })
-    ).subscribe();
-
     this.getReviewComment();
   }
 
@@ -72,7 +55,23 @@ export class BookReviewCommentComponent implements OnInit, OnDestroy {
     this.loading = true;
     const tmpComments: BookReviewComment[] = [];
     const doneComments = {};
-    this.bookReviewCommentService.getBookReviewComments(this.reviewId, this.page, this.pageSize).pipe(
+
+    this.isLoggedSubscription = this.store.select('user').pipe(
+      switchMap((reducer: UserState) => {
+        this.isLogged = reducer.login;
+        this.loggedUserId = reducer.id;
+        if (this.isLogged) {
+          return this.accountService.getUserById(reducer.id);
+        }
+        const emptyUser: User = {userId: -1, email: '', photoPath: '', fullName: '', createdAt: '', enabled: false, roles: {name: ''}};
+        return of(emptyUser);
+      }),
+      switchMap((user: User) => {
+        if (user.userId !== -1) {
+          this.loggedUser = user;
+        }
+        return this.bookReviewCommentService.getBookReviewComments(this.reviewId, this.page, this.pageSize);
+      }),
       map((respPage: Page<BookReviewComment>) => {
         return respPage.array;
       }),
@@ -96,7 +95,7 @@ export class BookReviewCommentComponent implements OnInit, OnDestroy {
             doneComments[comment.commentId] = true;
             comment.author = author;
             this.reviewComments.unshift(comment);
-        });
+          });
       }),
     ).subscribe();
   }
