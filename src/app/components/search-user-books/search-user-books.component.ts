@@ -254,19 +254,19 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
   makeFavoriteMark(item: ListItemInfo, userBookId: number, value: boolean): void {
     this.usersBooksService.setFavoriteMark(userBookId, value)
       .subscribe((userBook: UserBook) => {
-        this.search();
+        this.searchPage();
       });
   }
   makeReadMark(item: ListItemInfo, userBookId: number, value: boolean): void {
     this.usersBooksService.setReadMark(userBookId, value)
       .subscribe((userBook: UserBook) => {
-        this.search();
+        this.searchPage();
       });
   }
   removeFromList(userBookId: number): void {
     this.usersBooksService.deleteUsersBook(userBookId)
       .subscribe(() => {
-        this.search();
+        this.searchPage();
       });
   }
 }
