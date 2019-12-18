@@ -58,7 +58,8 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      
+      <mat-checkbox [(ngModel)]="readMark" (change)="search()">Read marked</mat-checkbox>
+      <mat-checkbox [(ngModel)]="favoriteMark" (change)="search()">Favorite marked</mat-checkbox>
 
     </div>
   </mat-expansion-panel>

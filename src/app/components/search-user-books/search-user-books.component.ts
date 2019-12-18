@@ -116,6 +116,12 @@ export class SearchUserBooksComponent implements OnInit, OnDestroy {
     this.search();
   }
   search(): void {
+    if (this.readMark === false) {
+      this.readMark = null;
+    }
+    if (this.favoriteMark === false) {
+      this.favoriteMark = null;
+    }
     this.resetPaginator();
     this.searchPage();
   }
