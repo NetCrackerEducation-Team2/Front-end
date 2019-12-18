@@ -25,13 +25,11 @@
     <button *ngIf="isLogged" class="button" mat-flat-button color="primary" [routerLink]="['/search-users']">Search for
       friends
     </button>
+    <button *ngIf="isLogged" class="button" mat-flat-button color="primary" (click)="openSettings()">Settings</button>
     <button *ngIf="canChat()" class="button" mat-flat-button color="primary" [routerLink]="['chat']">
       Chat
     </button>
   </div>
-
-  <app-user-settings></app-user-settings>
-
   <mat-divider></mat-divider>
   <app-achievements *ngIf="profile.userId; else downloadingSpinner"
                     [profileId]="this.profile.userId"></app-achievements>
