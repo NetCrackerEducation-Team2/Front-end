@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 // tslint:disable-next-line:component-class-suffix
 export class ConfirmDeleteFromFriendsDialog implements OnInit {
-  private username: string;
+  username: string;
   constructor(
     public dialogRef: MatDialogRef<ConfirmDeleteFromFriendsDialog>,
     @Inject(MAT_DIALOG_DATA) public data: {username: string}) {}

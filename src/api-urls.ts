@@ -75,7 +75,9 @@ export const apiUrls = {
     API_GET_CHAT: environment.BASE_URL + '/api/ws/getChat',
     API_GROUP_CHAT_CREATE: environment.BASE_URL + '/api/ws/create/groupChat',
     API_GET_GROUP_MESSAGES: environment.BASE_URL + '/api/ws/getGroupMessages',
-    API_GET_GROUP_CHATS: environment.BASE_URL + '/api/ws/getGroupChats'
+    API_GET_GROUP_CHATS: environment.BASE_URL + '/api/ws/getGroupChats',
+    API_GET_CHAT_USERS: environment.BASE_URL + '/api/ws/getChatUsers',
+    API_CHAT_ADD_USER: environment.BASE_URL + '/api/ws/addChatUser'
   },
   API_USERS_ID: environment.BASE_URL + '/api/users/',
   API_ACHIEVEMENT: {

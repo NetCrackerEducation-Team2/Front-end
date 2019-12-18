@@ -39,9 +39,6 @@ import {EditComponent} from './components/account/edit/edit.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-// import { BooksManagementComponent } from './components/books-management/books-management.component';
-// import { CreateModeratorComponent } from './components/create-moderator/create-moderator.component';
-// import { CreateAdminComponent } from './components/create-admin/create-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {OverviewsManagementComponent} from './components/overviews-management/overviews-management.component';
@@ -56,7 +53,6 @@ import {ReviewsManagementComponent} from './components/reviews-management/review
 import {ChangePasswordComponent} from './components/account/change-password/change-password.component';
 import {ActivateAccountComponent} from './components/activate-account/activate-account.component';
 import {TokenInterceptorService} from './service/token-interceptor.service';
-// import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import {ListItemComponent} from './components/presentational/list-item/list-item.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {BookOverviewComponent} from './components/book-overview/book-overview.component';
@@ -111,6 +107,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDeleteFromFriendsDialog} from './components/user-item/confirm-delete-from-friends-dialog/confirm-delete-from-friends-dialog.component';
 import {FriendRequestNotificationItemComponent} from "./components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component";
 import { SearchUserBooksComponent } from './components/search-user-books/search-user-books.component';
+import {FriendRequestNotificationItemComponent} from './components/notification/notification-list/friend-request-notification-item/friend-request-notification-item.component';
+import {ValidationErrorMessageComponent} from './components/suggest-book/validation-error-message/validation-error-message.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {SettingsDialogComponent} from "./components/account/profile/settigns-dialog/settings-dialog.component";
 
 @NgModule({
   declarations: [
@@ -138,15 +138,11 @@ import { SearchUserBooksComponent } from './components/search-user-books/search-
     RecoverComponent,
     AdminComponent,
     ReviewsManagementComponent,
-    // BooksManagementComponent,
     AnnouncementsManagementComponent,
     CreateBookComponent,
-    // CreateModeratorComponent,
-    // CreateAdminComponent,
     CreateAnnouncementComponent,
     ActivateAccountComponent,
     OverviewListComponent,
-    // OverviewItemComponent,
     ActivateAccountComponent,
     ListItemComponent,
     AddAnnouncementComponent,
@@ -194,6 +190,8 @@ import { SearchUserBooksComponent } from './components/search-user-books/search-
     DateAgoPipe,
     ConfirmDeleteFromFriendsDialog,
     FriendRequestNotificationItemComponent,
+    ValidationErrorMessageComponent,
+    SettingsDialogComponent,
     SearchUserBooksComponent
   ],
   imports: [
@@ -242,7 +240,8 @@ import { SearchUserBooksComponent } from './components/search-user-books/search-
     MatRadioModule,
     RecaptchaModule.forRoot(),
     UiSwitchModule,
-    MatDialogModule
+    MatDialogModule,
+    ScrollingModule,
   ],
   exports: [
     BrowserModule,
@@ -270,7 +269,6 @@ import { SearchUserBooksComponent } from './components/search-user-books/search-
       useClass: TokenInterceptorService,
       multi: true
     },
-    //  SocketService
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
@@ -278,7 +276,8 @@ import { SearchUserBooksComponent } from './components/search-user-books/search-
     }
   ],
   entryComponents: [
-    ConfirmDeleteFromFriendsDialog
+    ConfirmDeleteFromFriendsDialog,
+    SettingsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -50,7 +50,7 @@ export class SearchUsersComponent implements OnInit {
           this.selectedPage = selectedPage;
         });
     } else {
-      console.log('Loading friends...')
+      console.log('Loading friends...');
       // load friends list
       this.searchProcessing = true;
       this.friendService.getFriends(this.selectedPage.currentPage, this.selectedPage.pageSize).subscribe(

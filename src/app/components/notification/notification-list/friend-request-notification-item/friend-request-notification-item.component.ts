@@ -14,7 +14,7 @@ import {Subscription} from 'rxjs';
 })
 export class FriendRequestNotificationItemComponent implements OnInit, OnDestroy {
   @Input() notification: FullNotification;
-  private listItem: ListItemInfo;
+  listItem: ListItemInfo;
   private acceptActionElement: ButtonInfo;
   private declineActionElement: ButtonInfo;
   // Subscriptions

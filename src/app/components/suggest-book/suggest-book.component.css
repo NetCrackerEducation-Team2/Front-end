@@ -49,7 +49,7 @@ label {
 .nav-footer {
   margin-top: 20px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   justify-content: center;
 }
 
@@ -72,4 +72,15 @@ label {
   color: white;
   margin-bottom: 15px;
   text-align: center;
+}
+.messages {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 5px 0 15px;
+}
+.button-card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }

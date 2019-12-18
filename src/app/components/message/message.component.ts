@@ -3,13 +3,13 @@ import {Location} from '@angular/common';
 import {Message} from '../../models/message';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../models/user';
-import {SocketService} from '../../service/socket.service';
 import {AccountService} from '../../service/account.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 import {apiUrls} from '../../../api-urls';
 import {Chat} from '../../models/chat';
+import {ChatService} from '../../service/chat.service';
 
 
 @Component({
@@ -34,19 +34,19 @@ export class MessageComponent implements OnInit {
 
   constructor(private location: Location,
               private route: ActivatedRoute,
-              private socketService: SocketService,
+              private chatService: ChatService,
               private accountService: AccountService) {
     this.serverUrl = apiUrls.API_CHAT.API_SOCKET;
   }
 
   ngOnInit() {
-    this.connect();
     this.getCurrentUser();
     this.getFriend();
+    this.getChat();
+
     this.form = new FormGroup({
       message: new FormControl(null, [Validators.required])
     });
-    this.getChat();
     this.getMessages();
   }
 
@@ -64,7 +64,7 @@ export class MessageComponent implements OnInit {
   }
 
   getChat(): void {
-      this.socketService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => this.chat = resp);
+    this.chatService.getChatId(this.userFriendId, this.userCurrentId).subscribe(resp => { this.connect(resp.chatId); } );
   }
 
   sendMessage(): void {
@@ -73,7 +73,7 @@ export class MessageComponent implements OnInit {
         content: this.form.value.message, fromUser: this.userCurrentId,
         toUser: this.user.userId, fromUserName: this.fullName, chatName: null
       };
-      this.socketService.sendMessage(message).subscribe();
+      this.chatService.sendMessage(message).subscribe();
       this.form.reset();
     }
   }
@@ -85,18 +85,18 @@ export class MessageComponent implements OnInit {
     this.userCurrentId = currentUser.userId;
   }
 
-  connect() {
+  connect(chatId: number) {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({}, () => {
       that.isLoaded = true;
-      that.openSocket();
+      that.openSocket(chatId);
     });
   }
 
   getMessages() {
-    this.socketService.getMessages(this.userFriendId, this.userCurrentId).subscribe(
+    this.chatService.getMessages(this.userFriendId, this.userCurrentId).subscribe(
       (result: Message[]) => {
         for (const res of result) {
           this.messages.push(res);
@@ -104,8 +104,8 @@ export class MessageComponent implements OnInit {
       }
     );
   }
-  openSocket() {
-    this.stompClient.subscribe('/socket-publisher/' + this.chat.chatId, (message) => {
+  openSocket(chatId: number) {
+    this.stompClient.subscribe('/socket-publisher/' + chatId, (message) => {
       this.handleResult(message);
     });
   }

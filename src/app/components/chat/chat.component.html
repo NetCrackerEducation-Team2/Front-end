@@ -36,18 +36,23 @@
         </button>
         <br>
         <mat-form-field>
-          <mat-select placeholder="Select a chat" [(ngModel)]="chatName" name="friendId">
+          <mat-select placeholder="Select a chat" [(ngModel)]="chatGroupName" name="friendId">
             <mat-option *ngFor="let chat of this.chats" [value]="chat.chatName">{{chat.chatName}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-flat-button color="primary" (click)="chooseGroupChat(chatName)">Select chat</button>
+        <button mat-flat-button color="primary" (click)="chooseGroupChat(chatGroupName)">Select chat</button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
   <br>
-  <div *ngIf="isError">
+  <div *ngIf="isErrorChooseGroup">
     <p class="error">
-      Select please a friend
+      Select please a group chat
+    </p>
+  </div>
+  <div *ngIf="isErrorCreate">
+    <p class="error">
+      Select please all fields for creating/selecting chat
     </p>
   </div>
 </div>

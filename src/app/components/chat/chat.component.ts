@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SocketService} from '../../service/socket.service';
 import {User} from '../../models/user';
 import {AccountService} from '../../service/account.service';
 import {FriendService} from '../../service/friend.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ChatService} from '../../service/chat.service';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Chat} from '../../models/chat';
 
 @Component({
@@ -23,12 +21,13 @@ export class ChatComponent implements OnInit {
   userFriendId: number;
   users: User[] = [];
   chats: Chat[] = [];
-  isError = false;
+  isErrorChooseGroup = false;
+  isErrorCreate = false;
   chatName: string;
+  chatGroupName: string;
   usersId: number[];
 
-  constructor(private socketService: SocketService,
-              private accountService: AccountService,
+  constructor(private accountService: AccountService,
               private friendsService: FriendService,
               private chatService: ChatService,
               private router: Router) {
@@ -53,38 +52,48 @@ export class ChatComponent implements OnInit {
   }
 
   chooseGroupChat(chatName: string) {
-    this.router.navigate(['/message/groupChat', chatName]);
+    this.isErrorChooseGroup = false;
+    this.isErrorCreate = false;
+    if (typeof chatName !== 'undefined') {
+      this.router.navigate(['/message/groupChat', chatName]);
+    } else {
+      this.isErrorChooseGroup = true;
+    }
   }
 
   getGroupsChat() {
-    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => this.chats = res);
+    this.chatService.getGroupChats(this.userCurrentId).subscribe(res => {this.chats = res; });
   }
 
   createChat(friendId: number) {
-    this.isError = false;
-    if (friendId === 0) {
-      this.isError = true;
+    this.isErrorCreate = false;
+    this.isErrorChooseGroup = false;
+    if (typeof friendId === 'undefined') {
+      this.isErrorCreate = true;
     } else {
       this.chatService.createChat(friendId, this.userCurrentId).subscribe(
         () => {
           this.router.navigate(['/message', friendId]);
         }, (error: HttpErrorResponse) => {
-          this.isError = true;
+          this.isErrorCreate = false;
         }
       );
     }
   }
+
   createGroupChat(usersId: number[]) {
-    this.isError = false;
-    usersId.push(this.userCurrentId);
-    if (this.chatName == null) {
-      this.isError = true;
+    this.isErrorChooseGroup = false;
+    this.isErrorCreate = false;
+    if (typeof usersId === 'undefined') {
+      this.isErrorCreate = true;
+    } else if (typeof this.chatName === 'undefined') {
+      this.isErrorCreate = true;
     } else {
+      usersId.push(this.userCurrentId);
       this.chatService.createGroupChat(usersId, this.chatName).subscribe(
         () => {
           this.router.navigate(['/message/groupChat', this.chatName]);
         }, (error: HttpErrorResponse) => {
-          this.isError = true;
         }
       );
     }
