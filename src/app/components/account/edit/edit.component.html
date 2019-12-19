@@ -6,7 +6,7 @@
       <label class="row-label" for="name">Full name</label>
       <mat-form-field class="form-field">
         <input required id="name" matInput placeholder="Full name" [(ngModel)]="user.fullName"
-               name="name" #fullName="ngModel">
+               name="name" #fullName="ngModel" pattern="^\S.{2,}[a-zA-Z0-9_]$">
       </mat-form-field>
     </div>
 
@@ -29,7 +29,7 @@
     </div>
 
     <div class="errors">
-      <small class="text-danger" *ngIf="fullName.touched && fullName.invalid">Full name is required</small>
+      <small class="text-danger" *ngIf="fullName.touched && fullName.invalid">Please enter a valid full name</small>
       <small class="text-danger" *ngIf="email.touched && email.invalid">Please enter a valid email</small>
       <small class="text-danger" *ngIf="photoPath.touched && photoPath.invalid">Please enter a valid URL</small>
     </div>
