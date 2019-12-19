@@ -42,7 +42,7 @@ export class OverviewListComponent implements OnInit {
             return {
               title: this.bookOverviewPresentationService.getBookOverviewTitle(bookOverview),
               subtitle: this.bookOverviewPresentationService.getBookOverviewSubtitle(bookOverview),
-              photoPath: null,
+              photoPath: bookOverview.book.photoPath,
               itemId: null,
               publish: null,
               contentElements: [
