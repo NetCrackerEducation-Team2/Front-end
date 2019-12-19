@@ -2,9 +2,6 @@
   <ng-container *ngIf="listItemInfo.photoPath">
     <img [src]="listItemInfo.photoPath" alt="" (error)="img.src = 'assets/images/not_found.jpg'" class="item-photo" #img/>
   </ng-container>
-  <ng-container *ngIf="!listItemInfo.photoPath">
-    <img [src]="'assets/images/not_found.jpg'" alt="" class="item-photo" #img/>
-  </ng-container>
   <div class="item-info">
     <div class="mat-card-header">
       <div class="mat-card-header-text">
