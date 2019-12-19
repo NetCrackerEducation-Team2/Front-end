@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from '../../../service/authentication.service';
 
@@ -19,7 +19,6 @@ export class RecoverComponent implements OnInit {
 
   ngOnInit() {
     const link = this.activatedRoute.snapshot.paramMap.get('link');
-
     this.authService.getRecoveryPassword(link)
       .subscribe(
         () =>
@@ -32,5 +31,6 @@ export class RecoverComponent implements OnInit {
         () => this.isDownloading = false
       );
   }
+
 
 }

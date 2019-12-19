@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Page} from '../../models/page';
 import {BookOverviewService} from '../../service/book-overview.service';
 import {ActivatedRoute} from '@angular/router';
@@ -17,7 +17,6 @@ export class OverviewListComponent implements OnInit {
   pageLoading: boolean;
   emptyPage: Page<ListItemInfo> = {currentPage: 0, pageSize: 5, countPages: 0, array: null};
   selectedPage: Page<ListItemInfo>;
-
   constructor(private route: ActivatedRoute,
               private bookOverviewService: BookOverviewService,
               private bookOverviewPresentationService: BookOverviewPresentationService) { }
@@ -27,10 +26,13 @@ export class OverviewListComponent implements OnInit {
     this.searchPage();
   }
 
+
   searchPage() {
     const bookId = +this.route.snapshot.paramMap.get('bookId');
     this.pageLoading = true;
-    this.bookOverviewService.getBookOverviewsByBook(bookId, this.selectedPage.currentPage, this.selectedPage.pageSize)
+    this.bookOverviewService.getBookOverviewsByBook(bookId,
+                                                    this.selectedPage.currentPage,
+                                                    this.selectedPage.pageSize)
       .pipe(map(page => {
         return {
           currentPage: page.currentPage,

@@ -96,7 +96,6 @@ export class AccountService {
     const token = this.getToken();
     if (token) {
       const decodedToken = jwt_decode(token);
-      console.log('Decoded JWT token content: ', decodedToken);
       return JSON.parse(JSON.stringify((decodedToken))).rol;
     } else {
       return null;

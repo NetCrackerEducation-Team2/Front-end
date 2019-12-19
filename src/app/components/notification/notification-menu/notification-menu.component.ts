@@ -34,6 +34,7 @@ export class NotificationMenuComponent implements OnInit {
     this.getNotificationsCount();
   }
 
+
   getNotifications(): void {
     this.notificationService.getNotifications(0, 5)
         .subscribe(result => this.notifications = result);

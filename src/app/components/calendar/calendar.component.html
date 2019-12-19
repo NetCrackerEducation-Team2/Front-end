@@ -1,32 +1,57 @@
 
-<div class="calendar-header">
-  <div class="calendar-year-month">
-    <h1> {{currentYear}} {{currentMonthLabel}}</h1>
-  </div>
-  <div class="calendar-buttons">
-      <mat-icon class="icon-calendar" (click)="back()">arrow_back</mat-icon>
-      <mat-icon class="icon-calendar"> today</mat-icon>
-      <mat-icon class="icon-calendar" (click)="forward()">arrow_forward</mat-icon>
-  </div>
-</div>
 
-<div class="tiles-container">
-  <mat-grid-list cols="7" gutterSize ="5px">
-  <mat-grid-tile *ngFor="let tile of tiles"
-  [colspan]="tile.cols"
-  [rowspan]="tile.rows">
 
-    <div class="calendar-tile">
+<div class="calendar-container">
+  <app-selector></app-selector>
 
-       <div class="calendar-tile-header">
-         {{tile.day}}
-       </div>
-       <div>
-         {{tile.text}}
-       </div>
-       <div>
-       </div>
-      </div>
-  </mat-grid-tile>
-  </mat-grid-list>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Sunday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let week of calendar">
+      <td
+        *ngFor="let day of week.days"
+        [class.disabled]="day.disabled"
+        [class.selected]="day.selected"
+        [class.active]="day.active"
+        (click)="select(day.value)"
+      >
+        <span>
+          {{ day.value | moment:'DD' }}
+        </span>
+        <div class="calendar-announcement-icon"
+             *ngIf="hasAnyAnnouncements(day)">
+
+
+        <ng-template #HtmlContent>
+          <p></p>
+          <p>{{day.announcements[0].title}}</p>
+          <p>{{day.announcements[1].title}}</p>
+
+        </ng-template>
+
+          <mat-icon
+            [tooltip]="HtmlContent"
+            content-type="template"
+            placement="top"
+            [animation-duration]="2000"
+            aria-label="Button that displays a tooltip when focused or hovered over">
+            announcement
+          </mat-icon>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

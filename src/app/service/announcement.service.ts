@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Announcement} from '../models/announcement';
-import {ANNOUNCEMENTS} from '../mocks/mock-announcement';
-import {Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {apiUrls} from '../../api-urls';
 import {CheckPaginationService} from './check-pagination.service';
-import {ErrorHandlerService} from "./error-handler.service";
+import {ErrorHandlerService} from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class AnnouncementService {
 
   private readonly announcementsUrl: string;
   private readonly publishedAnnouncementsUrl: string;
-
+  private readonly getPublishedAnnouncementByDateUrl: string;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -28,6 +27,7 @@ export class AnnouncementService {
 
     this.announcementsUrl = apiUrls.API_ANNOUNCEMENTS;
     this.publishedAnnouncementsUrl = apiUrls.API_PUBLISHED_ANNOUNCEMENTS;
+    this.getPublishedAnnouncementByDateUrl = apiUrls.API_GET_PUBLISHED_ANNOUNCEMENT_BY_DATE;
   }
 
   getAnnouncements(page: number, pageSize: number): Observable<any> {
@@ -39,6 +39,8 @@ export class AnnouncementService {
         catchError(this.errorHandlerService.handleError<any>('getAnnouncements', []))
       );
   }
+
+
   getPublishedAnnouncements(page: number, pageSize: number): Observable<any> {
     let paramsString: string;
     paramsString = this.checkPaginationService.checkPagination(page, pageSize);
@@ -48,8 +50,16 @@ export class AnnouncementService {
         catchError(this.errorHandlerService.handleError<any>('getPublishAnnouncements', []))
       );
   }
+
   getAnnouncement(id: number): Observable<Announcement> {
     return this.http.get(this.announcementsUrl + id)
+      .pipe(
+        catchError(this.errorHandlerService.handleError<any>('getAnnouncements', []))
+      );
+  }
+
+  getPublishedAnnouncementByDate(date: string): Observable<Announcement> {
+    return this.http.get(this.getPublishedAnnouncementByDateUrl + date)
       .pipe(
         catchError(this.errorHandlerService.handleError<any>('getAnnouncements', []))
       );

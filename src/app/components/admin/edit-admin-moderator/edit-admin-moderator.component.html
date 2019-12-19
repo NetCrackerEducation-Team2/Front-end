@@ -2,19 +2,10 @@
 
     <form class="submit-form" #regForm="ngForm" novalidate >
 
-
-
-    <div class="submit-row">
-      <label class="label" for="userId">Enter id</label>
-      <mat-form-field class="form-field">
-        <input pattern = "^[0-9]*" required name="UserId" #UserId="ngModel" type="text" id="" matInput
-                placeholder="id" [(ngModel)]="user.userId">
-      </mat-form-field>
-    </div>
     <div class="submit-row">
         <label class="label" for="role">Choose role</label>
         <mat-form-field class="form-field">
-          <mat-select multiple placeholder="Roles">
+          <mat-select multiple placeholder="Roles" required name = 'role'>
             <mat-option  (onSelectionChange)="change($event)"  *ngFor="let role of roles" [value]="role" >
               {{role}}
             </mat-option>
@@ -61,7 +52,6 @@
 
       <div class="nav-footer">
         <div class="messages">
-          <small class="text-danger" *ngIf=" UserId.touched && UserId.invalid" >User id is required</small>
           <small class="text-danger" *ngIf="fullName.touched && fullName.invalid" >Full name is required</small>
           <small class="text-danger" *ngIf="!email.dirty && email.touched && email.invalid">Email is required</small>
           <small class="text-danger" *ngIf="email.dirty && email.touched && email.invalid">Please enter a valid email</small>

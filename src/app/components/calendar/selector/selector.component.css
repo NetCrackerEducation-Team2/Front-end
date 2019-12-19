@@ -1,0 +1,16 @@
+
+
+.selector-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+i {
+  cursor: pointer;
+}
+
+i:hover {
+ opacity: 0.5;
+}

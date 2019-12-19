@@ -1,13 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AdminModeratorService} from '../../../service/admin-moderator.service';
 import {take} from 'rxjs/operators';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../state/app.state';
 import * as constants from '../../../state/constants';
 import {AccountService} from '../../../service/account.service';
 import {User} from '../../../models/user';
-
-
+import {Store} from '@ngrx/store';
+import {State} from '../../../state/app.state';
 @Component({
   selector: 'app-edit-admin-moderator',
   templateUrl: './edit-admin-moderator.component.html',
@@ -15,14 +13,14 @@ import {User} from '../../../models/user';
 })
 export class EditAdminModeratorComponent implements OnInit {
   user = {userId: null, fullName: '', email: '', password: '', photo_path: '', roles: []};
-  roles = [constants.user, ...constants.adminRoles];
+  roles = [...constants.adminRoles];
   repeatPassword: '';
   isError = false;
   isEdited = false;
   email: string;
 
 
-  constructor(private admModerService: AdminModeratorService, private store: Store<AppState>,
+  constructor(private admModerService: AdminModeratorService, private store: Store<State>,
               private accountService: AccountService) {
   }
 
