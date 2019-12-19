@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           console.log(currentUser);
           console.log('Successfully signed in');
           this.isError = false;
-          this.store.dispatch(new LOGIN(currentUser.roles));
+          this.store.dispatch(new LOGIN(currentUser));
         },
         (error: HttpErrorResponse) => {
           this.isError = true;

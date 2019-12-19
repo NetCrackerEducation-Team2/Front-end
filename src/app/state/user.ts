@@ -31,7 +31,7 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         login: true,
-        roles: [...state.roles, ...action.payload],
+        roles: [...state.roles, ...action.payload.roles],
         id: action.payload.userId
     };
     case APP_ACTION.APP_LOGOUT:
